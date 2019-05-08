@@ -1,6 +1,7 @@
 package se.kits.gakusei.controller;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,11 +21,15 @@ import se.kits.gakusei.user.repository.UserRepository;
 @RestController
 @Api(value="KanjiDrawingController", description="Operations for handling kanji drawings")
 public class KanjiDrawingController {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    private final KanjiDrawingRepository kanjiDrawingRepository;
 
     @Autowired
-    private KanjiDrawingRepository kanjiDrawingRepository;
+    public KanjiDrawingController(UserRepository userRepository, KanjiDrawingRepository kanjiDrawingRepository) {
+        this.userRepository = userRepository;
+        this.kanjiDrawingRepository = kanjiDrawingRepository;
+    }
 
     @ApiOperation(value="Adds users kanji drawing, returns ResponseEntity and sets users kanji drawing as a list of coordinates (data) as String", response = ResponseEntity.class)
     @RequestMapping(
@@ -56,5 +61,18 @@ public class KanjiDrawingController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @ApiOperation(value="Gets a users kanji drawings", response = ResponseEntity.class)
+    @RequestMapping(
+            value = "/api/kanji-drawings",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+    )
+    public ResponseEntity<List<KanjiDrawing>> getKanjiDrawings(@RequestParam(value = "name") String userName) {
+        List<KanjiDrawing> kanjiDrawingList = kanjiDrawingRepository.findKanjiDrawingByUsername(userName);
+        if (kanjiDrawingList != null && !kanjiDrawingList.isEmpty()) {
+            return new ResponseEntity<>(kanjiDrawingList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
 

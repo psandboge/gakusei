@@ -431,14 +431,14 @@ export class selectScreen extends React.Component {
           >
             {this.translate('selectScreen.getLessons.drawEasy')}
           </Radio>
-          <Radio
-            key={'medium'}
-            name={'difficultySelect'}
-            onChange={() => this.props.setKanjiDifficulty('medium')}
-            checked={this.props.kanjiDifficulty === 'medium'}
-          >
-            {this.translate('selectScreen.getLessons.drawMeduim')}
-          </Radio>
+          {/*<Radio*/}
+          {/*  key={'medium'}*/}
+          {/*  name={'difficultySelect'}*/}
+          {/*  onChange={() => this.props.setKanjiDifficulty('medium')}*/}
+          {/*  checked={this.props.kanjiDifficulty === 'medium'}*/}
+          {/*>*/}
+          {/*  {this.translate('selectScreen.getLessons.drawMeduim')}*/}
+          {/*</Radio>*/}
           <Radio
             key={'hard'}
             name={'difficultySelect'}

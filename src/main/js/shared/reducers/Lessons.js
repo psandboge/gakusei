@@ -30,7 +30,7 @@ export const defaultState = {
   answerType: 'swedish',
   playType: 'guess',
 
-  kanjiDifficulty: 'easy',
+  kanjiDifficulty: 'hard',
 
   questions: [],
   currentQuestion: {
@@ -150,15 +150,15 @@ export function calcLessonSuccessRateMessage() {
       };
 
       lessonSuccessRateMessage = `(${lessonSuccessRate}%)`;
-      if (lessonSuccessRate >= 80) {
+      if (lessonSuccessRate >= 90) {
         lessonSuccessRateMessage += ` ${emojiFeedback.veryGood}`;
-      } else if (lessonSuccessRate < 80 && lessonSuccessRate >= 60) {
+      } else if (lessonSuccessRate >= 75) {
         lessonSuccessRateMessage += ` ${emojiFeedback.good}`;
-      } else if (lessonSuccessRate < 60 && lessonSuccessRate >= 40) {
+      } else if (lessonSuccessRate >= 50) {
         lessonSuccessRateMessage += ` ${emojiFeedback.average}`;
-      } else if (lessonSuccessRate < 40 && lessonSuccessRate >= 20) {
+      } else if (lessonSuccessRate >= 25) {
         lessonSuccessRateMessage += ` ${emojiFeedback.bad}`;
-      } else if (lessonSuccessRate < 20) {
+      } else {
         lessonSuccessRateMessage += ` ${emojiFeedback.veryBad}`;
       }
     }
