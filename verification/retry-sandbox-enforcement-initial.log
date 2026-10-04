@@ -1,0 +1,4 @@
+PASS write outside worktree/temp denied
+Traceback (most recent call last):
+  File "<stdin>", line 14, in <module>
+TimeoutError: timed out

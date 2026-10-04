@@ -100,3 +100,51 @@ Boot 2.7 and retained frontend runtime majors need the separately scoped support
 server/dependency decision. PostgreSQL persistence/migrations/seed/reset remain M4;
 currently supported server migration planning remains M5. Grammar content/favorites
 and optional Japanese speech voices are not accepted by vocabulary-only evidence.
+
+## Retry 2: sandbox verification (gaku-18x)
+
+The previous implementation is unchanged. Native Firefox and Safari each still
+return `Computer Use server error -10005: cgWindowNotFound`; the native launch API
+is unavailable and `cua.createBrowserTab("iab", ...)` returns
+`Browser is not available: iab`. No packaged visual flow is claimed.
+
+macOS `/usr/bin/sandbox-exec` is available even though the command executor itself
+is unrestricted. `local-verification.sb` restricts writes to this worktree and
+OS temporary directories and restricts TCP traffic to loopback. Reads and other
+operations retain the default policy; this is a verification sandbox, not a
+production security boundary. The denial probes in
+`retry-sandbox-enforcement.log` demonstrate outside writes and remote outbound
+connections fail with PermissionError, while local bind/listen/connect works.
+
+From the validated worktree with `. scripts/local-env.sh`:
+
+```sh
+WORKTREE="$(pwd -P)"
+sandbox-exec -D "WORKTREE=$WORKTREE" -f verification/local-verification.sb npm test
+JAVA_TOOL_OPTIONS=-Djava.net.preferIPv4Stack=true sandbox-exec -D "WORKTREE=$WORKTREE" -f verification/local-verification.sb ./mvnw -o -B -ntp -Dskip.frontend=true test
+sandbox-exec -D "WORKTREE=$WORKTREE" -f verification/local-verification.sb java -Djava.net.preferIPv4Stack=true -jar target/gakusei.jar --spring.profiles.active=local --server.port=18081
+# Wait for the jar to be ready, then in a second terminal:
+sandbox-exec -D "WORKTREE=$WORKTREE" -f verification/local-verification.sb python3 scripts/verify-local-http.py http://localhost:18081
+# Stop/restart the jar using the same command before:
+sandbox-exec -D "WORKTREE=$WORKTREE" -f verification/local-verification.sb python3 scripts/verify-local-http.py http://localhost:18081 --reset-proof
+```
+
+Frontend: **7 passing**. Backend: **45 tests, zero failures/errors/skipped**.
+Packaged HTTP proof: **PASS**, six fixtures before registration, six questions,
+six answer/progress rows, auth/session, static assets/docs and logout/login.
+The existing full-build jar is used, with no dev server. No dependency install or
+new packaging was necessary because source/tool pins are unchanged.
+
+Actual retry failures are retained: the first sandbox's combined local/remote
+network filter did not constrain remote traffic; the corrected profile splits
+bind/inbound/outbound allowances, and all enforcement probes pass. Initial
+backend/jar execution failed to bind Java's dual-stack socket in the localhost
+sandbox; `-Djava.net.preferIPv4Stack=true` resolves it without widening access.
+The first HTTP probe ran before readiness and got ConnectionRefusedError; the
+final probe waited for a successful root response and passed. Initial/dualstack/
+before-ready logs preserve these failures separately from final results.
+
+Sandboxed H2 reset proof: **PASS**, exactly six fixtures and zero prior users,
+events or progress after restart (`retry-sandbox-h2-reset.log`). Both retry jar
+processes were stopped after verification. Listener inspection recorded only
+127.0.0.1:18081, and no dev server was used.

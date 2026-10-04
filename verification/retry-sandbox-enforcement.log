@@ -1,0 +1,3 @@
+PASS write outside worktree/temp denied
+PASS non-loopback outbound connection denied
+PASS loopback bind/listen/connect permitted
