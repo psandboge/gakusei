@@ -148,3 +148,15 @@ Sandboxed H2 reset proof: **PASS**, exactly six fixtures and zero prior users,
 events or progress after restart (`retry-sandbox-h2-reset.log`). Both retry jar
 processes were stopped after verification. Listener inspection recorded only
 127.0.0.1:18081, and no dev server was used.
+
+## Retry 3: browser availability (gaku-96k)
+
+The first verification command `cua.getState()` passed inventory discovery but
+returned no browser providers. Native Firefox and Safari both still fail with
+`Computer Use server error -10005: cgWindowNotFound`; creating an in-app browser
+fails with `Browser is not available: iab`. Exact calls/results are retained in
+`retry3-browser-availability.log`. No usable visual surface exists, so the packaged
+browser flow remains blocked. No application process was started on this attempt.
+Source behavior is unchanged; the previously passing build, 7 frontend tests,
+45 backend tests and sandboxed HTTP/reset evidence remain valid. Repeating those
+checks would not resolve the missing visual gate.

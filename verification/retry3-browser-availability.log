@@ -1,0 +1,16 @@
+Retry 3 (gaku-96k), 2026-10-04
+First verification command: cua.getState()
+Result: PASS inventory; browsers=[]; Firefox/Safari listed as running.
+
+cua.getApp("org.mozilla.firefox")
+FAIL: Computer Use server error -10005: cgWindowNotFound
+
+cua.getApp("com.apple.Safari")
+FAIL: Computer Use server error -10005: cgWindowNotFound
+
+cua.createBrowserTab("iab", "http://localhost:18081", {visible:true})
+FAIL: Browser is not available: iab
+
+No usable browser surface; packaged visual acceptance remains unverified.
+No runtime process started, local account created, or production action performed.
+Existing implementation and sandboxed verification evidence retained unchanged.
