@@ -8,7 +8,7 @@ A beta version of Gakusei can be tested at [gakusei.daigaku.se](http://gakusei.d
 ## Verified local development (macOS arm64)
 
 This disposable baseline uses **Temurin 17.0.16+8, Maven 3.9.16, Node 24.21.0,
-npm 11.19.0, Spring Boot 2.7.18 and H2 2.1.214**. React 16/Redux and the existing
+npm 11.19.0, Spring Boot 2.7.18 and PostgreSQL 16.15**. React 16/Redux and the existing
 API/session authentication are retained. Boot 2.7 is a temporary local
 compatibility bridge, not an ongoing supported server deployment. The exact
 frontend graph is in `package-lock.json`; use `npm ci`, not `npm install`.
@@ -27,7 +27,7 @@ npm --version
 npm ci
 npm test
 npm run compile
-./mvnw -Dskip.frontend=true test
+./scripts/test-postgres.sh
 ```
 
 The installer downloads pinned vendor archives, verifies SHA-256, and extracts
@@ -44,13 +44,16 @@ Maven validates the jar and POM against committed SHA-256 pins before compilatio
 (`scripts/verify-grammar.sh`). An unavailable or changed artifact is a build
 failure; no floating upstream clone or grammar stub is used.
 
-### Start the disposable H2 applications
+### Start the local PostgreSQL application
+
+First initialize PostgreSQL and explicitly seed as described in
+[Persistent local PostgreSQL](#persistent-local-postgresql). Then:
 
 Terminal 1:
 
 ```sh
 . scripts/local-env.sh
-./mvnw -Dskip.frontend=true spring-boot:run -Dspring-boot.run.profiles=local
+./mvnw -Dskip.frontend=true spring-boot:run -Dspring-boot.run.profiles=local-postgres
 ```
 
 Terminal 2:
@@ -72,7 +75,7 @@ If a port is occupied, inspect it with `lsof -nP -iTCP:8080 -sTCP:LISTEN`; do no
 stop an unrelated process. For example, the acceptance run used these alternatives:
 
 ```sh
-./mvnw -Dskip.frontend=true spring-boot:run -Dspring-boot.run.profiles=local \
+./mvnw -Dskip.frontend=true spring-boot:run -Dspring-boot.run.profiles=local-postgres \
   -Dspring-boot.run.arguments=--server.port=18080
 GAKUSEI_BACKEND_PORT=18080 GAKUSEI_FRONTEND_PORT=17777 npm start
 # Browser: http://localhost:17777
@@ -91,38 +94,39 @@ Stop the dev backend first (and the dev server for standalone acceptance):
 
 ```sh
 . scripts/local-env.sh
-./mvnw clean verify -Pproduction
-java -jar target/gakusei.jar --spring.profiles.active=local
+./scripts/test-postgres.sh clean verify -Pproduction
+java -jar target/gakusei.jar --spring.profiles.active=local-postgres
 # Open http://localhost:8080
 ```
 
 Maven installs its own pinned native Node/npm under ignored `node/`, runs `npm ci`
 and builds production assets. The jar embeds the generated template, hashed
 `/js/` assets, local Bootstrap 3.3.7 styles/fonts and license resources. No CDN,
-dev server, PostgreSQL, ELK, Redis or production credentials are needed at runtime.
+dev server, ELK, Redis or production credentials are needed at runtime. Local
+PostgreSQL and exported database settings are required.
 For another local port add `--server.port=18081`. API documentation is now
 `/v3/api-docs` and `/swagger-ui/index.html` (sign in locally); the old Springfox
 `/v2/api-docs` endpoint is replaced.
 
 ### Data lifecycle, content and limitations
 
-The default runtime profile is `local`. Its in-memory H2 creates an empty schema,
-seeds once per backend process and drops all accounts, events and progress on
-shutdown. **Every backend restart resets your work**. Stop and start to reset;
-there is no persistent volume or production dump. The seed creates six disposable
-sample users (including `pieru` / `gakusei` and admin / `gakusei`), vocabulary,
-lessons, kanji, quizzes, and the seven event categories needed for progress.
-Use a newly registered account for learning acceptance. Fixture initialization
-is transactional, missing JSON fails startup, and empty vocabulary fails clearly.
-An optional `LOCAL_REMEMBER_ME_KEY` environment variable sets the local key;
-no real credentials belong in tracked files.
+The default runtime profile is `local-postgres`. The `local` and `development`
+aliases also select PostgreSQL. There is no embedded database fallback: Docker,
+a reachable database and exported `LOCAL_DB_PASSWORD` are required. Migrations
+run at startup and Hibernate validates the schema. Normal startup never seeds;
+use `local-postgres,local-seed` once to install the sample content. Repeating
+that explicit seed is safe and preserves users and progress. Backend and
+container restarts preserve data in the named volume. Resetting requires an
+explicit destructive `docker compose down -v` on the intended local project.
+The sample seed creates six disposable users, vocabulary, lessons, kanji,
+quizzes and event categories. Register your own local account for learning.
 
 Vocabulary is the verified core flow. Bundled material exposes five vocabulary lessons, two kanji lessons and one
 quiz in lesson-selection APIs (three quiz records exist in the raw repository).
 It is sample content, not the production corpus. Grammar reference/inflection fixtures and
 favorites remain incomplete; browser Japanese Web Speech voices are optional.
-Persistent PostgreSQL is available through the dedicated `local-postgres` profile
-below. The retained historical `postgres` profile is unchanged; use the dedicated
+PostgreSQL is required through the dedicated `local-postgres` profile below.
+The retained historical `postgres` profile is unchanged; use the dedicated
 local configuration. The supported-server migration decision remains a follow-up.
 
 Installation/build still need network access to vendor archives, npm, Maven
@@ -139,7 +143,7 @@ prevent the verified local flow.
 `react-toggle-button@2.2.0` changes only its obsolete peer declaration to include
 React 16; its implementation is unchanged (`vendor/react-toggle-button/PROVENANCE.md`).
 
-### Persistent local PostgreSQL (phase 3)
+### Persistent local PostgreSQL
 
 Docker Desktop must be running. This Compose project contains only PostgreSQL
 16.15, pinned by manifest SHA-256. Its dedicated named volume is disposable local
@@ -171,7 +175,12 @@ categories and requires an empty users/content database without a seed marker.
 Fixtures and the marker commit in one transaction; errors abort startup and roll
 back. Repeating `local-seed` serializes on the marker table and leaves seeded
 accounts, content and progress unchanged. Normal startup never seeds.
-Do not combine `local-postgres` with `local` or `development`.
+Integration tests use a separate disposable Compose project and volume:
+`./scripts/test-postgres.sh`. The harness exports random local credentials,
+waits for SQL readiness, runs all tests, then removes only its own volume.
+Pass Maven goals/options to run the packaged build against that database.
+A direct Maven test command must supply an isolated empty PostgreSQL database;
+the integration tests explicitly seed it and expect six sample users.
 
 For a packaged persistent application after the full production build:
 
@@ -186,9 +195,10 @@ docker compose --env-file .env.local -f compose.local.yml down -v
 # Then up -d --wait and explicitly bootstrap with local-seed again.
 ```
 
-Verified run details, actual test counts and browser/persistence evidence are in
-`verification/ORDERED-PHASES.md`. The restored server/dependency stack remains a
-local compatibility bridge with the limitations listed above.
+Historical run details are archived in `verification/ORDERED-PHASES.md`.
+Current PostgreSQL-only verification is recorded in the assigned task report.
+The restored server/dependency stack remains a local compatibility bridge with
+the limitations listed above.
 
 
 ## Historical auxiliary infrastructure

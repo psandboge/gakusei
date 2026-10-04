@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("local")
+@ActiveProfiles({"local-postgres", "local-seed"})
 public class LocalBaselineTest {
     @Autowired LessonRepository lessons;
     @Autowired UserRepository users;

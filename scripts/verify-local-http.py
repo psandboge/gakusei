@@ -6,7 +6,6 @@ from urllib.request import build_opener, HTTPCookieProcessor, Request
 
 parser = argparse.ArgumentParser()
 parser.add_argument('origin')
-parser.add_argument('--reset-proof', action='store_true')
 args = parser.parse_args()
 url = urlparse(args.origin)
 assert url.scheme == 'http' and url.hostname in ('localhost', '127.0.0.1') and url.port, 'Explicit local HTTP port required'
@@ -25,12 +24,6 @@ def get_json(path, admin=False):
     assert status == 200
     return json.loads(data)
 users = get_json('/api/users', admin=True)
-if args.reset_proof:
-    assert len(users) == 6
-    assert not any(u['username'].startswith('httpproof') or u['username']=='localdev1004' for u in users)
-    assert all(not u['events'] and not u['progressTrackingList'] for u in users)
-    print('PASS disposable database reset: exactly six sample users, zero prior users/events/progress')
-    raise SystemExit(0)
 name = 'httpproof' + str(int(time.time()))
 form = urlencode({'username': name, 'password': 'disposableproof', 'remember-me': 'false'})
 assert request('/registeruser', form, 'text/plain')[0] == 201

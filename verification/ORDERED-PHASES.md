@@ -1,3 +1,7 @@
+> Archived execution record from before the PostgreSQL-only change.
+> Commands, embedded database references and results below are historical,
+> not current startup or test instructions. Use the root README.
+
 # Ordered local development execution (gaku-mtc)
 
 Executed 2026-10-04 in the isolated gaku-5m7 worktree on

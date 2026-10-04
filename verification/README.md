@@ -1,3 +1,9 @@
+> Archived execution record from before the PostgreSQL-only change.
+> Commands, embedded database references and results below are historical,
+> not current startup or test instructions. Use the root README.
+> All files in this directory are archival evidence. The tracked root `log.txt`
+> is also an immutable historical 2018 runtime log, including old console entries.
+
 # Local baseline execution record
 
 Executed on 2026-10-04 from the isolated `gaku-5m7` worktree based on
