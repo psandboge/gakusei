@@ -1,0 +1,19 @@
+{
+  "kanji_questions": {
+    "http_status": 200,
+    "count": 5,
+    "example_keys": [
+      "questionNuggetId",
+      "question",
+      "correctAlternative",
+      "alternative3",
+      "alternative2",
+      "alternative1"
+    ]
+  },
+  "quiz_questions": {
+    "http_status": 200,
+    "count": 5,
+    "endpoint": "/api/quiz?lessonName=Den japanska floran"
+  }
+}

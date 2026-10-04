@@ -1,0 +1,9 @@
+(version 1)
+; Retry verification: read host tools/dependencies, write only this worktree/temp.
+(allow default)
+(deny file-write*)
+(allow file-write* (subpath (param "WORKTREE")) (subpath "/private/tmp") (subpath "/private/var/folders") (literal "/dev/null"))
+(deny network*)
+(allow network-bind (local ip "localhost:*"))
+(allow network-inbound (local ip "localhost:*"))
+(allow network-outbound (remote ip "localhost:*"))

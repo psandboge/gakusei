@@ -1,0 +1,156 @@
+18:53:19,000 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+18:53:19,001 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar!/BOOT-INF/classes!/logback.xml]
+18:53:19,007 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@2c9f9fb0 - URL [jar:file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar!/BOOT-INF/classes!/logback.xml] is not of type file
+18:53:19,040 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+18:53:19,041 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+18:53:19,043 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+18:53:19,046 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+18:53:19,064 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+18:53:19,066 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [FILE]
+18:53:19,071 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@546718765 - No compression will be used
+18:53:19,071 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@546718765 - Will use the pattern logs/logFile.%d{yyyy-MM-dd}.%i.html for the active file
+18:53:19,072 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/logFile.%d{yyyy-MM-dd}.%i.html'.
+18:53:19,072 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - Roll-over at midnight.
+18:53:19,078 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - Setting initial period to Sun Oct 04 18:52:06 CEST 2026
+18:53:19,078 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+18:53:19,078 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+18:53:19,081 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/logFile.html
+18:53:19,081 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [logs/logFile.html]
+18:53:19,082 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+18:53:19,082 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+18:53:19,082 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [FILE] to Logger[ROOT]
+18:53:19,082 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+18:53:19,082 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@234bef66 - Registering current configuration as safe fallback point
+
+
+                                              ooooooooo     *ooooooooo*                                           
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooo:::::ooooooooooo::::::                                      
+            oooooooooo        :oooooooooooo.  ooooooooo     *ooooooooo*                                            
+            oooooooooo      :ooooooooooooo    ooooooooo     *ooooooooo*                                            
+            oooooooooo    *oooooooooooo       ooooooooo     *ooooooooo*                                            
+            oooooooooo  .ooooooooooooo        ooooooooo     *ooooooooo*                                            
+            oooooooooo oooooooooooo           ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooo:            ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooo              ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooo            ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooooo           ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooooo          ooooooooo     *oooooooooo       :ooooooooooooooooo:                  
+            ooooooooooo:  *ooooooooooo        ooooooooo     .ooooooooooo.   ooooooooooooooooooooooo                
+            oooooooooo     :ooooooooooo       ooooooooo      ooooooooooooooooooooooooooooooooooooooo*              
+            oooooooooo      .ooooooooooo      ooooooooo      :ooooooooooooooooooooo         ooooooooo*             
+            oooooooooo        ooooooooooo*    ooooooooo        ooooooooooooooooooo.          ooooooooo             
+            oooooooooo         &ooooooooooo                              oooooooooo#                               
+            oooooooooo          oooooooooooo                             oooooooooooooo:                           
+            oooooooooo            ooooooooooo:                             ooooooooooooooooooooo:                  
+            oooooooooo             ooooooooooo:                             *ooooooooooooooooooooooo               
+                                                                                *oooooooooooooooooooo*             
+                                                                                         :oooooooooooo:            
+                                                                                             oooooooooo            
+                                                                        ooooooooo             ooooooooo            
+                                                                        *ooooooooo           :oooooooo:            
+                                                                         :ooooooooooo:*..*:ooooooooooo             
+                                                                           oooooooooooooooooooooooooo              
+                                                                             ooooooooooooooooooooo:                
+                                                                                 .*oooooooooo*.                    
+:: Running Spring Boot 2.7.18 ::
+
+18:53:19.432 [background-preinit] [34mINFO [0;39m [36mo.h.validator.internal.util.Version[0;39m - HV000001: Hibernate Validator 6.2.5.Final 
+18:53:19.463 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - Starting GakuseiApplication v2.1.1 using Java 17.0.16 on Pierres-MacBook-Pro-2.local with PID 23084 (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar started by pierresandboge in /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7) 
+18:53:19.463 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - The following 1 profile is active: "local" 
+18:53:20.033 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+18:53:20.107 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 70 ms. Found 20 JPA repository interfaces. 
+18:53:20.990 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat initialized with port(s): 18081 (http) 
+18:53:21.039 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Initializing ProtocolHandler ["http-nio-127.0.0.1-18081"] 
+18:53:21.040 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Starting service [Tomcat] 
+18:53:21.041 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/9.0.83] 
+18:53:21.093 [main] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring embedded WebApplicationContext 
+18:53:21.094 [main] [34mINFO [0;39m [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 1599 ms 
+18:53:21.500 [main] [34mINFO [0;39m [36mo.h.jpa.internal.util.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: default] 
+18:53:21.538 [main] [34mINFO [0;39m [36morg.hibernate.Version[0;39m - HHH000412: Hibernate ORM core version 5.6.15.Final 
+18:53:21.715 [main] [34mINFO [0;39m [36mo.h.annotations.common.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+18:53:21.793 [main] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+18:53:21.968 [main] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+18:53:21.987 [main] [34mINFO [0;39m [36morg.hibernate.dialect.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+18:53:22.937 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+18:53:22.954 [main] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+18:53:24.439 [main] [31mWARN [0;39m [36mo.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration[0;39m - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+18:53:27.147 [main] [31mWARN [0;39m [36mo.s.s.c.a.web.builders.WebSecurity[0;39m - You are asking Spring Security to ignore Ant [pattern='/js/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead. 
+18:53:27.147 [main] [34mINFO [0;39m [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will not secure Ant [pattern='/js/**'] 
+18:53:27.392 [main] [34mINFO [0;39m [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@794240e2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@74a820bf, org.springframework.security.web.context.SecurityContextPersistenceFilter@34a6d9db, org.springframework.security.web.header.HeaderWriterFilter@595f9916, org.springframework.security.web.authentication.logout.LogoutFilter@78d73b1b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1373e3ee, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3009eed7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@52f8a6f4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@511da44f, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@64279ab, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5a30722c, org.springframework.security.web.session.SessionManagementFilter@310d57b1, org.springframework.security.web.access.ExceptionTranslationFilter@656842bc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@571a663c] 
+18:53:27.781 [main] [31mWARN [0;39m [36mo.s.d.r.c.m.RepositoryCollectionResourceMapping[0;39m - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.UserRepository! Use @RepositoryRestResource instead! 
+18:53:27.783 [main] [31mWARN [0;39m [36mo.s.d.r.c.m.RepositoryCollectionResourceMapping[0;39m - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.EventRepository! Use @RepositoryRestResource instead! 
+18:53:28.458 [main] [34mINFO [0;39m [36mo.s.b.a.w.s.WelcomePageHandlerMapping[0;39m - Adding welcome page template: index 
+18:53:30.129 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Starting ProtocolHandler ["http-nio-127.0.0.1-18081"] 
+18:53:30.472 [main] [31mWARN [0;39m [36mo.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext[0;39m - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat server 
+18:53:30.476 [main] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default' 
+18:53:30.476 [main] [34mINFO [0;39m [36mo.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl[0;39m - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down' 
+18:53:30.504 [main] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown initiated... 
+18:53:30.505 [main] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown completed. 
+18:53:30.506 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Pausing ProtocolHandler ["http-nio-127.0.0.1-18081"] 
+18:53:30.506 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Stopping service [Tomcat] 
+18:53:30.508 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Stopping ProtocolHandler ["http-nio-127.0.0.1-18081"] 
+18:53:30.508 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Destroying ProtocolHandler ["http-nio-127.0.0.1-18081"] 
+18:53:30.512 [main] [34mINFO [0;39m [36mo.s.b.a.l.ConditionEvaluationReportLoggingListener[0;39m - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled. 
+18:53:30.675 [main] [1;31mERROR[0;39m [36mo.s.boot.SpringApplication[0;39m - Application run failed 
+org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat server
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182)
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:54)
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:357)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:156)
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:124)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:946)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:594)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:409)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1300)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1289)
+	at se.kits.gakusei.GakuseiApplication.main(GakuseiApplication.java:12)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:108)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:65)
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat server
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:229)
+	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:43)
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:179)
+	... 22 common frames omitted
+Caused by: java.lang.IllegalArgumentException: standardService.connector.startFailed
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:235)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213)
+	... 24 common frames omitted
+Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1042)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232)
+	... 26 common frames omitted
+Caused by: java.net.SocketException: Operation not permitted
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:555)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:337)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:294)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:276)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:231)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1332)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1418)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:665)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1039)
+	... 28 common frames omitted

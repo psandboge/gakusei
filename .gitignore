@@ -37,4 +37,14 @@ src/main/resources/static/js/**
 
 # Don't include java log directory
 logs/
-package-lock.json
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+
+.tools/
+log.txt
+
+.env.local

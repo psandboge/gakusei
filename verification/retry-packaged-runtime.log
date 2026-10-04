@@ -1,0 +1,129 @@
+18:53:52,839 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+18:53:52,839 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar!/BOOT-INF/classes!/logback.xml]
+18:53:52,843 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@2c9f9fb0 - URL [jar:file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar!/BOOT-INF/classes!/logback.xml] is not of type file
+18:53:52,863 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+18:53:52,863 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+18:53:52,866 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+18:53:52,868 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+18:53:52,884 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+18:53:52,885 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [FILE]
+18:53:52,889 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@546718765 - No compression will be used
+18:53:52,889 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@546718765 - Will use the pattern logs/logFile.%d{yyyy-MM-dd}.%i.html for the active file
+18:53:52,890 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/logFile.%d{yyyy-MM-dd}.%i.html'.
+18:53:52,890 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - Roll-over at midnight.
+18:53:52,893 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - Setting initial period to Sun Oct 04 18:53:34 CEST 2026
+18:53:52,894 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+18:53:52,894 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+18:53:52,896 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/logFile.html
+18:53:52,896 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [logs/logFile.html]
+18:53:52,897 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+18:53:52,897 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+18:53:52,897 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [FILE] to Logger[ROOT]
+18:53:52,897 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+18:53:52,897 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@234bef66 - Registering current configuration as safe fallback point
+
+
+                                              ooooooooo     *ooooooooo*                                           
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooo:::::ooooooooooo::::::                                      
+            oooooooooo        :oooooooooooo.  ooooooooo     *ooooooooo*                                            
+            oooooooooo      :ooooooooooooo    ooooooooo     *ooooooooo*                                            
+            oooooooooo    *oooooooooooo       ooooooooo     *ooooooooo*                                            
+            oooooooooo  .ooooooooooooo        ooooooooo     *ooooooooo*                                            
+            oooooooooo oooooooooooo           ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooo:            ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooo              ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooo            ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooooo           ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooooo          ooooooooo     *oooooooooo       :ooooooooooooooooo:                  
+            ooooooooooo:  *ooooooooooo        ooooooooo     .ooooooooooo.   ooooooooooooooooooooooo                
+            oooooooooo     :ooooooooooo       ooooooooo      ooooooooooooooooooooooooooooooooooooooo*              
+            oooooooooo      .ooooooooooo      ooooooooo      :ooooooooooooooooooooo         ooooooooo*             
+            oooooooooo        ooooooooooo*    ooooooooo        ooooooooooooooooooo.          ooooooooo             
+            oooooooooo         &ooooooooooo                              oooooooooo#                               
+            oooooooooo          oooooooooooo                             oooooooooooooo:                           
+            oooooooooo            ooooooooooo:                             ooooooooooooooooooooo:                  
+            oooooooooo             ooooooooooo:                             *ooooooooooooooooooooooo               
+                                                                                *oooooooooooooooooooo*             
+                                                                                         :oooooooooooo:            
+                                                                                             oooooooooo            
+                                                                        ooooooooo             ooooooooo            
+                                                                        *ooooooooo           :oooooooo:            
+                                                                         :ooooooooooo:*..*:ooooooooooo             
+                                                                           oooooooooooooooooooooooooo              
+                                                                             ooooooooooooooooooooo:                
+                                                                                 .*oooooooooo*.                    
+:: Running Spring Boot 2.7.18 ::
+
+18:53:53.210 [background-preinit] [34mINFO [0;39m [36mo.h.validator.internal.util.Version[0;39m - HV000001: Hibernate Validator 6.2.5.Final 
+18:53:53.244 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - Starting GakuseiApplication v2.1.1 using Java 17.0.16 on Pierres-MacBook-Pro-2.local with PID 26839 (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar started by pierresandboge in /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7) 
+18:53:53.245 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - The following 1 profile is active: "local" 
+18:53:55.113 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+18:53:55.268 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 137 ms. Found 20 JPA repository interfaces. 
+18:53:57.131 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat initialized with port(s): 18081 (http) 
+18:53:57.257 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Initializing ProtocolHandler ["http-nio-127.0.0.1-18081"] 
+18:53:57.259 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Starting service [Tomcat] 
+18:53:57.259 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/9.0.83] 
+18:53:57.705 [main] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring embedded WebApplicationContext 
+18:53:57.705 [main] [34mINFO [0;39m [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 4432 ms 
+18:53:58.797 [main] [34mINFO [0;39m [36mo.h.jpa.internal.util.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: default] 
+18:53:58.842 [main] [34mINFO [0;39m [36morg.hibernate.Version[0;39m - HHH000412: Hibernate ORM core version 5.6.15.Final 
+18:53:59.034 [main] [34mINFO [0;39m [36mo.h.annotations.common.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+18:53:59.143 [main] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+18:53:59.428 [main] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+18:53:59.454 [main] [34mINFO [0;39m [36morg.hibernate.dialect.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+18:54:00.321 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+18:54:00.336 [main] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+18:54:01.640 [main] [31mWARN [0;39m [36mo.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration[0;39m - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+18:54:02.993 [main] [31mWARN [0;39m [36mo.s.s.c.a.web.builders.WebSecurity[0;39m - You are asking Spring Security to ignore Ant [pattern='/js/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead. 
+18:54:02.994 [main] [34mINFO [0;39m [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will not secure Ant [pattern='/js/**'] 
+18:54:03.369 [main] [34mINFO [0;39m [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@75bd28d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@129c4d19, org.springframework.security.web.context.SecurityContextPersistenceFilter@72a8361b, org.springframework.security.web.header.HeaderWriterFilter@78d73b1b, org.springframework.security.web.authentication.logout.LogoutFilter@3c18942, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5a30722c, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@79252c83, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@75793f17, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5ea7bc4, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@57cabdc3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@11810917, org.springframework.security.web.session.SessionManagementFilter@681e913c, org.springframework.security.web.access.ExceptionTranslationFilter@28b523a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@64279ab] 
+18:54:03.695 [main] [31mWARN [0;39m [36mo.s.d.r.c.m.RepositoryCollectionResourceMapping[0;39m - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.EventRepository! Use @RepositoryRestResource instead! 
+18:54:03.696 [main] [31mWARN [0;39m [36mo.s.d.r.c.m.RepositoryCollectionResourceMapping[0;39m - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.UserRepository! Use @RepositoryRestResource instead! 
+18:54:04.503 [main] [34mINFO [0;39m [36mo.s.b.a.w.s.WelcomePageHandlerMapping[0;39m - Adding welcome page template: index 
+18:54:06.328 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Starting ProtocolHandler ["http-nio-127.0.0.1-18081"] 
+18:54:06.542 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat started on port(s): 18081 (http) with context path '' 
+18:54:06.550 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - Started GakuseiApplication in 13.584 seconds (JVM running for 13.876) 
+18:54:07.709 [main] [34mINFO [0;39m [36mse.kits.gakusei.init.DataInit[0;39m - Loaded resource: testdata/testdata.json 
+18:54:07.942 [main] [34mINFO [0;39m [36mse.kits.gakusei.init.DataInit[0;39m - Loaded resource: testdata/testdata.json 
+18:54:08.825 [main] [34mINFO [0;39m [36mse.kits.gakusei.init.DataInit[0;39m - *** Data initialization was set on profile(s): [local] 
+18:54:21.888 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+18:54:21.888 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Initializing Servlet 'dispatcherServlet' 
+18:54:21.889 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Completed initialization in 1 ms 
+18:54:22.730 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36mo.s.api.AbstractOpenApiResource[0;39m - Init duration for springdoc-openapi is: 333 ms 
+18:54:22.769 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:21.763 / lessons / question / true / 1a117b59-d0ad-489e-bdec-b0c3e69ba4fd / httpproof1791132862 
+18:54:22.775 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.763 / lessons / userAnswer / true / 1a117b59-d0ad-489e-bdec-b0c3e69ba4fd / httpproof1791132862 
+18:54:22.778 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.763 / lessons / answeredCorrectly / true / 1a117b59-d0ad-489e-bdec-b0c3e69ba4fd / httpproof1791132862 
+18:54:22.789 [http-nio-127.0.0.1-18081-exec-6] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.763 / lessons / updateRetention / true / 1a117b59-d0ad-489e-bdec-b0c3e69ba4fd / httpproof1791132862 
+18:54:22.821 [http-nio-127.0.0.1-18081-exec-7] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:21.819 / lessons / question / true / f722c1a2-cf1d-4f57-8c1d-989e7b9b2e58 / httpproof1791132862 
+18:54:22.824 [http-nio-127.0.0.1-18081-exec-8] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.819 / lessons / userAnswer / true / f722c1a2-cf1d-4f57-8c1d-989e7b9b2e58 / httpproof1791132862 
+18:54:22.827 [http-nio-127.0.0.1-18081-exec-9] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.819 / lessons / answeredCorrectly / true / f722c1a2-cf1d-4f57-8c1d-989e7b9b2e58 / httpproof1791132862 
+18:54:22.831 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.819 / lessons / updateRetention / true / f722c1a2-cf1d-4f57-8c1d-989e7b9b2e58 / httpproof1791132862 
+18:54:22.846 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:21.844 / lessons / question / true / 0051b30b-0f4c-4286-820f-96b250a809c2 / httpproof1791132862 
+18:54:22.848 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.844 / lessons / userAnswer / true / 0051b30b-0f4c-4286-820f-96b250a809c2 / httpproof1791132862 
+18:54:22.851 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.844 / lessons / answeredCorrectly / true / 0051b30b-0f4c-4286-820f-96b250a809c2 / httpproof1791132862 
+18:54:22.854 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.844 / lessons / updateRetention / true / 0051b30b-0f4c-4286-820f-96b250a809c2 / httpproof1791132862 
+18:54:22.866 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:21.864 / lessons / question / true / 30dd351c-4d2e-4007-a9cc-4e546ddaed66 / httpproof1791132862 
+18:54:22.869 [http-nio-127.0.0.1-18081-exec-6] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.864 / lessons / userAnswer / true / 30dd351c-4d2e-4007-a9cc-4e546ddaed66 / httpproof1791132862 
+18:54:22.871 [http-nio-127.0.0.1-18081-exec-7] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.864 / lessons / answeredCorrectly / true / 30dd351c-4d2e-4007-a9cc-4e546ddaed66 / httpproof1791132862 
+18:54:22.875 [http-nio-127.0.0.1-18081-exec-8] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.864 / lessons / updateRetention / true / 30dd351c-4d2e-4007-a9cc-4e546ddaed66 / httpproof1791132862 
+18:54:22.883 [http-nio-127.0.0.1-18081-exec-9] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:21.881 / lessons / question / true / 74008586-1a1c-41ab-8a5d-36822a21c5e9 / httpproof1791132862 
+18:54:22.886 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.881 / lessons / userAnswer / true / 74008586-1a1c-41ab-8a5d-36822a21c5e9 / httpproof1791132862 
+18:54:22.888 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.881 / lessons / answeredCorrectly / true / 74008586-1a1c-41ab-8a5d-36822a21c5e9 / httpproof1791132862 
+18:54:22.891 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.881 / lessons / updateRetention / true / 74008586-1a1c-41ab-8a5d-36822a21c5e9 / httpproof1791132862 
+18:54:22.899 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:21.897 / lessons / question / true / f8724c0f-8ce0-40bf-8382-139bec395f93 / httpproof1791132862 
+18:54:22.901 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.897 / lessons / userAnswer / true / f8724c0f-8ce0-40bf-8382-139bec395f93 / httpproof1791132862 
+18:54:22.903 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.897 / lessons / answeredCorrectly / true / f8724c0f-8ce0-40bf-8382-139bec395f93 / httpproof1791132862 
+18:54:22.906 [http-nio-127.0.0.1-18081-exec-6] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:54:22.897 / lessons / updateRetention / true / f8724c0f-8ce0-40bf-8382-139bec395f93 / httpproof1791132862 
+18:54:45.464 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default' 
+18:54:45.465 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mo.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl[0;39m - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down' 
+18:54:45.469 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown initiated... 
+18:54:45.470 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown completed. 

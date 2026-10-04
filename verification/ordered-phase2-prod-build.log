@@ -1,0 +1,128 @@
+
+> gakusei@2.1.1 precompile:production
+> npm run preflight && NODE_ENV=production npm run prepare:assets
+
+
+> gakusei@2.1.1 preflight
+> node scripts/preflight.js
+
+
+> gakusei@2.1.1 prepare:assets
+> node scripts/updateVersionFromMavenPom.js && node scripts/generateFrontendLicenses.js && node scripts/copyBootstrap.js
+
+package.json dependencies written to frontend_licenses.json: 647.494ms
+
+> gakusei@2.1.1 compile:production
+> webpack --mode production
+
+asset main.4eb90230d4a13c862717.bundle.js 2.13 MiB [emitted] [immutable] [minimized] [big] (name: main) 2 related assets
+asset ../../templates/index.html 457 bytes [emitted] [minimized]
+orphan modules 1.26 MiB [orphan] 367 modules
+runtime modules 2.72 KiB 10 modules
+javascript modules 4.97 MiB
+  modules by path ./node_modules/ 3.65 MiB 1109 modules
+  modules by path ./src/main/ 1.27 MiB
+    ./src/main/js/main.js + 350 modules 1.25 MiB [built] [code generated]
+    ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./src/main/resources/static/css/style.scss 16.5 KiB [built] [code generated] [6 warnings]
+  + 4 modules
+json modules 62.9 KiB
+  modules by path ./node_modules/sanitize-html-react/node_modules/dom-serializer/ 32.8 KiB
+    ./node_modules/sanitize-html-react/node_modules/dom-serializer/foreignNames.json 2.79 KiB [built] [code generated]
+    + 4 modules
+  modules by path ./node_modules/sanitize-html-react/node_modules/entities/ 30 KiB
+    ./node_modules/sanitize-html-react/node_modules/entities/maps/entities.json 28.4 KiB [built] [code generated]
+    + 3 modules
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 2, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:2:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+2 | @import 'elements/_base.scss';
+
+
+src/main/resources/static/css/style.scss 3:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 1:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 4, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:4:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+4 | @import 'components/_about-features.scss';
+
+
+src/main/resources/static/css/style.scss 5:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 1:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 5, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:5:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+5 | @import 'components/_answer-button.scss';
+
+
+src/main/resources/static/css/style.scss 6:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 1:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 6, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:6:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+6 | @import 'components/_copyright-information.scss';
+
+
+src/main/resources/static/css/style.scss 7:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 1:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 7, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:7:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+7 | @import 'components/_exercise.scss';
+
+
+src/main/resources/static/css/style.scss 8:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 1:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+27 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 1:0-44
+
+WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  main.4eb90230d4a13c862717.bundle.js (2.13 MiB)
+    Largest modules: ./src/main/js/main.js + 350 modules (1.25 MiB), ./node_modules/chart.js/dist/Chart.js (433 KiB), ./node_modules/moment/moment.js (179 KiB)
+
+WARNING in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  main (2.13 MiB)
+      main.4eb90230d4a13c862717.bundle.js
+
+WARNING in webpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+
+webpack 5.111.1 compiled with 9 warnings in 14978 ms

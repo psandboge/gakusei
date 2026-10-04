@@ -1,2 +1,4 @@
-//DO NOT REMOVE
-//This file is used by alienfast/i18next-loader as a root pointer.
+import en from './en/translation.json';
+import jp from './jp/translation.json';
+import se from './se/translation.json';
+export default { en, jp, se };

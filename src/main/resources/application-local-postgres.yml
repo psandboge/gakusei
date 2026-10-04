@@ -1,0 +1,25 @@
+server:
+  address: 127.0.0.1
+  port: 8080
+spring:
+  devtools:
+    livereload:
+      enabled: false
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:${LOCAL_DB_PORT:5432}/${LOCAL_DB_NAME:gakusei_local}
+    username: ${LOCAL_DB_USER:gakusei_local}
+    password: ${LOCAL_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/db.changelog-local.yaml
+  cache:
+    type: none
+gakusei:
+  data-init: false
+  local-seed: false
+  event-logging: true
+  remember-me-key: ${LOCAL_REMEMBER_ME_KEY:disposable-local-gakusei}

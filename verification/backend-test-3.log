@@ -1,0 +1,220 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< se.kits.gakusei:gakusei >-----------------------
+[INFO] Building gakusei 2.1.1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] 1 problem was encountered while building the effective model for org.javassist:javassist:jar:3.20.0-GA during dependency collection step for project (use -X to see details)
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (toolchain) @ gakusei ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- license:1.10:download-licenses (download-licenses) @ gakusei ---
+[WARNING] No license information available for: com.github.psandboge:japanese-grammar-utils
+[INFO] 
+[INFO] --- frontend:1.15.4:install-node-and-npm (install node and npm) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- frontend:1.15.4:npm (npm install) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- frontend:1.15.4:npm (npm compile) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- resources:3.2.0:resources (default-resources) @ gakusei ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 2 resources
+[INFO] Copying 6897 resources
+[INFO] 
+[INFO] --- compiler:3.10.1:compile (default-compile) @ gakusei ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 80 source files to /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/classes
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/controller/LessonController.java: Some input files use or override a deprecated API.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/controller/LessonController.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/init/DataInit.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/init/DataInit.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.2.0:testResources (default-testResources) @ gakusei ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] skip non existing resourceDirectory /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.10.1:testCompile (default-testCompile) @ gakusei ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 11 source files to /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/test-classes
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/java/se/kits/gakusei/controller/QuestionControllerTest.java: Some input files use or override a deprecated API.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/java/se/kits/gakusei/controller/QuestionControllerTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/java/se/kits/gakusei/util/KanjiHandlerTest.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/java/se/kits/gakusei/util/KanjiHandlerTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- surefire:2.22.2:test (default-test) @ gakusei ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+18:20:09,644 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+18:20:09,644 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/classes/logback.xml]
+18:20:09,672 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+18:20:09,672 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+18:20:09,674 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+18:20:09,675 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+18:20:09,689 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+18:20:09,691 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [FILE]
+18:20:09,712 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@2082781203 - No compression will be used
+18:20:09,712 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@2082781203 - Will use the pattern logs/logFile.%d{yyyy-MM-dd}.%i.html for the active file
+18:20:09,713 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2c35e847 - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/logFile.%d{yyyy-MM-dd}.%i.html'.
+18:20:09,713 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2c35e847 - Roll-over at midnight.
+18:20:09,734 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2c35e847 - Setting initial period to Sun Oct 04 18:20:09 CEST 2026
+18:20:09,734 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2c35e847 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+18:20:09,734 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2c35e847 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+18:20:09,737 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/logFile.html
+18:20:09,737 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [logs/logFile.html]
+18:20:09,737 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+18:20:09,737 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+18:20:09,737 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [FILE] to Logger[ROOT]
+18:20:09,737 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+18:20:09,737 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@7bd4937b - Registering current configuration as safe fallback point
+
+18:20:09.774 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [se.kits.gakusei.integration.LocalBaselineTest], using SpringBootContextLoader 
+18:20:09.777 [main] INFO  o.s.t.c.s.AbstractContextLoader - Could not detect default resource locations for test class [se.kits.gakusei.integration.LocalBaselineTest]: no resource found for suffixes {-context.xml, Context.groovy}. 
+18:20:09.777 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [se.kits.gakusei.integration.LocalBaselineTest]: LocalBaselineTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration. 
+18:20:09.826 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration se.kits.gakusei.GakuseiApplication for test class se.kits.gakusei.integration.LocalBaselineTest 
+18:20:09.862 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener] 
+18:20:09.869 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@58ffcbd7, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@555cf22, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@6bb2d00b, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3c9bfddc, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1a9c38eb, org.springframework.test.context.support.DirtiesContextTestExecutionListener@319bc845, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4c5474f5, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2f4205be, org.springframework.test.context.event.EventPublishingTestExecutionListener@54e22bdd, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@3bd418e4, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@544820b7, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@6b98a075, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2e61d218, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@3569fc08, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@20b12f8a] 
+18:20:09.881 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [se.kits.gakusei.integration.LocalBaselineTest], using SpringBootContextLoader 
+18:20:09.881 [main] INFO  o.s.t.c.s.AbstractContextLoader - Could not detect default resource locations for test class [se.kits.gakusei.integration.LocalBaselineTest]: no resource found for suffixes {-context.xml, Context.groovy}. 
+18:20:09.881 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [se.kits.gakusei.integration.LocalBaselineTest]: LocalBaselineTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration. 
+18:20:09.883 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration se.kits.gakusei.GakuseiApplication for test class se.kits.gakusei.integration.LocalBaselineTest 
+18:20:09.883 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener] 
+18:20:09.884 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3e14c16d, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3c989952, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@784b990c, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3d3ba765, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@25bc0606, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5d1659ea, org.springframework.test.context.transaction.TransactionalTestExecutionListener@793138bd, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1951b871, org.springframework.test.context.event.EventPublishingTestExecutionListener@5c18016b, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@33aeca0b, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@43aaf813, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@57ac5227, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@4ba302e0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@e98770d, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@1ae67cad] 
+[INFO] Running se.kits.gakusei.util.KanjiHandlerTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.15 s - in se.kits.gakusei.util.KanjiHandlerTest
+[INFO] Running se.kits.gakusei.util.ProgressHandlerTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.105 s - in se.kits.gakusei.util.ProgressHandlerTest
+[INFO] Running se.kits.gakusei.util.QuestionHandlerTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in se.kits.gakusei.util.QuestionHandlerTest
+[INFO] Running se.kits.gakusei.integration.LocalBaselineTest
+18:20:10.182 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running 
+
+                                              ooooooooo     *ooooooooo*                                           
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooo:::::ooooooooooo::::::                                      
+            oooooooooo        :oooooooooooo.  ooooooooo     *ooooooooo*                                            
+            oooooooooo      :ooooooooooooo    ooooooooo     *ooooooooo*                                            
+            oooooooooo    *oooooooooooo       ooooooooo     *ooooooooo*                                            
+            oooooooooo  .ooooooooooooo        ooooooooo     *ooooooooo*                                            
+            oooooooooo oooooooooooo           ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooo:            ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooo              ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooo            ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooooo           ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooooo          ooooooooo     *oooooooooo       :ooooooooooooooooo:                  
+            ooooooooooo:  *ooooooooooo        ooooooooo     .ooooooooooo.   ooooooooooooooooooooooo                
+            oooooooooo     :ooooooooooo       ooooooooo      ooooooooooooooooooooooooooooooooooooooo*              
+            oooooooooo      .ooooooooooo      ooooooooo      :ooooooooooooooooooooo         ooooooooo*             
+            oooooooooo        ooooooooooo*    ooooooooo        ooooooooooooooooooo.          ooooooooo             
+            oooooooooo         &ooooooooooo                              oooooooooo#                               
+            oooooooooo          oooooooooooo                             oooooooooooooo:                           
+            oooooooooo            ooooooooooo:                             ooooooooooooooooooooo:                  
+            oooooooooo             ooooooooooo:                             *ooooooooooooooooooooooo               
+                                                                                *oooooooooooooooooooo*             
+                                                                                         :oooooooooooo:            
+                                                                                             oooooooooo            
+                                                                        ooooooooo             ooooooooo            
+                                                                        *ooooooooo           :oooooooo:            
+                                                                         :ooooooooooo:*..*:ooooooooooo             
+                                                                           oooooooooooooooooooooooooo              
+                                                                             ooooooooooooooooooooo:                
+                                                                                 .*oooooooooo*.                    
+:: Running Spring Boot 2.7.18 ::
+
+18:20:10.324 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final 
+18:20:10.345 [main] WARN  o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/Users/pierresandboge/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/Users/pierresandboge/.m2/repository/org/json/json/20180813/json-20180813.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+18:20:10.352 [main] INFO  s.k.g.integration.LocalBaselineTest - Starting LocalBaselineTest using Java 17.0.16 on Pierres-MacBook-Pro-2.local with PID 42962 (started by pierresandboge in /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7) 
+18:20:10.354 [main] INFO  s.k.g.integration.LocalBaselineTest - The following 1 profile is active: "local" 
+18:20:11.208 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+18:20:11.247 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 20 JPA repository interfaces. 
+18:20:12.918 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 0 (http) 
+18:20:12.925 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-127.0.0.1-auto-1"] 
+18:20:12.929 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+18:20:12.929 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83] 
+18:20:13.055 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext 
+18:20:13.055 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2693 ms 
+18:20:13.359 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+18:20:13.443 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final 
+18:20:13.466 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+18:20:13.608 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+18:20:13.729 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+18:20:13.741 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+18:20:14.182 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+18:20:14.193 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+18:20:14.468 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+18:20:17.337 [main] WARN  o.s.s.c.a.web.builders.WebSecurity - You are asking Spring Security to ignore Ant [pattern='/js/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead. 
+18:20:17.338 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will not secure Ant [pattern='/js/**'] 
+18:20:17.371 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@796eeafb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6dd0d9a2, org.springframework.security.web.context.SecurityContextPersistenceFilter@7ff395fa, org.springframework.security.web.header.HeaderWriterFilter@4136638d, org.springframework.security.web.authentication.logout.LogoutFilter@59dae020, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@64b7719f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5f8c319, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@69e636cc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@39e3da5a, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@3acd06b0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5f9d29c4, org.springframework.security.web.session.SessionManagementFilter@279e9c95, org.springframework.security.web.access.ExceptionTranslationFilter@59c530b5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@497d9489] 
+18:20:17.462 [main] WARN  o.s.d.r.c.m.RepositoryCollectionResourceMapping - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.UserRepository! Use @RepositoryRestResource instead! 
+18:20:17.462 [main] WARN  o.s.d.r.c.m.RepositoryCollectionResourceMapping - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.EventRepository! Use @RepositoryRestResource instead! 
+18:20:17.884 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false) 
+18:20:18.125 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-127.0.0.1-auto-1"] 
+18:20:18.162 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 56042 (http) with context path '' 
+18:20:18.173 [main] INFO  s.k.g.integration.LocalBaselineTest - Started LocalBaselineTest in 7.994 seconds (JVM running for 8.996) 
+18:20:18.800 [main] INFO  se.kits.gakusei.init.DataInit - Loaded resource: testdata/testdata.json 
+18:20:18.904 [main] INFO  se.kits.gakusei.init.DataInit - Loaded resource: testdata/testdata.json 
+18:20:19.161 [main] INFO  se.kits.gakusei.init.DataInit - *** Data initialization was set on profile(s): [local] 
+18:20:19.211 [http-nio-127.0.0.1-auto-1-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+18:20:19.212 [http-nio-127.0.0.1-auto-1-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+18:20:19.212 [http-nio-127.0.0.1-auto-1-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms 
+18:20:20.297 [http-nio-127.0.0.1-auto-1-exec-2] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 592 ms 
+18:20:20.326 [main] INFO  o.s.t.c.t.TransactionContext - Began transaction (1) for test context [DefaultTestContext@104b145b testClass = LocalBaselineTest, testInstance = se.kits.gakusei.integration.LocalBaselineTest@38be950e, testMethod = bundledSeedSupportsRealVocabularyAndRetentionQueries@LocalBaselineTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@33b8f619 testClass = LocalBaselineTest, locations = '{}', classes = '{class se.kits.gakusei.GakuseiApplication}', contextInitializerClasses = '[]', activeProfiles = '{local}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@57a3e26a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@3b5fad2d, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6dd7b5a3, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6aa8e115, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@295cf707, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5965d37], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@4d3946b6]; rollback [true] 
+18:20:20.355 [main] INFO  o.s.t.c.t.TransactionContext - Rolled back transaction for test: [DefaultTestContext@104b145b testClass = LocalBaselineTest, testInstance = se.kits.gakusei.integration.LocalBaselineTest@38be950e, testMethod = bundledSeedSupportsRealVocabularyAndRetentionQueries@LocalBaselineTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@33b8f619 testClass = LocalBaselineTest, locations = '{}', classes = '{class se.kits.gakusei.GakuseiApplication}', contextInitializerClasses = '[]', activeProfiles = '{local}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@57a3e26a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@3b5fad2d, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6dd7b5a3, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6aa8e115, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@295cf707, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5965d37], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]] 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.191 s - in se.kits.gakusei.integration.LocalBaselineTest
+[INFO] Running se.kits.gakusei.controller.KanjiControllerTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s - in se.kits.gakusei.controller.KanjiControllerTest
+[INFO] Running se.kits.gakusei.controller.QuestionControllerTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s - in se.kits.gakusei.controller.QuestionControllerTest
+[INFO] Running se.kits.gakusei.controller.CourseControllerTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s - in se.kits.gakusei.controller.CourseControllerTest
+[INFO] Running se.kits.gakusei.controller.EventControllerTest
+18:20:20.428 [main] INFO  s.k.g.controller.EventController - 2017-01-24 15:13:54.671 / testmode / testtype / testdata / testNuggetId / testname 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s - in se.kits.gakusei.controller.EventControllerTest
+[INFO] Running se.kits.gakusei.controller.QuizControllerTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s - in se.kits.gakusei.controller.QuizControllerTest
+[INFO] Running se.kits.gakusei.controller.NuggetControllerTest
+18:20:20.457 [main] INFO  s.k.g.controller.NuggetController - Get all nuggets took 1 ms 
+18:20:20.457 [main] INFO  s.k.g.controller.NuggetController - Get all nuggets took 0 ms 
+18:20:20.457 [main] INFO  s.k.g.controller.NuggetController - Get filtered nuggets took 0 ms 
+18:20:20.458 [main] INFO  s.k.g.controller.NuggetController - Get filtered nuggets took 0 ms 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s - in se.kits.gakusei.controller.NuggetControllerTest
+18:20:20.488 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+18:20:20.488 [SpringApplicationShutdownHook] INFO  o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down' 
+18:20:20.495 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+18:20:20.497 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 45, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  23.080 s
+[INFO] Finished at: 2026-10-04T18:20:22+02:00
+[INFO] ------------------------------------------------------------------------

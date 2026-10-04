@@ -1,0 +1,21 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< se.kits.gakusei:gakusei >-----------------------
+[INFO] Building gakusei 2.1.1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] 1 problem was encountered while building the effective model for org.javassist:javassist:jar:3.20.0-GA during dependency collection step for project (use -X to see details)
+[INFO] 
+[INFO] --- exec:3.5.0:exec (verify-grammar-provenance) @ gakusei ---
+/Users/pierresandboge/.m2/repository/com/github/psandboge/japanese-grammar-utils/1.0.0/japanese-grammar-utils-1.0.0.jar: OK
+/Users/pierresandboge/.m2/repository/com/github/psandboge/japanese-grammar-utils/1.0.0/japanese-grammar-utils-1.0.0.pom: OK
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (toolchain) @ gakusei ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.563 s
+[INFO] Finished at: 2026-10-04T18:45:46+02:00
+[INFO] ------------------------------------------------------------------------

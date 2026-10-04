@@ -1,0 +1,36 @@
+
+> gakusei@2.1.1 pretest
+> npm run preflight
+
+
+> gakusei@2.1.1 preflight
+> node scripts/preflight.js
+
+
+> gakusei@2.1.1 test
+> mocha --require ./mocha.bootstrap.js --timeout 10000 "src/main/js/**/*.test.js"
+
+
+✖ ERROR: ConfigError: .ignore must be an array, or undefined
+    at loadOptionsSync (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/@babel/core/lib/config/index.js:58:78)
+    at OptionManager.init (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/@babel/core/lib/index.js:222:40)
+    at module.exports.transformSync (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/@babel/register/lib/worker/transform.cjs:76:42)
+    at LocalClient.handleMessage (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/@babel/register/lib/worker/handle-message.cjs:15:24)
+    at LocalClient.<anonymous> (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/@babel/register/lib/worker-client.cjs:72:77)
+    at LocalClient.transform (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/@babel/register/lib/worker-client.cjs:28:47)
+    at compile (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/@babel/register/lib/hook.cjs:42:25)
+    at compileBabel7 (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/@babel/register/lib/hook.cjs:35:12)
+    at Module._compile (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/pirates/lib/index.js:124:29)
+    at node:internal/modules/cjs/loader:2060:10
+    at Object.newLoader [as .js] (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/pirates/lib/index.js:134:7)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:372:15)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:244:9)
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async formattedImport (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/mocha/lib/nodejs/esm-utils.js:10:14)
+    at async requireModule (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/mocha/lib/nodejs/esm-utils.js:105:30)
+    at async exports.handleRequires (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/mocha/lib/cli/run-helpers.js:109:28)
+    at async /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/mocha/lib/cli/run.js:368:25

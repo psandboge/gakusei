@@ -1,0 +1,19 @@
+npm error code ERESOLVE
+npm error ERESOLVE unable to resolve dependency tree
+npm error
+npm error While resolving: gakusei@2.1.1
+npm error Found: redux@3.7.2
+npm error node_modules/redux
+npm error   redux@"^3.6.0" from the root project
+npm error
+npm error Could not resolve dependency:
+npm error peer redux@"^4" from redux-thunk@2.4.2
+npm error node_modules/redux-thunk
+npm error   redux-thunk@"^2.2.0" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry this command with --force or --legacy-peer-deps to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /Users/pierresandboge/.npm/_logs/2026-10-04T16_16_56_730Z-eresolve-report.txt
+npm error A complete log of this run can be found in: /Users/pierresandboge/.npm/_logs/2026-10-04T16_16_56_730Z-debug-0.log

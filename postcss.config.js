@@ -1,9 +1,1 @@
-/* eslint-env node */
-
-module.exports = {
-  plugins: {
-    autoprefixer: {},
-    'postcss-import': {},
-    'postcss-cssnext': { warnForDuplicates: false }
-  }
-};
+module.exports = { plugins: { 'postcss-import': {}, 'postcss-preset-env': {} } };

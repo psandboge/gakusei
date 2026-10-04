@@ -1,0 +1,410 @@
+18:36:16,559 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+18:36:16,559 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar!/BOOT-INF/classes!/logback.xml]
+18:36:16,564 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@2c9f9fb0 - URL [jar:file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar!/BOOT-INF/classes!/logback.xml] is not of type file
+18:36:16,584 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+18:36:16,584 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+18:36:16,586 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+18:36:16,589 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+18:36:16,604 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+18:36:16,605 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [FILE]
+18:36:16,609 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@546718765 - No compression will be used
+18:36:16,609 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@546718765 - Will use the pattern logs/logFile.%d{yyyy-MM-dd}.%i.html for the active file
+18:36:16,610 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/logFile.%d{yyyy-MM-dd}.%i.html'.
+18:36:16,610 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - Roll-over at midnight.
+18:36:16,613 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - Setting initial period to Sun Oct 04 18:35:31 CEST 2026
+18:36:16,614 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+18:36:16,614 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+18:36:16,616 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/logFile.html
+18:36:16,616 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [logs/logFile.html]
+18:36:16,617 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+18:36:16,617 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+18:36:16,617 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [FILE] to Logger[ROOT]
+18:36:16,617 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+18:36:16,617 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@234bef66 - Registering current configuration as safe fallback point
+
+
+                                              ooooooooo     *ooooooooo*                                           
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooo:::::ooooooooooo::::::                                      
+            oooooooooo        :oooooooooooo.  ooooooooo     *ooooooooo*                                            
+            oooooooooo      :ooooooooooooo    ooooooooo     *ooooooooo*                                            
+            oooooooooo    *oooooooooooo       ooooooooo     *ooooooooo*                                            
+            oooooooooo  .ooooooooooooo        ooooooooo     *ooooooooo*                                            
+            oooooooooo oooooooooooo           ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooo:            ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooo              ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooo            ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooooo           ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooooo          ooooooooo     *oooooooooo       :ooooooooooooooooo:                  
+            ooooooooooo:  *ooooooooooo        ooooooooo     .ooooooooooo.   ooooooooooooooooooooooo                
+            oooooooooo     :ooooooooooo       ooooooooo      ooooooooooooooooooooooooooooooooooooooo*              
+            oooooooooo      .ooooooooooo      ooooooooo      :ooooooooooooooooooooo         ooooooooo*             
+            oooooooooo        ooooooooooo*    ooooooooo        ooooooooooooooooooo.          ooooooooo             
+            oooooooooo         &ooooooooooo                              oooooooooo#                               
+            oooooooooo          oooooooooooo                             oooooooooooooo:                           
+            oooooooooo            ooooooooooo:                             ooooooooooooooooooooo:                  
+            oooooooooo             ooooooooooo:                             *ooooooooooooooooooooooo               
+                                                                                *oooooooooooooooooooo*             
+                                                                                         :oooooooooooo:            
+                                                                                             oooooooooo            
+                                                                        ooooooooo             ooooooooo            
+                                                                        *ooooooooo           :oooooooo:            
+                                                                         :ooooooooooo:*..*:ooooooooooo             
+                                                                           oooooooooooooooooooooooooo              
+                                                                             ooooooooooooooooooooo:                
+                                                                                 .*oooooooooo*.                    
+:: Running Spring Boot 2.7.18 ::
+
+18:36:16.912 [background-preinit] [34mINFO [0;39m [36mo.h.validator.internal.util.Version[0;39m - HV000001: Hibernate Validator 6.2.5.Final 
+18:36:16.945 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - Starting GakuseiApplication v2.1.1 using Java 17.0.16 on Pierres-MacBook-Pro-2.local with PID 84370 (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar started by pierresandboge in /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7) 
+18:36:16.945 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - The following 1 profile is active: "local" 
+18:36:17.734 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+18:36:17.849 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 109 ms. Found 20 JPA repository interfaces. 
+18:36:19.741 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat initialized with port(s): 18081 (http) 
+18:36:19.749 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Initializing ProtocolHandler ["http-nio-127.0.0.1-18081"] 
+18:36:19.751 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Starting service [Tomcat] 
+18:36:19.751 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/9.0.83] 
+18:36:20.027 [main] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring embedded WebApplicationContext 
+18:36:20.029 [main] [34mINFO [0;39m [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 3060 ms 
+18:36:20.999 [main] [34mINFO [0;39m [36mo.h.jpa.internal.util.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: default] 
+18:36:21.255 [main] [34mINFO [0;39m [36morg.hibernate.Version[0;39m - HHH000412: Hibernate ORM core version 5.6.15.Final 
+18:36:21.622 [main] [34mINFO [0;39m [36mo.h.annotations.common.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+18:36:21.795 [main] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+18:36:21.987 [main] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+18:36:22.051 [main] [34mINFO [0;39m [36morg.hibernate.dialect.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+18:36:23.131 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+18:36:23.148 [main] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+18:36:25.392 [main] [31mWARN [0;39m [36mo.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration[0;39m - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+18:36:28.717 [main] [31mWARN [0;39m [36mo.s.s.c.a.web.builders.WebSecurity[0;39m - You are asking Spring Security to ignore Ant [pattern='/js/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead. 
+18:36:28.725 [main] [34mINFO [0;39m [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will not secure Ant [pattern='/js/**'] 
+18:36:29.127 [main] [34mINFO [0;39m [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@70b48eb3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7b8ea1db, org.springframework.security.web.context.SecurityContextPersistenceFilter@4981d95b, org.springframework.security.web.header.HeaderWriterFilter@5bfc79cb, org.springframework.security.web.authentication.logout.LogoutFilter@756808cc, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6842c101, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@497ed877, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3dec3f87, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5939e24, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@4fb64a52, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@a91119b, org.springframework.security.web.session.SessionManagementFilter@19662208, org.springframework.security.web.access.ExceptionTranslationFilter@72c9ebfa, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2cccf134] 
+18:36:29.620 [main] [31mWARN [0;39m [36mo.s.d.r.c.m.RepositoryCollectionResourceMapping[0;39m - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.EventRepository! Use @RepositoryRestResource instead! 
+18:36:29.621 [main] [31mWARN [0;39m [36mo.s.d.r.c.m.RepositoryCollectionResourceMapping[0;39m - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.UserRepository! Use @RepositoryRestResource instead! 
+18:36:30.657 [main] [34mINFO [0;39m [36mo.s.b.a.w.s.WelcomePageHandlerMapping[0;39m - Adding welcome page template: index 
+18:36:31.835 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Starting ProtocolHandler ["http-nio-127.0.0.1-18081"] 
+18:36:31.860 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat started on port(s): 18081 (http) with context path '' 
+18:36:31.891 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - Started GakuseiApplication in 15.213 seconds (JVM running for 15.458) 
+18:36:32.678 [main] [34mINFO [0;39m [36mse.kits.gakusei.init.DataInit[0;39m - Loaded resource: testdata/testdata.json 
+18:36:32.943 [main] [34mINFO [0;39m [36mse.kits.gakusei.init.DataInit[0;39m - Loaded resource: testdata/testdata.json 
+18:36:34.489 [main] [34mINFO [0;39m [36mse.kits.gakusei.init.DataInit[0;39m - *** Data initialization was set on profile(s): [local] 
+18:38:12.715 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+18:38:12.715 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Initializing Servlet 'dispatcherServlet' 
+18:38:12.716 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Completed initialization in 1 ms 
+18:38:41.141 [http-nio-127.0.0.1-18081-exec-8] [34mINFO [0;39m [36mo.s.api.AbstractOpenApiResource[0;39m - Init duration for springdoc-openapi is: 538 ms 
+18:38:41.196 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:38:41.187 / lessons / answeredCorrectly / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131920 
+18:38:41.245 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:38:41.187 / lessons / updateRetention / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131920 
+18:38:41.324 [http-nio-127.0.0.1-18081-exec-1] [1;31mERROR[0;39m [36mo.a.c.c.C.[.[.[.[dispatcherServlet][0;39m - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "se.kits.gakusei.user.repository.EventRepository.getAnswerTimePeriod(String, String)" is null] with root cause 
+java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "se.kits.gakusei.user.repository.EventRepository.getAnswerTimePeriod(String, String)" is null
+	at se.kits.gakusei.util.ProgressHandler.updateRetention(ProgressHandler.java:89)
+	at se.kits.gakusei.util.ProgressHandler$$FastClassBySpringCGLIB$$110982a1.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:707)
+	at se.kits.gakusei.util.ProgressHandler$$EnhancerBySpringCGLIB$$91ff658f.updateRetention(<generated>)
+	at se.kits.gakusei.controller.EventController.addEvent(EventController.java:137)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:106)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:97)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:164)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:223)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:217)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.valves.RemoteIpValve.invoke(RemoteIpValve.java:765)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+18:39:03.986 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:02.984 / lessons / question / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131943 
+18:39:03.990 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:03.984 / lessons / answeredCorrectly / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131943 
+18:39:03.994 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:03.984 / lessons / updateRetention / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131943 
+18:39:03.997 [http-nio-127.0.0.1-18081-exec-4] [1;31mERROR[0;39m [36mo.a.c.c.C.[.[.[.[dispatcherServlet][0;39m - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "java.sql.Timestamp.getTime()" because the return value of "se.kits.gakusei.user.model.ProgressTracking.getLatestTimestamp()" is null] with root cause 
+java.lang.NullPointerException: Cannot invoke "java.sql.Timestamp.getTime()" because the return value of "se.kits.gakusei.user.model.ProgressTracking.getLatestTimestamp()" is null
+	at se.kits.gakusei.util.ProgressHandler.updateRetention(ProgressHandler.java:123)
+	at se.kits.gakusei.util.ProgressHandler$$FastClassBySpringCGLIB$$110982a1.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:707)
+	at se.kits.gakusei.util.ProgressHandler$$EnhancerBySpringCGLIB$$91ff658f.updateRetention(<generated>)
+	at se.kits.gakusei.controller.EventController.addEvent(EventController.java:137)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:106)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:97)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:164)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:223)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:217)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.valves.RemoteIpValve.invoke(RemoteIpValve.java:765)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+18:39:19.366 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:18.364 / lessons / question / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131959 
+18:39:19.370 [http-nio-127.0.0.1-18081-exec-6] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.364 / lessons / userAnswer / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131959 
+18:39:19.373 [http-nio-127.0.0.1-18081-exec-7] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.364 / lessons / answeredCorrectly / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131959 
+18:39:19.377 [http-nio-127.0.0.1-18081-exec-8] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.364 / lessons / updateRetention / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131959 
+18:39:19.400 [http-nio-127.0.0.1-18081-exec-9] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:18.398 / lessons / question / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131959 
+18:39:19.403 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.398 / lessons / userAnswer / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131959 
+18:39:19.406 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.398 / lessons / answeredCorrectly / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131959 
+18:39:19.410 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.398 / lessons / updateRetention / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131959 
+18:39:19.422 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:18.419 / lessons / question / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131959 
+18:39:19.425 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.419 / lessons / userAnswer / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131959 
+18:39:19.428 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.419 / lessons / answeredCorrectly / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131959 
+18:39:19.432 [http-nio-127.0.0.1-18081-exec-6] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.419 / lessons / updateRetention / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131959 
+18:39:19.442 [http-nio-127.0.0.1-18081-exec-7] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:18.44 / lessons / question / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131959 
+18:39:19.445 [http-nio-127.0.0.1-18081-exec-8] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.44 / lessons / userAnswer / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131959 
+18:39:19.447 [http-nio-127.0.0.1-18081-exec-9] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.44 / lessons / answeredCorrectly / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131959 
+18:39:19.450 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.44 / lessons / updateRetention / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131959 
+18:39:19.458 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:18.456 / lessons / question / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131959 
+18:39:19.461 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.456 / lessons / userAnswer / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131959 
+18:39:19.463 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.456 / lessons / answeredCorrectly / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131959 
+18:39:19.466 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.456 / lessons / updateRetention / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131959 
+18:39:19.473 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:18.471 / lessons / question / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131959 
+18:39:19.476 [http-nio-127.0.0.1-18081-exec-6] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.471 / lessons / userAnswer / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131959 
+18:39:19.478 [http-nio-127.0.0.1-18081-exec-7] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.471 / lessons / answeredCorrectly / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131959 
+18:39:19.482 [http-nio-127.0.0.1-18081-exec-8] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:19.471 / lessons / updateRetention / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131959 
+18:39:36.234 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:35.226 / lessons / question / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131975 
+18:39:36.245 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.226 / lessons / userAnswer / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131975 
+18:39:36.251 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.226 / lessons / answeredCorrectly / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131975 
+18:39:36.258 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.226 / lessons / updateRetention / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131975 
+18:39:36.268 [http-nio-127.0.0.1-18081-exec-6] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:35.266 / lessons / question / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131975 
+18:39:36.272 [http-nio-127.0.0.1-18081-exec-7] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.266 / lessons / userAnswer / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131975 
+18:39:36.276 [http-nio-127.0.0.1-18081-exec-8] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.266 / lessons / answeredCorrectly / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131975 
+18:39:36.281 [http-nio-127.0.0.1-18081-exec-9] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.266 / lessons / updateRetention / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131975 
+18:39:36.289 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:35.286 / lessons / question / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131975 
+18:39:36.292 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.286 / lessons / userAnswer / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131975 
+18:39:36.295 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.286 / lessons / answeredCorrectly / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131975 
+18:39:36.299 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.286 / lessons / updateRetention / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131975 
+18:39:36.309 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:35.304 / lessons / question / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131975 
+18:39:36.314 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.304 / lessons / userAnswer / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131975 
+18:39:36.318 [http-nio-127.0.0.1-18081-exec-6] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.304 / lessons / answeredCorrectly / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131975 
+18:39:36.323 [http-nio-127.0.0.1-18081-exec-7] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.304 / lessons / updateRetention / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131975 
+18:39:36.330 [http-nio-127.0.0.1-18081-exec-8] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:35.328 / lessons / question / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131975 
+18:39:36.333 [http-nio-127.0.0.1-18081-exec-9] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.328 / lessons / userAnswer / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131975 
+18:39:36.335 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.328 / lessons / answeredCorrectly / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131975 
+18:39:36.339 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.328 / lessons / updateRetention / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131975 
+18:39:36.347 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:35.344 / lessons / question / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131975 
+18:39:36.351 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.344 / lessons / userAnswer / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131975 
+18:39:36.355 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.344 / lessons / answeredCorrectly / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131975 
+18:39:36.359 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:36.344 / lessons / updateRetention / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131975 
+18:39:50.971 [http-nio-127.0.0.1-18081-exec-9] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:49.969 / lessons / question / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131990 
+18:39:50.973 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.969 / lessons / userAnswer / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131990 
+18:39:50.975 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.969 / lessons / answeredCorrectly / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131990 
+18:39:50.978 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.969 / lessons / updateRetention / true / fae0af78-0c11-4139-a37e-f7ca35ca8d57 / httpproof1791131990 
+18:39:50.983 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:49.981 / lessons / question / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131990 
+18:39:50.985 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.981 / lessons / userAnswer / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131990 
+18:39:50.987 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.981 / lessons / answeredCorrectly / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131990 
+18:39:50.990 [http-nio-127.0.0.1-18081-exec-6] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.981 / lessons / updateRetention / true / 6f57ee32-6c10-4323-b50e-e175c0426017 / httpproof1791131990 
+18:39:50.995 [http-nio-127.0.0.1-18081-exec-7] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:49.993 / lessons / question / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131990 
+18:39:50.997 [http-nio-127.0.0.1-18081-exec-8] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.993 / lessons / userAnswer / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131990 
+18:39:50.999 [http-nio-127.0.0.1-18081-exec-9] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.993 / lessons / answeredCorrectly / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131990 
+18:39:51.002 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.993 / lessons / updateRetention / true / d2e8acf2-de98-484a-aa74-9175608bf4a0 / httpproof1791131990 
+18:39:51.007 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.006 / lessons / question / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131990 
+18:39:51.009 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:51.006 / lessons / userAnswer / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131990 
+18:39:51.012 [http-nio-127.0.0.1-18081-exec-3] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:51.006 / lessons / answeredCorrectly / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131990 
+18:39:51.016 [http-nio-127.0.0.1-18081-exec-4] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:51.006 / lessons / updateRetention / true / 4c2d4ccb-1bed-48b0-90dd-fa9c7b0bcaba / httpproof1791131990 
+18:39:51.021 [http-nio-127.0.0.1-18081-exec-5] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.02 / lessons / question / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131990 
+18:39:51.023 [http-nio-127.0.0.1-18081-exec-6] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:51.02 / lessons / userAnswer / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131990 
+18:39:51.025 [http-nio-127.0.0.1-18081-exec-7] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:51.02 / lessons / answeredCorrectly / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131990 
+18:39:51.027 [http-nio-127.0.0.1-18081-exec-8] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:51.02 / lessons / updateRetention / true / 30c1e4f8-5272-40ee-8a31-24558dfe4a34 / httpproof1791131990 
+18:39:51.032 [http-nio-127.0.0.1-18081-exec-9] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:50.031 / lessons / question / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131990 
+18:39:51.035 [http-nio-127.0.0.1-18081-exec-10] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:51.031 / lessons / userAnswer / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131990 
+18:39:51.036 [http-nio-127.0.0.1-18081-exec-1] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:51.031 / lessons / answeredCorrectly / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131990 
+18:39:51.039 [http-nio-127.0.0.1-18081-exec-2] [34mINFO [0;39m [36ms.k.g.controller.EventController[0;39m - 2026-10-04 18:39:51.031 / lessons / updateRetention / true / c9f220f0-944d-4d8b-be5c-b61236011134 / httpproof1791131990 
+18:40:36.935 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default' 
+18:40:36.935 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mo.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl[0;39m - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down' 
+18:40:36.939 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown initiated... 
+18:40:36.941 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown completed. 

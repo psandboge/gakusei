@@ -1,0 +1,33 @@
+{
+  "vocabulary": {
+    "http_status": 200,
+    "count": 5,
+    "names": [
+      "Verbs",
+      "genki 13",
+      "genki 15",
+      "jlpt n3",
+      "jlpt n4"
+    ]
+  },
+  "kanji_lessons": {
+    "http_status": 200,
+    "count": 2,
+    "names": [
+      "genki 1",
+      "jlpt n5"
+    ]
+  },
+  "grammar_lessons": {
+    "http_status": 200,
+    "count": 0,
+    "names": []
+  },
+  "quizzes": {
+    "http_status": 200,
+    "count": 1,
+    "names": [
+      "Den japanska floran"
+    ]
+  }
+}

@@ -1,0 +1,236 @@
+Picked up JAVA_TOOL_OPTIONS: -Djava.net.preferIPv4Stack=true
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< se.kits.gakusei:gakusei >-----------------------
+[INFO] Building gakusei 2.1.1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:2.7.18:run (default-cli) > test-compile @ gakusei >>>
+[WARNING] 1 problem was encountered while building the effective model for org.javassist:javassist:jar:3.20.0-GA during dependency collection step for project (use -X to see details)
+[INFO] 
+[INFO] --- exec:3.5.0:exec (verify-grammar-provenance) @ gakusei ---
+/Users/pierresandboge/.m2/repository/com/github/psandboge/japanese-grammar-utils/1.0.0/japanese-grammar-utils-1.0.0.jar: OK
+/Users/pierresandboge/.m2/repository/com/github/psandboge/japanese-grammar-utils/1.0.0/japanese-grammar-utils-1.0.0.pom: OK
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (toolchain) @ gakusei ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- license:1.10:download-licenses (download-licenses) @ gakusei ---
+[WARNING] Offline flag is on, download-licenses goal is skip.
+[INFO] 
+[INFO] --- frontend:1.15.4:install-node-and-npm (install node and npm) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- frontend:1.15.4:npm (npm install) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- frontend:1.15.4:npm (npm compile) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- resources:3.2.0:resources (default-resources) @ gakusei ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 4 resources
+[INFO] Copying 6917 resources
+[INFO] 
+[INFO] --- compiler:3.10.1:compile (default-compile) @ gakusei ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.2.0:testResources (default-testResources) @ gakusei ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] skip non existing resourceDirectory /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.10.1:testCompile (default-testCompile) @ gakusei ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< spring-boot:2.7.18:run (default-cli) < test-compile @ gakusei <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:2.7.18:run (default-cli) @ gakusei ---
+[INFO] Attaching agents: []
+Picked up JAVA_TOOL_OPTIONS: -Djava.net.preferIPv4Stack=true
+20:57:20,938 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+20:57:20,938 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/classes/logback.xml]
+20:57:20,968 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+20:57:20,968 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+20:57:20,970 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+20:57:20,971 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+20:57:20,984 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+20:57:20,985 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [FILE]
+20:57:20,990 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@194706439 - No compression will be used
+20:57:20,990 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@194706439 - Will use the pattern logs/logFile.%d{yyyy-MM-dd}.%i.html for the active file
+20:57:20,990 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@382db087 - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/logFile.%d{yyyy-MM-dd}.%i.html'.
+20:57:20,990 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@382db087 - Roll-over at midnight.
+20:57:20,996 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@382db087 - Setting initial period to Sun Oct 04 20:56:31 CEST 2026
+20:57:20,996 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@382db087 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+20:57:20,996 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@382db087 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+20:57:20,998 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/logFile.html
+20:57:20,998 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [logs/logFile.html]
+20:57:20,998 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+20:57:20,998 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+20:57:20,998 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [FILE] to Logger[ROOT]
+20:57:20,998 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+20:57:20,998 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@73d4cc9e - Registering current configuration as safe fallback point
+
+
+                                              ooooooooo     *ooooooooo*                                           
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooo:::::ooooooooooo::::::                                      
+            oooooooooo        :oooooooooooo.  ooooooooo     *ooooooooo*                                            
+            oooooooooo      :ooooooooooooo    ooooooooo     *ooooooooo*                                            
+            oooooooooo    *oooooooooooo       ooooooooo     *ooooooooo*                                            
+            oooooooooo  .ooooooooooooo        ooooooooo     *ooooooooo*                                            
+            oooooooooo oooooooooooo           ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooo:            ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooo              ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooo            ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooooo           ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooooo          ooooooooo     *oooooooooo       :ooooooooooooooooo:                  
+            ooooooooooo:  *ooooooooooo        ooooooooo     .ooooooooooo.   ooooooooooooooooooooooo                
+            oooooooooo     :ooooooooooo       ooooooooo      ooooooooooooooooooooooooooooooooooooooo*              
+            oooooooooo      .ooooooooooo      ooooooooo      :ooooooooooooooooooooo         ooooooooo*             
+            oooooooooo        ooooooooooo*    ooooooooo        ooooooooooooooooooo.          ooooooooo             
+            oooooooooo         &ooooooooooo                              oooooooooo#                               
+            oooooooooo          oooooooooooo                             oooooooooooooo:                           
+            oooooooooo            ooooooooooo:                             ooooooooooooooooooooo:                  
+            oooooooooo             ooooooooooo:                             *ooooooooooooooooooooooo               
+                                                                                *oooooooooooooooooooo*             
+                                                                                         :oooooooooooo:            
+                                                                                             oooooooooo            
+                                                                        ooooooooo             ooooooooo            
+                                                                        *ooooooooo           :oooooooo:            
+                                                                         :ooooooooooo:*..*:ooooooooooo             
+                                                                           oooooooooooooooooooooooooo              
+                                                                             ooooooooooooooooooooo:                
+                                                                                 .*oooooooooo*.                    
+:: Running Spring Boot 2.7.18 ::
+
+20:57:21.225 [background-preinit] [34mINFO [0;39m [36mo.h.validator.internal.util.Version[0;39m - HV000001: Hibernate Validator 6.2.5.Final 
+20:57:21.246 [restartedMain] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - Starting GakuseiApplication using Java 17.0.16 on Pierres-MacBook-Pro-2.local with PID 9726 (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/classes started by pierresandboge in /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7) 
+20:57:21.247 [restartedMain] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - The following 1 profile is active: "local-postgres" 
+20:57:21.267 [restartedMain] [34mINFO [0;39m [36mo.s.b.d.e.DevToolsPropertyDefaultsPostProcessor[0;39m - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable 
+20:57:21.267 [restartedMain] [34mINFO [0;39m [36mo.s.b.d.e.DevToolsPropertyDefaultsPostProcessor[0;39m - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG' 
+20:57:21.561 [restartedMain] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+20:57:21.587 [restartedMain] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 23 ms. Found 20 JPA repository interfaces. 
+20:57:21.857 [restartedMain] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat initialized with port(s): 18082 (http) 
+20:57:21.859 [restartedMain] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Initializing ProtocolHandler ["http-nio-127.0.0.1-18082"] 
+20:57:21.861 [restartedMain] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Starting service [Tomcat] 
+20:57:21.861 [restartedMain] [34mINFO [0;39m [36mo.a.catalina.core.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/9.0.83] 
+20:57:21.884 [restartedMain] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring embedded WebApplicationContext 
+20:57:21.884 [restartedMain] [34mINFO [0;39m [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 617 ms 
+20:57:21.902 [restartedMain] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+20:57:21.985 [restartedMain] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+20:57:21.988 [restartedMain] [34mINFO [0;39m [36mo.s.b.a.h.H2ConsoleAutoConfiguration[0;39m - H2 console available at '/h2-console'. Database available at 'jdbc:postgresql://127.0.0.1:15432/gakusei_local' 
+20:57:22.129 [restartedMain] [34mINFO [0;39m [36mliquibase.database[0;39m - Set default schema name to public 
+20:57:22.158 [restartedMain] [34mINFO [0;39m [36mliquibase.lockservice[0;39m - Successfully acquired change log lock 
+20:57:22.273 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Reading from public.databasechangelog 
+Running Changeset: classpath:/db/db.changelog-local.yaml::local-jpa-numeric-types-v1::local-development
+20:57:22.322 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - books.id datatype was changed to bigint 
+20:57:22.330 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - courses.id datatype was changed to bigint 
+20:57:22.335 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - courses.parent_ref datatype was changed to bigint 
+20:57:22.337 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - incorrect_quiz_answers.id datatype was changed to bigint 
+20:57:22.339 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - incorrect_quiz_answers.quiz_nugget_ref datatype was changed to bigint 
+20:57:22.342 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - inflections.id datatype was changed to bigint 
+20:57:22.345 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - inflections.lesson_ref datatype was changed to bigint 
+20:57:22.346 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - kanji_books.book_id datatype was changed to bigint 
+20:57:22.352 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - lessons.id datatype was changed to bigint 
+20:57:22.354 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - lessons.course_ref datatype was changed to bigint 
+20:57:22.356 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - lessons_kanjis.lesson_id datatype was changed to bigint 
+20:57:22.357 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - lessons_nuggets.lesson_id datatype was changed to bigint 
+20:57:22.360 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nugget_books.book_id datatype was changed to bigint 
+20:57:22.364 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nuggets.word_type_ref datatype was changed to bigint 
+20:57:22.365 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - prerequisites.course_id datatype was changed to bigint 
+20:57:22.366 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - prerequisites.prerequisite_id datatype was changed to bigint 
+20:57:22.370 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - quiz.id datatype was changed to bigint 
+20:57:22.373 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - quiz_nugget.id datatype was changed to bigint 
+20:57:22.376 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - quiz_nugget.quiz_ref datatype was changed to bigint 
+20:57:22.379 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - word_types.id datatype was changed to bigint 
+20:57:22.382 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - announcements.id datatype was changed to bigint 
+20:57:22.386 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - events.id datatype was changed to bigint 
+20:57:22.391 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - events.nugget_type_ref datatype was changed to bigint 
+20:57:22.395 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - internationalization.id datatype was changed to bigint 
+20:57:22.398 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - kanji_drawings.id datatype was changed to bigint 
+20:57:22.402 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nugget_category.id datatype was changed to bigint 
+20:57:22.405 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - progresstrackinglist.id datatype was changed to bigint 
+20:57:22.407 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - progresstrackinglist.nugget_type_ref datatype was changed to bigint 
+20:57:22.411 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - settings.id datatype was changed to bigint 
+20:57:22.413 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - user_lesson.id datatype was changed to bigint 
+20:57:22.417 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - user_lesson.lesson_ref datatype was changed to bigint 
+20:57:22.419 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - progresstrackinglist.retention_factor datatype was changed to double precision 
+20:57:22.421 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - progresstrackinglist.retention_interval datatype was changed to double precision 
+20:57:22.425 [restartedMain] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet classpath:/db/db.changelog-local.yaml::local-jpa-numeric-types-v1::local-development ran successfully in 108ms 
+20:57:22.430 [restartedMain] [34mINFO [0;39m [36mliquibase.lockservice[0;39m - Successfully released change log lock 
+20:57:22.468 [restartedMain] [34mINFO [0;39m [36mo.h.jpa.internal.util.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: default] 
+20:57:22.487 [restartedMain] [34mINFO [0;39m [36morg.hibernate.Version[0;39m - HHH000412: Hibernate ORM core version 5.6.15.Final 
+20:57:22.534 [restartedMain] [34mINFO [0;39m [36mo.h.annotations.common.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+20:57:22.574 [restartedMain] [34mINFO [0;39m [36morg.hibernate.dialect.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect 
+20:57:22.879 [restartedMain] [1;31mERROR[0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing table [prerequisites] 
+20:57:22.880 [restartedMain] [31mWARN [0;39m [36mo.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext[0;39m - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing table [prerequisites] 
+20:57:22.881 [restartedMain] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown initiated... 
+20:57:22.882 [restartedMain] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown completed. 
+20:57:22.883 [restartedMain] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Stopping service [Tomcat] 
+20:57:22.888 [restartedMain] [34mINFO [0;39m [36mo.s.b.a.l.ConditionEvaluationReportLoggingListener[0;39m - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled. 
+20:57:22.895 [restartedMain] [1;31mERROR[0;39m [36mo.s.boot.SpringApplication[0;39m - Application run failed 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing table [prerequisites]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1168)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:919)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:591)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:409)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1300)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1289)
+	at se.kits.gakusei.GakuseiApplication.main(GakuseiApplication.java:12)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing table [prerequisites]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	... 21 common frames omitted
+Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing table [prerequisites]
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.validateTable(AbstractSchemaValidator.java:129)
+	at org.hibernate.tool.schema.internal.GroupedSchemaValidatorImpl.validateTables(GroupedSchemaValidatorImpl.java:42)
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.performValidation(AbstractSchemaValidator.java:97)
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.doValidation(AbstractSchemaValidator.java:76)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:204)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:85)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:335)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:471)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1498)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	... 25 common frames omitted
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.922 s
+[INFO] Finished at: 2026-10-04T20:57:22+02:00
+[INFO] ------------------------------------------------------------------------

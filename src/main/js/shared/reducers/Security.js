@@ -265,8 +265,8 @@ export function requestUserLogin(data, redirectUrl) {
             dispatch(setRedirectUrl(null));
             dispatch(fetchLoggedInUser()).then(() => {
               dispatch(setPageByName(redirectUrl || '/'));
-              dispatch(setUserLanguage(getState().security.loggedInUser));
-              dispatch(logLoginEvent(getState().security.loggedInUser));
+              setUserLanguage(getState().security.loggedInUser);
+              logLoginEvent(getState().security.loggedInUser);
             });
             break;
           default:
