@@ -121,10 +121,9 @@ Vocabulary is the verified core flow. Bundled material exposes five vocabulary l
 quiz in lesson-selection APIs (three quiz records exist in the raw repository).
 It is sample content, not the production corpus. Grammar reference/inflection fixtures and
 favorites remain incomplete; browser Japanese Web Speech voices are optional.
-Persistent PostgreSQL migration/seed/restart/reset verification is **M4 follow-up**,
-not supplied by this disposable baseline. The retained historical `postgres`
-profile is not a verified persistent setup and must not be combined with sample
-initialization. The supported-server migration decision is **M5 follow-up**.
+Persistent PostgreSQL is available through the dedicated `local-postgres` profile
+below. The retained historical `postgres` profile is unchanged; use the dedicated
+local configuration. The supported-server migration decision remains a follow-up.
 
 Installation/build still need network access to vendor archives, npm, Maven
 Central, JitPack and some dependency license URLs. License generation is retained;
@@ -140,14 +139,57 @@ prevent the verified local flow.
 `react-toggle-button@2.2.0` changes only its obsolete peer declaration to include
 React 16; its implementation is unchanged (`vendor/react-toggle-button/PROVENANCE.md`).
 
-Packaged HTTP/session/assets/restart checks passed. Packaged visual acceptance
-remains open because native browser automation lost its window connection after
-the dev-browser checks.
+### Persistent local PostgreSQL (phase 3)
 
-See [verification/README.md](verification/README.md) for executed commands,
-nonzero test counts, browser/HTTP evidence, first failures and remaining gaps.
-The public production landing page was used only as a read-only layout reference;
-no production sign-in, registration or learning events were performed.
+Docker Desktop must be running. This Compose project contains only PostgreSQL
+16.15, pinned by manifest SHA-256. Its dedicated named volume is disposable local
+data; no production dump or services are used. PostgreSQL and both app listeners
+bind to loopback. The example credentials are only for disposable local use.
+
+```sh
+cp .env.local.example .env.local
+# Edit the password; optionally choose another LOCAL_DB_PORT if 5432 is occupied.
+docker compose --env-file .env.local -f compose.local.yml up -d --wait
+. scripts/local-env.sh
+set -a
+. ./.env.local
+set +a
+# Explicit first-run bootstrap; stop it after startup succeeds.
+./mvnw -Dskip.frontend=true spring-boot:run \
+  -Dspring-boot.run.profiles=local-postgres,local-seed
+# Normal startup (no sample initialization):
+./mvnw -Dskip.frontend=true spring-boot:run \
+  -Dspring-boot.run.profiles=local-postgres
+# Start npm in a separate terminal as documented above.
+```
+
+The container initialization creates `contentschema` owned by the local role.
+Liquibase runs the unchanged historical master plus local incremental changes;
+Hibernate validates the result. Local additions widen JPA IDs/references to
+bigint and retention fields to double precision. Seeding reuses migration-owned
+categories and requires an empty users/content database without a seed marker.
+Fixtures and the marker commit in one transaction; errors abort startup and roll
+back. Repeating `local-seed` serializes on the marker table and leaves seeded
+accounts, content and progress unchanged. Normal startup never seeds.
+Do not combine `local-postgres` with `local` or `development`.
+
+For a packaged persistent application after the full production build:
+
+```sh
+java -jar target/gakusei.jar --spring.profiles.active=local-postgres
+# Same browser hostname: http://localhost:8080
+# Stop the app before stopping/resetting PostgreSQL.
+docker compose --env-file .env.local -f compose.local.yml stop
+# Resume with up -d --wait; the named volume retains data.
+# DESTRUCTIVE reset of this disposable local project only:
+docker compose --env-file .env.local -f compose.local.yml down -v
+# Then up -d --wait and explicitly bootstrap with local-seed again.
+```
+
+Verified run details, actual test counts and browser/persistence evidence are in
+`verification/ORDERED-PHASES.md`. The restored server/dependency stack remains a
+local compatibility bridge with the limitations listed above.
+
 
 ## Historical auxiliary infrastructure
 

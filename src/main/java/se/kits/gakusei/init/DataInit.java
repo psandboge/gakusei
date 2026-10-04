@@ -72,9 +72,16 @@ public class DataInit implements ApplicationRunner {
     @Value("${gakusei.data-init}")
     private boolean datainit;
 
+    @Value("${gakusei.local-seed:false}")
+    private boolean localSeed;
+
+    @Autowired
+    private org.springframework.jdbc.core.JdbcTemplate jdbc;
+
+
     private Set<String> allKeysExceptBooks;
 
-    @org.springframework.transaction.annotation.Transactional
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)
     @Override
     public void run(ApplicationArguments applicationArguments)
         throws
@@ -82,7 +89,24 @@ public class DataInit implements ApplicationRunner {
         String activeProfiles = Arrays.toString(
             environment.getActiveProfiles()
         );
-        if (datainit) {
+        if (localSeed) {
+            if (!Arrays.asList(environment.getActiveProfiles()).contains("local-postgres")
+                    || datainit) {
+                throw new IllegalStateException("local-seed requires local-postgres without data-init");
+            }
+            // Serialize concurrent bootstrap attempts; the marker commits with the fixtures.
+            jdbc.execute("LOCK TABLE public.local_sample_seed IN EXCLUSIVE MODE");
+            if (jdbc.queryForObject("SELECT count(*) FROM public.local_sample_seed WHERE version = 1", Long.class) > 0) {
+                logger.info("Local sample seed v1 already applied; leaving persistent data unchanged");
+                return;
+            }
+            if (userRepository.count() != 0 || nuggetRepository.count() != 0
+                    || bookRepository.count() != 0 || lessonRepository.count() != 0
+                    || kanjiRepository.count() != 0 || quizRepository.count() != 0) {
+                throw new IllegalStateException("Refusing sample seed on a nonempty database without its seed marker");
+            }
+        }
+        if (datainit || localSeed) {
             String testDataFile = "testdata/testdata.json";
             String csvQuizNuggetFile = "testdata/quizzes.csv";
 
@@ -108,6 +132,9 @@ public class DataInit implements ApplicationRunner {
                 throw new IllegalStateException("Sample data contains no vocabulary lessons; check testdata resources");
             }
 
+            if (localSeed) {
+                jdbc.update("INSERT INTO public.local_sample_seed(version) VALUES (1)");
+            }
             logger.info(
                 "*** Data initialization was set on profile(s): " + activeProfiles
             );
@@ -152,7 +179,7 @@ public class DataInit implements ApplicationRunner {
                     }
                 }
             } catch(Exception e) {
-                logger.warn("Faulty book detected, skipping: " + tdh);
+                throw new IllegalStateException("Invalid sample book: " + tdh, e);
             }
         }
     }
@@ -222,7 +249,7 @@ public class DataInit implements ApplicationRunner {
                     createNugget(books, tdh);
                 }
             } catch(Exception e) {
-                logger.warn("Faulty nugget detected, skipping: " + tdh);
+                throw new IllegalStateException("Invalid sample nugget: " + tdh, e);
             }
         }
     }
@@ -234,6 +261,13 @@ public class DataInit implements ApplicationRunner {
         String[] types = { "unknown", "vocab", "kanji", "quiz", "flashcards", "grammar", "translate" };
         for (int i = 0; i < types.length; i++) {
             se.kits.gakusei.user.model.NuggetType type = new se.kits.gakusei.user.model.NuggetType();
+            se.kits.gakusei.user.model.NuggetType existing = nuggetTypeRepository.findByType(types[i]);
+            if (existing != null) {
+                if (existing.getId() != (long) i + 1) {
+                    throw new IllegalStateException("Unexpected category id for " + types[i]);
+                }
+                continue;
+            }
             type.setId((long) i + 1);
             type.setType(types[i]);
             nuggetTypeRepository.save(type);
@@ -319,7 +353,7 @@ public class DataInit implements ApplicationRunner {
         try {
             csvQuizNuggets = parser.parse();
         } catch(ParserFailureException e) {
-            logger.error("Unable to parse " + csvFile, e);
+            throw new IllegalStateException("Unable to parse " + csvFile, e);
         }
         for (CSVQuizNugget csvQuizNugget : csvQuizNuggets) {
             Quiz newQuiz = csvQuizNugget.getQuiz();

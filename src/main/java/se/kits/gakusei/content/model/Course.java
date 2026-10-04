@@ -32,6 +32,7 @@ public class Course implements Serializable {
 
     @JoinTable(
         name = "prerequisites",
+        schema = "contentschema",
         joinColumns = @JoinColumn(
             name = "course_id",
             referencedColumnName = "id"

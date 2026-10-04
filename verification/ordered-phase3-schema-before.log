@@ -1,0 +1,156 @@
+ table_schema  |       table_name       |    column_name     |          data_type          
+---------------+------------------------+--------------------+-----------------------------
+ contentschema | books                  | id                 | integer
+ contentschema | books                  | title              | character varying
+ contentschema | courses                | id                 | integer
+ contentschema | courses                | name               | character varying
+ contentschema | courses                | description        | character varying
+ contentschema | courses                | parent_ref         | integer
+ contentschema | courses                | course_order       | integer
+ contentschema | courses                | course_code        | character varying
+ contentschema | grammar_texts          | id                 | character varying
+ contentschema | grammar_texts          | book               | character varying
+ contentschema | grammar_texts          | course             | character varying
+ contentschema | grammar_texts          | type               | character varying
+ contentschema | grammar_texts          | jp_short           | text
+ contentschema | grammar_texts          | se_short           | text
+ contentschema | grammar_texts          | related            | text
+ contentschema | grammar_texts          | sample             | text
+ contentschema | grammar_texts          | se_long            | text
+ contentschema | grammar_texts          | inflection_method  | text
+ contentschema | incorrect_quiz_answers | id                 | integer
+ contentschema | incorrect_quiz_answers | incorrect_answer   | character varying
+ contentschema | incorrect_quiz_answers | quiz_nugget_ref    | integer
+ contentschema | inflections            | id                 | integer
+ contentschema | inflections            | inflection_method  | character varying
+ contentschema | inflections            | lesson_ref         | integer
+ contentschema | kanji_books            | kanji_id           | character varying
+ contentschema | kanji_books            | book_id            | integer
+ contentschema | kanjis                 | id                 | character varying
+ contentschema | kanjis                 | description        | character varying
+ contentschema | kanjis                 | hidden             | boolean
+ contentschema | kanjis                 | swedish            | character varying
+ contentschema | kanjis                 | english            | character varying
+ contentschema | kanjis                 | kanji              | character varying
+ contentschema | kanjis                 | reading            | character varying
+ contentschema | lessons                | id                 | integer
+ contentschema | lessons                | name               | character varying
+ contentschema | lessons                | description        | character varying
+ contentschema | lessons                | course_ref         | integer
+ contentschema | lessons_kanjis         | lesson_id          | integer
+ contentschema | lessons_kanjis         | kanji_id           | character varying
+ contentschema | lessons_nuggets        | lesson_id          | integer
+ contentschema | lessons_nuggets        | nugget_id          | character varying
+ contentschema | nugget_books           | book_id            | integer
+ contentschema | nugget_books           | nugget_id          | character varying
+ contentschema | nuggets                | id                 | character varying
+ contentschema | nuggets                | description        | character varying
+ contentschema | nuggets                | hidden             | boolean
+ contentschema | nuggets                | swedish            | character varying
+ contentschema | nuggets                | english            | character varying
+ contentschema | nuggets                | jp_read            | character varying
+ contentschema | nuggets                | jp_write           | character varying
+ contentschema | nuggets                | word_type_ref      | integer
+ contentschema | prerequisites          | course_id          | integer
+ contentschema | prerequisites          | prerequisite_id    | integer
+ contentschema | quiz                   | id                 | integer
+ contentschema | quiz                   | name               | character varying
+ contentschema | quiz                   | description        | character varying
+ contentschema | quiz                   | category           | character varying
+ contentschema | quiz                   | learning_language  | character varying
+ contentschema | quiz_nugget            | id                 | integer
+ contentschema | quiz_nugget            | question           | character varying
+ contentschema | quiz_nugget            | correct_answer     | character varying
+ contentschema | quiz_nugget            | quiz_ref           | integer
+ contentschema | quiz_nugget            | image              | character varying
+ contentschema | word_types             | id                 | integer
+ contentschema | word_types             | type               | character varying
+ public        | announcements          | id                 | integer
+ public        | announcements          | start_date         | timestamp without time zone
+ public        | announcements          | end_date           | timestamp without time zone
+ public        | announcements          | text               | text
+ public        | announcements          | text_english       | text
+ public        | announcements          | text_japan         | text
+ public        | databasechangelog      | id                 | character varying
+ public        | databasechangelog      | author             | character varying
+ public        | databasechangelog      | filename           | character varying
+ public        | databasechangelog      | dateexecuted       | timestamp without time zone
+ public        | databasechangelog      | orderexecuted      | integer
+ public        | databasechangelog      | exectype           | character varying
+ public        | databasechangelog      | md5sum             | character varying
+ public        | databasechangelog      | description        | character varying
+ public        | databasechangelog      | comments           | character varying
+ public        | databasechangelog      | tag                | character varying
+ public        | databasechangelog      | liquibase          | character varying
+ public        | databasechangelog      | contexts           | character varying
+ public        | databasechangelog      | labels             | character varying
+ public        | databasechangelog      | deployment_id      | character varying
+ public        | databasechangeloglock  | id                 | integer
+ public        | databasechangeloglock  | locked             | boolean
+ public        | databasechangeloglock  | lockgranted        | timestamp without time zone
+ public        | databasechangeloglock  | lockedby           | character varying
+ public        | events                 | id                 | integer
+ public        | events                 | timestamp          | timestamp without time zone
+ public        | events                 | type               | character varying
+ public        | events                 | data               | character varying
+ public        | events                 | gamemode           | character varying
+ public        | events                 | user_ref           | character varying
+ public        | events                 | nugget_id          | character varying
+ public        | events                 | lesson             | character varying
+ public        | events                 | nugget_type_ref    | integer
+ public        | internationalization   | id                 | integer
+ public        | internationalization   | abbreviation       | character varying
+ public        | internationalization   | language           | character varying
+ public        | internationalization   | sentence           | text
+ public        | kanji_drawings         | id                 | integer
+ public        | kanji_drawings         | user_ref           | character varying
+ public        | kanji_drawings         | nugget_id          | character varying
+ public        | kanji_drawings         | difficulty         | character varying
+ public        | kanji_drawings         | image_data         | text
+ public        | kanji_drawings         | timestamp          | timestamp without time zone
+ public        | local_sample_seed      | version            | integer
+ public        | nugget_category        | id                 | integer
+ public        | nugget_category        | type               | character varying
+ public        | progresstrackinglist   | id                 | integer
+ public        | progresstrackinglist   | user_ref           | character varying
+ public        | progresstrackinglist   | nugget_id          | character varying
+ public        | progresstrackinglist   | correct_count      | bigint
+ public        | progresstrackinglist   | incorrect_count    | bigint
+ public        | progresstrackinglist   | latest_timestamp   | timestamp without time zone
+ public        | progresstrackinglist   | latest_result      | boolean
+ public        | progresstrackinglist   | retention_factor   | real
+ public        | progresstrackinglist   | retention_interval | real
+ public        | progresstrackinglist   | retention_date     | timestamp without time zone
+ public        | progresstrackinglist   | nugget_type_ref    | integer
+ public        | settings               | id                 | integer
+ public        | settings               | language           | character varying
+ public        | settings               | language_code      | character varying
+ public        | settings               | flag_svg           | text
+ public        | settings               | enabled            | boolean
+ public        | user_lesson            | id                 | integer
+ public        | user_lesson            | user_ref           | character varying
+ public        | user_lesson            | first_deadline     | timestamp without time zone
+ public        | user_lesson            | second_deadline    | timestamp without time zone
+ public        | user_lesson            | lesson_ref         | integer
+ public        | users                  | username           | character varying
+ public        | users                  | password           | character varying
+ public        | users                  | userrole           | character varying
+ public        | users                  | new_user           | boolean
+ public        | users                  | site_language      | character varying
+(137 rows)
+
+ count 
+-------
+    96
+(1 row)
+
+ count 
+-------
+     0
+(1 row)
+
+ count 
+-------
+     0
+(1 row)
+

@@ -1,0 +1,11 @@
+                                            version                                             | current_user  
+------------------------------------------------------------------------------------------------+---------------
+ PostgreSQL 16.15 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit | gakusei_local
+(1 row)
+
+    nspname    |  pg_get_userbyid  
+---------------+-------------------
+ public        | pg_database_owner
+ contentschema | gakusei_local
+(2 rows)
+

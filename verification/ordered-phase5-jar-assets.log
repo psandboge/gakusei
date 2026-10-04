@@ -1,0 +1,8 @@
+BOOT-INF/classes/static/js/
+BOOT-INF/classes/static/js/main.4eb90230d4a13c862717.bundle.js.map
+BOOT-INF/classes/static/js/main.4eb90230d4a13c862717.bundle.js.LICENSE.txt
+BOOT-INF/classes/static/js/main.4eb90230d4a13c862717.bundle.js
+BOOT-INF/classes/application-local-postgres.yml
+BOOT-INF/classes/db/db.changelog-local.yaml
+BOOT-INF/classes/templates/index.html
+BOOT-INF/classes/application-local-seed.yml

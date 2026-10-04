@@ -1,0 +1,3 @@
+ERROR:  syntax error at or near "\"
+LINE 1: ...yid(nspowner) FROM pg_namespace WHERE nspname IN (\x27public...
+                                                             ^

@@ -1,0 +1,297 @@
+
+> gakusei@2.1.1 prestart
+> npm run preflight && npm run prepare:assets
+
+
+> gakusei@2.1.1 preflight
+> node scripts/preflight.js
+
+
+> gakusei@2.1.1 prepare:assets
+> node scripts/updateVersionFromMavenPom.js && node scripts/generateFrontendLicenses.js && node scripts/copyBootstrap.js
+
+dummy package.json dependencies written to frontend_licenses.json: 0.652ms
+
+> gakusei@2.1.1 start
+> webpack serve --mode development
+
+<i> [webpack-dev-server] [HPM] Proxy created: /api,/auth,/logout,/username,/registeruser,/license,/icons,/css,/img,/bootstrap  -> http://127.0.0.1:18082
+<i> [webpack-dev-server] Project is running at:
+<i> [webpack-dev-server] Loopback: http://127.0.0.1:17777/
+<i> [webpack-dev-server] Content not from webpack is served from '/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/public' directory
+<i> [webpack-dev-server] 404s will fallback to '/index.html'
+asset main.bundle.js 7.31 MiB [emitted] (name: main) 1 related asset
+asset index.html 606 bytes [emitted]
+runtime modules 29.8 KiB 17 modules
+orphan modules 723 bytes [orphan] 1 module
+modules by path ./node_modules/ 5.58 MiB
+  javascript modules 5.52 MiB 1499 modules
+  json modules 62.9 KiB 9 modules
+modules by path ./src/main/ 473 KiB
+  modules by path ./src/main/js/screens/app/ 312 KiB 37 modules
+  modules by path ./src/main/js/shared/ 89.7 KiB 10 modules
+  modules by path ./src/main/resources/ 59.1 KiB 6 modules
+  modules by path ./src/main/js/*.js 12.2 KiB 3 modules
+./vendor/react-toggle-button/lib/index.js 50.8 KiB [built] [code generated]
+readable-stream (ignored) 15 bytes [built] [code generated]
+util (ignored) 15 bytes [built] [code generated]
+util (ignored) 15 bytes [built] [code generated]
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 2, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:2:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+2 | @import 'elements/_base.scss';
+
+
+src/main/resources/static/css/style.scss 3:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 4, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:4:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+4 | @import 'components/_about-features.scss';
+
+
+src/main/resources/static/css/style.scss 5:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 5, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:5:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+5 | @import 'components/_answer-button.scss';
+
+
+src/main/resources/static/css/style.scss 6:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 6, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:6:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+6 | @import 'components/_copyright-information.scss';
+
+
+src/main/resources/static/css/style.scss 7:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 7, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:7:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+7 | @import 'components/_exercise.scss';
+
+
+src/main/resources/static/css/style.scss 8:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+27 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+webpack 5.111.1 compiled with 6 warnings in 9371 ms
+(node:22646) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+assets by status 606 bytes [cached] 1 asset
+assets by path *.js 7.32 MiB
+  asset main.bundle.js 7.31 MiB [emitted] (name: main) 1 related asset
+  asset main.dce54888b64b81208ff1.hot-update.js 7.79 KiB [emitted] [immutable] [hmr] (name: main) 1 related asset
+asset main.dce54888b64b81208ff1.hot-update.json 49 bytes [emitted] [immutable] [hmr]
+Entrypoint main 7.32 MiB (7.62 MiB) = main.bundle.js 7.31 MiB main.dce54888b64b81208ff1.hot-update.js 7.79 KiB 2 auxiliary assets
+cached modules 6.09 MiB [cached] 1568 modules
+runtime modules 29.8 KiB 17 modules
+./src/main/js/screens/app/screens/play/components/LessonStats.js 6.17 KiB [built] [code generated]
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 2, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:2:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+2 | @import 'elements/_base.scss';
+
+
+src/main/resources/static/css/style.scss 3:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 4, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:4:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+4 | @import 'components/_about-features.scss';
+
+
+src/main/resources/static/css/style.scss 5:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 5, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:5:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+5 | @import 'components/_answer-button.scss';
+
+
+src/main/resources/static/css/style.scss 6:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 6, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:6:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+6 | @import 'components/_copyright-information.scss';
+
+
+src/main/resources/static/css/style.scss 7:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 7, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:7:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+7 | @import 'components/_exercise.scss';
+
+
+src/main/resources/static/css/style.scss 8:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+27 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+webpack 5.111.1 compiled with 6 warnings in 230 ms
+assets by status 606 bytes [cached] 1 asset
+assets by path *.js 7.32 MiB
+  asset main.bundle.js 7.31 MiB [emitted] (name: main) 1 related asset
+  asset main.187b558df514a47d5dbf.hot-update.js 7.73 KiB [emitted] [immutable] [hmr] (name: main) 1 related asset
+asset main.187b558df514a47d5dbf.hot-update.json 49 bytes [emitted] [immutable] [hmr]
+Entrypoint main 7.32 MiB (7.62 MiB) = main.bundle.js 7.31 MiB main.187b558df514a47d5dbf.hot-update.js 7.73 KiB 2 auxiliary assets
+cached modules 6.09 MiB [cached] 1568 modules
+runtime modules 29.8 KiB 17 modules
+./src/main/js/screens/app/screens/play/components/LessonStats.js 6.1 KiB [built] [code generated]
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 2, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:2:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+2 | @import 'elements/_base.scss';
+
+
+src/main/resources/static/css/style.scss 3:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 4, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:4:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+4 | @import 'components/_about-features.scss';
+
+
+src/main/resources/static/css/style.scss 5:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 5, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:5:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+5 | @import 'components/_answer-button.scss';
+
+
+src/main/resources/static/css/style.scss 6:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 6, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:6:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+6 | @import 'components/_copyright-information.scss';
+
+
+src/main/resources/static/css/style.scss 7:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 7, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:7:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+7 | @import 'components/_exercise.scss';
+
+
+src/main/resources/static/css/style.scss 8:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+27 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 24:7-21 50:25-39 51:36-47 51:50-64 56:54-65 56:68-82 62:42-53 62:56-70 64:21-28 76:22-29 76:33-47 76:50-64 75:0-245 75:0-245 55:6-65:7 53:4-66:5
+ @ ./src/main/js/main.js 3:0-44
+
+webpack 5.111.1 compiled with 6 warnings in 219 ms
+<i> [webpack-dev-server] Gracefully shutting down. To force exit, press ^C again. Please wait...
+<i> [webpack-dev-server] [HPM] server close signal received: closing proxy server

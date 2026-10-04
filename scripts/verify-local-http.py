@@ -29,7 +29,7 @@ if args.reset_proof:
     assert len(users) == 6
     assert not any(u['username'].startswith('httpproof') or u['username']=='localdev1004' for u in users)
     assert all(not u['events'] and not u['progressTrackingList'] for u in users)
-    print('PASS H2 restart reset: exactly six sample users, zero prior users/events/progress')
+    print('PASS disposable database reset: exactly six sample users, zero prior users/events/progress')
     raise SystemExit(0)
 name = 'httpproof' + str(int(time.time()))
 form = urlencode({'username': name, 'password': 'disposableproof', 'remember-me': 'false'})

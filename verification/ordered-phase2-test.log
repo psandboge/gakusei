@@ -1,0 +1,89 @@
+
+> gakusei@2.1.1 pretest
+> npm run preflight
+
+
+> gakusei@2.1.1 preflight
+> node scripts/preflight.js
+
+
+> gakusei@2.1.1 test
+> mocha --exit --require ./mocha.bootstrap.js --timeout 10000 "src/main/js/**/*.test.js"
+
+This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+This browser doesn't support cancelAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills
+i18next: languageChanged en-US
+i18next: initialized {
+  debug: true,
+  initImmediate: true,
+  ns: [ 'translations' ],
+  defaultNS: 'translations',
+  fallbackLng: [ 'se' ],
+  fallbackNS: false,
+  whitelist: false,
+  nonExplicitWhitelist: false,
+  load: 'all',
+  preload: false,
+  simplifyPluralSuffix: true,
+  keySeparator: false,
+  nsSeparator: ':',
+  pluralSeparator: '_',
+  contextSeparator: '_',
+  partialBundledLanguages: false,
+  saveMissing: false,
+  updateMissing: false,
+  saveMissingTo: 'fallback',
+  saveMissingPlurals: true,
+  missingKeyHandler: false,
+  missingInterpolationHandler: false,
+  postProcess: false,
+  returnNull: true,
+  returnEmptyString: true,
+  returnObjects: false,
+  joinArrays: false,
+  returnedObjectHandler: [Function: returnedObjectHandler],
+  parseMissingKeyHandler: false,
+  appendNamespaceToMissingKey: false,
+  appendNamespaceToCIMode: false,
+  overloadTranslationOptionHandler: [Function: handle],
+  interpolation: {
+    escapeValue: true,
+    format: [Function: format],
+    prefix: '{{',
+    suffix: '}}',
+    formatSeparator: ',',
+    unescapePrefix: '-',
+    nestingPrefix: '$t(',
+    nestingSuffix: ')',
+    maxReplaces: 1000
+  },
+  lng: undefined,
+  resources: {
+    en: { translations: [Object] },
+    jp: { translations: [Object] },
+    se: { translations: [Object] }
+  },
+  detectBrowserLanguage: true
+}
+(node:78574) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/moresketchy/package.json' of 'dist/index.js'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+  kanji drawing rules should work as intended
+    ✔ should take in some data without error
+
+  Bundled translations
+    ✔ resolves flat keys in the namespace used by React, with Swedish fallback
+
+  Lessons
+    Reducer
+      ✔ should return default state
+      ✔ should set all buttons to disabled state
+      ✔ should receive lesson
+    ...other functions
+      ✔ should fetch userSuccessRate
+      ✔ should reset lessong
+
+
+  7 passing (23ms)
+

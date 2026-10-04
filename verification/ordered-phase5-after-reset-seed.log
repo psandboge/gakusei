@@ -1,0 +1,462 @@
+21:06:58,420 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+21:06:58,420 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar!/BOOT-INF/classes!/logback.xml]
+21:06:58,424 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@2c9f9fb0 - URL [jar:file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar!/BOOT-INF/classes!/logback.xml] is not of type file
+21:06:58,444 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+21:06:58,445 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+21:06:58,447 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+21:06:58,450 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+21:06:58,466 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+21:06:58,467 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [FILE]
+21:06:58,471 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@546718765 - No compression will be used
+21:06:58,471 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@546718765 - Will use the pattern logs/logFile.%d{yyyy-MM-dd}.%i.html for the active file
+21:06:58,472 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/logFile.%d{yyyy-MM-dd}.%i.html'.
+21:06:58,472 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - Roll-over at midnight.
+21:06:58,476 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - Setting initial period to Sun Oct 04 21:06:45 CEST 2026
+21:06:58,476 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+21:06:58,476 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@9f70c54 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+21:06:58,478 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/logFile.html
+21:06:58,478 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [logs/logFile.html]
+21:06:58,479 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+21:06:58,479 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+21:06:58,479 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [FILE] to Logger[ROOT]
+21:06:58,479 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+21:06:58,479 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@234bef66 - Registering current configuration as safe fallback point
+
+
+                                              ooooooooo     *ooooooooo*                                           
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooo:::::ooooooooooo::::::                                      
+            oooooooooo        :oooooooooooo.  ooooooooo     *ooooooooo*                                            
+            oooooooooo      :ooooooooooooo    ooooooooo     *ooooooooo*                                            
+            oooooooooo    *oooooooooooo       ooooooooo     *ooooooooo*                                            
+            oooooooooo  .ooooooooooooo        ooooooooo     *ooooooooo*                                            
+            oooooooooo oooooooooooo           ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooo:            ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooo              ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooo            ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooooo           ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooooo          ooooooooo     *oooooooooo       :ooooooooooooooooo:                  
+            ooooooooooo:  *ooooooooooo        ooooooooo     .ooooooooooo.   ooooooooooooooooooooooo                
+            oooooooooo     :ooooooooooo       ooooooooo      ooooooooooooooooooooooooooooooooooooooo*              
+            oooooooooo      .ooooooooooo      ooooooooo      :ooooooooooooooooooooo         ooooooooo*             
+            oooooooooo        ooooooooooo*    ooooooooo        ooooooooooooooooooo.          ooooooooo             
+            oooooooooo         &ooooooooooo                              oooooooooo#                               
+            oooooooooo          oooooooooooo                             oooooooooooooo:                           
+            oooooooooo            ooooooooooo:                             ooooooooooooooooooooo:                  
+            oooooooooo             ooooooooooo:                             *ooooooooooooooooooooooo               
+                                                                                *oooooooooooooooooooo*             
+                                                                                         :oooooooooooo:            
+                                                                                             oooooooooo            
+                                                                        ooooooooo             ooooooooo            
+                                                                        *ooooooooo           :oooooooo:            
+                                                                         :ooooooooooo:*..*:ooooooooooo             
+                                                                           oooooooooooooooooooooooooo              
+                                                                             ooooooooooooooooooooo:                
+                                                                                 .*oooooooooo*.                    
+:: Running Spring Boot 2.7.18 ::
+
+21:06:58.755 [background-preinit] [34mINFO [0;39m [36mo.h.validator.internal.util.Version[0;39m - HV000001: Hibernate Validator 6.2.5.Final 
+21:06:58.782 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - Starting GakuseiApplication v2.1.1 using Java 17.0.16 on Pierres-MacBook-Pro-2.local with PID 90664 (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/gakusei.jar started by pierresandboge in /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7) 
+21:06:58.782 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - The following 2 profiles are active: "local-postgres", "local-seed" 
+21:06:59.207 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+21:06:59.275 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 64 ms. Found 20 JPA repository interfaces. 
+21:06:59.682 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat initialized with port(s): 18083 (http) 
+21:06:59.691 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Initializing ProtocolHandler ["http-nio-127.0.0.1-18083"] 
+21:06:59.692 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Starting service [Tomcat] 
+21:06:59.692 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/9.0.83] 
+21:06:59.721 [main] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring embedded WebApplicationContext 
+21:06:59.721 [main] [34mINFO [0;39m [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 917 ms 
+21:06:59.866 [main] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+21:06:59.951 [main] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+21:07:00.011 [main] [34mINFO [0;39m [36mliquibase.database[0;39m - Set default schema name to public 
+21:07:00.061 [main] [34mINFO [0;39m [36mliquibase.lockservice[0;39m - Successfully acquired change log lock 
+21:07:00.199 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Creating database history table with name: public.databasechangelog 
+21:07:00.203 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Reading from public.databasechangelog 
+Running Changeset: db/changelogs/db.changelog_001.yaml::1487684531133-1::joakim (generated)
+21:07:00.315 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table events created 
+21:07:00.317 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_001.yaml::1487684531133-1::joakim (generated) ran successfully in 22ms 
+Running Changeset: db/changelogs/db.changelog_002.yaml::1487684531133-2::joakim (generated)
+21:07:00.332 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table progresstrackinglist created 
+21:07:00.333 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_002.yaml::1487684531133-2::joakim (generated) ran successfully in 12ms 
+Running Changeset: db/changelogs/db.changelog_003.yaml::1487684531133-3::joakim (generated)
+21:07:00.346 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table user_lesson created 
+21:07:00.347 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_003.yaml::1487684531133-3::joakim (generated) ran successfully in 12ms 
+Running Changeset: db/changelogs/db.changelog_004.yaml::1487684531133-4::joakim (generated)
+21:07:00.354 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table users created 
+21:07:00.355 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_004.yaml::1487684531133-4::joakim (generated) ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_005.yaml::1487684531133-5::joakim (generated)
+21:07:00.448 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Primary key added to users (username) 
+21:07:00.449 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_005.yaml::1487684531133-5::joakim (generated) ran successfully in 92ms 
+Running Changeset: db/changelogs/db.changelog_006.yaml::1487684531133-6::joakim (generated)
+21:07:00.453 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to events (user_ref) 
+21:07:00.454 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_006.yaml::1487684531133-6::joakim (generated) ran successfully in 4ms 
+Running Changeset: db/changelogs/db.changelog_007.yaml::1487684531133-7::joakim (generated)
+21:07:00.457 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to progresstrackinglist (user_ref) 
+21:07:00.458 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_007.yaml::1487684531133-7::joakim (generated) ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_008.yaml::1487684523397-1::joakim (generated)
+21:07:00.464 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table facts created 
+21:07:00.465 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_008.yaml::1487684523397-1::joakim (generated) ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_009.yaml::1487684523397-2::joakim (generated)
+21:07:00.472 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table lessons created 
+21:07:00.473 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_009.yaml::1487684523397-2::joakim (generated) ran successfully in 7ms 
+Running Changeset: db/changelogs/db.changelog_010.yaml::1487684523397-3::joakim (generated)
+21:07:00.479 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table lessons_nuggets created 
+21:07:00.480 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_010.yaml::1487684523397-3::joakim (generated) ran successfully in 5ms 
+Running Changeset: db/changelogs/db.changelog_011.yaml::1487684523397-4::joakim (generated)
+21:07:00.485 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table nuggets created 
+21:07:00.485 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_011.yaml::1487684523397-4::joakim (generated) ran successfully in 4ms 
+Running Changeset: db/changelogs/db.changelog_012.yaml::1487684523397-5::joakim (generated)
+21:07:00.539 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Primary key added to nuggets (id) 
+21:07:00.540 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_012.yaml::1487684523397-5::joakim (generated) ran successfully in 53ms 
+Running Changeset: db/changelogs/db.changelog_013.yaml::1487684523397-6::joakim (generated)
+21:07:00.547 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to facts (nuggetid) 
+21:07:00.548 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_013.yaml::1487684523397-6::joakim (generated) ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_014.yaml::2::psandboge
+21:07:00.555 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Column user_lesson.username renamed to user_ref 
+21:07:00.557 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_014.yaml::2::psandboge ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_015.yaml::3::psandboge
+21:07:00.561 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns lesson_ref(SERIAL) added to user_lesson 
+21:07:00.562 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_015.yaml::3::psandboge ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_016.yaml::4::psandboge
+21:07:00.565 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Column user_lesson.lesson_name dropped 
+21:07:00.566 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_016.yaml::4::psandboge ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_017.yaml::1487684523397-7::joakim
+21:07:00.569 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to user_lesson (user_ref) 
+21:07:00.569 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_017.yaml::1487684523397-7::joakim ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_018.yaml::1487684523397-8::joakim
+21:07:00.573 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to user_lesson (lesson_ref) 
+21:07:00.573 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_018.yaml::1487684523397-8::joakim ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_019.yaml::1::joakim
+21:07:00.577 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns nugget_id(varchar(16)) added to events 
+21:07:00.577 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_019.yaml::1::joakim ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_020.yaml::20::Michael Dubell
+21:07:00.584 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table quiz created 
+21:07:00.585 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_020.yaml::20::Michael Dubell ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_021.yaml::21::Fredrik Öller
+21:07:00.597 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table quiz_nugget created 
+21:07:00.597 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_021.yaml::21::Fredrik Öller ran successfully in 11ms 
+Running Changeset: db/changelogs/db.changelog_022.yaml::22::Fredrik Öller
+21:07:00.605 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table incorrect_answers created 
+21:07:00.605 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_022.yaml::22::Fredrik Öller ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_023.yaml::23::Sofia Edström
+21:07:00.613 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table courses created 
+21:07:00.615 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table prerequisites created 
+21:07:00.615 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_023.yaml::23::Sofia Edström ran successfully in 8ms 
+Running Changeset: db/changelogs/db.changelog_024.yaml::24::Sofia Edström
+21:07:00.618 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns course_ref(INTEGER) added to lessons 
+21:07:00.619 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_024.yaml::24::Sofia Edström ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_025.yaml::25::Sofia Edström
+21:07:00.627 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table word_types created 
+21:07:00.627 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_025.yaml::25::Sofia Edström ran successfully in 7ms 
+Running Changeset: db/changelogs/db.changelog_026.yaml::26::Sofia Edström
+21:07:00.633 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns swedish(VARCHAR(32)),english(VARCHAR(32)),jp_read(VARCHAR(32)),jp_write(VARCHAR(32)),word_type_ref(INTEGER) added to nuggets 
+21:07:00.634 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_026.yaml::26::Sofia Edström ran successfully in 5ms 
+Running Changeset: db/changelogs/db.changelog_027.yaml::27::Sofia Edström
+21:07:00.641 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table books created 
+21:07:00.641 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_027.yaml::27::Sofia Edström ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_028.yaml::28::Sofia Edström
+21:07:00.645 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns book_ref(INTEGER) added to nuggets 
+21:07:00.646 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_028.yaml::28::Sofia Edström ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_029.yaml::29::Dzeno
+21:07:00.648 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key quiz_nugget_quiz_ref_key dropped 
+21:07:00.649 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to quiz_nugget (quiz_ref) 
+21:07:00.649 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_029.yaml::29::Dzeno ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_030.yaml::30::Dzeno
+21:07:00.652 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key incorrect_answers_quiz_nugget_ref_key dropped 
+21:07:00.653 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to incorrect_answers (quiz_nugget_ref) 
+21:07:00.654 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_030.yaml::30::Dzeno ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_031.yaml::31::doverstav
+21:07:00.656 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Column courses.order renamed to courseOrder 
+21:07:00.657 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_031.yaml::31::doverstav ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_032.yaml::32::doverstav
+21:07:00.662 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Column courses.courseOrder renamed to course_order 
+21:07:00.663 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_032.yaml::32::doverstav ran successfully in 4ms 
+Running Changeset: db/changelogs/db.changelog_033.yaml::33::sofiaedstrom
+21:07:00.667 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Unique constraint added to quiz(name) 
+21:07:00.667 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_033.yaml::33::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_034.yaml::34::sofiaedstrom
+21:07:00.672 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.672 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_034.yaml::34::sofiaedstrom ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_035.yaml::35::sofiaedstrom
+21:07:00.677 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.678 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_035.yaml::35::sofiaedstrom ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_036.yaml::36::sofiaedstrom
+21:07:00.681 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.681 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_036.yaml::36::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_037.yaml::37::sofiaedstrom
+21:07:00.684 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.685 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_037.yaml::37::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_038.yaml::38::sofiaedstrom
+21:07:00.687 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.688 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_038.yaml::38::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_039.yaml::39::sofiaedstrom
+21:07:00.691 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key incorrect_answers_quiz_nugget_ref_key dropped 
+21:07:00.692 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to incorrect_answers (quiz_nugget_ref) 
+21:07:00.693 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_039.yaml::39::sofiaedstrom ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_040.yaml::40::sofiaedstrom
+21:07:00.695 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key quiz_nugget_quiz_ref_key dropped 
+21:07:00.696 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to quiz_nugget (quiz_ref) 
+21:07:00.697 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_040.yaml::40::sofiaedstrom ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_041.yaml::41::sofiaedstrom
+21:07:00.701 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Unique constraint added to user_lesson(lesson_ref, user_ref) 
+21:07:00.701 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_041.yaml::41::sofiaedstrom ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_042.yaml::42::sofiaedstrom
+21:07:00.704 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - events.data datatype was changed to varchar(256) 
+21:07:00.705 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_042.yaml::42::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_043.yaml::43::Pontus Doverstav
+21:07:00.712 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table inflections created 
+21:07:00.713 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_043.yaml::43::Pontus Doverstav ran successfully in 7ms 
+Running Changeset: db/changelogs/db.changelog_044.yaml::44::sofiaedstrom
+21:07:00.716 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nuggets.swedish datatype was changed to varchar(128) 
+21:07:00.717 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nuggets.swedish datatype was changed to varchar(128) 
+21:07:00.718 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nuggets.english datatype was changed to varchar(128) 
+21:07:00.719 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nuggets.jp_read datatype was changed to varchar(128) 
+21:07:00.720 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nuggets.jp_write datatype was changed to varchar(128) 
+21:07:00.721 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_044.yaml::44::sofiaedstrom ran successfully in 5ms 
+Running Changeset: db/changelogs/db.changelog_045.yaml::45::sofiaedstrom
+21:07:00.723 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.723 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_045.yaml::45::sofiaedstrom ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_046.yaml::46::sofiaedstrom
+21:07:00.725 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.726 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_046.yaml::46::sofiaedstrom ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_047.yaml::47::sofiaedstrom
+21:07:00.728 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.729 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_047.yaml::47::sofiaedstrom ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_048.yaml::48::sofiaedstrom
+21:07:00.731 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.732 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_048.yaml::48::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_049.yaml::49::sofiaedstrom
+21:07:00.734 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.735 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_049.yaml::49::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_050.yaml::50::sofiaedstrom
+21:07:00.738 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.738 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_050.yaml::50::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_051.yaml::51::sofiaedstrom
+21:07:00.741 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.741 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_051.yaml::51::sofiaedstrom ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_052.yaml::52::sofiaedstrom
+21:07:00.750 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table nugget_books created 
+21:07:00.752 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Unique constraint added to nugget_books(nugget_id, book_id) 
+21:07:00.753 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Column nuggets.book_ref dropped 
+21:07:00.754 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_052.yaml::52::sofiaedstrom ran successfully in 11ms 
+Running Changeset: db/changelogs/db.changelog_053.yaml::53::Pontus Doverstav
+21:07:00.758 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nuggets.id datatype was changed to varchar(256) 
+21:07:00.759 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_053.yaml::53::Pontus Doverstav ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_054.yaml::54::Pontus Doverstav
+21:07:00.762 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - lessons_nuggets.nugget_id datatype was changed to varchar(256) 
+21:07:00.762 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_054.yaml::54::Pontus Doverstav ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_055.yaml::55::Pontus Doverstav
+21:07:00.766 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - facts.nuggetid datatype was changed to varchar(256) 
+21:07:00.767 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_055.yaml::55::Pontus Doverstav ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_056.yaml::56::Pontus Doverstav
+21:07:00.770 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - events.nugget_id datatype was changed to varchar(256) 
+21:07:00.770 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_056.yaml::56::Pontus Doverstav ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_057.yaml::57::Pontus Doverstav
+21:07:00.773 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - progresstrackinglist.nugget_id datatype was changed to varchar(256) 
+21:07:00.773 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_057.yaml::57::Pontus Doverstav ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_058.yaml::58::sofiaedstrom
+21:07:00.778 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.778 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_058.yaml::58::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_058B.yaml::58B::Pontus Doverstav
+21:07:00.784 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table lessons_kanjis created 
+21:07:00.785 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_058B.yaml::58B::Pontus Doverstav ran successfully in 5ms 
+Running Changeset: db/changelogs/db.changelog_059.yaml::59::Pontus Doverstav
+21:07:00.792 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table kanjis created 
+21:07:00.792 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_059.yaml::59::Pontus Doverstav ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_060.yaml::60::Pontus Doverstav
+21:07:00.796 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Primary key added to kanjis (id) 
+21:07:00.796 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_060.yaml::60::Pontus Doverstav ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_061.yaml::61::Pontus Doverstav
+21:07:00.800 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.800 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_061.yaml::61::Pontus Doverstav ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_062.yaml::62::Pontus Doverstav
+21:07:00.803 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.803 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_062.yaml::62::Pontus Doverstav ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_063.yaml::63::Pontus Doverstav
+21:07:00.806 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.806 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_063.yaml::63::Pontus Doverstav ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_064.yaml::64::Pontus Doverstav
+21:07:00.808 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.809 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_064.yaml::64::Pontus Doverstav ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_065.yaml::65::Pontus Doverstav
+21:07:00.811 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.811 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_065.yaml::65::Pontus Doverstav ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_066.yaml::66::Pontus Doverstav
+21:07:00.817 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table kanji_books created 
+21:07:00.818 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_066.yaml::66::Pontus Doverstav ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_067.yaml::67::Pontus Doverstav
+21:07:00.821 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.821 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_067.yaml::67::Pontus Doverstav ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_068.yaml::68::sofiaedstrom
+21:07:00.823 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.824 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_068.yaml::68::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_069.yaml::69::Pontus Doverstav
+21:07:00.826 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key events_user_ref_fkey dropped 
+21:07:00.827 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to events (user_ref) 
+21:07:00.828 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key progresstrackinglist_user_ref_fkey dropped 
+21:07:00.829 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to progresstrackinglist (user_ref) 
+21:07:00.831 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key user_lesson_user_ref_fkey dropped 
+21:07:00.832 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to user_lesson (user_ref) 
+21:07:00.833 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_069.yaml::69::Pontus Doverstav ran successfully in 8ms 
+Running Changeset: db/changelogs/db.changelog_070.yaml::70::Pontus Doverstav
+21:07:00.841 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table grammar_texts created 
+21:07:00.842 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_070.yaml::70::Pontus Doverstav ran successfully in 7ms 
+Running Changeset: db/changelogs/db.changelog_071.yaml::71::sofiaedstrom
+21:07:00.846 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table facts dropped 
+21:07:00.847 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_071.yaml::71::sofiaedstrom ran successfully in 4ms 
+Running Changeset: db/changelogs/db.changelog_072.yaml::72::sofiaedstrom
+21:07:00.850 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Custom SQL executed 
+21:07:00.850 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_072.yaml::72::sofiaedstrom ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_073.yaml::73::Pontus Doverstav
+21:07:00.852 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Column nuggets.type dropped 
+21:07:00.853 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_073.yaml::73::Pontus Doverstav ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_074.yaml::74::Anton Myrholm
+21:07:00.856 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns retention_factor(real),retention_interval(real),retention_date(datetime) added to progresstrackinglist 
+21:07:00.857 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_074.yaml::74::Anton Myrholm ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_075.yaml::75::Anton Myrholm
+21:07:00.864 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table kanji_drawings created 
+21:07:00.864 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_075.yaml::75::Anton Myrholm ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_076.yaml::76::Anton Myrholm
+21:07:00.866 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns lesson(VARCHAR(256)) added to events 
+21:07:00.867 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_076.yaml::76::Anton Myrholm ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_077.yaml::77::Pierre Sandboge
+21:07:00.869 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - kanjis.swedish datatype was changed to varchar(127) 
+21:07:00.870 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - kanjis.english datatype was changed to varchar(127) 
+21:07:00.870 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_077.yaml::77::Pierre Sandboge ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_078.yaml::78::lars
+21:07:00.882 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns reading(varchar(127)) added to kanjis 
+21:07:00.883 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_078.yaml::78::lars ran successfully in 12ms 
+Running Changeset: db/changelogs/db.changelog_079.yaml::79::Daniel Ivestig
+21:07:00.887 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table announcements created 
+21:07:00.888 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_079.yaml::79::Daniel Ivestig ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_080.yaml::80::Daniel Ivestig
+21:07:00.892 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table nugget_category created 
+21:07:00.893 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - New row inserted into nugget_category 
+21:07:00.893 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - New row inserted into nugget_category 
+21:07:00.894 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - New row inserted into nugget_category 
+21:07:00.895 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - New row inserted into nugget_category 
+21:07:00.896 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - New row inserted into nugget_category 
+21:07:00.896 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - New row inserted into nugget_category 
+21:07:00.897 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - New row inserted into nugget_category 
+21:07:00.898 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns nugget_type_ref(int) added to events 
+21:07:00.899 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to events (nugget_type_ref) 
+21:07:00.900 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns nugget_type_ref(int) added to progresstrackinglist 
+21:07:00.901 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Foreign key constraint added to progresstrackinglist (nugget_type_ref) 
+21:07:00.902 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_080.yaml::80::Daniel Ivestig ran successfully in 13ms 
+Running Changeset: db/changelogs/db.changelog_081.yaml::81::Joella Johannesson
+21:07:00.911 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns category(varchar(50)) added to quiz 
+21:07:00.912 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_081.yaml::81::Joella Johannesson ran successfully in 9ms 
+Running Changeset: db/changelogs/db.changelog_082.yaml::82::Joella Johannesson
+21:07:00.922 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns image(varchar(50)) added to quiz_nugget 
+21:07:00.922 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_082.yaml::82::Joella Johannesson ran successfully in 9ms 
+Running Changeset: db/changelogs/db.changelog_083.yaml::83::Joella Johannesson
+21:07:00.925 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - quiz_nugget.image datatype was changed to varchar(127) 
+21:07:00.925 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_083.yaml::83::Joella Johannesson ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_084.yaml::83::Joella Johannesson
+21:07:00.927 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - quiz_nugget.image datatype was changed to varchar(255) 
+21:07:00.928 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_084.yaml::83::Joella Johannesson ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_085.yaml::85::Akar Khatab
+21:07:00.930 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Null constraint dropped from kanji_drawings.image_data 
+21:07:00.931 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_085.yaml::85::Akar Khatab ran successfully in 2ms 
+Running Changeset: db/changelogs/db.changelog_086.yaml::86::Akar Khatab
+21:07:00.938 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table settings created 
+21:07:00.938 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_086.yaml::86::Akar Khatab ran successfully in 6ms 
+Running Changeset: db/changelogs/db.changelog_087.yaml::87::Akar Khatab
+21:07:00.942 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table internationalization created 
+21:07:00.944 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Unique constraint added to internationalization(abbreviation, language) 
+21:07:00.944 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_087.yaml::87::Akar Khatab ran successfully in 4ms 
+Running Changeset: db/changelogs/db.changelog_088.yaml::88::Akar Khatab
+21:07:00.952 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns flag_svg(text) added to settings 
+21:07:00.953 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - internationalization.abbreviation datatype was changed to VARCHAR(128) 
+21:07:00.954 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_088.yaml::88::Akar Khatab ran successfully in 4ms 
+Running Changeset: db/changelogs/db.changelog_089.yaml::89::Akar Khatab
+21:07:00.956 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns enabled(boolean) added to settings 
+21:07:00.956 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_089.yaml::89::Akar Khatab ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_090.yaml::90::Akar Khatab
+21:07:00.958 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table incorrect_answers renamed to incorrect_quiz_answers 
+21:07:00.959 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_090.yaml::90::Akar Khatab ran successfully in 1ms 
+Running Changeset: db/changelogs/db.changelog_091.yaml::91::Akar Khatab
+21:07:00.961 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns new_user(boolean) added to users 
+21:07:00.963 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - NOT NULL constraint has been added to users.new_user 
+21:07:00.963 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_091.yaml::91::Akar Khatab ran successfully in 3ms 
+Running Changeset: db/changelogs/db.changelog_092.yaml::89::Joella Johannesson
+21:07:00.972 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns learning_language(varchar(50)) added to quiz 
+21:07:00.972 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_092.yaml::89::Joella Johannesson ran successfully in 8ms 
+Running Changeset: db/changelogs/db.changelog_093.yaml::82::Joella Johannesson
+21:07:00.982 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns text_english(text),text_japan(text) added to announcements 
+21:07:00.982 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_093.yaml::82::Joella Johannesson ran successfully in 8ms 
+Running Changeset: db/changelogs/db.changelog_094.yaml::93::Akar Khatab
+21:07:00.984 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Columns site_language(VARCHAR(64)) added to users 
+21:07:00.985 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet db/changelogs/db.changelog_094.yaml::93::Akar Khatab ran successfully in 1ms 
+Running Changeset: classpath:/db/db.changelog-local.yaml::local-sample-seed-marker-v1::local-development
+21:07:00.988 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - Table local_sample_seed created 
+21:07:00.989 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet classpath:/db/db.changelog-local.yaml::local-sample-seed-marker-v1::local-development ran successfully in 3ms 
+Running Changeset: classpath:/db/db.changelog-local.yaml::local-jpa-numeric-types-v1::local-development
+21:07:00.993 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - books.id datatype was changed to bigint 
+21:07:00.997 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - courses.id datatype was changed to bigint 
+21:07:01.001 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - courses.parent_ref datatype was changed to bigint 
+21:07:01.003 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - incorrect_quiz_answers.id datatype was changed to bigint 
+21:07:01.006 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - incorrect_quiz_answers.quiz_nugget_ref datatype was changed to bigint 
+21:07:01.008 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - inflections.id datatype was changed to bigint 
+21:07:01.010 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - inflections.lesson_ref datatype was changed to bigint 
+21:07:01.011 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - kanji_books.book_id datatype was changed to bigint 
+21:07:01.015 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - lessons.id datatype was changed to bigint 
+21:07:01.018 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - lessons.course_ref datatype was changed to bigint 
+21:07:01.019 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - lessons_kanjis.lesson_id datatype was changed to bigint 
+21:07:01.020 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - lessons_nuggets.lesson_id datatype was changed to bigint 
+21:07:01.023 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nugget_books.book_id datatype was changed to bigint 
+21:07:01.026 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nuggets.word_type_ref datatype was changed to bigint 
+21:07:01.027 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - prerequisites.course_id datatype was changed to bigint 
+21:07:01.028 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - prerequisites.prerequisite_id datatype was changed to bigint 
+21:07:01.036 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - quiz.id datatype was changed to bigint 
+21:07:01.039 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - quiz_nugget.id datatype was changed to bigint 
+21:07:01.041 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - quiz_nugget.quiz_ref datatype was changed to bigint 
+21:07:01.045 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - word_types.id datatype was changed to bigint 
+21:07:01.048 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - announcements.id datatype was changed to bigint 
+21:07:01.051 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - events.id datatype was changed to bigint 
+21:07:01.054 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - events.nugget_type_ref datatype was changed to bigint 
+21:07:01.057 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - internationalization.id datatype was changed to bigint 
+21:07:01.060 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - kanji_drawings.id datatype was changed to bigint 
+21:07:01.064 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - nugget_category.id datatype was changed to bigint 
+21:07:01.066 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - progresstrackinglist.id datatype was changed to bigint 
+21:07:01.068 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - progresstrackinglist.nugget_type_ref datatype was changed to bigint 
+21:07:01.071 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - settings.id datatype was changed to bigint 
+21:07:01.073 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - user_lesson.id datatype was changed to bigint 
+21:07:01.076 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - user_lesson.lesson_ref datatype was changed to bigint 
+21:07:01.078 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - progresstrackinglist.retention_factor datatype was changed to double precision 
+21:07:01.080 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - progresstrackinglist.retention_interval datatype was changed to double precision 
+21:07:01.082 [main] [34mINFO [0;39m [36mliquibase.changelog[0;39m - ChangeSet classpath:/db/db.changelog-local.yaml::local-jpa-numeric-types-v1::local-development ran successfully in 92ms 
+21:07:01.085 [main] [34mINFO [0;39m [36mliquibase.lockservice[0;39m - Successfully released change log lock 
+21:07:01.144 [main] [34mINFO [0;39m [36mo.h.jpa.internal.util.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: default] 
+21:07:01.170 [main] [34mINFO [0;39m [36morg.hibernate.Version[0;39m - HHH000412: Hibernate ORM core version 5.6.15.Final 
+21:07:01.249 [main] [34mINFO [0;39m [36mo.h.annotations.common.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+21:07:01.325 [main] [34mINFO [0;39m [36morg.hibernate.dialect.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect 
+21:07:01.806 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+21:07:01.818 [main] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+21:07:02.301 [main] [31mWARN [0;39m [36mo.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration[0;39m - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+21:07:02.829 [main] [31mWARN [0;39m [36mo.s.s.c.a.web.builders.WebSecurity[0;39m - You are asking Spring Security to ignore Ant [pattern='/js/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead. 
+21:07:02.829 [main] [34mINFO [0;39m [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will not secure Ant [pattern='/js/**'] 
+21:07:02.922 [main] [34mINFO [0;39m [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@188ae8d2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7a522157, org.springframework.security.web.context.SecurityContextPersistenceFilter@4687366b, org.springframework.security.web.header.HeaderWriterFilter@58486deb, org.springframework.security.web.authentication.logout.LogoutFilter@73d7d676, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5b0575d0, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7df5549e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@65da1cbe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@39f8adc0, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@4f0c1409, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@706c062e, org.springframework.security.web.session.SessionManagementFilter@574327ed, org.springframework.security.web.access.ExceptionTranslationFilter@d70dbeb, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@71f4aeb6] 
+21:07:03.043 [main] [31mWARN [0;39m [36mo.s.d.r.c.m.RepositoryCollectionResourceMapping[0;39m - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.EventRepository! Use @RepositoryRestResource instead! 
+21:07:03.043 [main] [31mWARN [0;39m [36mo.s.d.r.c.m.RepositoryCollectionResourceMapping[0;39m - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.UserRepository! Use @RepositoryRestResource instead! 
+21:07:03.295 [main] [34mINFO [0;39m [36mo.s.b.a.w.s.WelcomePageHandlerMapping[0;39m - Adding welcome page template: index 
+21:07:03.716 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Starting ProtocolHandler ["http-nio-127.0.0.1-18083"] 
+21:07:03.722 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat started on port(s): 18083 (http) with context path '' 
+21:07:03.728 [main] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - Started GakuseiApplication in 5.192 seconds (JVM running for 5.443) 
+21:07:04.237 [main] [34mINFO [0;39m [36mse.kits.gakusei.init.DataInit[0;39m - Loaded resource: testdata/testdata.json 
+21:07:04.584 [main] [34mINFO [0;39m [36mse.kits.gakusei.init.DataInit[0;39m - Loaded resource: testdata/testdata.json 
+21:07:06.708 [main] [34mINFO [0;39m [36mse.kits.gakusei.init.DataInit[0;39m - *** Data initialization was set on profile(s): [local-postgres, local-seed] 
+21:07:48.912 [http-nio-127.0.0.1-18083-exec-1] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+21:07:48.912 [http-nio-127.0.0.1-18083-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Initializing Servlet 'dispatcherServlet' 
+21:07:48.913 [http-nio-127.0.0.1-18083-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Completed initialization in 1 ms 
+21:08:42.647 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default' 
+21:08:42.648 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown initiated... 
+21:08:42.649 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown completed. 
