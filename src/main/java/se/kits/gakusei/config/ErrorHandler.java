@@ -20,10 +20,6 @@ public class ErrorHandler implements ErrorController {
     @Autowired
     private ErrorAttributes errorAttributes;
 
-    @Override
-    public String getErrorPath() {
-        return "/error";
-    }
 
     @RequestMapping
     public ResponseEntity<String> error(HttpServletRequest request, WebRequest webRequest) {
@@ -34,7 +30,7 @@ public class ErrorHandler implements ErrorController {
                 String,
                 Object
                 > errorAttributes = this.errorAttributes.getErrorAttributes(webRequest,
-                false
+                org.springframework.boot.web.error.ErrorAttributeOptions.of(org.springframework.boot.web.error.ErrorAttributeOptions.Include.MESSAGE)
         );
         final int status = (int) errorAttributes.get("status");
         final String message = (String) errorAttributes.get("message");

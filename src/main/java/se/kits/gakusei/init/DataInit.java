@@ -74,6 +74,7 @@ public class DataInit implements ApplicationRunner {
 
     private Set<String> allKeysExceptBooks;
 
+    @org.springframework.transaction.annotation.Transactional
     @Override
     public void run(ApplicationArguments applicationArguments)
         throws
@@ -97,11 +98,15 @@ public class DataInit implements ApplicationRunner {
                     "kanjidrawing"
                 )
             );
+            createNuggetCategories();
             createUsers();
             createTestBooks(readTestDataFromFile(testDataFile));
             createTestData(readTestDataFromFile(testDataFile));
             createLessons();
             createQuizzesFromCSV(csvQuizNuggetFile);
+            if (nuggetRepository.count() == 0 || lessonRepository.count() == 0) {
+                throw new IllegalStateException("Sample data contains no vocabulary lessons; check testdata resources");
+            }
 
             logger.info(
                 "*** Data initialization was set on profile(s): " + activeProfiles
@@ -128,7 +133,7 @@ public class DataInit implements ApplicationRunner {
             return dataHolders;
         } catch(IOException e) {
             logger.error("Unable to parse " + testDataFile, e);
-            return null;
+            throw new IllegalStateException("Unable to load bundled sample data: " + testDataFile, e);
         }
     }
 
@@ -219,6 +224,19 @@ public class DataInit implements ApplicationRunner {
             } catch(Exception e) {
                 logger.warn("Faulty nugget detected, skipping: " + tdh);
             }
+        }
+    }
+
+    @Autowired
+    private se.kits.gakusei.user.repository.NuggetTypeRepository nuggetTypeRepository;
+
+    private void createNuggetCategories() {
+        String[] types = { "unknown", "vocab", "kanji", "quiz", "flashcards", "grammar", "translate" };
+        for (int i = 0; i < types.length; i++) {
+            se.kits.gakusei.user.model.NuggetType type = new se.kits.gakusei.user.model.NuggetType();
+            type.setId((long) i + 1);
+            type.setType(types[i]);
+            nuggetTypeRepository.save(type);
         }
     }
 

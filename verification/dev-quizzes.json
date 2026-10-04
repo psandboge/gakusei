@@ -1,0 +1,34 @@
+{
+  "_embedded" : {
+    "quizzes" : [ {
+      "name" : "Den japanska floran",
+      "description" : "Ett quiz om den japanska floran",
+      "learningLanguage" : null,
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:18080/api/quizzes/1"
+        },
+        "quiz" : {
+          "href" : "http://localhost:18080/api/quizzes/1"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:18080/api/quizzes"
+    },
+    "profile" : {
+      "href" : "http://localhost:18080/api/profile/quizzes"
+    },
+    "search" : {
+      "href" : "http://localhost:18080/api/quizzes/search"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 1,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}

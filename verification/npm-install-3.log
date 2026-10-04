@@ -1,0 +1,27 @@
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: gakusei@2.1.1
+npm error Found: prop-types@15.8.1
+npm error node_modules/prop-types
+npm error   prop-types@"^15.6.2" from the root project
+npm error   peer prop-types@"15.x" from @fortawesome/react-fontawesome@0.0.18
+npm error   node_modules/@fortawesome/react-fontawesome
+npm error     @fortawesome/react-fontawesome@"0.0.18" from the root project
+npm error   5 more (react, react-bootstrap, react-dom, react-chartjs-2, react-hot-loader)
+npm error
+npm error Could not resolve dependency:
+npm error react-i18next@"^8.1.2" from the root project
+npm error
+npm error Conflicting peer dependency: prop-types@15.6.2
+npm error node_modules/prop-types
+npm error   peer prop-types@"15.6.2" from react-i18next@8.4.0
+npm error   node_modules/react-i18next
+npm error     react-i18next@"^8.1.2" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry this command with --force or --legacy-peer-deps to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /Users/pierresandboge/.npm/_logs/2026-10-04T16_17_33_104Z-eresolve-report.txt
+npm error A complete log of this run can be found in: /Users/pierresandboge/.npm/_logs/2026-10-04T16_17_33_104Z-debug-0.log

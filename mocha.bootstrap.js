@@ -4,10 +4,10 @@
 // require('ignore-styles');
 // ES6/ES201X-functionality
 // require('babel-polyfill');
-require('babel-register')({
+require('@babel/register')({
   // This will override `node_modules` ignoring - you can alternatively pass
   // an array of strings to be explicitly matched or a regex / glob
-  ignore: function(filename) {
+  ignore: [function(filename) {
     if (filename.includes('moresketchy')) {
       return false;
     } else if (filename.includes('node_modules')) {
@@ -15,28 +15,28 @@ require('babel-register')({
     } else {
       return false;
     }
-  },
+  }],
   // This is a .babelrc config
   sourceMaps: 'inline',
   retainLines: true,
   presets: [
     [
-      'env',
+      '@babel/preset-env',
       {
         targets: {
-          node: '8.1.2'
+          node: 'current'
         }
       }
     ],
-    'react'
+    '@babel/preset-react'
   ],
-  plugins: ['transform-object-rest-spread']
+  babelrc: false
 });
 
 // Chai
-require('chai/register-assert'); // Using Assert style
-require('chai/register-expect'); // Using Expect style
-require('chai/register-should'); // Using Should style
+global.assert = require('chai').assert; // Using Assert style
+global.expect = require('chai').expect; // Using Expect style
+require('chai').should(); // Using Should style
 
 // DOM simulation things
 // ------------------------
@@ -52,7 +52,7 @@ if (!global.dom) {
   global.window = dom.window;
   global.document = dom.window.document;
   // Allow for things like window.location
-  global.navigator = global.window.navigator;
+  Object.defineProperty(global, 'navigator', { value: global.window.navigator, configurable: true });
 
   global.dom = dom;
 

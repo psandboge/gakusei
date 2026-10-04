@@ -5,12 +5,14 @@ import resources from '../../resources/locales';
 i18n.use(languageDetector).init({
   lng: i18n.languages,
   fallbackLng: 'se',
+  defaultNS: 'translations',
+  ns: ['translations'],
   debug: true,
 
   // we init with resources
   resources: resources,
 
-  keySeparator: true, // we use content as keys
+  keySeparator: false, // we use content as keys
 
   detectBrowserLanguage: true
 });

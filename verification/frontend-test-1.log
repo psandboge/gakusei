@@ -1,0 +1,13 @@
+
+> gakusei@2.1.1 pretest
+> npm run preflight
+
+
+> gakusei@2.1.1 preflight
+> node scripts/preflight.js
+
+
+> gakusei@2.1.1 test
+> mocha --require ./mocha.bootstrap.js --timeout 10000 "src/main/js/**/*.test.js"
+
+sh: mocha: command not found

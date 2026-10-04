@@ -23,6 +23,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfiguration
     extends WebSecurityConfigurerAdapter {
+    @org.springframework.beans.factory.annotation.Value("${gakusei.remember-me-key:uniqueAndSecret}")
+    private String rememberMeKey;
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -64,7 +67,7 @@ public class SecurityConfiguration
         ).and().httpBasic().and().headers().frameOptions().sameOrigin().and().csrf().csrfTokenRepository(
             CookieCsrfTokenRepository.withHttpOnlyFalse()
         ).and().logout().logoutSuccessUrl("/").deleteCookies("JSESSIONID").and(
-        ).rememberMe().key("uniqueAndSecret");
+        ).rememberMe().key(rememberMeKey);
 
         http.csrf().disable();
     }

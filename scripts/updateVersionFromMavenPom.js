@@ -1,23 +1,8 @@
-const replace = require('replace');
-const xml2js = require('xml2js');
 const fs = require('fs');
-
-const pomXmlText = fs.readFileSync('./pom.xml', 'utf8');
-
-function doReplace(newVersion) {
-  replace({
-    regex: /"version": "\d+?.\d+?.\d+?"/,
-    replacement: `"version": "${newVersion}"`,
-    paths: ['package.json'],
-    recursive: true,
-    silent: true
-  });
-}
-
-xml2js.parseString(pomXmlText, (err, pomJson) => {
-  if (err) {
-    throw err;
-  } else {
-    doReplace(pomJson.project.version);
-  }
+const xml2js = require('xml2js');
+xml2js.parseString(fs.readFileSync('pom.xml', 'utf8'), (error, pom) => {
+  if (error) throw error;
+  const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  const version = pom.project.version[0];
+  if (pkg.version !== version) throw new Error(`package.json version ${pkg.version} must match pom.xml ${version}; update both and regenerate the lockfile`);
 });

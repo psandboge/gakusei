@@ -1,6 +1,3 @@
-import 'react-hot-loader/patch';
-import { AppContainer } from 'react-hot-loader';
-
 import '../resources/static/css/style.scss';
 import AppProvider from './AppProvider';
 import { configureStore, history } from './configureStore';
@@ -18,20 +15,13 @@ const indexRoot = document.getElementById('index_root');
 function doRender() {
   ReactDOM.render(
     <I18nextProvider i18n={i18n}>
-      <AppContainer>
-        <AppProvider
-          store={store}
-          history={history}
-        />
-      </AppContainer>
+      <AppProvider
+        store={store}
+        history={history}
+      />
     </I18nextProvider>,
     indexRoot
   );
 }
 
 doRender();
-if (module.hot) {
-  module.hot.accept('./AppProvider', () => {
-    doRender();
-  });
-}

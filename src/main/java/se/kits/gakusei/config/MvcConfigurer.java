@@ -17,21 +17,9 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.schema.AlternateTypeRules;
-import springfox.documentation.schema.WildcardType;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
-@EnableSwagger2
 public class MvcConfigurer implements WebMvcConfigurer {
 
     @Value("${spring.caching:false}")
@@ -39,23 +27,6 @@ public class MvcConfigurer implements WebMvcConfigurer {
 
     @Value("${spring.caching-ttl:3600}")
     private int ttl;
-
-    @Bean
-    public Docket userApi(){
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select().apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(metaData());
-    }
-
-    private ApiInfo metaData(){
-        return new ApiInfoBuilder()
-                .title("Spring Boot REST API")
-                .description("\"Spring Boot REST API for Gakusei\"")
-                .version("2.1.0")
-                .build();
-    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -74,10 +45,6 @@ public class MvcConfigurer implements WebMvcConfigurer {
                 "classpath:/static/js/"
         ).setCacheControl(cacheControl);
 
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
     @Override

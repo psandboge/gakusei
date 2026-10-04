@@ -1,0 +1,186 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< se.kits.gakusei:gakusei >-----------------------
+[INFO] Building gakusei 2.1.1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:2.7.18:run (default-cli) > test-compile @ gakusei >>>
+[WARNING] 1 problem was encountered while building the effective model for org.javassist:javassist:jar:3.20.0-GA during dependency collection step for project (use -X to see details)
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (toolchain) @ gakusei ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- license:1.10:download-licenses (download-licenses) @ gakusei ---
+[WARNING] No license information available for: com.github.psandboge:japanese-grammar-utils
+[INFO] 
+[INFO] --- frontend:1.15.4:install-node-and-npm (install node and npm) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- frontend:1.15.4:npm (npm install) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- frontend:1.15.4:npm (npm compile) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- resources:3.2.0:resources (default-resources) @ gakusei ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 2 resources
+[INFO] Copying 6914 resources
+[INFO] 
+[INFO] --- compiler:3.10.1:compile (default-compile) @ gakusei ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 80 source files to /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/classes
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/controller/LessonController.java: Some input files use or override a deprecated API.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/controller/LessonController.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/init/DataInit.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/init/DataInit.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.2.0:testResources (default-testResources) @ gakusei ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] skip non existing resourceDirectory /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.10.1:testCompile (default-testCompile) @ gakusei ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 11 source files to /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/test-classes
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/java/se/kits/gakusei/controller/QuestionControllerTest.java: Some input files use or override a deprecated API.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/java/se/kits/gakusei/controller/QuestionControllerTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/java/se/kits/gakusei/util/KanjiHandlerTest.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/test/java/se/kits/gakusei/util/KanjiHandlerTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] <<< spring-boot:2.7.18:run (default-cli) < test-compile @ gakusei <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:2.7.18:run (default-cli) @ gakusei ---
+[INFO] Attaching agents: []
+18:22:22,923 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+18:22:22,923 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/classes/logback.xml]
+18:22:22,942 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+18:22:22,942 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+18:22:22,944 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+18:22:22,945 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+18:22:22,957 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+18:22:22,958 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [FILE]
+18:22:22,963 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@194706439 - No compression will be used
+18:22:22,964 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@194706439 - Will use the pattern logs/logFile.%d{yyyy-MM-dd}.%i.html for the active file
+18:22:22,964 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@382db087 - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/logFile.%d{yyyy-MM-dd}.%i.html'.
+18:22:22,964 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@382db087 - Roll-over at midnight.
+18:22:22,968 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@382db087 - Setting initial period to Sun Oct 04 18:20:20 CEST 2026
+18:22:22,968 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@382db087 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+18:22:22,968 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@382db087 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+18:22:22,970 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/logFile.html
+18:22:22,970 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [logs/logFile.html]
+18:22:22,970 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+18:22:22,970 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+18:22:22,970 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [FILE] to Logger[ROOT]
+18:22:22,970 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+18:22:22,971 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@73d4cc9e - Registering current configuration as safe fallback point
+
+
+                                              ooooooooo     *ooooooooo*                                           
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+                                              ooooooooo     *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                                      *ooooooooo*                                            
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooooooooooooooooooooooooo                                      
+            oooooooooo                        ooooooooo:::::ooooooooooo::::::                                      
+            oooooooooo        :oooooooooooo.  ooooooooo     *ooooooooo*                                            
+            oooooooooo      :ooooooooooooo    ooooooooo     *ooooooooo*                                            
+            oooooooooo    *oooooooooooo       ooooooooo     *ooooooooo*                                            
+            oooooooooo  .ooooooooooooo        ooooooooo     *ooooooooo*                                            
+            oooooooooo oooooooooooo           ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooo:            ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooo              ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooo            ooooooooo     *ooooooooo*                                            
+            ooooooooooooooooooooooo           ooooooooo     *ooooooooo*                                            
+            oooooooooooooooooooooooo          ooooooooo     *oooooooooo       :ooooooooooooooooo:                  
+            ooooooooooo:  *ooooooooooo        ooooooooo     .ooooooooooo.   ooooooooooooooooooooooo                
+            oooooooooo     :ooooooooooo       ooooooooo      ooooooooooooooooooooooooooooooooooooooo*              
+            oooooooooo      .ooooooooooo      ooooooooo      :ooooooooooooooooooooo         ooooooooo*             
+            oooooooooo        ooooooooooo*    ooooooooo        ooooooooooooooooooo.          ooooooooo             
+            oooooooooo         &ooooooooooo                              oooooooooo#                               
+            oooooooooo          oooooooooooo                             oooooooooooooo:                           
+            oooooooooo            ooooooooooo:                             ooooooooooooooooooooo:                  
+            oooooooooo             ooooooooooo:                             *ooooooooooooooooooooooo               
+                                                                                *oooooooooooooooooooo*             
+                                                                                         :oooooooooooo:            
+                                                                                             oooooooooo            
+                                                                        ooooooooo             ooooooooo            
+                                                                        *ooooooooo           :oooooooo:            
+                                                                         :ooooooooooo:*..*:ooooooooooo             
+                                                                           oooooooooooooooooooooooooo              
+                                                                             ooooooooooooooooooooo:                
+                                                                                 .*oooooooooo*.                    
+:: Running Spring Boot 2.7.18 ::
+
+18:22:23.124 [background-preinit] [34mINFO [0;39m [36mo.h.validator.internal.util.Version[0;39m - HV000001: Hibernate Validator 6.2.5.Final 
+18:22:23.139 [restartedMain] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - Starting GakuseiApplication using Java 17.0.16 on Pierres-MacBook-Pro-2.local with PID 64479 (/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/classes started by pierresandboge in /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7) 
+18:22:23.139 [restartedMain] [34mINFO [0;39m [36mse.kits.gakusei.GakuseiApplication[0;39m - The following 1 profile is active: "local" 
+18:22:23.154 [restartedMain] [34mINFO [0;39m [36mo.s.b.d.e.DevToolsPropertyDefaultsPostProcessor[0;39m - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable 
+18:22:23.154 [restartedMain] [34mINFO [0;39m [36mo.s.b.d.e.DevToolsPropertyDefaultsPostProcessor[0;39m - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG' 
+18:22:23.386 [restartedMain] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+18:22:23.411 [restartedMain] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 22 ms. Found 20 JPA repository interfaces. 
+18:22:23.688 [restartedMain] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat initialized with port(s): 8080 (http) 
+18:22:23.690 [restartedMain] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"] 
+18:22:23.691 [restartedMain] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Starting service [Tomcat] 
+18:22:23.691 [restartedMain] [34mINFO [0;39m [36mo.a.catalina.core.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/9.0.83] 
+18:22:23.716 [restartedMain] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring embedded WebApplicationContext 
+18:22:23.717 [restartedMain] [34mINFO [0;39m [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 563 ms 
+18:22:23.736 [restartedMain] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+18:22:23.806 [restartedMain] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+18:22:23.810 [restartedMain] [34mINFO [0;39m [36mo.s.b.a.h.H2ConsoleAutoConfiguration[0;39m - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:gakusei' 
+18:22:23.887 [restartedMain] [34mINFO [0;39m [36mo.h.jpa.internal.util.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: default] 
+18:22:23.902 [restartedMain] [34mINFO [0;39m [36morg.hibernate.Version[0;39m - HHH000412: Hibernate ORM core version 5.6.15.Final 
+18:22:23.948 [restartedMain] [34mINFO [0;39m [36mo.h.annotations.common.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+18:22:23.983 [restartedMain] [34mINFO [0;39m [36morg.hibernate.dialect.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+18:22:24.286 [restartedMain] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+18:22:24.294 [restartedMain] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+18:22:24.359 [restartedMain] [31mWARN [0;39m [36mo.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration[0;39m - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+18:22:24.848 [restartedMain] [31mWARN [0;39m [36mo.s.s.c.a.web.builders.WebSecurity[0;39m - You are asking Spring Security to ignore Ant [pattern='/js/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead. 
+18:22:24.849 [restartedMain] [34mINFO [0;39m [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will not secure Ant [pattern='/js/**'] 
+18:22:24.888 [restartedMain] [34mINFO [0;39m [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1252e035, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@223fc58b, org.springframework.security.web.context.SecurityContextPersistenceFilter@58a8ccee, org.springframework.security.web.header.HeaderWriterFilter@34f34600, org.springframework.security.web.authentication.logout.LogoutFilter@5d9ef116, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7eac5e00, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6c0c1f9a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1fcd9bbd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c12aea7, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@1eaedcb5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@410b50e9, org.springframework.security.web.session.SessionManagementFilter@49637c6f, org.springframework.security.web.access.ExceptionTranslationFilter@414e65bc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1e30a5be] 
+18:22:24.930 [restartedMain] [31mWARN [0;39m [36mo.s.d.r.c.m.RepositoryCollectionResourceMapping[0;39m - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.EventRepository! Use @RepositoryRestResource instead! 
+18:22:24.931 [restartedMain] [31mWARN [0;39m [36mo.s.d.r.c.m.RepositoryCollectionResourceMapping[0;39m - @RestResource detected to customize the repository resource for se.kits.gakusei.user.repository.UserRepository! Use @RepositoryRestResource instead! 
+18:22:25.029 [restartedMain] [34mINFO [0;39m [36mo.s.b.a.w.s.WelcomePageHandlerMapping[0;39m - Adding welcome page template: index 
+18:22:25.348 [restartedMain] [34mINFO [0;39m [36mo.s.b.d.a.OptionalLiveReloadServer[0;39m - LiveReload server is running on port 35729 
+18:22:25.361 [restartedMain] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"] 
+18:22:25.362 [restartedMain] [31mWARN [0;39m [36mo.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext[0;39m - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use 
+18:22:25.367 [restartedMain] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default' 
+18:22:25.367 [restartedMain] [34mINFO [0;39m [36mo.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl[0;39m - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down' 
+18:22:25.658 [restartedMain] [31mWARN [0;39m [36mo.s.b.f.s.DisposableBeanAdapter[0;39m - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214] 
+18:22:25.658 [restartedMain] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown initiated... 
+18:22:25.659 [restartedMain] [34mINFO [0;39m [36mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown completed. 
+18:22:25.661 [restartedMain] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Pausing ProtocolHandler ["http-nio-127.0.0.1-8080"] 
+18:22:25.661 [restartedMain] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Stopping service [Tomcat] 
+18:22:25.662 [restartedMain] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Stopping ProtocolHandler ["http-nio-127.0.0.1-8080"] 
+18:22:25.662 [restartedMain] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Destroying ProtocolHandler ["http-nio-127.0.0.1-8080"] 
+18:22:25.666 [restartedMain] [34mINFO [0;39m [36mo.s.b.a.l.ConditionEvaluationReportLoggingListener[0;39m - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled. 
+18:22:25.675 [restartedMain] [1;31mERROR[0;39m [36mo.s.b.d.LoggingFailureAnalysisReporter[0;39m - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+ 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  13.982 s
+[INFO] Finished at: 2026-10-04T18:22:27+02:00
+[INFO] ------------------------------------------------------------------------

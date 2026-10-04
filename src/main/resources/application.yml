@@ -1,12 +1,13 @@
 logging:
-  file: log.txt
+  file:
+    name: log.txt
 spring:
   cache:
     type: none
 ---
 spring:
   profiles:
-    active: development
+    default: local
   data:
     rest:
       base-path: /api
@@ -20,12 +21,15 @@ gakusei:
 
 server:
   tomcat:
-    remote_ip_header: x-forwarded-for
-    protocol_header: x-forwarded-proto
+    remoteip:
+      remote-ip-header: x-forwarded-for
+      protocol-header: x-forwarded-proto
 ---
 
 spring:
-  profiles: development
+  config:
+    activate:
+      on-profile: development
   datasource:
     url: jdbc:h2:mem:gakusei:DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL;INIT=create schema if not exists CONTENTSCHEMA
     driver-class-name: org.h2.Driver
@@ -47,7 +51,9 @@ spring:
 ---
 
 spring:
-  profiles: postgres
+  config:
+    activate:
+      on-profile: postgres
   datasource:
     url: jdbc:postgresql://localhost:5432/gakusei
     username: gakusei
@@ -60,7 +66,9 @@ spring:
 ---
 
 spring:
-  profiles: enable-resource-caching
+  config:
+    activate:
+      on-profile: enable-resource-caching
   caching: true
   cache-ttl: 3600
   cache:
@@ -71,7 +79,9 @@ spring:
 ---
 
 spring:
-  profiles: heroku
+  config:
+    activate:
+      on-profile: heroku
   datasource:
     url: ${JDBC_DATABASE_URL}
 

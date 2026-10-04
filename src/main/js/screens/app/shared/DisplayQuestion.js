@@ -23,7 +23,7 @@ export class DisplayQuestion extends React.Component {
       } else {
         text += ` (${this.props.secondaryText})`;
       }
-    } else if (!this.props.japaneseCharacters && !/[a-z]/i.test(this.props.primaryText.toString().toLowerCase())) {
+    } else if (!this.props.japaneseCharacters && String(this.props.primaryText).includes(',') && !/[a-z]/i.test(String(this.props.primaryText).toLowerCase())) {
       text = `${this.props.primaryText.toString().split(',')[0]} 
        「${this.props.primaryText.toString().split(',')[1]}」`;
     }

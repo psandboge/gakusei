@@ -1,0 +1,157 @@
+
+> gakusei@2.1.1 precompile
+> npm run preflight && npm run prepare:assets
+
+
+> gakusei@2.1.1 preflight
+> node scripts/preflight.js
+
+
+> gakusei@2.1.1 prepare:assets
+> node scripts/updateVersionFromMavenPom.js && node scripts/generateFrontendLicenses.js && node scripts/copyBootstrap.js
+
+dummy package.json dependencies written to frontend_licenses.json: 0.101ms
+
+> gakusei@2.1.1 compile
+> webpack --mode development
+
+asset main.bundle.js 6.99 MiB [emitted] (name: main) 1 related asset
+asset ../../templates/index.html 609 bytes [compared for emit]
+runtime modules 2.23 KiB 10 modules
+orphan modules 2.48 KiB [orphan] 3 modules
+modules by path ./node_modules/ 5.33 MiB
+  javascript modules 5.27 MiB 1411 modules
+  json modules 62.9 KiB
+    modules by path ./node_modules/sanitize-html-react/node_modules/dom-serializer/ 32.8 KiB 5 modules
+    modules by path ./node_modules/sanitize-html-react/node_modules/entities/ 30 KiB 4 modules
+modules by path ./src/main/ 498 KiB
+  modules by path ./src/main/js/screens/app/ 316 KiB 37 modules
+  modules by path ./src/main/js/shared/ 111 KiB 10 modules
+  modules by path ./src/main/resources/ 58 KiB 6 modules
+  modules by path ./src/main/js/*.js 12.6 KiB 3 modules
+./vendor/react-toggle-button/lib/index.js 49.8 KiB [built] [code generated]
+readable-stream (ignored) 15 bytes [built] [code generated]
+
+WARNING in ./src/main/js/screens/app/AppScreen.js 27:0-48
+export 'AppProvider' (imported as 'AppProvider') was not found in '../../AppProvider' (possible exports: default)
+ @ ./src/main/js/screens/app/index.js 8:0-36 9:15-24
+ @ ./src/main/js/AppProvider.js 30:0-38 45:35-44
+ @ ./src/main/js/main.js 11:0-40 24:91-102
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 2, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:2:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+2 | @import 'elements/_base.scss';
+
+
+src/main/resources/static/css/style.scss 3:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 10:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 4, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:4:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+4 | @import 'components/_about-features.scss';
+
+
+src/main/resources/static/css/style.scss 5:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 10:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 5, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:5:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+5 | @import 'components/_answer-button.scss';
+
+
+src/main/resources/static/css/style.scss 6:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 10:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 6, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:6:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+6 | @import 'components/_copyright-information.scss';
+
+
+src/main/resources/static/css/style.scss 7:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 10:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 7, column 8 of file:///Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css/style.scss:7:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+7 | @import 'components/_exercise.scss';
+
+
+src/main/resources/static/css/style.scss 8:9  root stylesheet
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 10:0-44
+
+WARNING in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss)
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+27 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 10:0-44
+
+WARNING in ./node_modules/sax/lib/sax.js 197:13-37
+Module not found: Error: Can't resolve 'stream' in '/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/node_modules/sax/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "stream": require.resolve("stream-browserify") }'
+	- install 'stream-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "stream": false }
+ @ ./node_modules/xml2js/lib/parser.js 9:8-22
+ @ ./node_modules/xml2js/lib/xml2js.js 12:11-30
+ @ ./src/main/js/screens/app/screens/about/aboutScreen.js 26:0-28 74:6-24
+ @ ./src/main/js/screens/app/screens/about/index.js 8:0-40 9:15-26
+ @ ./src/main/js/AppProvider.js 31:0-54 116:21-32
+ @ ./src/main/js/main.js 11:0-40 24:91-102
+
+1 warning has detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
+
+ERROR in ./src/main/resources/static/css/style.scss (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/main/resources/static/css/style.scss) 5:36-102
+Module not found: Error: Can't resolve '/img/front_page/gakusei_background.svg' in '/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css'
+resolve '/img/front_page/gakusei_background.svg' in '/Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/resources/static/css'
+  using description file: /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/package.json (relative path: ./src/main/resources/static/css)
+    No description file found in /img/front_page or above
+    no extension
+      /img/front_page/gakusei_background.svg doesn't exist
+    as directory
+      /img/front_page/gakusei_background.svg doesn't exist
+    root path /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7
+      using description file: /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/package.json (relative path: ./img/front_page/gakusei_background.svg)
+        no extension
+          /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/img/front_page/gakusei_background.svg doesn't exist
+        as directory
+          /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/img/front_page/gakusei_background.svg doesn't exist
+ @ ./src/main/resources/static/css/style.scss 8:6-275 20:17-24 25:22-29 25:33-47 25:50-64 24:0-245 24:0-245
+ @ ./src/main/js/main.js 10:0-44
+
+webpack 5.111.1 compiled with 1 error and 8 warnings in 1610 ms

@@ -1,0 +1,74 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< se.kits.gakusei:gakusei >-----------------------
+[INFO] Building gakusei 2.1.1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] 1 problem was encountered while building the effective model for org.javassist:javassist:jar:3.20.0-GA during dependency collection step for project (use -X to see details)
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (toolchain) @ gakusei ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- license:1.10:download-licenses (download-licenses) @ gakusei ---
+[WARNING] POM for dependency javax.activation:javax.activation-api has a license URL that returns file not found: https://github.com/javaee/activation/blob/master/LICENSE.txt
+[WARNING] Unable to retrieve license for dependency: jakarta.annotation:jakarta.annotation-api
+[WARNING] https://www.gnu.org/software/classpath/license.html
+[WARNING] Server returned HTTP response code: 403 for URL: https://www.gnu.org/software/classpath/license.html
+[WARNING] Unable to retrieve license for dependency: ch.qos.logback:logback-classic
+[WARNING] http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+[WARNING] Connect timed out
+[WARNING] No license information available for: com.github.psandboge:japanese-grammar-utils
+[WARNING] Unable to retrieve license for dependency: jakarta.transaction:jakarta.transaction-api
+[WARNING] https://www.gnu.org/software/classpath/license.html
+[WARNING] Connect timed out
+[WARNING] Unable to retrieve license for dependency: ch.qos.logback:logback-core
+[WARNING] http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+[WARNING] Connect timed out
+[INFO] 
+[INFO] --- frontend:1.15.4:install-node-and-npm (install node and npm) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- frontend:1.15.4:npm (npm install) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- frontend:1.15.4:npm (npm compile) @ gakusei ---
+[INFO] Skipping execution.
+[INFO] 
+[INFO] --- resources:3.2.0:resources (default-resources) @ gakusei ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 2 resources
+[INFO] Copying 6897 resources
+[INFO] 
+[INFO] --- compiler:3.10.1:compile (default-compile) @ gakusei ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 80 source files to /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/target/classes
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/controller/LessonController.java: Some input files use or override a deprecated API.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/controller/LessonController.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/init/DataInit.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/init/DataInit.java: Recompile with -Xlint:unchecked for details.
+[INFO] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/config/ErrorHandler.java:[23,5] method does not override or implement a method from a supertype
+[ERROR] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/config/ErrorHandler.java:[37,17] incompatible types: boolean cannot be converted to org.springframework.boot.web.error.ErrorAttributeOptions
+[INFO] 2 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:17 min
+[INFO] Finished at: 2026-10-04T18:18:16+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project gakusei: Compilation failure: Compilation failure: 
+[ERROR] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/config/ErrorHandler.java:[23,5] method does not override or implement a method from a supertype
+[ERROR] /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/src/main/java/se/kits/gakusei/config/ErrorHandler.java:[37,17] incompatible types: boolean cannot be converted to org.springframework.boot.web.error.ErrorAttributeOptions
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

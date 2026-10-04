@@ -1,0 +1,15 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< se.kits.gakusei:gakusei >-----------------------
+[INFO] Building gakusei 2.1.1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- help:3.2.0:effective-pom (default-cli) @ gakusei ---
+[INFO] Effective-POM written to: /Users/pierresandboge/bin/slay/daigaku/rigs/gakusei/worktrees/gaku-5m7/verification/effective-pom.xml
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.163 s
+[INFO] Finished at: 2026-10-04T18:34:16+02:00
+[INFO] ------------------------------------------------------------------------
