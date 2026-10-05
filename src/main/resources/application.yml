@@ -61,18 +61,3 @@ spring:
     type: jcache
     jcache:
       config: classpath:ehcache.xml
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: heroku
-  datasource:
-    url: ${JDBC_DATABASE_URL}
-
-gakusei:
-  event-logging: false
-
----
-
