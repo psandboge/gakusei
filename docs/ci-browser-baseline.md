@@ -92,15 +92,21 @@ See `tests/lifecycle/README.md` for the private manifest/state protocol.
 ## Failure diagnostics and privacy
 
 The workflow's always-run, five-minute bounded fallback cleanup precedes
-collection. The collector derives backend Surefire counts, each owned run's exit
-status and phase completion into `artifacts/browser/diagnostics.json` and a safe
-summary log, plus a sanitized Surefire summary XML. Only suite names declared
-in the repository tests are retained. `diagnostics.png` is an offline Chromium screenshot of this scanned
-count/phase report, useful even after a failed journey. It never opens the app.
-Application screenshots, raw Surefire XML, runner HTML, traces, service logs,
-credentials, environment, browser storage and database exports stay private.
-This deliberately limits failure detail in downloadable evidence; maintainers
-can inspect private local reports without uploading them.
+collection. The collector derives source-validated backend and browser test IDs,
+actual statuses, closed safe cause categories and validated repository source
+locations into `artifacts/browser/diagnostics.json`, a summary log and sanitized
+Surefire XML. Harness checks distinguish readiness, SQL state, browser runner,
+handled termination and cleanup failures. A phase directory only proves it was
+started; phase success is recorded after runner and independent SQL checks pass.
+Missing older-run or prerequisite evidence is explicitly `unavailable`; CI step
+outcomes distinguish frontend/build failure from skipped dependent steps.
+`diagnostics.png` renders these same scanned structured facts offline in Chromium.
+It never opens the app. Source locations are retained when validated; unavailable
+locations are labelled. Test IDs must match static source declarations. Dynamic
+identifiers and all raw exception messages, learner values, headers, application
+screenshots, raw XML/runner HTML, traces, service logs, credentials, environment,
+browser storage and database exports stay private. Safe causes intentionally
+omit private payloads while identifying which check and boundary failed.
 
 The scan rejects synthetic markers, credential/header/manifest indicators,
 generated token patterns, exact learner credentials/nonces, foreign files and

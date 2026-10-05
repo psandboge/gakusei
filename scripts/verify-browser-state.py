@@ -242,6 +242,10 @@ class Run:
                         SPRING_PROFILES_ACTIVE='local-postgres', SERVER_ADDRESS='127.0.0.1',
                         SERVER_PORT=str(self.r['app_port']), GAKUSEI_DATA_INIT='false',
                         GAKUSEI_LOCAL_SEED='false', LOCAL_REMEMBER_ME_KEY=secrets.token_hex(24))
+        self.check_id = 'lifecycle'
+        self.phase_id = 'setup'
+        self.checks = []
+        self.phases = {}
         self.process = None
         self.learner = None
         self.app_started = False
@@ -249,6 +253,7 @@ class Run:
         print('OWNERSHIP=' + str(self.record), flush=True)
 
     def up(self):
+        self.check_id = 'database-readiness'
         for attempt in range(5):
             try:
                 with open(self.directory / 'compose.log', 'a') as log:
@@ -267,6 +272,7 @@ class Run:
                 atomic(self.record, self.r)
 
     def start(self, seed=False):
+        self.check_id = 'application-readiness'
         # Refuse occupied ports before launching; readiness never attaches to them.
         for attempt in range(5):
             try:
@@ -329,6 +335,9 @@ class Run:
             atomic(self.record, self.r)
 
     def phase(self, phase, runner):
+        self.phase_id = phase
+        self.check_id = 'browser-tests'
+        self.phases[phase] = 'unavailable'
         inspect_service(self.r, self.env)
         assert self.process and self.process.poll() is None
         output = self.directory / phase
@@ -341,7 +350,9 @@ class Run:
                    GAKUSEI_BROWSER_OUTPUT_DIR=str(output))
         process = subprocess.Popen(runner, cwd=ROOT, env=env, start_new_session=True)
         try:
-            assert process.wait(timeout=300) == 0, 'Browser phase failed'
+            exit_code = process.wait(timeout=300)
+            if exit_code:
+                raise subprocess.CalledProcessError(exit_code, runner)
         finally:
             if process.poll() is None:
                 os.killpg(process.pid, signal.SIGTERM)
@@ -350,6 +361,8 @@ class Run:
                 except subprocess.TimeoutExpired:
                     os.killpg(process.pid, signal.SIGKILL)
                     process.wait(timeout=5)
+        self.checks.append(dict(check='browser-tests', phase=phase, status='passed', cause='none'))
+        self.check_id = 'durable-state'
         state_path = self.directory / 'learner.json'
         assert state_path.stat().st_mode & 0o077 == 0, 'Learner state must be private'
         state = json.loads(state_path.read_text())
@@ -360,7 +373,10 @@ class Run:
         deadline = time.monotonic() + 15
         while True:
             try:
-                return learner_state(self.r, self.env, state)
+                snapshot = learner_state(self.r, self.env, state)
+                self.phases[phase] = 'passed'
+                self.checks.append(dict(check='durable-state', phase=phase, status='passed', cause='none'))
+                return snapshot
             except AssertionError:
                 if time.monotonic() >= deadline:
                     raise
@@ -391,17 +407,21 @@ def run(mode, args):
                        '-Dlogging.file.name=' + str(lifecycle.directory / 'backend-private.log')]
             # Only Maven goals and non-Spring build options may be supplied.
             assert all(a in ('test', 'verify', '-Dskip.frontend=true') for a in args), 'Only full backend test goals and skip.frontend are allowed'
+            lifecycle.check_id = 'backend-tests'
+            lifecycle.phase_id = 'backend'
             command(['./mvnw'] + (args or ['-Dskip.frontend=true', 'test']) + options,
                     lifecycle.env, timeout=600)
         else:
             runner = args or ['npx', '--no-install', 'playwright', 'test']
             lifecycle.start()
+            lifecycle.check_id = 'fresh-state'
             fresh = content(lifecycle.r, lifecycle.env)
             assert fresh['migrations'] > 0 and fresh['seed'] == 0
             assert fresh['users'] == fresh['nuggets'] == fresh['lessons'] == 0
             atomic(lifecycle.directory / 'fresh.json', fresh)
             lifecycle.stop()
             lifecycle.start(seed=True)
+            lifecycle.check_id = 'seed-fixture'
             assert fixture(lifecycle.r, lifecycle.env)['nuggets']
             lifecycle.stop()
             lifecycle.start()
@@ -412,19 +432,42 @@ def run(mode, args):
             command(compose(lifecycle.r) + ['restart', 'postgres'], lifecycle.env)
             command(compose(lifecycle.r) + ['up', '-d', '--wait', '--wait-timeout', '75'], lifecycle.env)
             lifecycle.start()
-            assert lifecycle.phase('after-restart', runner) == before
+            restarted = lifecycle.phase('after-restart', runner)
+            lifecycle.check_id = 'restart-state'
+            assert restarted == before
             assert content(lifecycle.r, lifecycle.env) == seeded
             lifecycle.stop()
             lifecycle.start(seed=True)
             lifecycle.stop()
             lifecycle.start()
-            assert lifecycle.phase('after-reseed', runner) == before
+            reseeded = lifecycle.phase('after-reseed', runner)
+            lifecycle.check_id = 'reseed-state'
+            assert reseeded == before
             assert content(lifecycle.r, lifecycle.env) == seeded
             atomic(lifecycle.directory / 'proof.json', dict(fresh=fresh, seeded=seeded, phases=3))
             print('PASS fresh migration, explicit seed, same-learner restart/reseed and phase state', flush=True)
     except SystemExit as exc:
         code = int(exc.code)
+        lifecycle.checks.append(dict(check=lifecycle.check_id, phase=lifecycle.phase_id,
+                                     status='interrupted', cause='handled-termination'))
+        if lifecycle.phase_id in ('journey', 'after-restart', 'after-reseed'):
+            lifecycle.phases[lifecycle.phase_id] = 'interrupted'
     except Exception as exc:
+        cause = 'check-failed'
+        if isinstance(exc, AssertionError):
+            cause = 'sql-state-mismatch' if lifecycle.check_id in ('durable-state', 'fresh-state', 'restart-state', 'reseed-state') else 'assertion-failed'
+        elif isinstance(exc, subprocess.TimeoutExpired):
+            cause = 'timeout'
+        elif isinstance(exc, subprocess.CalledProcessError):
+            cause = 'command-failed'
+        if lifecycle.check_id in ('application-readiness', 'database-readiness'):
+            cause = 'readiness-failed'
+        frames = traceback.extract_tb(exc.__traceback__)
+        source = next((f for f in reversed(frames) if f.filename == __file__), None)
+        lifecycle.checks.append(dict(check=lifecycle.check_id, phase=lifecycle.phase_id, status='failed',
+                                     cause=cause, location=dict(file='scripts/verify-browser-state.py', line=source.lineno) if source else None))
+        if lifecycle.phase_id in ('journey', 'after-restart', 'after-reseed'):
+            lifecycle.phases[lifecycle.phase_id] = 'failed'
         # Do not print command/environment exceptions containing credentials.
         (lifecycle.directory / 'error-private.txt').write_text(traceback.format_exc())
         print('FAIL ' + type(exc).__name__ + '; private evidence: ' + str(lifecycle.directory), file=sys.stderr)
@@ -433,10 +476,12 @@ def run(mode, args):
         try:
             lifecycle.stop()
             cleanup(lifecycle.record)
+            lifecycle.checks.append(dict(check='owned-cleanup', phase='cleanup', status='passed', cause='none'))
         except Exception as exc:
+            lifecycle.checks.append(dict(check='owned-cleanup', phase='cleanup', status='failed', cause='cleanup-failed'))
             print('FAIL cleanup: ' + type(exc).__name__, file=sys.stderr)
             code = code or 1
-        atomic(lifecycle.directory / 'result.json', {'exit_code': code, 'project': lifecycle.r['project']})
+        atomic(lifecycle.directory / 'result.json', {'exit_code': code, 'project': lifecycle.r['project'], 'checks': lifecycle.checks, 'phases': lifecycle.phases})
     return code
 
 

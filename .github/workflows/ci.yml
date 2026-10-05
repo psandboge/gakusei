@@ -18,29 +18,41 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Install pinned Linux tools
+        id: tools
         run: bash scripts/install-ci-tools.sh
       - name: Clean dependencies
+        id: dependencies
         run: npm ci
       - name: Toolchain preflight
+        id: preflight
         run: npm run preflight
       - name: Frontend tests
+        id: frontend
         run: npm test
       - name: Independent PostgreSQL backend tests
+        id: backend
         run: bash scripts/test-postgres.sh -Dskip.frontend=true test
       - name: Production package
+        id: build
         run: ./mvnw -Pproduction -DskipTests package
       - name: Chromium and Linux dependencies
+        id: chromium
         run: npx --no-install playwright install --with-deps chromium
       - name: Owned browser journey, restart and reseed
+        id: browser
         run: npm run test:browser
       - name: Collector privacy regression tests
+        id: privacy_tests
         run: python3 scripts/test-ci-artifacts.py
       - name: Bounded exact ownership cleanup
+        id: cleanup
         if: always()
         timeout-minutes: 5
         run: python3 scripts/collect-ci-artifacts.py cleanup
       - name: Collect and validate private diagnostics
         id: privacy
+        env:
+          CI_PHASE_RESULTS: ${{ toJSON(steps) }}
         if: always()
         timeout-minutes: 2
         run: python3 scripts/collect-ci-artifacts.py collect
