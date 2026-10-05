@@ -36,6 +36,9 @@ attributes; its public fallback is retained explicitly. Documentation remains
 public as measured on the baseline. Admin reads still return 401 anonymously,
 403 for ordinary learners and 200 for admins. JS bypass, same-origin frames,
 BCrypt, Basic, session persistence, form login and keyed remember-me remain.
+Authentication filters explicitly save to a shared request/session repository;
+Basic also saves there to preserve its baseline session behavior. Read-only
+responses do not automatically resave authentication after logout.
 Registration returns 201 without authenticating; the frontend then calls `/auth`
 for its 200 success or 403 failure. Logout returns 204 for the tested non-HTML
 client and clears login state. The inactive CSRF cookie repository is removed;

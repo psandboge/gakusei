@@ -12,6 +12,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.context.DelegatingSecurityContextRepository;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
+import org.springframework.security.web.context.SecurityContextRepository;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
@@ -39,6 +43,8 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider provider) throws Exception {
+        SecurityContextRepository contexts = new DelegatingSecurityContextRepository(
+            new RequestAttributeSecurityContextRepository(), new HttpSessionSecurityContextRepository());
         http.authenticationProvider(provider)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/registeruser", "/registeruser/", "/username", "/username/",
@@ -50,11 +56,13 @@ public class SecurityConfiguration {
             .formLogin(form -> form.loginPage("/").loginProcessingUrl("/auth")
                 .failureHandler(new CustomAuthenticationFailureHandler())
                 .successHandler(new CustomAuthenticationSuccessHandler()).permitAll())
-            .httpBasic(basic -> {})
+            .httpBasic(basic -> basic.securityContextRepository(contexts))
             .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
             // The old cookie token repository was followed by csrf().disable().
             .csrf(csrf -> csrf.disable())
-            .securityContext(context -> context.requireExplicitSave(false))
+            // Authentication filters save explicitly; a late read-only response
+            // must not recreate an authenticated session after logout.
+            .securityContext(context -> context.requireExplicitSave(true).securityContextRepository(contexts))
             .logout(logout -> logout.logoutSuccessUrl("/").deleteCookies("JSESSIONID"))
             .rememberMe(remember -> remember.key(rememberMeKey));
         return http.build();

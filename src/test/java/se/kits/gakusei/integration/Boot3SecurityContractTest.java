@@ -70,4 +70,13 @@ public class Boot3SecurityContractTest {
         assertEquals(204, request(client, "/logout", "", null).statusCode());
         assertTrue(request(client, "/username", null, null).body().contains("\"loggedIn\":false"));
     }
+
+    @Test public void basicAuthenticationPersistsInSessionUntilLogout() throws Exception {
+        CookieManager cookies = new CookieManager(null, CookiePolicy.ACCEPT_ALL);
+        HttpClient client = HttpClient.newBuilder().cookieHandler(cookies).build();
+        assertTrue(request(client, "/username", null, "pieru:gakusei").body().contains("\"loggedIn\":true"));
+        assertTrue(request(client, "/username", null, null).body().contains("\"loggedIn\":true"));
+        assertEquals(204, request(client, "/logout", "", null).statusCode());
+        assertTrue(request(client, "/username", null, null).body().contains("\"loggedIn\":false"));
+    }
 }
