@@ -50,7 +50,10 @@ an NPE in denial dispatch. Framework 6 missing-resource errors retain the previo
 `No message available` body. Missing-parameter errors retain the detailed
 parameter/type message instead of the new shortened ErrorResponse detail. `Boot3SecurityContractTest` measures both statuses
 and error bodies, sessions, new remember-me cookies, registration and logout.
-The same matrix is also executed against the frozen Boot 2 source.
+The same matrix is also executed against the frozen Boot 2 source, including
+a denied admin read followed by logout. Browser logout checks await the POST
+response before probing identity, so the probe cannot replay a remember-me
+cookie while its deletion is still in flight; the anonymous assertion remains.
 
 `Boot3LearningContractTest` exercises real vocabulary/kanji shapes, quiz
 alternatives/image references, grammar inflection, drawing JSON/timestamp storage
