@@ -3,8 +3,8 @@ package se.kits.gakusei.controller;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import se.kits.gakusei.util.LessonHandler;
 import se.kits.gakusei.util.ProgressHandler;
 
 @RestController
-@Api(value="LessonController", description="Operations for handling lessons")
+@Tag(name="LessonController", description="Operations for handling lessons")
 public class LessonController {
     private Logger logger = LoggerFactory.getLogger(LessonController.class);
 
@@ -50,9 +50,9 @@ public class LessonController {
     @Autowired
     private ProgressHandler progressHandler;
 
-    @ApiOperation(value="Getting all the lessons", response = ResponseEntity.class)
+    @Operation(summary="Getting all the lessons")
     @RequestMapping(value = "/api/lessons", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<List<Lesson>> getLessons(@RequestParam(value = "lessonType") String lessonType) {
 
         if (lessonType.equals("grammar")) {
@@ -64,9 +64,9 @@ public class LessonController {
         return new ResponseEntity<>(lessonHandler.getLessonsWithEnoughNuggets(), HttpStatus.OK);
     }
 
-    @ApiOperation(value="Getting info about a question", response = ResponseEntity.class)
+    @Operation(summary="Getting info about a question")
     @RequestMapping(value = "/api/lessonInfo", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<HashMap<String, HashMap<String, Integer>>> getQuestionInfo(
             @RequestParam(name = "lessonType", defaultValue = "guess") String lessonType,
             @RequestParam(name = "username") String username)
@@ -75,9 +75,9 @@ public class LessonController {
         return new ResponseEntity<>(values, HttpStatus.OK);
     }
 
-    @ApiOperation(value="Getting the wrong count", response = ResponseEntity.class)
+    @Operation(summary="Getting the wrong count")
     @RequestMapping(value = "/api/lessons/incorrectcount", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<HashMap<String, Integer>> getIncorrectCount(
             @RequestParam(name = "lessonType", defaultValue = "guess") String lessonType,
             @RequestParam(name = "username") String username)
@@ -86,11 +86,11 @@ public class LessonController {
         return new ResponseEntity<>(progressHandler.getWrongCount(username), HttpStatus.OK);
     }
 
-    @ApiOperation(value="Getting lessons marked as favorite", response = ResponseEntity.class)
+    @Operation(summary="Getting lessons marked as favorite")
     @RequestMapping(
             value = "/api/lessons/favorite",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+            produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<FavoriteLesson> getFavoriteLesson(
             @RequestParam(value = "lessonType", required = false) String lessonType,

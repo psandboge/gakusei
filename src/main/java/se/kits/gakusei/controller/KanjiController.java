@@ -3,8 +3,8 @@ package se.kits.gakusei.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ import se.kits.gakusei.content.repository.LessonRepository;
 import se.kits.gakusei.util.KanjiHandler;
 
 @RestController
-@Api(value="KanjiController", description="Operations for handling kanjis")
+@Tag(name="KanjiController", description="Operations for handling kanjis")
 public class KanjiController {
     @Value("${gakusei.kanji-quantity}")
     private int quantity;
@@ -41,11 +41,11 @@ public class KanjiController {
         this.kanjiRepository = kanjiRepository;
     }
 
-    @ApiOperation(value="Getting kanji questions from a lesson", response = ResponseEntity.class)
+    @Operation(summary="Getting kanji questions from a lesson")
     @RequestMapping(
         value = "/api/questions/kanji",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     ResponseEntity<List<HashMap<String, Object>>> getKanjiQuestionsFromLesson(
         @RequestParam(value = "lessonName")
@@ -67,11 +67,11 @@ public class KanjiController {
         ) : new ResponseEntity<>(questions, HttpStatus.OK);
     }
 
-    @ApiOperation(value="Getting kanji questions that a user has answered incorrectly", response = ResponseEntity.class)
+    @Operation(summary="Getting kanji questions that a user has answered incorrectly")
     @RequestMapping(
             value = "/api/wrongquestions/kanji",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+            produces = "application/json;charset=UTF-8"
     )
     ResponseEntity<List<HashMap<String, Object>>> createWrongAnswersQuestions(
             @RequestParam(value = "userName") String userName){

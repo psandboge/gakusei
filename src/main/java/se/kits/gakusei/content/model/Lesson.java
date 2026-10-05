@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -91,14 +91,14 @@ import org.hibernate.annotations.FetchMode;
 public class Lesson implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @ApiModelProperty(notes="the database generated lesson id")
+    @Schema(description="the database generated lesson id")
     private Long id;
 
     @Column(nullable = false, unique = true)
-    @ApiModelProperty(notes="the lesson name")
+    @Schema(description="the lesson name")
     private String name;
 
-    @ApiModelProperty(notes="the lesson description")
+    @Schema(description="the lesson description")
     private String description;
 
     //@JsonManagedReference(value = "lessonnugget")

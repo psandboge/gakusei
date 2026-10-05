@@ -1,13 +1,13 @@
 package se.kits.gakusei.content.model;
 
 import com.fasterxml.jackson.annotation.*;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @JsonIdentityInfo(
@@ -17,10 +17,10 @@ import javax.persistence.*;
 @Table(name = "nuggets", schema = "contentschema")
 public class Nugget implements Serializable {
     @Id
-    @ApiModelProperty(notes="the nugget id")
+    @Schema(description="the nugget id")
     private String id = UUID.randomUUID().toString();
 
-    @ApiModelProperty(notes="the nugget description")
+    @Schema(description="the nugget description")
     private String description;
 
     private boolean hidden = false;

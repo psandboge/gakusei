@@ -1,20 +1,20 @@
 package se.kits.gakusei.content.model;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "word_types", schema = "contentschema")
 public class WordType implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @ApiModelProperty(notes="the database generated word type id")
+    @Schema(description="the database generated word type id")
     private Long id;
 
-    @ApiModelProperty(notes="the type")
+    @Schema(description="the type")
     @Column(nullable = false, unique = true)
     private String type;
 

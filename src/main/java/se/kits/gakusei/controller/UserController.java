@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
@@ -23,7 +23,7 @@ import se.kits.gakusei.user.model.User;
 import se.kits.gakusei.user.repository.UserRepository;
 
 @RestController
-@Api(value = "UserController", description = "Operations for handling users")
+@Tag(name="UserController", description = "Operations for handling users")
 public class UserController {
     @Autowired
     private UserRepository ur;
@@ -36,12 +36,12 @@ public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-/*    @ApiOperation(value="Creating a user", response = ResponseEntity.class)
+/*    @Operation(summary="Creating a user")
     @RequestMapping(
         value = "/api/users",
         method = RequestMethod.POST,
-        consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        consumes = "application/json;charset=UTF-8",
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<User> createUser(
         @RequestBody
@@ -53,11 +53,11 @@ public class UserController {
         return new ResponseEntity<User>(ur.save(user), HttpStatus.CREATED);
     }*/
 
-    @ApiOperation(value = "Getting all the users", response = ResponseEntity.class)
+    @Operation(summary="Getting all the users")
     @RequestMapping(
             value = "/api/users",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+            produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Iterable<User>> getUsers() {
         Iterable<User> users = ur.findAll();
@@ -66,11 +66,11 @@ public class UserController {
         ) : new ResponseEntity<Iterable<User>>(users, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Getting the current username", response = ResponseEntity.class)
+    @Operation(summary="Getting the current username")
     @RequestMapping(
             value = "/username",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+            produces = "application/json;charset=UTF-8"
     )
     @ResponseBody
     public Map<String, Object> currentUserName(Authentication authentication) {

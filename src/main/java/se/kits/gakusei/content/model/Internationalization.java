@@ -1,6 +1,6 @@
 package se.kits.gakusei.content.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity

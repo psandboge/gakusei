@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ import se.kits.gakusei.util.LessonHandler;
 import se.kits.gakusei.util.ProgressHandler;
 
 @RestController
-@Api(value="EventController", description="Operations for handling events")
+@Tag(name="EventController", description="Operations for handling events")
 public class EventController {
     private Logger logger = LoggerFactory.getLogger(EventController.class);
 
@@ -61,11 +61,11 @@ public class EventController {
     @Value("${gakusei.event-logging}")
     private boolean eventLogging;
 
-    @ApiOperation(value="Getting all the events", response = ResponseEntity.class)
+    @Operation(summary="Getting all the events")
     @RequestMapping(
             value = "/api/events",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+            produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Iterable<Event>> getEvents() {
         Iterable events = eventRepository.findAll();
@@ -74,12 +74,12 @@ public class EventController {
         ) : new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
-    @ApiOperation(value="Add an event", response = ResponseEntity.class)
+    @Operation(summary="Add an event")
     @RequestMapping(
             value = "/api/events2",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            consumes = "application/json;charset=UTF-8",
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<Event> addEvents(@RequestBody EventDTO[] eventDTOs) {
 
         for (EventDTO eventDTO : eventDTOs) {
@@ -93,12 +93,12 @@ public class EventController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ApiOperation(value="Add an event", response = ResponseEntity.class)
+    @Operation(summary="Add an event")
     @RequestMapping(
             value = "/api/events",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            consumes = "application/json;charset=UTF-8",
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<Event> addEvent(@RequestBody EventDTO eventDTO) {
         if (!eventLogging) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

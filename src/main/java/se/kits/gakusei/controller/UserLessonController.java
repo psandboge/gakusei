@@ -3,8 +3,8 @@ package se.kits.gakusei.controller;
 import java.sql.Timestamp;
 import java.util.List;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ import se.kits.gakusei.user.model.User;
 import se.kits.gakusei.user.repository.UserRepository;
 
 @RestController
-@Api(value="UserLessonController", description="Operations for handling user lessons")
+@Tag(name="UserLessonController", description="Operations for handling user lessons")
 public class UserLessonController {
     @Autowired
     private UserLessonRepository userLessonRepository;
@@ -32,9 +32,9 @@ public class UserLessonController {
     @Autowired
     private LessonRepository lessonRepository;
 
-    @ApiOperation(value="Get a users lessons", response = ResponseEntity.class)
+    @Operation(summary="Get a users lessons")
     @RequestMapping(value = "/api/userLessons", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<List<UserLesson>> getUserLesson(@RequestParam(value = "username") String username) {
 
         List<UserLesson> userLessons = userLessonRepository.findUsersStarredLessons(username);
@@ -43,12 +43,12 @@ public class UserLessonController {
         return new ResponseEntity<>(userLessons, HttpStatus.OK);
     }
 
-    @ApiOperation(value="Add a lesson to a user", response = ResponseEntity.class)
+    @Operation(summary="Add a lesson to a user")
     @RequestMapping(
         value = "/api/userLessons/add",
         method = RequestMethod.POST,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
-        consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8",
+        consumes = "application/json;charset=UTF-8"
     )
     public ResponseEntity<UserLesson> addUserLesson(
             @RequestParam(value = "lessonName") String lessonName,
@@ -60,9 +60,9 @@ public class UserLessonController {
         return new ResponseEntity<UserLesson>(userLessonRepository.save(userLesson), HttpStatus.OK);
     }
 
-    @ApiOperation(value="Remove a lesson from a user", response = ResponseEntity.class)
+    @Operation(summary="Remove a lesson from a user")
     @RequestMapping(value = "/api/userLessons/remove", method = RequestMethod.DELETE,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<UserLesson> removeUserLesson(
         @RequestParam(value = "lessonName") String lessonName,
         @RequestParam(value = "username") String username)
@@ -72,9 +72,9 @@ public class UserLessonController {
         return new ResponseEntity<UserLesson>(HttpStatus.OK);
     }
 
-    @ApiOperation(value="Set a first deadline for a users lesson", response = ResponseEntity.class)
+    @Operation(summary="Set a first deadline for a users lesson")
     @RequestMapping(value = "/api/userLessons/setFirstDeadline", method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<UserLesson> setFirstDeadlineToUserLesson(@RequestBody DeadlineDTO deadlineDTO) {
 
         List<UserLesson> userLessons = userLessonRepository.findUserLessonByUsernameAndLessonName(
@@ -85,9 +85,9 @@ public class UserLessonController {
         return new ResponseEntity<UserLesson>(HttpStatus.OK);
     }
 
-    @ApiOperation(value="Set a second deadline for a users lesson", response = ResponseEntity.class)
+    @Operation(summary="Set a second deadline for a users lesson")
     @RequestMapping(value = "/api/userLessons/setSecondDeadline", method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<UserLesson> setSecondDeadlineToUserLesson(@RequestBody DeadlineDTO deadlineDTO) {
 
         List<UserLesson> userLessons = userLessonRepository.findUserLessonByUsernameAndLessonName(

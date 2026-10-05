@@ -1,24 +1,24 @@
 package se.kits.gakusei.content.model;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "quiz", schema = "contentschema")
 public class Quiz implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @ApiModelProperty(notes="the database generated quiz id")
+    @Schema(description="the database generated quiz id")
     private long id;
 
     @Column(nullable = false, unique = true)
-    @ApiModelProperty(notes="the quiz name")
+    @Schema(description="the quiz name")
     private String name;
 
-    @ApiModelProperty(notes="the quiz description")
+    @Schema(description="the quiz description")
     private String description;
 
     private String learningLanguage;

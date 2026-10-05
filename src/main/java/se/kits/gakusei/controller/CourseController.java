@@ -1,7 +1,7 @@
 package se.kits.gakusei.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,16 +15,16 @@ import se.kits.gakusei.content.model.Course;
 import se.kits.gakusei.content.repository.CourseRepository;
 
 @RestController
-@Api(value="UserController", description="Operations for handling users")
+@Tag(name="UserController", description="Operations for handling users")
 public class CourseController {
     @Autowired
     CourseRepository courseRepository;
 
-    @ApiOperation(value="Getting all courses", response = ResponseEntity.class)
+    @Operation(summary="Getting all courses")
     @RequestMapping(
         value = "api/courses",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Iterable<Course>> getAllCourses() {
         Iterable courses = courseRepository.findAll();
@@ -36,11 +36,11 @@ public class CourseController {
         }
     }
 
-    @ApiOperation(value="Getting one course with a specific id", response = ResponseEntity.class)
+    @Operation(summary="Getting one course with a specific id")
     @RequestMapping(
         value = "api/courses/{courseID}",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Course> getCourseByID(
         @PathVariable(value = "courseID")
@@ -51,11 +51,11 @@ public class CourseController {
         return createResponseEntity(course);
     }
 
-    @ApiOperation(value="Getting one course with a specific name", response = ResponseEntity.class)
+    @Operation(summary="Getting one course with a specific name")
     @RequestMapping(
         value = "api/courses/{courseName}",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Course> getCourseByName(
         @PathVariable(value = "courseName")
@@ -66,11 +66,11 @@ public class CourseController {
         return createResponseEntity(course);
     }
 
-    @ApiOperation(value="Getting one course with a specific course code", response = ResponseEntity.class)
+    @Operation(summary="Getting one course with a specific course code")
     @RequestMapping(
         value = "api/courses/{courseCode}",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Course> getCourseByCode(
         @PathVariable(value = "courseCode")

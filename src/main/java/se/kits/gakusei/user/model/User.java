@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -22,17 +22,17 @@ public class User implements Serializable {
 
     @Id
     @JsonProperty(value = "username")
-    @ApiModelProperty(notes="the user id")
+    @Schema(description="the user id")
     @Size(min= 2, max = 32, message = "username must be 2-32 characters")
     private String username;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY, value = "password")
-    @ApiModelProperty(notes="the user password")
+    @Schema(description="the user password")
     private String password;
 
     @Column(name = "userrole")
     @JsonProperty(value = "role")
-    @ApiModelProperty(notes="the user role")
+    @Schema(description="the user role")
     private String role;
 
     @Fetch(value = FetchMode.SUBSELECT)

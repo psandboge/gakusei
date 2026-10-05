@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -16,14 +16,14 @@ import org.hibernate.annotations.FetchMode;
 public class Course implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @ApiModelProperty(notes="the database generated course id")
+    @Schema(description="the database generated course id")
     private Long id;
 
     @Column(nullable = false, unique = true)
-    @ApiModelProperty(notes="the course name")
+    @Schema(description="the course name")
     private String name;
 
-    @ApiModelProperty(notes="the course description")
+    @Schema(description="the course description")
     private String description;
 
     @JoinColumn(name = "parent_ref")
@@ -47,11 +47,11 @@ public class Course implements Serializable {
     @ManyToMany
     private List<Course> prerequisites;
 
-    @ApiModelProperty(notes="the course order")
+    @Schema(description="the course order")
     private int courseOrder;
 
     @Column(nullable = false, unique = true)
-    @ApiModelProperty(notes="the course code")
+    @Schema(description="the course code")
     private String courseCode;
 
     @Fetch(value = FetchMode.SUBSELECT)

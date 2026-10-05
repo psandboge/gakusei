@@ -41,6 +41,11 @@ jobs:
       - name: Owned browser journey, restart and reseed
         id: browser
         run: npm run test:browser
+      - name: Lifecycle and browser ownership guards
+        run: |
+          python3 tests/lifecycle/check.py
+          node tests/browser/check-guards.js
+          python3 tests/lifecycle/upgrade-guards.py
       - name: Collector privacy regression tests
         id: privacy_tests
         run: python3 scripts/test-ci-artifacts.py
@@ -64,3 +69,55 @@ jobs:
           path: artifacts/browser/
           retention-days: 14
           if-no-files-found: error
+  boot3-upgrade:
+    needs: regression
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install pinned Linux tools
+        run: bash scripts/install-ci-tools.sh
+      - name: Build immutable Boot 2 fixture
+        run: |
+          git worktree add --detach .tools/boot2-fixture 9d614c2506d5e58ad3a8343a92dc7d87f9fde1c4
+          cd .tools/boot2-fixture
+          test "$(git rev-parse HEAD)" = 9d614c2506d5e58ad3a8343a92dc7d87f9fde1c4
+          npm ci
+          npm run preflight
+          bash scripts/test-postgres.sh -Dskip.frontend=true test
+          ./mvnw -Pproduction -DskipTests package
+      - name: Build candidate after regression proof
+        run: |
+          npm ci
+          npm run preflight
+          ./mvnw -Pproduction -DskipTests package
+      - name: Fresh and populated Boot 2 upgrade proof
+        timeout-minutes: 15
+        run: >-
+          bash scripts/test-boot3-upgrade.sh
+          --baseline-jar "$GITHUB_WORKSPACE/.tools/boot2-fixture/target/gakusei.jar"
+          --candidate-jar "$GITHUB_WORKSPACE/target/gakusei.jar"
+          --baseline-sha 9d614c2506d5e58ad3a8343a92dc7d87f9fde1c4
+      - name: Upgrade fail-closed and interrupted cleanup proof
+        timeout-minutes: 10
+        run: |
+          python3 tests/lifecycle/upgrade-guards.py
+          python3 tests/lifecycle/upgrade-interrupt.py "$GITHUB_WORKSPACE/.tools/boot2-fixture/target/gakusei.jar" "$GITHUB_WORKSPACE/target/gakusei.jar"
+      - name: Unconditional exact owned cleanup
+        if: always()
+        timeout-minutes: 5
+        run: |
+          cleanup_status=0
+          python3 scripts/verify-boot3-upgrade.py --cleanup || cleanup_status=1
+          python3 scripts/collect-ci-artifacts.py cleanup || cleanup_status=1
+          if test -d .tools/boot2-fixture; then
+            (cd .tools/boot2-fixture && python3 scripts/collect-ci-artifacts.py cleanup) || cleanup_status=1
+          fi
+          exit "$cleanup_status"

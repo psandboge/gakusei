@@ -1,27 +1,27 @@
 package se.kits.gakusei.content.model;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "announcements", schema = "public")
 public class Announcement implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @ApiModelProperty(notes="the database generated announcement id")
+    @Schema(description="the database generated announcement id")
     private Long id;
 
     @Column(nullable = false)
-    @ApiModelProperty(notes="the start date of the announcement")
+    @Schema(description="the start date of the announcement")
     private Timestamp startDate;
 
     @Column(nullable = false)
-    @ApiModelProperty(notes="the end date of the announcement")
+    @Schema(description="the end date of the announcement")
     private Timestamp endDate;
 
     @Column

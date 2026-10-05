@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Owned browser lifecycle and allowlisted SQL proof. See tests/lifecycle/README.md."""
 import collections
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -271,7 +272,20 @@ class Run:
                 self.env['SPRING_DATASOURCE_URL'] = f"jdbc:postgresql://127.0.0.1:{self.r['db_port']}/gakusei_browser"
                 atomic(self.record, self.r)
 
-    def start(self, seed=False):
+    def start(self, seed=False, jar_path=None, profiles="local-postgres"):
+        assert profiles in ("local-postgres", "upgrade-seed-refusal"), "Only owned fixture profiles allowed"
+        # Optional immutable production jar for cross-version upgrade proof. The
+        # default and ownership-record validation remain unchanged.
+        jar = ROOT / 'target/gakusei.jar' if jar_path is None else Path(jar_path)
+        assert jar.is_absolute() and jar.is_file() and not jar.is_symlink(), 'Absolute immutable jar required'
+        digest = hashlib.sha256(jar.read_bytes()).hexdigest()
+        hashes = self.r.setdefault('jar_hashes', {})
+        assert hashes.get(str(jar), digest) == digest, 'Jar changed across restart'
+        hashes[str(jar)] = digest
+        with zipfile.ZipFile(jar) as archive:
+            assert any(n.startswith('BOOT-INF/classes/static/js/') and n.endswith('.js')
+                       for n in archive.namelist()), 'Production jar required'
+        atomic(self.record, self.r)
         self.check_id = 'application-readiness'
         # Refuse occupied ports before launching; readiness never attaches to them.
         for attempt in range(5):
@@ -292,9 +306,9 @@ class Run:
         env = dict(self.env, GAKUSEI_LOCAL_SEED=str(seed).lower())
         log_path = self.directory / (('seed-' if seed else 'app-') + secrets.token_hex(4) + '.log')
         log = open(log_path, 'w')
-        self.process = subprocess.Popen(['java', '-jar', str(ROOT / 'target/gakusei.jar'),
+        self.process = subprocess.Popen(['java', '-jar', str(jar),
             '--spring.config.location=classpath:/application.yml',
-            '--spring.profiles.active=local-postgres', '--server.address=127.0.0.1',
+            '--spring.profiles.active=' + profiles, '--server.address=127.0.0.1',
             '--server.port=' + str(self.r['app_port']), '--gakusei.data-init=false',
             '--logging.file.name=' + str(self.directory / 'spring-private.log'),
             '--gakusei.local-seed=' + str(seed).lower()], cwd=ROOT, env=env, stdout=log, stderr=log)

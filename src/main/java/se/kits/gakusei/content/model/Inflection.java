@@ -6,8 +6,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Generated;
-import javax.persistence.*;
+import javax.annotation.processing.Generated;
+import jakarta.persistence.*;
 
 import se.sandboge.japanese.conjugation.Verb;
 

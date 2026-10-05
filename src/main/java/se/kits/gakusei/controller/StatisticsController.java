@@ -1,7 +1,7 @@
 package se.kits.gakusei.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ import se.kits.gakusei.user.repository.EventRepository;
 import se.kits.gakusei.user.repository.UserRepository;
 
 @RestController
-@Api(value="StatisticsController", description="Operations for handling statistics")
+@Tag(name="StatisticsController", description="Operations for handling statistics")
 public class StatisticsController {
     @Autowired
     UserRepository userRepository;
@@ -24,11 +24,11 @@ public class StatisticsController {
     @Autowired
     EventRepository eventRepository;
 
-    @ApiOperation(value="Get succes rate from a user", response = ResponseEntity.class)
+    @Operation(summary="Get succes rate from a user")
     @RequestMapping(
         value = "/api/statistics/{user}",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Integer> getSuccessRate(
         @PathVariable("user")

@@ -1,6 +1,6 @@
 package se.kits.gakusei.controller;
 
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,14 +13,14 @@ import se.kits.gakusei.content.model.Settings;
 import se.kits.gakusei.content.repository.SettingsRepository;
 
 @RestController
-@Api(value="SettingsController", description="Operations for handling user language settings")
+@Tag(name="SettingsController", description="Operations for handling user language settings")
 public class SettingsController {
 
     @Autowired
     private SettingsRepository settingsRepository;
 
     @RequestMapping(value = "api/settings", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<Iterable<Settings>> getSettings(
             @RequestParam(value = "language", required = false) String language){
 

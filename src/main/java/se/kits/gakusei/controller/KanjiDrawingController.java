@@ -3,8 +3,8 @@ package se.kits.gakusei.controller;
 import java.sql.Timestamp;
 import java.util.List;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,7 +19,7 @@ import se.kits.gakusei.user.model.User;
 import se.kits.gakusei.user.repository.UserRepository;
 
 @RestController
-@Api(value="KanjiDrawingController")
+@Tag(name="KanjiDrawingController")
 public class KanjiDrawingController {
     private final UserRepository userRepository;
 
@@ -31,12 +31,12 @@ public class KanjiDrawingController {
         this.kanjiDrawingRepository = kanjiDrawingRepository;
     }
 
-    @ApiOperation(value="Adds users kanji drawing, returns ResponseEntity and sets users kanji drawing as a list of coordinates (data) as String", response = ResponseEntity.class)
+    @Operation(summary="Adds users kanji drawing, returns ResponseEntity and sets users kanji drawing as a list of coordinates (data) as String")
     @RequestMapping(
         value = "/api/kanji-drawings",
         method = RequestMethod.POST,
-        consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        consumes = "application/json;charset=UTF-8",
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<UserLesson> addKanjiDrawing(
         @RequestBody
@@ -61,11 +61,11 @@ public class KanjiDrawingController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ApiOperation(value="Gets a users kanji drawings", response = ResponseEntity.class)
+    @Operation(summary="Gets a users kanji drawings")
     @RequestMapping(
             value = "/api/kanji-drawings",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+            produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<List<KanjiDrawing>> getKanjiDrawings(@RequestParam(value = "name") String userName) {
         List<KanjiDrawing> kanjiDrawingList = kanjiDrawingRepository.findKanjiDrawingByUsername(userName);

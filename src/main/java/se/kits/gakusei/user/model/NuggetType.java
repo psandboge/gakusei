@@ -1,6 +1,6 @@
 package se.kits.gakusei.user.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
