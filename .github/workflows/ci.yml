@@ -1,0 +1,66 @@
+name: CI and browser baseline
+on:
+  pull_request:
+  push:
+    branches: [develop]
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install pinned Linux tools
+        id: tools
+        run: bash scripts/install-ci-tools.sh
+      - name: Clean dependencies
+        id: dependencies
+        run: npm ci
+      - name: Toolchain preflight
+        id: preflight
+        run: npm run preflight
+      - name: Frontend tests
+        id: frontend
+        run: npm test
+      - name: Independent PostgreSQL backend tests
+        id: backend
+        run: bash scripts/test-postgres.sh -Dskip.frontend=true test
+      - name: Production package
+        id: build
+        run: ./mvnw -Pproduction -DskipTests package
+      - name: Chromium and Linux dependencies
+        id: chromium
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Owned browser journey, restart and reseed
+        id: browser
+        run: npm run test:browser
+      - name: Collector privacy regression tests
+        id: privacy_tests
+        run: python3 scripts/test-ci-artifacts.py
+      - name: Bounded exact ownership cleanup
+        id: cleanup
+        if: always()
+        timeout-minutes: 5
+        run: python3 scripts/collect-ci-artifacts.py cleanup
+      - name: Collect and validate private diagnostics
+        id: privacy
+        env:
+          CI_PHASE_RESULTS: ${{ toJSON(steps) }}
+        if: always()
+        timeout-minutes: 2
+        run: python3 scripts/collect-ci-artifacts.py collect
+      - name: Upload safe diagnostics
+        if: always() && steps.privacy.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: safe-browser-diagnostics
+          path: artifacts/browser/
+          retention-days: 14
+          if-no-files-found: error
