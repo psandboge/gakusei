@@ -13,6 +13,10 @@ API/session authentication are retained. Boot 2.7 is a temporary local
 compatibility bridge, not an ongoing supported server deployment. The exact
 frontend graph is in `package-lock.json`; use `npm ci`, not `npm install`.
 
+For the complete PR/develop CI and isolated browser sequence, privacy diagnostics,
+platform prerequisites and exact owned recovery, see
+[CI and browser regression baseline](docs/ci-browser-baseline.md).
+
 ### Install and select tools
 
 From the checkout root:
