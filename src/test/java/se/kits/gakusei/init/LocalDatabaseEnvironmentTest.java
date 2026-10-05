@@ -39,7 +39,7 @@ public class LocalDatabaseEnvironmentTest {
     @Test
     public void productionConfigurationIsUnaffected() {
         MockEnvironment env = new MockEnvironment();
-        env.setActiveProfiles("postgres", "heroku");
+        env.setActiveProfiles("postgres");
         new LocalDatabaseEnvironment().postProcessEnvironment(env, null);
     }
 }

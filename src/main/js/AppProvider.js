@@ -11,7 +11,6 @@ import { requireAuthentication } from './shared/components/AuthenticatedComponen
 
 import AppScreen from './screens/app';
 import aboutScreen from './screens/app/screens/about';
-// import listsScreen from './screens/app/screens/lists';
 import grammarScreen from './screens/app/screens/grammar';
 import finishScreen from './screens/app/screens/finish';
 import homeScreen from './screens/app/screens/home';
