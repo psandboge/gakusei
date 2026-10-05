@@ -20,7 +20,9 @@
     "prestart": "npm run preflight && npm run prepare:assets",
     "start": "webpack serve --mode development",
     "pretest": "npm run preflight",
-    "test": "mocha --exit --require ./mocha.bootstrap.js --timeout 10000 \"src/main/js/**/*.test.js\""
+    "test": "mocha --exit --require ./mocha.bootstrap.js --timeout 10000 \"src/main/js/**/*.test.js\"",
+    "test:browser": "bash scripts/test-browser.sh",
+    "test:browser:spec": "playwright test"
   },
   "repository": {
     "type": "git",
@@ -74,6 +76,7 @@
     "@babel/preset-env": "7.29.7",
     "@babel/preset-react": "7.29.7",
     "@babel/register": "7.29.7",
+    "@playwright/test": "1.63.0",
     "@pmmmwh/react-refresh-webpack-plugin": "0.6.2",
     "babel-loader": "9.2.1",
     "bootstrap": "3.3.7",
