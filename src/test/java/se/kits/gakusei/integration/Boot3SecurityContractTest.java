@@ -67,7 +67,7 @@ public class Boot3SecurityContractTest {
         cookies.getCookieStore().getCookies().stream().filter(c -> c.getName().equals("JSESSIONID")).toList()
             .forEach(c -> cookies.getCookieStore().remove(URI.create("http://127.0.0.1:" + port), c));
         assertTrue(request(client, "/username", null, null).body().contains("\"loggedIn\":true"));
-        assertEquals(403, request(client, "/api/users", null, null).statusCode());
+        assertEquals(401, request(client, "/api/users", null, null).statusCode());
         assertEquals(204, request(client, "/logout", "", null).statusCode());
         assertTrue(request(client, "/username", null, null).body().contains("\"loggedIn\":false"));
     }
