@@ -41,7 +41,8 @@ test('owned anchor, chart, localization, icons and overlay lifecycle parity', as
     return {scroll:(types.get('scroll') || new Set()).size,hashchange:(types.get('hashchange') || new Set()).size};
   });
   try {
-    await page.goto(m.origin + '/start');
+    // The retained server serves the anonymous start screen through '/', not direct '/start'.
+    await page.goto(m.origin + '/');
     const anchor = page.locator('div.about-features.container');
     await expect(anchor).toBeVisible();
     expect(await anchor.evaluate(el => el.parentElement.tagName)).toBe('DIV');
