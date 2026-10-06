@@ -1,7 +1,7 @@
 import React, { act } from 'react';
 import sinon from 'sinon';
 import * as persistence from 'redux-persist';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import createMemoryHistory from 'history/createMemoryHistory';
 import { mountApp } from './shared/mountApp';
 import { routerMiddleware } from './shared/routing';
@@ -12,15 +12,15 @@ import i18n from './shared/i18n';
 const wait = () => new Promise(resolve => setTimeout(resolve, 30));
 
 describe('Actual AppProvider with React 18 root and persistence', () => {
-  let container, root, history, store, stub, original, callbacks, active, writes, data, purges, pauseCalls;
+  let container, root, history, store, stub, original, callbacks, active, writes, data, purges, pauseCalls, readKeys, writeKeys;
   beforeEach(() => {
     window.localStorage.clear();
     container = document.createElement('div'); document.body.appendChild(container);
     history = createMemoryHistory({ initialEntries: ['/about'] });
-    store = createStore(rootReducer, applyMiddleware(thunk, routerMiddleware(history)));
-    active = 0; writes = 0; callbacks = []; purges = []; pauseCalls = 0;
+    store = createStore(rootReducer, compose(applyMiddleware(thunk, routerMiddleware(history)), persistence.autoRehydrate()));
+    active = 0; writes = 0; callbacks = []; purges = []; pauseCalls = 0; readKeys = []; writeKeys = [];
     data = { 'reduxPersist:security': JSON.stringify({ loggedIn: false, loggedInUser: '', projectVersion: process.env.PROJECT_VERSION }),
-      'reduxPersist:lessons': JSON.stringify({ smartLearning: false }) };
+      'reduxPersist:lessons': JSON.stringify({ smartLearning: false, spacedRepetition: false, selectedLesson: { name: 'stored-probe' } }) };
     const subscribe = store.subscribe;
     store.subscribe = cb => {
       active++;
@@ -37,8 +37,8 @@ describe('Actual AppProvider with React 18 root and persistence', () => {
             readStarted = true; callbacks.push(() => cb(null, Object.keys(data)));
           } else cb(null, Object.keys(data));
         },
-        getItem: (key, cb) => cb(null, data[key]),
-        setItem: (key, value, cb) => { writes++; data[key] = value; cb(null); },
+        getItem: (key, cb) => { readKeys.push(key); cb(null, data[key]); },
+        setItem: (key, value, cb) => { writes++; writeKeys.push(key); data[key] = value; cb(null); },
         removeItem: (key, cb) => new Promise(resolve => purges.push(() => { delete data[key]; cb(null); resolve(); }))
       };
       const persistor = original(facade, { ...config, storage }, complete);
@@ -62,11 +62,22 @@ describe('Actual AppProvider with React 18 root and persistence', () => {
   it('gates actual app commit on rehydration and retains stored state and routing blacklist', async () => {
     await mount();
     expect(container.textContent).to.equal(''); expect(active).to.equal(1);
-    await act(async () => { callbacks.shift()(); await wait(); });
+    data['reduxPersist:routing'] = JSON.stringify({ location: { pathname: '/stored-route' } });
+    let rehydratedState;
+    await act(async () => { callbacks.shift()(); rehydratedState = store.getState(); await wait(); });
     expect(container.querySelector('main')).not.to.equal(null);
-    expect(store.getState().lessons.smartLearning).to.equal(false);
+    expect(store.getState().lessons).not.to.have.property('smartLearning');
+    expect(store.getState().lessons.spacedRepetition).to.equal(true);
+    expect(store.getState().lessons.selectedLesson).to.deep.equal({ name: '' });
+    expect(rehydratedState.security.loggedIn).to.equal(false);
+    expect(rehydratedState.security.loggedInUser).to.equal('');
+    expect(rehydratedState.security.projectVersion).to.equal(process.env.PROJECT_VERSION);
+    expect(rehydratedState.security.purgeNeeded).to.equal(false);
+    expect(purges).to.have.length(0);
     expect(store.getState().routing.location.pathname).to.equal('/about');
-    expect(data).not.to.have.property('reduxPersist:routing');
+    expect(readKeys).not.to.include('reduxPersist:routing');
+    expect(writeKeys).not.to.include('reduxPersist:routing');
+    expect(JSON.parse(data['reduxPersist:routing']).location.pathname).to.equal('/stored-route');
   });
   it('waits for version purge resolution before showing the tree', async () => {
     data['reduxPersist:security'] = JSON.stringify({ purgeNeeded: true, projectVersion: 'old' });
