@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Install pinned Linux tools
         id: tools
         run: bash scripts/install-ci-tools.sh
@@ -75,6 +76,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
       - name: Install pinned Linux tools
         run: bash scripts/install-ci-tools.sh
@@ -138,6 +140,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
       - name: Install pinned Linux tools
         run: bash scripts/install-ci-tools.sh
@@ -182,6 +185,21 @@ jobs:
             (cd .tools/boot3-fixture && python3 scripts/collect-ci-artifacts.py cleanup) || cleanup_status=1
           fi
           exit "$cleanup_status"
+      - name: Collect safe pair diagnostics
+        id: privacy
+        if: always()
+        timeout-minutes: 2
+        env:
+          CI_PHASE_RESULTS: ${{ toJSON(steps) }}
+        run: python3 scripts/collect-ci-artifacts.py collect
+      - name: Upload safe pair diagnostics
+        if: always() && steps.privacy.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: boot4-upgrade-safe-diagnostics
+          path: artifacts/browser/
+          retention-days: 14
+          if-no-files-found: error
   java25-upgrade:
     needs: regression
     runs-on: ubuntu-24.04
@@ -190,6 +208,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
       - name: Install pinned Linux tools
         run: bash scripts/install-ci-tools.sh
@@ -234,3 +253,18 @@ jobs:
             (cd .tools/boot4-fixture && python3 scripts/collect-ci-artifacts.py cleanup) || cleanup_status=1
           fi
           exit "$cleanup_status"
+      - name: Collect safe pair diagnostics
+        id: privacy
+        if: always()
+        timeout-minutes: 2
+        env:
+          CI_PHASE_RESULTS: ${{ toJSON(steps) }}
+        run: python3 scripts/collect-ci-artifacts.py collect
+      - name: Upload safe pair diagnostics
+        if: always() && steps.privacy.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: java25-upgrade-safe-diagnostics
+          path: artifacts/browser/
+          retention-days: 14
+          if-no-files-found: error
