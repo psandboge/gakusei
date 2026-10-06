@@ -185,6 +185,10 @@ jobs:
             (cd .tools/boot3-fixture && python3 scripts/collect-ci-artifacts.py cleanup) || cleanup_status=1
           fi
           exit "$cleanup_status"
+      - name: Chromium and Linux dependencies
+        id: chromium
+        if: always()
+        run: npx --no-install playwright install --with-deps chromium
       - name: Collect safe pair diagnostics
         id: privacy
         if: always()
@@ -253,6 +257,10 @@ jobs:
             (cd .tools/boot4-fixture && python3 scripts/collect-ci-artifacts.py cleanup) || cleanup_status=1
           fi
           exit "$cleanup_status"
+      - name: Chromium and Linux dependencies
+        id: chromium
+        if: always()
+        run: npx --no-install playwright install --with-deps chromium
       - name: Collect safe pair diagnostics
         id: privacy
         if: always()

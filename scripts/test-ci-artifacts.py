@@ -2,6 +2,7 @@
 """Privacy boundaries: synthetic and actual run-generated secret rejection."""
 import importlib.util
 import json
+import subprocess
 from pathlib import Path
 import tempfile
 import unittest
@@ -19,6 +20,31 @@ collector = module('collector', 'scripts/collect-ci-artifacts.py')
 owned = module('owned', 'scripts/verify-browser-state.py')
 
 class Privacy(unittest.TestCase):
+    def test_renderer_failure_removes_stale_and_partial_output(self):
+        for error in (subprocess.CalledProcessError(1, 'node'),
+                      subprocess.TimeoutExpired('node', 45)):
+            with self.subTest(error=type(error).__name__), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                public = root / 'artifacts/browser'
+                public.mkdir(parents=True)
+                (public / 'diagnostics.png').write_bytes(b'previous upload')
+                stage = root / '.tools/ci-public-stage'
+
+                def fail_render(args, **kwargs):
+                    self.assertEqual(kwargs['timeout'], 45)
+                    self.assertTrue(kwargs['check'])
+                    self.assertEqual(kwargs['stdout'], subprocess.DEVNULL)
+                    self.assertEqual(kwargs['stderr'], subprocess.DEVNULL)
+                    (Path(args[-1]) / 'diagnostics.png').write_bytes(b'partial PNG')
+                    raise error
+
+                with patch.object(collector, 'ROOT', root), patch.object(collector, 'DEST', public), \
+                     patch.object(collector.subprocess, 'run', fail_render):
+                    with self.assertRaises(type(error)):
+                        collector.collect()
+                self.assertFalse(public.exists(), 'Renderer failure must suppress stale uploads')
+                self.assertFalse(stage.exists(), 'Renderer failure must remove partial output')
+
     def test_upgrade_requires_current_source_and_complete_prerequisites(self):
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp)
