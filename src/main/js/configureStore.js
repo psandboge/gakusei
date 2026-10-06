@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { autoRehydrate } from 'redux-persist';
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from './shared/routing';
 import createBrowserHistory from 'history/createBrowserHistory';
 import thunkMiddleware from 'redux-thunk';
 

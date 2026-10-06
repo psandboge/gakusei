@@ -1,5 +1,5 @@
 import { Button, Collapse, Well } from 'react-bootstrap';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import faVolumeUp from '@fortawesome/fontawesome-free-solid/faVolumeUp';
 import faQuestion from '@fortawesome/fontawesome-free-solid/faQuestion';
 import Speech from '../../../shared/util/Speech';

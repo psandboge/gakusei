@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import { push } from 'react-router-redux';
+import { push } from '../routing';
 import { REHYDRATE } from 'redux-persist/constants';
 import Utility from '../../shared/util/Utility';
 import { translate, Trans } from 'react-i18next';

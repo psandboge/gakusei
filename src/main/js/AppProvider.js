@@ -5,7 +5,7 @@ import { Route, Redirect } from 'react-router';
 import { Switch, withRouter } from 'react-router-dom';
 import { anchorate } from 'anchorate';
 import { persistStore } from 'redux-persist';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from './shared/routing';
 
 import { requireAuthentication } from './shared/components/AuthenticatedComponent';
 
@@ -29,24 +29,50 @@ const AppScreenRoutered = withRouter(AppScreen);
 export default class AppProvider extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      rehydrated: false,
-      persistor: null
-    };
+    this.state = { rehydrated: false, persistenceError: false };
+    this.persistenceSubscriptions = [];
   }
 
-  componentWillMount() {
-    // Redux store purging logic (aka "has project.json version changed?")
-    // For now, we let security reducer determine purging decision for all reducers
-    this.setState({
-      persistor: persistStore(this.props.store, { blacklist: ['routing'] }, (err, state) => {
-        if (state.security && state.security.purgeNeeded) {
-          this.state.persistor.purge().then(this.setState({ rehydrated: true }));
-        } else {
-          this.setState({ rehydrated: true });
+  componentDidMount() {
+    this.mounted = true;
+    const store = this.props.store;
+    // redux-persist 4 does not expose its subscription handle. Capture only
+    // persistence subscriptions; Provider and Router use the original store.
+    const persistenceStore = {
+      getState: store.getState,
+      dispatch: store.dispatch,
+      subscribe: listener => {
+        const unsubscribe = store.subscribe(listener);
+        this.persistenceSubscriptions.push(unsubscribe);
+        return unsubscribe;
+      }
+    };
+    this.persistor = persistStore(persistenceStore, { blacklist: ['routing'] }, async (err, restoredState) => {
+      // persistStore resumes before calling us, including after unmount.
+      if (!this.mounted) {
+        this.persistor.pause();
+        return;
+      }
+      try {
+        if (err) throw err;
+        if (restoredState && restoredState.security && restoredState.security.purgeNeeded) {
+          await this.persistor.purge();
         }
-      })
+        if (this.mounted) this.setState({ rehydrated: true });
+        else this.persistor.pause();
+      } catch (error) {
+        this.persistor.pause();
+        // Bounded diagnostics: storage errors can contain private values.
+        console.error('Application persistence failed');
+        if (this.mounted) this.setState({ persistenceError: true });
+      }
     });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+    if (this.persistor) this.persistor.pause();
+    this.persistenceSubscriptions.splice(0).forEach(unsubscribe => unsubscribe());
   }
 
   componentDidUpdate() {
@@ -57,7 +83,7 @@ export default class AppProvider extends React.Component {
     if (this.state.rehydrated) {
       return (
         <Provider store={this.props.store}>
-          <ConnectedRouter history={this.props.history}>
+          <ConnectedRouter history={this.props.history} store={this.props.store}>
             <AppScreenRoutered>
               <Switch>
                 <Route
@@ -115,7 +141,7 @@ export default class AppProvider extends React.Component {
         </Provider>
       );
     }
-    return null;
+    return this.state.persistenceError ? <p role="alert">Application persistence failed</p> : null;
   }
 }
 

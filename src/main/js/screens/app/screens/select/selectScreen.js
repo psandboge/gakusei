@@ -18,7 +18,7 @@ import Utility from '../../../../shared/util/Utility';
 import * as Lessons from '../../../../shared/reducers/Lessons';
 import * as Security from '../../../../shared/reducers/Security';
 
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import faStar from '@fortawesome/fontawesome-free-solid/faStar';
 

@@ -20,7 +20,7 @@ if not __debug__:
     raise RuntimeError('Ownership checks require Python without optimization')
 
 ROOT = Path(__file__).resolve().parent.parent
-PROTECTED = {18082, 15432}
+PROTECTED = {18082, 18083, 15432, 15433}
 
 
 def safe_env():

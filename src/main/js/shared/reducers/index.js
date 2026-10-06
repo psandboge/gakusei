@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import { routerReducer } from '../routing';
 
 import { lessons } from './Lessons';
 import { security } from './Security';
