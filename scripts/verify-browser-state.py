@@ -213,6 +213,7 @@ def private_browser_parent(path, expected, deadline=None, root=None):
     path, expected = Path(path), Path(expected)
     assert root.is_absolute() and path.is_absolute() and path == expected
     assert '..' not in path.parts and '..' not in root.parts
+    assert path.is_relative_to(root), 'Foreign private proof path'
     relative = path.relative_to(root)
     assert len(relative.parts) >= 4 and relative.parts[:2] == ('.tools', 'browser-tests')
     assert re.fullmatch('[a-f0-9]{24}', relative.parts[2]), 'Invalid private run path'
