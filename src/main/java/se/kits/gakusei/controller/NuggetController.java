@@ -3,8 +3,8 @@ package se.kits.gakusei.controller;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import se.kits.gakusei.content.repository.NuggetRepository;
 import se.kits.gakusei.content.repository.WordTypeRepository;
 
 @RestController
-@Api(value="NuggetController", description="Operations for handling nuggets")
+@Tag(name="NuggetController", description="Operations for handling nuggets")
 public class NuggetController {
     private final Logger logger = LoggerFactory.getLogger(
         NuggetController.class
@@ -38,11 +38,11 @@ public class NuggetController {
         this.wordTypeRepository = wordTypeRepository;
     }
 
-    @ApiOperation(value="Getting nuggets trough a filter", response = ResponseEntity.class)
+    @Operation(summary="Getting nuggets trough a filter")
     @RequestMapping(
         value = "/api/filter/nuggets",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<List<Nugget>> findNuggetsByFilter(
         @RequestParam(value = "wordType", defaultValue = "vocabulary")

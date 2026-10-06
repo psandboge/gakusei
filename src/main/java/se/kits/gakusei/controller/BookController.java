@@ -1,7 +1,7 @@
 package se.kits.gakusei.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,16 +15,16 @@ import se.kits.gakusei.content.model.Book;
 import se.kits.gakusei.content.repository.BookRepository;
 
 @RestController
-@Api(value="BookController", description="Operations for handling books")
+@Tag(name="BookController", description="Operations for handling books")
 public class BookController {
     @Autowired
     BookRepository bookRepository;
 
-    @ApiOperation(value="Getting all books", response = ResponseEntity.class)
+    @Operation(summary="Getting all books")
     @RequestMapping(
         value = "api/books",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Iterable<Book>> getAllBooks() {
         Iterable<Book> allBooks = bookRepository.findAll();
@@ -35,11 +35,11 @@ public class BookController {
         }
     }
 
-    @ApiOperation(value="Getting one book with a specific id", response = ResponseEntity.class)
+    @Operation(summary="Getting one book with a specific id")
     @RequestMapping(
         value = "api/books/{bookId}",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Book> getBookById(
         @PathVariable(value = "bookId")
@@ -54,11 +54,11 @@ public class BookController {
         }
     }
 
-    @ApiOperation(value="Getting one book with a specific title", response = ResponseEntity.class)
+    @Operation(summary="Getting one book with a specific title")
     @RequestMapping(
         value = "api/books/{bookTitle}",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Book> getBookByTitle(
         @PathVariable(value = "bookTitle")

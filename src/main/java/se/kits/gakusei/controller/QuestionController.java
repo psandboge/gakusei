@@ -3,8 +3,8 @@ package se.kits.gakusei.controller;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,7 +22,7 @@ import se.kits.gakusei.content.repository.UserLessonRepository;
 import se.kits.gakusei.util.QuestionHandler;
 
 @RestController
-@Api(value="QuestionController", description="Operations for handling questions")
+@Tag(name="QuestionController", description="Operations for handling questions")
 public class QuestionController {
     private LessonRepository lessonRepository;
 
@@ -48,11 +48,11 @@ public class QuestionController {
         this.nuggetRepository = nuggetRepository;
     }
 
-    @ApiOperation(value="Getting questions from a lesson", response = ResponseEntity.class)
+    @Operation(summary="Getting questions from a lesson")
     @RequestMapping(
             value = "/api/questions",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+            produces = "application/json;charset=UTF-8"
     )
     ResponseEntity<List<HashMap<String, Object>>> getQuestionsFromLesson(
             @RequestParam(value = "lessonName")
@@ -96,11 +96,11 @@ public class QuestionController {
         ) : new ResponseEntity<>(questions, HttpStatus.OK);
     }
 
-    @ApiOperation(value="Getting questions that a user has answered incorrectly", response = ResponseEntity.class)
+    @Operation(summary="Getting questions that a user has answered incorrectly")
     @RequestMapping(
             value = "/api/wrongquestions",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+            produces = "application/json;charset=UTF-8"
     )
     ResponseEntity<List<HashMap<String, Object>>> createWrongAnswersQuestions(
             @RequestParam(value = "questionType") String questionType,

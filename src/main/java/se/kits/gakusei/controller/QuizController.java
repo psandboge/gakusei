@@ -3,8 +3,8 @@ package se.kits.gakusei.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +21,7 @@ import se.kits.gakusei.util.QuestionHandler;
 import se.kits.gakusei.util.QuizHandler;
 
 @RestController
-@Api(value="QuizController", description="Operations for handling quiz")
+@Tag(name="QuizController", description="Operations for handling quiz")
 public class QuizController {
     @Autowired
     LessonRepository lessonRepository;
@@ -35,11 +35,11 @@ public class QuizController {
     @Autowired
     QuizHandler quizHandler;
 
-    @ApiOperation(value="Getting questions for one quiz", response = ResponseEntity.class)
+    @Operation(summary="Getting questions for one quiz")
     @RequestMapping(
         value = "/api/quiz",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<List<HashMap<String, Object>>> getQuizQuestions(
         @RequestParam(value = "lessonName")
@@ -56,21 +56,21 @@ public class QuizController {
         return new ResponseEntity<>(correctFormat, HttpStatus.OK);
     }
 
-    @ApiOperation(value="Getting all the quizzes", response = ResponseEntity.class)
+    @Operation(summary="Getting all the quizzes")
     @RequestMapping(
         value = "/api/quizes",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Iterable<Quiz>> getQuizzes() {
         return new ResponseEntity<>(quizRepository.findAll(), HttpStatus.OK);
     }
 
-    @ApiOperation(value="Get one quiz with a specific id", response = ResponseEntity.class)
+    @Operation(summary="Get one quiz with a specific id")
     @RequestMapping(
         value = "/api/quiz/{quizId}",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Quiz> getQuiz(
         @PathVariable(value = "quizId")
@@ -79,11 +79,11 @@ public class QuizController {
         return ResponseEntity.ok(quizRepository.findById(quizId).get());
     }
 
-    @ApiOperation(value="Get quizzes by a specific name", response = ResponseEntity.class)
+    @Operation(summary="Get quizzes by a specific name")
     @RequestMapping(
         value = "/api/quizes/{offset}/{name}",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Iterable<Quiz>> getQuizzesByName(
         @PathVariable(value = "name")
@@ -103,11 +103,11 @@ public class QuizController {
         );
     }
 
-    @ApiOperation(value="Getting the specific page for quizes", response = ResponseEntity.class)
+    @Operation(summary="Getting the specific page for quizes")
     @RequestMapping(
         value = "/api/quizes/{offset}",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Iterable<Quiz>> getQuizzesPage(
         @PathVariable(value = "offset")
@@ -123,11 +123,11 @@ public class QuizController {
         );
     }
 
-    @ApiOperation(value="Get nugget for quiz", response = ResponseEntity.class)
+    @Operation(summary="Get nugget for quiz")
     @RequestMapping(
         value = "/api/quiz/nugget/{quizNuggetId}",
         method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = "application/json;charset=UTF-8"
     )
     public HashMap<String, Object> getQuizNugget(
         @PathVariable(value = "quizNuggetId")
@@ -139,7 +139,7 @@ public class QuizController {
     @RequestMapping(
             value="/api/quiz/nugget/correctAnswer/{correctAnswer}",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+            produces = "application/json;charset=UTF-8"
     )
     public HashMap<String, Object> getQuizImage(
             @PathVariable(value="correctAnswer")

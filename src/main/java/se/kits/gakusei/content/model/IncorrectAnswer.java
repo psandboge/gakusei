@@ -2,7 +2,7 @@ package se.kits.gakusei.content.model;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "incorrect_quiz_answers", schema = "contentschema")

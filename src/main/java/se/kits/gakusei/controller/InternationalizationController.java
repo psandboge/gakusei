@@ -1,6 +1,6 @@
 package se.kits.gakusei.controller;
 
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@Api(value="InternationalizationController", description="Operations for handling internationalization")
+@Tag(name="InternationalizationController", description="Operations for handling internationalization")
 public class InternationalizationController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class InternationalizationController {
     private UserRepository userRepository;
 
     @RequestMapping(value = "api/internationalization", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<Iterable<Internationalization>> getSentences(
             @RequestParam(value = "language", required = false) String language,
             @RequestParam(value = "abbreviation", required = false) String abbreviation) {
@@ -63,7 +63,7 @@ public class InternationalizationController {
     }
 
     @RequestMapping(value = "api/internationalization/resources", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public String getInternationalizationResources() {
 
         JSONObject resources = new JSONObject();
@@ -93,7 +93,7 @@ public class InternationalizationController {
     }
 
     @RequestMapping(value = "api/internationalization/populateDB", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public void populateTableInternationalization() {
         List<String> langs = new ArrayList<>();
         langs.add("se");
@@ -123,7 +123,7 @@ public class InternationalizationController {
     }
 
     @RequestMapping(value = "api/internationalization/generateJSONFromDB", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = "application/json;charset=UTF-8")
     public void generateJSONFromDB() {
 
         List<String> availableLangs = new ArrayList<>();
@@ -186,7 +186,7 @@ public class InternationalizationController {
     }
 
     @RequestMapping(value = "/api/saveUserLanguage", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> saveUserLanguage(@RequestBody String userData) {
         try {
             JSONParser jsonParser = new JSONParser();

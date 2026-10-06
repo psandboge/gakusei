@@ -1,19 +1,19 @@
 package se.kits.gakusei.user.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "progresstrackinglist")
 public class ProgressTracking implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @ApiModelProperty(notes="the database generated progress tracking id")
+    @Schema(description="the database generated progress tracking id")
     private long id;
 
     @JoinColumn(name = "user_ref")
@@ -26,34 +26,34 @@ public class ProgressTracking implements Serializable {
     private NuggetType nuggetType;
 
     @Column(name = "nugget_id")
-    @ApiModelProperty(notes="the nugget id")
+    @Schema(description="the nugget id")
     private String nuggetID;
 
     @Column(name = "correct_count")
-    @ApiModelProperty(notes="the correct count")
+    @Schema(description="the correct count")
     private long correctCount;
 
     @Column(name = "incorrect_count")
-    @ApiModelProperty(notes="the incorrect count")
+    @Schema(description="the incorrect count")
     private long incorrectCount;
 
     @Column(name = "latest_timestamp")
-    @ApiModelProperty(notes="the latest timestamp")
+    @Schema(description="the latest timestamp")
     private Timestamp latestTimestamp;
 
     @Column(name = "latest_result")
-    @ApiModelProperty(notes="the latest result from the users")
+    @Schema(description="the latest result from the users")
     private boolean latestResult;
 
     @Column(name = "retention_factor")
-    @ApiModelProperty(notes="the retention factor")
+    @Schema(description="the retention factor")
     private double retentionFactor;
 
-    @ApiModelProperty(notes="the retention interval")
+    @Schema(description="the retention interval")
     @Column(name = "retention_interval")
     private double retentionInterval;
 
-    @ApiModelProperty(notes="the retention date")
+    @Schema(description="the retention date")
     @Column(name = "retention_date")
     private Timestamp retentionDate;
 

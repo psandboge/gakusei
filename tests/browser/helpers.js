@@ -20,7 +20,11 @@ async function login(page, m, s) {
 }
 async function logout(page) {
   await page.locator('.profile-button').getByRole('button').click();
+  // Wait for cookie deletion before issuing an authenticated-state probe. A
+  // parallel probe can replay remember-me while logout is still in flight.
+  const completed = page.waitForResponse(r => new URL(r.url()).pathname === '/logout' && r.request().method() === 'POST');
   await page.getByRole('link', { name: text('gakuseiNav.logout'), exact: true }).click();
+  expect((await completed).status()).toBe(204);
   await expect.poll(async () => (await (await page.request.get(new URL('/username', page.url()).href)).json()).loggedIn).toBe(false);
   await identity(page);
 }

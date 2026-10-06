@@ -2,7 +2,7 @@ package se.kits.gakusei.util;
 
 import java.util.*;
 
-import org.hibernate.cfg.NotYetImplementedException;
+
 
 public class InflectionUtil {
     private static Map<String, List<String>> inflectionMap = new HashMap<>();

@@ -1,7 +1,7 @@
 package se.kits.gakusei.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,17 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@Api(value="AnnouncementController", description="Operations for handling announcements")
+@Tag(name="AnnouncementController", description="Operations for handling announcements")
 public class AnnouncementController {
 
     @Autowired
     AnnouncementRepository announcementRepository;
 
-    @ApiOperation(value="get all the announcements", response = ResponseEntity.class)
+    @Operation(summary="get all the announcements")
     @RequestMapping(
             value = "api/announcement",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+            produces = "application/json;charset=UTF-8"
     )
     public ResponseEntity<Iterable<Announcement>> getAnnouncement() {
         Iterable<Announcement> allAnnouncements = announcementRepository.findAll();

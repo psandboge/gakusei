@@ -53,6 +53,8 @@ class Privacy(unittest.TestCase):
             run.joinpath('ownership.json').write_text(json.dumps({'nonce': 'private-nonce'}))
             run.joinpath('result.json').write_text('{"exit_code":1}')
             run.joinpath('journey').mkdir()
+            run.joinpath('upgrade-result-private.json').write_text('{"username":"UpgradePrivateLearner","password":"SYNTHETIC_SECRET_UPGRADE"}')
+            run.joinpath('upgrade-before-private.json').write_text('{"events":"Authorization private learner records"}')
             # Only rendering is mocked here; real Chromium is proved by collection.
             def render(args, **kwargs):
                 Path(args[-1], 'diagnostics.png').write_bytes(b'\x89PNG\r\n\x1a\n')
@@ -65,6 +67,8 @@ class Privacy(unittest.TestCase):
                 self.assertEqual(data['browser'][0]['exit_code'], 1)
                 self.assertFalse(data['browser'][0]['complete'])
                 self.assertNotIn('SECRET', public.joinpath('diagnostics.json').read_text())
+                self.assertNotIn('UpgradePrivateLearner', public.joinpath('diagnostics.json').read_text())
+                self.assertFalse(any('upgrade' in p.name for p in public.iterdir()))
                 def poison(args, **kwargs):
                     Path(args[-1], 'diagnostics.log').write_text('SYNTHETIC_SECRET_MARKER')
                 with patch.object(collector.subprocess, 'run', poison):
