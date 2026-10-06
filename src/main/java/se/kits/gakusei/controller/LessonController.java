@@ -51,7 +51,7 @@ public class LessonController {
     private ProgressHandler progressHandler;
 
     @Operation(summary="Getting all the lessons")
-    @RequestMapping(value = "/api/lessons", method = RequestMethod.GET,
+    @RequestMapping(value = {"/api/lessons", "/api/lessons/"}, method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     public ResponseEntity<List<Lesson>> getLessons(@RequestParam(value = "lessonType") String lessonType) {
 
@@ -65,7 +65,7 @@ public class LessonController {
     }
 
     @Operation(summary="Getting info about a question")
-    @RequestMapping(value = "/api/lessonInfo", method = RequestMethod.GET,
+    @RequestMapping(value = {"/api/lessonInfo", "/api/lessonInfo/"}, method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     public ResponseEntity<HashMap<String, HashMap<String, Integer>>> getQuestionInfo(
             @RequestParam(name = "lessonType", defaultValue = "guess") String lessonType,
@@ -76,7 +76,7 @@ public class LessonController {
     }
 
     @Operation(summary="Getting the wrong count")
-    @RequestMapping(value = "/api/lessons/incorrectcount", method = RequestMethod.GET,
+    @RequestMapping(value = {"/api/lessons/incorrectcount", "/api/lessons/incorrectcount/"}, method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     public ResponseEntity<HashMap<String, Integer>> getIncorrectCount(
             @RequestParam(name = "lessonType", defaultValue = "guess") String lessonType,
@@ -88,7 +88,7 @@ public class LessonController {
 
     @Operation(summary="Getting lessons marked as favorite")
     @RequestMapping(
-            value = "/api/lessons/favorite",
+            value = {"/api/lessons/favorite", "/api/lessons/favorite/"},
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8"
     )

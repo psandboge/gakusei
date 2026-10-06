@@ -50,7 +50,7 @@ public class QuestionController {
 
     @Operation(summary="Getting questions from a lesson")
     @RequestMapping(
-            value = "/api/questions",
+            value = {"/api/questions", "/api/questions/"},
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8"
     )
@@ -98,7 +98,7 @@ public class QuestionController {
 
     @Operation(summary="Getting questions that a user has answered incorrectly")
     @RequestMapping(
-            value = "/api/wrongquestions",
+            value = {"/api/wrongquestions", "/api/wrongquestions/"},
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8"
     )

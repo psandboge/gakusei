@@ -40,7 +40,7 @@ public class NuggetController {
 
     @Operation(summary="Getting nuggets trough a filter")
     @RequestMapping(
-        value = "/api/filter/nuggets",
+        value = {"/api/filter/nuggets", "/api/filter/nuggets/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )

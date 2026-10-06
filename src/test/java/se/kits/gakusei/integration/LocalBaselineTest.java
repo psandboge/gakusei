@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
+@org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles({"local-postgres", "local-seed"})
 public class LocalBaselineTest {
@@ -42,9 +43,9 @@ public class LocalBaselineTest {
         TestRestTemplate learner = http.withBasicAuth("pieru", "gakusei");
         org.springframework.http.ResponseEntity<String> questions = learner.getForEntity(
             "/api/questions?lessonName=Verbs&username=pieru&questionType=reading&answerType=swedish", String.class);
-        assertEquals(200, questions.getStatusCodeValue());
+        assertEquals(200, questions.getStatusCode().value());
         assertTrue(questions.getBody().startsWith("["));
         assertFalse(questions.getBody().equals("[]"));
-        assertEquals(200, learner.getForEntity("/v3/api-docs", String.class).getStatusCodeValue());
+        assertEquals(200, learner.getForEntity("/v3/api-docs", String.class).getStatusCode().value());
     }
 }

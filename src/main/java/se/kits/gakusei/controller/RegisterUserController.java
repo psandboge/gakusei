@@ -27,7 +27,7 @@ public class RegisterUserController {
 
     private String decodedInput;
 
-    @RequestMapping(value = "/registeruser", method = RequestMethod.POST)
+    @RequestMapping(value = {"/registeruser", "/registeruser/"}, method = RequestMethod.POST)
     public ResponseEntity<String> registerUser(
             @RequestBody
                     String input

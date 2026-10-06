@@ -102,13 +102,13 @@ public class EventControllerTest {
         when(eventRepository.save(any(Event.class))).thenReturn(event);
 
         ResponseEntity<?> re = eventController.addEvent(eventDTO);
-        assertEquals(200, re.getStatusCodeValue());
+        assertEquals(200, re.getStatusCode().value());
     }
 
     @Test
     public void testAddEventNoUser() throws Exception {
         when(userRepository.findByUsername(username)).thenReturn(null);
         ResponseEntity<?> re = eventController.addEvent(eventDTO);
-        assertEquals(500, re.getStatusCodeValue());
+        assertEquals(500, re.getStatusCode().value());
     }
 }

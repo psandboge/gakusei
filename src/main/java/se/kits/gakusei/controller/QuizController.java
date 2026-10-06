@@ -37,7 +37,7 @@ public class QuizController {
 
     @Operation(summary="Getting questions for one quiz")
     @RequestMapping(
-        value = "/api/quiz",
+        value = {"/api/quiz", "/api/quiz/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -58,7 +58,7 @@ public class QuizController {
 
     @Operation(summary="Getting all the quizzes")
     @RequestMapping(
-        value = "/api/quizes",
+        value = {"/api/quizes", "/api/quizes/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -68,7 +68,7 @@ public class QuizController {
 
     @Operation(summary="Get one quiz with a specific id")
     @RequestMapping(
-        value = "/api/quiz/{quizId}",
+        value = {"/api/quiz/{quizId}", "/api/quiz/{quizId}/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -81,7 +81,7 @@ public class QuizController {
 
     @Operation(summary="Get quizzes by a specific name")
     @RequestMapping(
-        value = "/api/quizes/{offset}/{name}",
+        value = {"/api/quizes/{offset}/{name}", "/api/quizes/{offset}/{name}/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -105,7 +105,7 @@ public class QuizController {
 
     @Operation(summary="Getting the specific page for quizes")
     @RequestMapping(
-        value = "/api/quizes/{offset}",
+        value = {"/api/quizes/{offset}", "/api/quizes/{offset}/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -125,7 +125,7 @@ public class QuizController {
 
     @Operation(summary="Get nugget for quiz")
     @RequestMapping(
-        value = "/api/quiz/nugget/{quizNuggetId}",
+        value = {"/api/quiz/nugget/{quizNuggetId}", "/api/quiz/nugget/{quizNuggetId}/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -137,7 +137,7 @@ public class QuizController {
     }
 
     @RequestMapping(
-            value="/api/quiz/nugget/correctAnswer/{correctAnswer}",
+            value={"/api/quiz/nugget/correctAnswer/{correctAnswer}", "/api/quiz/nugget/correctAnswer/{correctAnswer}/"},
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8"
     )

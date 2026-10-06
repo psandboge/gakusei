@@ -19,7 +19,7 @@ public class SettingsController {
     @Autowired
     private SettingsRepository settingsRepository;
 
-    @RequestMapping(value = "api/settings", method = RequestMethod.GET,
+    @RequestMapping(value = {"api/settings", "api/settings/"}, method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     public ResponseEntity<Iterable<Settings>> getSettings(
             @RequestParam(value = "language", required = false) String language){

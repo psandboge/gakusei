@@ -63,7 +63,7 @@ public class EventController {
 
     @Operation(summary="Getting all the events")
     @RequestMapping(
-            value = "/api/events",
+            value = {"/api/events", "/api/events/"},
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8"
     )
@@ -76,7 +76,7 @@ public class EventController {
 
     @Operation(summary="Add an event")
     @RequestMapping(
-            value = "/api/events2",
+            value = {"/api/events2", "/api/events2/"},
             method = RequestMethod.POST,
             consumes = "application/json;charset=UTF-8",
             produces = "application/json;charset=UTF-8")
@@ -95,7 +95,7 @@ public class EventController {
 
     @Operation(summary="Add an event")
     @RequestMapping(
-            value = "/api/events",
+            value = {"/api/events", "/api/events/"},
             method = RequestMethod.POST,
             consumes = "application/json;charset=UTF-8",
             produces = "application/json;charset=UTF-8")

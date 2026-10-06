@@ -1,14 +1,14 @@
 package se.kits.gakusei.integration;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,6 +17,7 @@ import se.kits.gakusei.content.model.Inflection;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
+@org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles({"local-postgres", "local-seed"})
 public class Boot3LearningContractTest {
@@ -81,6 +82,27 @@ public class Boot3LearningContractTest {
         } finally {
             jdbc.update("delete from kanji_drawings where user_ref='pieru' and image_data=?", coordinates);
         }
+    }
+
+    @Test public void explicitSlashAliasesKeepGetPostAndErrorContracts() throws Exception {
+        assertEquals(mapper.readTree(http.getForObject("/username", String.class)),
+                     mapper.readTree(http.getForObject("/username/", String.class)));
+        for (String path : java.util.List.of("/api/questions", "/api/quiz")) {
+            org.springframework.http.ResponseEntity<String> plain = http.getForEntity(path, String.class);
+            org.springframework.http.ResponseEntity<String> slash = http.getForEntity(path + "/", String.class);
+            assertEquals(plain.getStatusCode(), slash.getStatusCode());
+            assertEquals(plain.getBody(), slash.getBody());
+            assertEquals(plain.getHeaders().getContentType(), slash.getHeaders().getContentType());
+        }
+        se.kits.gakusei.dto.KanjiDrawingDTO drawing = new se.kits.gakusei.dto.KanjiDrawingDTO();
+        drawing.setUsername("missing-contract-learner"); drawing.setData("[[1,2]]");
+        org.springframework.http.ResponseEntity<String> plain = http.postForEntity("/api/kanji-drawings", drawing, String.class);
+        org.springframework.http.ResponseEntity<String> slash = http.postForEntity("/api/kanji-drawings/", drawing, String.class);
+        assertEquals(500, plain.getStatusCode().value());
+        assertEquals(plain.getStatusCode(), slash.getStatusCode());
+        assertEquals(plain.getBody(), slash.getBody());
+        assertNull(slash.getHeaders().getLocation());
+        assertTrue(get("/api/questions/?lessonName=Verbs&username=pieru&questionType=reading&answerType=swedish").size() >= 4);
     }
 
     @Test public void localizedUnicodeResourcesKeepJsonStructure() throws Exception {

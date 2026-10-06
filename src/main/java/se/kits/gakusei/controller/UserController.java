@@ -38,7 +38,7 @@ public class UserController {
 
 /*    @Operation(summary="Creating a user")
     @RequestMapping(
-        value = "/api/users",
+        value = {"/api/users", "/api/users/"},
         method = RequestMethod.POST,
         consumes = "application/json;charset=UTF-8",
         produces = "application/json;charset=UTF-8"
@@ -55,7 +55,7 @@ public class UserController {
 
     @Operation(summary="Getting all the users")
     @RequestMapping(
-            value = "/api/users",
+            value = {"/api/users", "/api/users/"},
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8"
     )
@@ -68,7 +68,7 @@ public class UserController {
 
     @Operation(summary="Getting the current username")
     @RequestMapping(
-            value = "/username",
+            value = {"/username", "/username/"},
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8"
     )
@@ -89,7 +89,7 @@ public class UserController {
         return values;
     }
 
-    @RequestMapping(value = "/api/changepassword", method = RequestMethod.POST)
+    @RequestMapping(value = {"/api/changepassword", "/api/changepassword/"}, method = RequestMethod.POST)
     public ResponseEntity<?> changePassword(@RequestBody String userData) {
 
         JSONObject jsonData = new JSONObject();
@@ -114,7 +114,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/api/checkNewUser", method = RequestMethod.POST)
+    @RequestMapping(value = {"/api/checkNewUser", "/api/checkNewUser/"}, method = RequestMethod.POST)
     public ResponseEntity<?> checkNewUser(@RequestBody String username) {
         try {
             User user = ur.findByUsername(username);

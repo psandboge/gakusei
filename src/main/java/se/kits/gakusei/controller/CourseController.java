@@ -22,7 +22,7 @@ public class CourseController {
 
     @Operation(summary="Getting all courses")
     @RequestMapping(
-        value = "api/courses",
+        value = {"api/courses", "api/courses/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -38,7 +38,7 @@ public class CourseController {
 
     @Operation(summary="Getting one course with a specific id")
     @RequestMapping(
-        value = "api/courses/{courseID}",
+        value = {"api/courses/{courseID}", "api/courses/{courseID}/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -53,7 +53,7 @@ public class CourseController {
 
     @Operation(summary="Getting one course with a specific name")
     @RequestMapping(
-        value = "api/courses/{courseName}",
+        value = {"api/courses/{courseName}", "api/courses/{courseName}/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -68,7 +68,7 @@ public class CourseController {
 
     @Operation(summary="Getting one course with a specific course code")
     @RequestMapping(
-        value = "api/courses/{courseCode}",
+        value = {"api/courses/{courseCode}", "api/courses/{courseCode}/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
