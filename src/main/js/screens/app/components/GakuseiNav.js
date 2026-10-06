@@ -1,4 +1,5 @@
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button } from 'react-bootstrap';
+import { NavDropdown } from '../../../shared/GuardedDropdown';
+import { Navbar, Nav, NavItem, MenuItem, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 

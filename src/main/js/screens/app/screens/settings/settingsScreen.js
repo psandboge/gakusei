@@ -1,7 +1,8 @@
+import { DropdownButton } from '../../../../shared/GuardedDropdown';
 import * as Security from '../../../../shared/reducers/Security';
 import * as Lessons from '../../../../shared/reducers/Lessons';
 import Utility from '../../../../shared/util/Utility';
-import { Col, DropdownButton, Grid, MenuItem, FormGroup, Form, Button, FormControl } from 'react-bootstrap';
+import { Col, Grid, MenuItem, FormGroup, Form, Button, FormControl } from 'react-bootstrap';
 import ReactTooltip from 'react-tooltip';
 import React from 'react';
 import swal from 'sweetalert';
