@@ -32,6 +32,12 @@ class Privacy(unittest.TestCase):
                 self.assertEqual('unavailable', collector.upgrade_facts(directory)[0]['status'])
                 for name in ('upgrade-before-private.json','upgrade-after-private.json','ownership.json'):
                     (directory / name).write_text('{"private":"SYNTHETIC_SECRET"}')
+                self.assertEqual('unavailable', collector.upgrade_facts(directory)[0]['status'])
+                for index in range(6):
+                    (directory/f'runtime-{index}-private.json').write_text(json.dumps(dict(
+                        schema='gakusei.upgrade-runtime.v1',pair='boot3-boot4',source_sha='current',
+                        pid=index+1,pid_identity='owned',vm_properties='private',
+                        jar_sha256='a'*64,launcher_sha256='b'*64)))
                 facts = collector.upgrade_facts(directory)
                 self.assertEqual('passed', facts[0]['status'])
                 self.assertNotIn('PRIVATE', json.dumps(facts))

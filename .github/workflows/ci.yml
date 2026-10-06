@@ -155,6 +155,11 @@ jobs:
           npm ci
           npm run preflight
           python3 scripts/build-upgrade-jar.py --checkout "$GITHUB_WORKSPACE" --manifest "$GITHUB_WORKSPACE/.tools/boot4-build.json" --java-home "$GAKUSEI_JAVA25_HOME" --expected-java-major 25
+      - name: Genuine manifest public negative guards
+        run: >-
+          python3 tests/lifecycle/java25-proof-guards.py --proof-pair boot3-boot4
+          --baseline-build-manifest "$GITHUB_WORKSPACE/.tools/boot3-build.json"
+          --candidate-build-manifest "$GITHUB_WORKSPACE/.tools/boot4-build.json"
       - name: Fresh and populated immutable Boot 3 to Boot 4
         timeout-minutes: 15
         run: >-
@@ -202,6 +207,11 @@ jobs:
           npm ci
           npm run preflight
           python3 scripts/build-upgrade-jar.py --checkout "$GITHUB_WORKSPACE" --manifest "$GITHUB_WORKSPACE/.tools/candidate-java25-build.json" --java-home "$GAKUSEI_JAVA25_HOME" --expected-java-major 25
+      - name: Genuine manifest public negative guards
+        run: >-
+          python3 tests/lifecycle/java25-proof-guards.py --proof-pair boot4-java25
+          --baseline-build-manifest "$GITHUB_WORKSPACE/.tools/baseline-java17-build.json"
+          --candidate-build-manifest "$GITHUB_WORKSPACE/.tools/candidate-java25-build.json"
       - name: Fresh and populated immutable Boot 4 Java17 to Boot 4
         timeout-minutes: 15
         run: >-

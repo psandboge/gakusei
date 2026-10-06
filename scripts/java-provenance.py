@@ -48,8 +48,8 @@ def jdk(home, major):
                     vendor='Eclipse Adoptium',
                     executables={name: digest(home/'bin'/name) for name in ('java', 'javac', 'jcmd')})
     assert data == expected, 'Unverified or tampered JDK installation'
-    java = capture([str(home/'bin/java'), '-XshowSettings:properties', '-version'], home)
-    javac = capture([str(home/'bin/javac'), '-version'], home)
+    java = capture([str(home/'bin/java'), '-XshowSettings:properties', '-version'], home, timeout=10)
+    javac = capture([str(home/'bin/javac'), '-version'], home, timeout=10)
     assert f'java.version = {version}' in java and 'java.vendor = Eclipse Adoptium' in java
     assert f'java.home = {home}' in java and f'javac {version}' in javac
     return dict(home=str(home), major=major, platform=label, vendor=data['vendor'],
@@ -120,7 +120,8 @@ def observe(run, proof, pair, owned, deadline):
     """Attach only to this Run's tracked PID, within its original startup budget."""
     identity = owned.pid_identity(run.process.pid)
     assert run.process.poll() is None and identity == run.r['pid_identity']
-    tools = validate(proof, proof['jdk']['major'])
+    tools = jdk(Path(proof['jdk']['home']), proof['jdk']['major'])
+    assert tools == proof['jdk'], 'Launcher/receipt changed before runtime observation'
     remaining = deadline - __import__('time').monotonic()
     assert remaining > 0, 'Runtime observation exceeded startup budget'
     raw = capture([tools['jcmd'], str(run.process.pid), 'VM.system_properties'],
@@ -128,10 +129,10 @@ def observe(run, proof, pair, owned, deadline):
     properties = dict(line.split('=', 1) for line in raw.splitlines() if '=' in line)
     assert properties['java.home'] == tools['home'] and properties['java.vendor'] == tools['vendor']
     assert properties['java.version'] == tools['full_version'].split('+')[0]
-    assert properties['sun.java.command'].split()[0] == proof['jar'], 'Observed runtime jar differs'
+    assert properties['sun.java.command'].startswith(proof['jar']+' --spring.config.location='), 'Observed runtime jar differs'
     assert run.process.poll() is None and owned.pid_identity(run.process.pid) == identity
     assert digest(proof['jar']) == proof['jar_sha256']
-    owned.atomic(run.directory / f'runtime-{run.process.pid}-private.json',
-                 dict(pair=pair, source_sha=proof['source_sha'], jar_sha256=proof['jar_sha256'],
+    owned.atomic(run.directory / f'runtime-{run.process.pid}-{__import__("time").monotonic_ns()}-private.json',
+                 dict(schema='gakusei.upgrade-runtime.v1', pair=pair, source_sha=proof['source_sha'], jar_sha256=proof['jar_sha256'],
                       launcher_sha256=tools['executables']['java'], pid=run.process.pid,
                       pid_identity=identity, jdk=tools, vm_properties=raw))

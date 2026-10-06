@@ -10,6 +10,7 @@ import subprocess
 import sys
 import threading
 import time
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('provenance', ROOT/'scripts/java-provenance.py')
@@ -36,6 +37,23 @@ def main():
         jar = checkout/'target/gakusei.jar'
         jars[str(jar)] = dict(source_sha=expected, jar_sha256=provenance.digest(jar))
     tools = provenance.jdk(args.java_home,17)
+    for jar, record in jars.items():
+        checkout = Path(jar).parent.parent
+        version = provenance.capture(['./mvnw','-B','-ntp','--version'],args.java_home,checkout)
+        assert 'Apache Maven 3.9.16' in version and 'Java version: 17.0.16' in version and tools['home'] in version
+        effective = provenance.capture(['./mvnw','-B','-ntp','help:effective-pom'],args.java_home,checkout,timeout=180)
+        begin,end=effective.index('<project '),effective.rindex('</project>')+len('</project>')
+        project=ET.fromstring(effective[begin:end])
+        ns={'m':'http://maven.apache.org/POM/4.0.0'}
+        props=project.find('m:properties',ns)
+        values={key:props.findtext('m:maven.compiler.'+key,namespaces=ns) for key in ('release','source','target')}
+        target=values['release'] or values['target']
+        assert target, 'Historical compiler target must be observed'
+        release=int(target.removeprefix('1.'))
+        assert 1 <= release <= 17
+        record['compiler']=dict(settings=values,classes=provenance.classes(jar,release),
+                                maven_version_observation=version,effective_pom_sha256=__import__('hashlib').sha256(effective[begin:end].encode()).hexdigest())
+
     spec = importlib.util.spec_from_file_location('frozen_owned',args.fixture/'scripts/verify-browser-state.py')
     owned = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(owned)
@@ -60,7 +78,7 @@ def main():
                     assert owned.pid_identity(pid) == key[1], 'Historical owned PID changed'
                     raw = provenance.capture([tools['jcmd'],str(pid),'VM.system_properties'],args.java_home,timeout=3)
                     facts = dict(line.split('=',1) for line in raw.splitlines() if '=' in line)
-                    jar = facts['sun.java.command'].split()[0]
+                    jar = next(path for path in jars if facts['sun.java.command'].startswith(path+' --spring.config.location='))
                     assert jar in jars and provenance.digest(jar) == jars[jar]['jar_sha256']
                     assert facts['java.home'] == tools['home'] and facts['java.vendor'] == tools['vendor']
                     assert facts['java.version'] == '17.0.16'

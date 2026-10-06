@@ -154,6 +154,15 @@ class Guards(unittest.TestCase):
             with self.assertRaises(AssertionError):
                 upgrade.provenance.jdk(home,25)
 
+
+    def test_reused_owned_pid_refuses_attachment(self):
+        from types import SimpleNamespace
+        run=SimpleNamespace(process=SimpleNamespace(pid=123,poll=lambda:None),r={'pid_identity':'original'})
+        with patch.object(upgrade.owned,'pid_identity',return_value='reused'), patch.object(upgrade.provenance,'capture') as attach:
+            with self.assertRaises(AssertionError):
+                upgrade.provenance.observe(run,{},'boot4-java25',upgrade.owned,999999999)
+            attach.assert_not_called()
+
     def test_mixed_and_preview_class_headers_refused(self):
         with tempfile.TemporaryDirectory() as directory:
             jar = Path(directory)/'bytecode.jar'
