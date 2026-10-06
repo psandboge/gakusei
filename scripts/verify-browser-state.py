@@ -272,7 +272,7 @@ class Run:
                 self.env['SPRING_DATASOURCE_URL'] = f"jdbc:postgresql://127.0.0.1:{self.r['db_port']}/gakusei_browser"
                 atomic(self.record, self.r)
 
-    def start(self, seed=False, jar_path=None, profiles="local-postgres"):
+    def start(self, seed=False, jar_path=None, profiles="local-postgres", java_executable=None):
         assert profiles in ("local-postgres", "upgrade-seed-refusal"), "Only owned fixture profiles allowed"
         # Optional immutable production jar for cross-version upgrade proof. The
         # default and ownership-record validation remain unchanged.
@@ -306,7 +306,11 @@ class Run:
         env = dict(self.env, GAKUSEI_LOCAL_SEED=str(seed).lower())
         log_path = self.directory / (('seed-' if seed else 'app-') + secrets.token_hex(4) + '.log')
         log = open(log_path, 'w')
-        self.process = subprocess.Popen(['java', '-jar', str(jar),
+        if java_executable is not None:
+            launcher = Path(java_executable)
+            assert launcher.is_absolute() and launcher.resolve() == launcher and launcher.is_file()
+            env.update(JAVA_HOME=str(launcher.parent.parent), PATH=str(launcher.parent)+os.pathsep+env.get('PATH',''))
+        self.process = subprocess.Popen([str(java_executable) if java_executable is not None else 'java', '-jar', str(jar),
             '--spring.config.location=classpath:/application.yml',
             '--spring.profiles.active=' + profiles, '--server.address=127.0.0.1',
             '--server.port=' + str(self.r['app_port']), '--gakusei.data-init=false',
@@ -318,6 +322,9 @@ class Run:
         self.r['pid_identity'] = pid_identity(self.process.pid)
         atomic(self.record, self.r)
         deadline = time.monotonic() + 100
+        observer = getattr(self, 'runtime_observer', None)
+        if observer is not None:
+            observer(self, deadline)
         while time.monotonic() < deadline:
             assert self.process.poll() is None, 'Tracked Java startup failed'
             inspect_service(self.r, self.env)

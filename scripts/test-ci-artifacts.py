@@ -2,6 +2,7 @@
 """Privacy boundaries: synthetic and actual run-generated secret rejection."""
 import importlib.util
 import json
+import subprocess
 from pathlib import Path
 import tempfile
 import unittest
@@ -19,24 +20,67 @@ collector = module('collector', 'scripts/collect-ci-artifacts.py')
 owned = module('owned', 'scripts/verify-browser-state.py')
 
 class Privacy(unittest.TestCase):
+    def test_renderer_failure_removes_stale_and_partial_output(self):
+        for error in (subprocess.CalledProcessError(1, 'node'),
+                      subprocess.TimeoutExpired('node', 45)):
+            with self.subTest(error=type(error).__name__), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                public = root / 'artifacts/browser'
+                public.mkdir(parents=True)
+                (public / 'diagnostics.png').write_bytes(b'previous upload')
+                stage = root / '.tools/ci-public-stage'
+
+                def fail_render(args, **kwargs):
+                    self.assertEqual(kwargs['timeout'], 45)
+                    self.assertTrue(kwargs['check'])
+                    self.assertEqual(kwargs['stdout'], subprocess.DEVNULL)
+                    self.assertEqual(kwargs['stderr'], subprocess.DEVNULL)
+                    (Path(args[-1]) / 'diagnostics.png').write_bytes(b'partial PNG')
+                    raise error
+
+                with patch.object(collector, 'ROOT', root), patch.object(collector, 'DEST', public), \
+                     patch.object(collector.subprocess, 'run', fail_render):
+                    with self.assertRaises(type(error)):
+                        collector.collect()
+                self.assertFalse(public.exists(), 'Renderer failure must suppress stale uploads')
+                self.assertFalse(stage.exists(), 'Renderer failure must remove partial output')
+
     def test_upgrade_requires_current_source_and_complete_prerequisites(self):
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp)
-            (directory / 'upgrade-private-marker.json').write_text('{}')
+            (directory / 'upgrade-private-marker.json').write_text(json.dumps(dict(proof_pair='boot3-boot4')))
             self.assertEqual('unavailable', collector.upgrade_facts(directory)[0]['status'])
             result = directory / 'upgrade-result-private.json'
-            result.write_text(json.dumps(dict(status='passed', candidate_sha='stale')))
+            result.write_text(json.dumps(dict(proof_pair='boot3-boot4', status='passed', candidate_sha='stale')))
             with patch.object(collector.subprocess, 'check_output', return_value='current'):
                 self.assertEqual('unavailable', collector.upgrade_facts(directory)[0]['status'])
-                result.write_text(json.dumps(dict(status='passed', candidate_sha='current', username='PRIVATE')))
+                result.write_text(json.dumps(dict(proof_pair='boot3-boot4', status='passed', candidate_sha='current', username='PRIVATE')))
                 self.assertEqual('unavailable', collector.upgrade_facts(directory)[0]['status'])
                 for name in ('upgrade-before-private.json','upgrade-after-private.json','ownership.json'):
                     (directory / name).write_text('{"private":"SYNTHETIC_SECRET"}')
+                self.assertEqual('unavailable', collector.upgrade_facts(directory)[0]['status'])
+                for index in range(6):
+                    (directory/f'runtime-{index}-private.json').write_text(json.dumps(dict(
+                        schema='gakusei.upgrade-runtime.v1',pair='boot3-boot4',source_sha='current',
+                        pid=index+1,pid_identity='owned',vm_properties='private',
+                        jar_sha256='a'*64,launcher_sha256='b'*64)))
                 facts = collector.upgrade_facts(directory)
                 self.assertEqual('passed', facts[0]['status'])
                 self.assertNotIn('PRIVATE', json.dumps(facts))
-                result.write_text(json.dumps(dict(status='interrupted', candidate_sha='current')))
+                result.write_text(json.dumps(dict(proof_pair='boot3-boot4', status='interrupted', candidate_sha='current')))
                 self.assertEqual('handled-termination', collector.upgrade_facts(directory)[0]['cause'])
+
+
+    def test_pair_mismatch_or_unclassified_result_refuses_disclosure(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            marker = directory/'upgrade-private-marker.json'
+            result = directory/'upgrade-result-private.json'
+            marker.write_text(json.dumps(dict(proof_pair='boot3-boot4')))
+            for pair in ('boot4-java25', 'unknown', None):
+                result.write_text(json.dumps(dict(proof_pair=pair,status='passed',candidate_sha='current')))
+                with self.assertRaises(ValueError):
+                    collector.upgrade_facts(directory)
 
     def test_secret_rejection(self):
         run = owned.Run()  # actual random DB/remember-me values, no services started

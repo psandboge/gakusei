@@ -187,6 +187,11 @@ def upgrade_facts(directory):
     if not result.is_file():
         return [fact('immutable-upgrade', 'upgrade', 'unavailable', 'unavailable')]
     data = json.loads(result.read_text())
+    pair = data.get('proof_pair')
+    if pair not in ('boot3-boot4', 'boot4-java25'):
+        raise ValueError('Unclassified upgrade proof pair')
+    if json.loads(marker.read_text()).get('proof_pair') != pair:
+        raise ValueError('Upgrade pair marker mismatch')
     current = subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip()
     if data.get('candidate_sha') != current:
         return [fact('immutable-upgrade', 'upgrade', 'unavailable', 'unavailable')]
@@ -196,9 +201,24 @@ def upgrade_facts(directory):
     if status == 'passed' and not all((directory / name).is_file() for name in
             ('upgrade-before-private.json', 'upgrade-after-private.json', 'ownership.json')):
         status = 'unavailable'
+    if status == 'passed':
+        records = list(directory.glob('runtime-*-private.json'))
+        if len(records) < 6:
+            status = 'unavailable'
+        baseline = {'boot3-boot4':'1bac4e96fe9a2f405eddff503056ef231fb4a8f9',
+                    'boot4-java25':'710a0051099492f34b5e383c0bd9457d9934f2bc'}[pair]
+        for path in records:
+            runtime = json.loads(path.read_text())
+            if (runtime.get('schema') != 'gakusei.upgrade-runtime.v1' or runtime.get('pair') != pair
+                    or runtime.get('source_sha') not in (baseline,current)
+                    or type(runtime.get('pid')) is not int or not runtime.get('pid_identity')
+                    or not runtime.get('vm_properties')
+                    or not re.fullmatch('[a-f0-9]{64}', runtime.get('jar_sha256',''))
+                    or not re.fullmatch('[a-f0-9]{64}', runtime.get('launcher_sha256',''))):
+                raise ValueError('Invalid or stale private runtime evidence')
     cause = {'passed':'none', 'failed':'check-failed', 'interrupted':'handled-termination',
              'unavailable':'unavailable'}[status]
-    return [fact('immutable-upgrade', 'upgrade', status, cause)]
+    return [fact(pair, 'upgrade', status, cause)]
 
 
 def collect():

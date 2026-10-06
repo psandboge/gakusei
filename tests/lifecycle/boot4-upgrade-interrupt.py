@@ -66,6 +66,6 @@ else:
             assert owned.inspect_service(sentinel.r, sentinel.env) == identity
             assert owned.sql(sentinel.r, sentinel.env, 'SELECT json_agg(value) FROM lifecycle_sentinel;') == ['untouched']
             assert owned.sql(sentinel.r, sentinel.env, "SELECT json_agg(tablename) FROM pg_tables WHERE schemaname='public';") == ['lifecycle_sentinel']
-            print('PASS upgrade ' + case + ': exact cleanup and hostile-env sentinel preservation', flush=True)
+            print('PASS ' + args.proof_pair + ' upgrade ' + case + ': exact cleanup and hostile-env sentinel preservation', flush=True)
     finally:
         owned.cleanup(sentinel.record)

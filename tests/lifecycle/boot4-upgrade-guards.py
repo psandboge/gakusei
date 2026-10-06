@@ -6,6 +6,10 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 import zipfile
+import os
+import json
+import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location('upgrade', ROOT / 'scripts/verify-boot4-upgrade.py')
@@ -86,16 +90,25 @@ class Guards(unittest.TestCase):
             jar.parent.mkdir()
             with zipfile.ZipFile(jar, 'w') as archive:
                 archive.writestr('BOOT-INF/lib/spring-boot-3.5.16.jar', b'')
+                archive.writestr('BOOT-INF/classes/Fixture.class', b'\xca\xfe\xba\xbe\x00\x00\x00\x3d')
                 archive.writestr('BOOT-INF/classes/static/js/main.js', b'fixture')
                 archive.writestr('BOOT-INF/classes/static/license/licenses.xml', b'fixture')
                 archive.writestr('META-INF/MANIFEST.MF', 'Start-Class: se.kits.gakusei.GakuseiApplication\nSpring-Boot-Version: 3.5.16\n')
             digest = hashlib.sha256(jar.read_bytes()).hexdigest()
-            proof = dict(schema='gakusei.upgrade-build.v1', checkout=str(root), source_sha=sha,
-                         tracked_source_clean=True, build_command=['./mvnw', '-B', '-ntp', '-Pproduction', '-DskipTests', 'package'],
+            proof = dict(schema='gakusei.upgrade-build.v2', checkout=str(root), source_sha=sha,
+                         tracked_source_clean=True, build_command=['./mvnw', '-B', '-ntp', '-Pproduction', '-DskipTests', 'clean', 'package'],
                          build_exit=0, jar=str(jar), jar_sha256=digest, boot_version='3.5.16')
+            home = Path(os.environ['GAKUSEI_JAVA17_HOME'])
+            proof.update(jdk=upgrade.provenance.jdk(home, 17),
+                         maven=dict(version='3.9.16', compiler_release=17,
+                                    version_observation='Apache Maven 3.9.16\nJava version: 17.0.16, runtime: '+str(home),
+                                    plugins={'maven-compiler-plugin':'3.14.0', 'maven-surefire-plugin':'3.5.3'},
+                                    effective_pom_sha256='a'*64),
+                         classes=upgrade.provenance.classes(jar,17))
             manifest = root / 'build.json'
             upgrade.owned.atomic(manifest, proof)
-            self.assertEqual(root, upgrade.binding(jar, sha, digest, manifest, '3.5.16'))
+            with patch.object(upgrade.provenance, 'maven', return_value=proof['maven']):
+                self.assertEqual(root, upgrade.binding(jar, sha, digest, manifest, '3.5.16'))
             for key, value in [('source_sha', 'a'*40), ('jar_sha256','b'*64), ('build_exit',1),
                                ('tracked_source_clean',False), ('boot_version','4.1.1'), ('jar',str(root/'foreign.jar'))]:
                 upgrade.owned.atomic(manifest, dict(proof, **{key:value}))
@@ -109,6 +122,66 @@ class Guards(unittest.TestCase):
             jar.write_bytes(b'swapped')
             with self.assertRaises(AssertionError):
                 upgrade.binding(jar, sha, digest, manifest, '3.5.16')
+
+
+    def test_public_pair_relabeling_refuses_before_allocation(self):
+        for pair, sha in [('boot4-java25', upgrade.BASELINE_SHA), ('boot3-boot4', upgrade.PAIRS['boot4-java25'][0])]:
+            result = subprocess.run([sys.executable, str(ROOT/'scripts/verify-boot4-upgrade.py'),
+                                     '--proof-pair', pair, '--baseline-sha', sha],
+                                    text=True, capture_output=True)
+            self.assertNotEqual(0, result.returncode)
+            self.assertIn('Unaccepted baseline SHA', result.stderr)
+            self.assertNotIn('OWNERSHIP=', result.stdout)
+        result = subprocess.run([sys.executable, str(ROOT/'scripts/run-boot4-proof.py'),
+                                 '--proof-pair', 'relabel'], text=True, capture_output=True)
+        self.assertNotEqual(0, result.returncode)
+        self.assertNotIn('OWNERSHIP=', result.stdout)
+
+    def test_actual_receipt_and_executable_tampering_refused(self):
+        import shutil
+        home = Path(os.environ['GAKUSEI_JAVA17_HOME'])
+        with tempfile.TemporaryDirectory() as directory:
+            copied = Path(directory).resolve()/'jdk'
+            (copied/'bin').mkdir(parents=True)
+            for name in ('java', 'javac', 'jcmd'):
+                shutil.copy2(home/'bin'/name, copied/'bin'/name)
+            receipt = json.loads((home/'gakusei-jdk-receipt.json').read_text())
+            receipt['home'] = str(copied)
+            (copied/'gakusei-jdk-receipt.json').write_text(json.dumps(receipt))
+            (copied/'bin/java').write_bytes(b'tampered')
+            with self.assertRaisesRegex(AssertionError, 'tampered'):
+                upgrade.provenance.jdk(copied,17)
+            with self.assertRaises(AssertionError):
+                upgrade.provenance.jdk(home,25)
+
+
+
+    def test_vm_properties_escaping_preserves_exact_jar_identity(self):
+        path='/private/owned with spaces/target/gakusei.jar'
+        observed=path+r' --spring.config.location\=classpath\:/application.yml'
+        self.assertEqual(path,upgrade.provenance.jar_identity(observed,[path]))
+        with self.assertRaises(AssertionError):
+            upgrade.provenance.jar_identity('/private/foreign.jar --seed=true',[path])
+        with self.assertRaises(AssertionError):
+            upgrade.provenance.jar_identity(observed,[path,path+r' --spring.config.location\=classpath\:/application.yml'])
+
+    def test_reused_owned_pid_refuses_attachment(self):
+        from types import SimpleNamespace
+        run=SimpleNamespace(process=SimpleNamespace(pid=123,poll=lambda:None),r={'pid_identity':'original'})
+        with patch.object(upgrade.owned,'pid_identity',return_value='reused'), patch.object(upgrade.provenance,'capture') as attach:
+            with self.assertRaises(AssertionError):
+                upgrade.provenance.observe(run,{},'boot4-java25',upgrade.owned,999999999)
+            attach.assert_not_called()
+
+    def test_mixed_and_preview_class_headers_refused(self):
+        with tempfile.TemporaryDirectory() as directory:
+            jar = Path(directory)/'bytecode.jar'
+            for header in (b'\xca\xfe\xba\xbe\x00\x00\x00\x3d',
+                           b'\xca\xfe\xba\xbe\xff\xff\x00\x45'):
+                with zipfile.ZipFile(jar,'w') as archive:
+                    archive.writestr('BOOT-INF/classes/Fixture.class',header)
+                with self.assertRaises(AssertionError):
+                    upgrade.provenance.classes(jar,25)
 
 if __name__ == '__main__':
     unittest.main()
