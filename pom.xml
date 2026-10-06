@@ -19,7 +19,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>17</java.version>
+        <java.version>25</java.version>
         <skip.frontend>false</skip.frontend>
     </properties>
     <repositories>
@@ -213,7 +213,7 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[17,18)</version>
+                                    <version>[25,26)</version>
                                 </requireJavaVersion>
                                 <requireMavenVersion>
                                     <version>[3.9.16,3.9.17)</version>

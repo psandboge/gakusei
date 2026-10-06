@@ -13,10 +13,6 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
-        with:
-          distribution: temurin
-          java-version: '17'
       - name: Install pinned Linux tools
         id: tools
         run: bash scripts/install-ci-tools.sh
@@ -80,12 +76,12 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
-        with:
-          distribution: temurin
-          java-version: '17'
       - name: Install pinned Linux tools
         run: bash scripts/install-ci-tools.sh
+      - name: Select verified historical Java 17
+        run: |
+          echo "JAVA_HOME=$GAKUSEI_JAVA17_HOME" >> "$GITHUB_ENV"
+          echo "$GAKUSEI_JAVA17_HOME/bin" >> "$GITHUB_PATH"
       - name: Build immutable Boot 2 fixture
         run: |
           git worktree add --detach .tools/boot2-fixture 9d614c2506d5e58ad3a8343a92dc7d87f9fde1c4
@@ -107,7 +103,12 @@ jobs:
       - name: Fresh and populated Boot 2 upgrade proof
         timeout-minutes: 15
         run: >-
-          bash .tools/boot3-fixture/scripts/test-boot3-upgrade.sh
+          python3 scripts/observe-historical-proof.py
+          --fixture "$GITHUB_WORKSPACE/.tools/boot3-fixture"
+          --baseline-checkout "$GITHUB_WORKSPACE/.tools/boot2-fixture"
+          --java-home "$GAKUSEI_JAVA17_HOME"
+          --records "$GITHUB_WORKSPACE/.tools/historical-upgrade"
+          -- bash scripts/test-boot3-upgrade.sh
           --baseline-jar "$GITHUB_WORKSPACE/.tools/boot2-fixture/target/gakusei.jar"
           --candidate-jar "$GITHUB_WORKSPACE/.tools/boot3-fixture/target/gakusei.jar"
           --baseline-sha 9d614c2506d5e58ad3a8343a92dc7d87f9fde1c4
@@ -115,7 +116,7 @@ jobs:
         timeout-minutes: 10
         run: |
           python3 .tools/boot3-fixture/tests/lifecycle/upgrade-guards.py
-          python3 .tools/boot3-fixture/tests/lifecycle/upgrade-interrupt.py "$GITHUB_WORKSPACE/.tools/boot2-fixture/target/gakusei.jar" "$GITHUB_WORKSPACE/.tools/boot3-fixture/target/gakusei.jar"
+          python3 scripts/observe-historical-proof.py --fixture "$GITHUB_WORKSPACE/.tools/boot3-fixture" --baseline-checkout "$GITHUB_WORKSPACE/.tools/boot2-fixture" --java-home "$GAKUSEI_JAVA17_HOME" --records "$GITHUB_WORKSPACE/.tools/historical-interrupt" -- python3 tests/lifecycle/upgrade-interrupt.py "$GITHUB_WORKSPACE/.tools/boot2-fixture/target/gakusei.jar" "$GITHUB_WORKSPACE/.tools/boot3-fixture/target/gakusei.jar"
       - name: Unconditional exact owned cleanup
         if: always()
         timeout-minutes: 5
@@ -138,10 +139,6 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
-        with:
-          distribution: temurin
-          java-version: '17'
       - name: Install pinned Linux tools
         run: bash scripts/install-ci-tools.sh
       - name: Build and bind independent frozen Boot 3
@@ -150,13 +147,14 @@ jobs:
           cd .tools/boot3-fixture
           npm ci
           npm run preflight
-          bash scripts/test-postgres.sh -Dskip.frontend=true test
-          python3 ../../scripts/build-upgrade-jar.py --checkout "$PWD" --manifest "$GITHUB_WORKSPACE/.tools/boot3-build.json"
+          JAVA_HOME="$GAKUSEI_JAVA17_HOME" PATH="$GAKUSEI_JAVA17_HOME/bin:$PATH" bash scripts/test-postgres.sh -Dskip.frontend=true test
+          cd "$GITHUB_WORKSPACE"
+          python3 scripts/build-upgrade-jar.py --checkout "$GITHUB_WORKSPACE/.tools/boot3-fixture" --manifest "$GITHUB_WORKSPACE/.tools/boot3-build.json" --java-home "$GAKUSEI_JAVA17_HOME" --expected-java-major 17
       - name: Build and bind candidate after regression
         run: |
           npm ci
           npm run preflight
-          python3 scripts/build-upgrade-jar.py --checkout "$GITHUB_WORKSPACE" --manifest "$GITHUB_WORKSPACE/.tools/boot4-build.json"
+          python3 scripts/build-upgrade-jar.py --checkout "$GITHUB_WORKSPACE" --manifest "$GITHUB_WORKSPACE/.tools/boot4-build.json" --java-home "$GAKUSEI_JAVA25_HOME" --expected-java-major 25
       - name: Fresh and populated immutable Boot 3 to Boot 4
         timeout-minutes: 15
         run: >-
@@ -177,5 +175,52 @@ jobs:
           python3 scripts/collect-ci-artifacts.py cleanup || cleanup_status=1
           if test -d .tools/boot3-fixture; then
             (cd .tools/boot3-fixture && python3 scripts/collect-ci-artifacts.py cleanup) || cleanup_status=1
+          fi
+          exit "$cleanup_status"
+  java25-upgrade:
+    needs: regression
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install pinned Linux tools
+        run: bash scripts/install-ci-tools.sh
+      - name: Build and bind independent frozen Boot 4 Java17
+        run: |
+          git worktree add --detach .tools/boot4-fixture 710a0051099492f34b5e383c0bd9457d9934f2bc
+          cd .tools/boot4-fixture
+          npm ci
+          npm run preflight
+          JAVA_HOME="$GAKUSEI_JAVA17_HOME" PATH="$GAKUSEI_JAVA17_HOME/bin:$PATH" bash scripts/test-postgres.sh -Dskip.frontend=true test
+          cd "$GITHUB_WORKSPACE"
+          python3 scripts/build-upgrade-jar.py --checkout "$GITHUB_WORKSPACE/.tools/boot4-fixture" --manifest "$GITHUB_WORKSPACE/.tools/baseline-java17-build.json" --java-home "$GAKUSEI_JAVA17_HOME" --expected-java-major 17
+      - name: Build and bind candidate after regression
+        run: |
+          npm ci
+          npm run preflight
+          python3 scripts/build-upgrade-jar.py --checkout "$GITHUB_WORKSPACE" --manifest "$GITHUB_WORKSPACE/.tools/candidate-java25-build.json" --java-home "$GAKUSEI_JAVA25_HOME" --expected-java-major 25
+      - name: Fresh and populated immutable Boot 4 Java17 to Boot 4
+        timeout-minutes: 15
+        run: >-
+          python3 scripts/run-boot4-proof.py --proof-pair boot4-java25
+          --baseline-build-manifest "$GITHUB_WORKSPACE/.tools/baseline-java17-build.json"
+          --candidate-build-manifest "$GITHUB_WORKSPACE/.tools/candidate-java25-build.json"
+      - name: Bound interruption and sentinel proof
+        timeout-minutes: 10
+        run: >-
+          python3 scripts/run-boot4-proof.py --proof-pair boot4-java25 --interrupt
+          --baseline-build-manifest "$GITHUB_WORKSPACE/.tools/baseline-java17-build.json"
+          --candidate-build-manifest "$GITHUB_WORKSPACE/.tools/candidate-java25-build.json"
+      - name: Unconditional exact ownership cleanup
+        if: always()
+        timeout-minutes: 5
+        run: |
+          cleanup_status=0
+          python3 scripts/collect-ci-artifacts.py cleanup || cleanup_status=1
+          if test -d .tools/boot4-fixture; then
+            (cd .tools/boot4-fixture && python3 scripts/collect-ci-artifacts.py cleanup) || cleanup_status=1
           fi
           exit "$cleanup_status"

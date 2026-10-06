@@ -21,6 +21,15 @@ BASELINE_SHA = '1bac4e96fe9a2f405eddff503056ef231fb4a8f9'
 spec = importlib.util.spec_from_file_location('owned', ROOT / 'scripts/verify-browser-state.py')
 owned = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(owned)
+spec = importlib.util.spec_from_file_location('provenance', ROOT / 'scripts/java-provenance.py')
+provenance = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(provenance)
+PAIRS = {
+    'boot3-boot4': (BASELINE_SHA, '3.5.16'),
+    'boot4-java25': ('710a0051099492f34b5e383c0bd9457d9934f2bc', '4.1.1'),
+}
+PROOF_PAIR = 'boot3-boot4'
+
 
 
 def jar_proof(path, version):
@@ -135,8 +144,8 @@ def finish(run):
 
 def fixture(baseline, candidate, upgrading):
     run = owned.Run()
-    owned.atomic(run.directory / 'upgrade-private-marker.json', {'kind':'boot4-upgrade'})
-    result = {'status':'failed', 'fixture':'populated-boot3' if upgrading else 'fresh-boot4',
+    owned.atomic(run.directory / 'upgrade-private-marker.json', {'kind':'boot4-upgrade', 'proof_pair':PROOF_PAIR})
+    result = {'status':'failed', 'proof_pair':PROOF_PAIR, 'fixture':('populated-' if upgrading else 'fresh-') + PROOF_PAIR,
               'candidate_sha': CANDIDATE_SHA}
     try:
         run.up()
@@ -204,7 +213,7 @@ def fixture(baseline, candidate, upgrading):
 
 def seed_refusal(candidate):
     run = owned.Run()
-    owned.atomic(run.directory / 'upgrade-private-marker.json', {'kind':'seed-refusal'})
+    owned.atomic(run.directory / 'upgrade-private-marker.json', {'kind':'seed-refusal', 'proof_pair':PROOF_PAIR})
     try:
         run.up()
         run.start(jar_path=candidate)
@@ -226,7 +235,7 @@ def seed_refusal(candidate):
 
 def seed_profile_refusal(candidate):
     run = owned.Run()
-    owned.atomic(run.directory / 'upgrade-private-marker.json', {'kind':'unsafe-profile-refusal'})
+    owned.atomic(run.directory / 'upgrade-private-marker.json', {'kind':'unsafe-profile-refusal', 'proof_pair':PROOF_PAIR})
     try:
         run.up()
         run.start(jar_path=candidate)
@@ -263,20 +272,20 @@ def git(root, *args):
     return subprocess.check_output(['git', '-C', str(root), *args], text=True).strip()
 
 
-def binding(jar, sha, digest, manifest, version):
+def binding(jar, sha, digest, manifest, version, major=17, baseline_sha=BASELINE_SHA):
     assert re.fullmatch('[a-f0-9]{40}', sha or ''), 'Full source SHA required'
     assert re.fullmatch('[a-f0-9]{64}', digest or ''), 'Independent SHA256 required'
     assert manifest and manifest.is_absolute() and manifest.resolve() == manifest
     assert manifest.is_file() and not manifest.is_symlink()
     assert stat.S_IMODE(manifest.stat().st_mode) == 0o600, 'Private build manifest required'
     proof = json.loads(manifest.read_text())
-    assert proof['schema'] == 'gakusei.upgrade-build.v1'
+    assert proof['schema'] == provenance.SCHEMA
     root = Path(proof['checkout'])
     assert root.is_absolute() and root.resolve() == root and root.is_dir()
     assert git(root, 'rev-parse', '--show-toplevel') == str(root)
     assert git(root, 'rev-parse', 'HEAD') == sha == proof['source_sha']
     assert proof['tracked_source_clean'] is True and not git(root, 'status', '--porcelain', '--untracked-files=no')
-    assert proof['build_command'] == ['./mvnw', '-B', '-ntp', '-Pproduction', '-DskipTests', 'package']
+    assert proof['build_command'] == provenance.BUILD_COMMAND
     assert type(proof['build_exit']) is int and proof['build_exit'] == 0
     assert proof['boot_version'] == version
     assert jar and jar.is_absolute() and jar.resolve() == jar
@@ -284,9 +293,10 @@ def binding(jar, sha, digest, manifest, version):
     assert jar.is_file() and not jar.is_symlink()
     assert proof['jar_sha256'] == digest == hashlib.sha256(jar.read_bytes()).hexdigest()
     assert jar_proof(jar, version) == digest
+    provenance.validate(proof, major)
     if version == '4.1.1':
-        subprocess.run(['git', '-C', str(root), 'merge-base', '--is-ancestor', BASELINE_SHA, sha], check=True)
-        subprocess.run(['git', '-C', str(root), 'merge-base', '--is-ancestor', BASELINE_SHA, 'origin/develop'], check=True)
+        subprocess.run(['git', '-C', str(root), 'merge-base', '--is-ancestor', baseline_sha, sha], check=True)
+        subprocess.run(['git', '-C', str(root), 'merge-base', '--is-ancestor', baseline_sha, 'origin/develop'], check=True)
     return root
 
 
@@ -297,27 +307,37 @@ def arguments(argv=None):
         parser.add_argument('--' + name + '-sha')
         parser.add_argument('--' + name + '-jar-sha256')
         parser.add_argument('--' + name + '-build-manifest', type=Path)
+    parser.add_argument('--proof-pair', choices=tuple(PAIRS), default='boot3-boot4')
     parser.add_argument('--cleanup', type=Path, metavar='OWNERSHIP_JSON')
     return parser.parse_args(argv)
 
 
 def validate(args):
-    assert args.baseline_sha == BASELINE_SHA, 'Unaccepted baseline SHA'
+    baseline_sha, version = PAIRS[args.proof_pair]
+    assert args.baseline_sha == baseline_sha, 'Unaccepted baseline SHA'
+    assert args.candidate_sha != baseline_sha, 'Distinct candidate source required'
     roots = []
-    for name, version in (('baseline', '3.5.16'), ('candidate', '4.1.1')):
+    for name, version, major in (('baseline', version, 17), ('candidate', '4.1.1', 25)):
         roots.append(binding(getattr(args, name+'_jar'), getattr(args, name+'_sha'),
-                            getattr(args, name+'_jar_sha256'), getattr(args, name+'_build_manifest'), version))
+                            getattr(args, name+'_jar_sha256'), getattr(args, name+'_build_manifest'), version, major, baseline_sha))
     assert roots[0] != roots[1], 'Independent checkouts required'
     assert args.baseline_jar != args.candidate_jar
     assert args.baseline_jar_sha256 != args.candidate_jar_sha256
 
 
 def install_binding_guard(args):
-    global CANDIDATE_SHA
+    global CANDIDATE_SHA, PROOF_PAIR
     CANDIDATE_SHA = args.candidate_sha
+    PROOF_PAIR = args.proof_pair
     original = owned.Run.start
     def start(run, *positional, **kwargs):
         validate(args)  # Source, manifest and both jar hashes before every restart.
+        jar = kwargs.get('jar_path')
+        assert jar in (args.baseline_jar, args.candidate_jar), 'Only independently bound jars allowed'
+        manifest = args.baseline_build_manifest if jar == args.baseline_jar else args.candidate_build_manifest
+        proof = json.loads(manifest.read_text())
+        kwargs['java_executable'] = proof['jdk']['java']
+        run.runtime_observer = lambda current, deadline: provenance.observe(current, proof, args.proof_pair, owned, deadline)
         return original(run, *positional, **kwargs)
     owned.Run.start = start
 
@@ -325,7 +345,7 @@ def install_binding_guard(args):
 def main():
     args = arguments()
     if args.cleanup:
-        assert not any(value for key, value in vars(args).items() if key != 'cleanup')
+        assert not any(value for key, value in vars(args).items() if key not in ('cleanup', 'proof_pair'))
         assert args.cleanup.is_absolute()
         owned.cleanup(args.cleanup)
         return

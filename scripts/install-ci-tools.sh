@@ -16,3 +16,13 @@ if [[ -n ${GITHUB_PATH:-} ]]; then
   printf '%s\n' "$TOOLS/node-v24.21.0-linux-x64/bin" >> "$GITHUB_PATH"
 fi
 printf 'export PATH=%q:$PATH\n' "$TOOLS/node-v24.21.0-linux-x64/bin"
+
+export GAKUSEI_JAVA_TOOLS_DIR="$TOOLS/java"
+JAVA_EXPORTS=$(bash "$(dirname "$0")/install-java-tools.sh")
+eval "$JAVA_EXPORTS"
+export JAVA_HOME="$GAKUSEI_JAVA25_HOME"
+if [[ -n ${GITHUB_ENV:-} ]]; then
+  printf 'GAKUSEI_JAVA17_HOME=%s\nGAKUSEI_JAVA25_HOME=%s\nJAVA_HOME=%s\n' "$GAKUSEI_JAVA17_HOME" "$GAKUSEI_JAVA25_HOME" "$JAVA_HOME" >> "$GITHUB_ENV"
+  printf '%s\n' "$JAVA_HOME/bin" >> "$GITHUB_PATH"
+fi
+printf 'export GAKUSEI_JAVA17_HOME=%q GAKUSEI_JAVA25_HOME=%q JAVA_HOME=%q\n' "$GAKUSEI_JAVA17_HOME" "$GAKUSEI_JAVA25_HOME" "$JAVA_HOME"

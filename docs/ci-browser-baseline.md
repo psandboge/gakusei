@@ -1,14 +1,14 @@
 # CI and browser regression baseline
 
 The PR and `develop` push workflow runs on Ubuntu 24.04 with read-only repository
-permission and a 45-minute limit. It installs Temurin Java 17, checksum-verified
+permission and a 45-minute limit. It installs Temurin Java 25, checksum-verified
 Linux x64 Node 24.21.0, exactly npm 11.19.0, and the committed Maven 3.9.16 wrapper.
 Actions are pinned to full commits; there are no database/dependency caches or
 publication steps. A local pass is separate evidence from a hosted Actions run.
 
 ## Prerequisites and complete local sequence
 
-Use an isolated checkout, Java 17, Node 24.21.0, npm 11.19.0, Python 3 (without
+Use an isolated checkout, Java 25, Node 24.21.0, npm 11.19.0, Python 3 (without
 `-O`/`PYTHONOPTIMIZE`), Docker with Compose v2 and a running Docker engine.
 Allow several GB for Node modules, Maven, the packaged application, Chromium
 and disposable PostgreSQL 16.15 volumes. Network access is needed to official
@@ -36,7 +36,7 @@ python3 scripts/collect-ci-artifacts.py cleanup
 python3 scripts/collect-ci-artifacts.py collect
 ```
 
-On Linux x86_64 use Ubuntu 24.04, Temurin Java 17 selected through `JAVA_HOME`,
+On Linux x86_64 use Ubuntu 24.04, Temurin Java 25 selected through `JAVA_HOME`,
 Python 3, Docker/Compose, curl, CA certificates and xz. Do not source the Mac
 local-env script. `bash scripts/install-ci-tools.sh` prints a shell-quoted PATH
 export; execute that export in the current terminal (in Actions it writes to
@@ -158,3 +158,5 @@ harness against separately built frozen Boot 2 and Boot 3. `boot4-upgrade` binds
 frozen Boot 3 and the candidate with private independent build records. Both
 jobs depend on regression. See `backend-boot4.md`; local and hosted results are
 separate evidence and neither is established by this configuration alone.
+
+The current runtime checkpoint is described in [backend-java25.md](backend-java25.md). All four hosted jobs are required: regression, frozen boot3-upgrade, boot4-upgrade and java25-upgrade. Historical fixture commands select verified Java17 explicitly; candidate commands use Java25.

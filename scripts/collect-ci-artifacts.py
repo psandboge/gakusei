@@ -187,6 +187,11 @@ def upgrade_facts(directory):
     if not result.is_file():
         return [fact('immutable-upgrade', 'upgrade', 'unavailable', 'unavailable')]
     data = json.loads(result.read_text())
+    pair = data.get('proof_pair')
+    if pair not in ('boot3-boot4', 'boot4-java25'):
+        raise ValueError('Unclassified upgrade proof pair')
+    if json.loads(marker.read_text()).get('proof_pair') != pair:
+        raise ValueError('Upgrade pair marker mismatch')
     current = subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip()
     if data.get('candidate_sha') != current:
         return [fact('immutable-upgrade', 'upgrade', 'unavailable', 'unavailable')]
@@ -198,7 +203,7 @@ def upgrade_facts(directory):
         status = 'unavailable'
     cause = {'passed':'none', 'failed':'check-failed', 'interrupted':'handled-termination',
              'unavailable':'unavailable'}[status]
-    return [fact('immutable-upgrade', 'upgrade', status, cause)]
+    return [fact(pair, 'upgrade', status, cause)]
 
 
 def collect():

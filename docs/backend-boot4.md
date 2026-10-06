@@ -1,6 +1,6 @@
 # Spring Boot 4 compatibility checkpoint
 
-The candidate uses released Spring Boot 4.1.1 on Java 17. The Boot BOM manages
+The accepted Boot4 checkpoint used released Spring Boot 4.1.1 on Java 17. The current candidate uses Java25; see [backend-java25.md](backend-java25.md). The Boot BOM manages
 Framework 7.0.9, Security 7.1.1, Jackson 3.1.5, Hibernate 7.4.5.Final,
 Liquibase Community 5.0.3 and PostgreSQL JDBC 42.7.13. PostgreSQL server remains
 16.15; Node 24.21.0, npm 11.19.0 and Maven 3.9.16 remain pinned.
@@ -48,8 +48,8 @@ frozen Boot 2 and Boot 3 jars; the new candidate cannot replace that old pair.
 For the new pair, independently run the following after backend tests succeed:
 
 ```sh
-python3 scripts/build-upgrade-jar.py --checkout /absolute/boot3-checkout --manifest /absolute/private/boot3-build.json
-python3 scripts/build-upgrade-jar.py --checkout /absolute/candidate-checkout --manifest /absolute/private/boot4-build.json
+python3 scripts/build-upgrade-jar.py --checkout /absolute/boot3-checkout --manifest /absolute/private/boot3-build.json --java-home "$GAKUSEI_JAVA17_HOME" --expected-java-major 17
+python3 scripts/build-upgrade-jar.py --checkout /absolute/candidate-checkout --manifest /absolute/private/boot4-build.json --java-home "$GAKUSEI_JAVA25_HOME" --expected-java-major 25
 python3 scripts/run-boot4-proof.py --baseline-build-manifest /absolute/private/boot3-build.json --candidate-build-manifest /absolute/private/boot4-build.json
 python3 scripts/run-boot4-proof.py --interrupt --baseline-build-manifest /absolute/private/boot3-build.json --candidate-build-manifest /absolute/private/boot4-build.json
 ```
