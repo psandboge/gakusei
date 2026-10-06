@@ -65,11 +65,12 @@ export class selectScreen extends React.Component {
 
   // Triggers when we change between play types but remain in "selection" page
   componentWillReceiveProps(nextProps) {
-    if (this.state.playType !== nextProps.match.params.type) {
-      this.props.fetchLessons(nextProps.match.params.type).catch(() => this.props.verifyUserLoggedIn());
-      this.props.fetchaddressedQuestionsInLessons(nextProps.match.params.type);
+    const nextPlayType = nextProps.match.params.type || 'guess';
+    if (this.state.playType !== nextPlayType) {
+      this.props.fetchLessons(nextPlayType).catch(() => this.props.verifyUserLoggedIn());
+      this.props.fetchaddressedQuestionsInLessons(nextPlayType);
       this.setState({
-        playType: nextProps.match.params.type
+        playType: nextPlayType
       });
       this.props.isFetchingLesson ? this.props.setFetchingLesson(false) : null;
     }
