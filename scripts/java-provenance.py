@@ -116,6 +116,13 @@ def validate(proof, major):
     assert proof['maven'] == maven(Path(proof['checkout']), Path(current['home']), major), 'Compiler/Maven evidence changed'
     return current
 
+def jar_identity(command, allowed):
+    # VM.system_properties escapes '=' in option values; match the whole jar
+    # argument before those options, then rely on the owned PID/start identity.
+    matches = [path for path in allowed if command == path or command.startswith(path+' ')]
+    assert len(matches) == 1, 'Observed runtime jar differs or is ambiguous'
+    return matches[0]
+
 def observe(run, proof, pair, owned, deadline):
     """Attach only to this Run's tracked PID, within its original startup budget."""
     identity = owned.pid_identity(run.process.pid)
@@ -129,7 +136,7 @@ def observe(run, proof, pair, owned, deadline):
     properties = dict(line.split('=', 1) for line in raw.splitlines() if '=' in line)
     assert properties['java.home'] == tools['home'] and properties['java.vendor'] == tools['vendor']
     assert properties['java.version'] == tools['full_version'].split('+')[0]
-    assert properties['sun.java.command'].startswith(proof['jar']+' --spring.config.location='), 'Observed runtime jar differs'
+    assert jar_identity(properties['sun.java.command'], [proof['jar']]) == proof['jar'], 'Observed runtime jar differs'
     assert run.process.poll() is None and owned.pid_identity(run.process.pid) == identity
     assert digest(proof['jar']) == proof['jar_sha256']
     owned.atomic(run.directory / f'runtime-{run.process.pid}-{__import__("time").monotonic_ns()}-private.json',

@@ -155,6 +155,16 @@ class Guards(unittest.TestCase):
                 upgrade.provenance.jdk(home,25)
 
 
+
+    def test_vm_properties_escaping_preserves_exact_jar_identity(self):
+        path='/private/owned with spaces/target/gakusei.jar'
+        observed=path+r' --spring.config.location\=classpath\:/application.yml'
+        self.assertEqual(path,upgrade.provenance.jar_identity(observed,[path]))
+        with self.assertRaises(AssertionError):
+            upgrade.provenance.jar_identity('/private/foreign.jar --seed=true',[path])
+        with self.assertRaises(AssertionError):
+            upgrade.provenance.jar_identity(observed,[path,path+r' --spring.config.location\=classpath\:/application.yml'])
+
     def test_reused_owned_pid_refuses_attachment(self):
         from types import SimpleNamespace
         run=SimpleNamespace(process=SimpleNamespace(pid=123,poll=lambda:None),r={'pid_identity':'original'})

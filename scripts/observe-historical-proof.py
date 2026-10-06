@@ -78,7 +78,7 @@ def main():
                     assert owned.pid_identity(pid) == key[1], 'Historical owned PID changed'
                     raw = provenance.capture([tools['jcmd'],str(pid),'VM.system_properties'],args.java_home,timeout=3)
                     facts = dict(line.split('=',1) for line in raw.splitlines() if '=' in line)
-                    jar = next(path for path in jars if facts['sun.java.command'].startswith(path+' --spring.config.location='))
+                    jar = provenance.jar_identity(facts['sun.java.command'], jars)
                     assert jar in jars and provenance.digest(jar) == jars[jar]['jar_sha256']
                     assert facts['java.home'] == tools['home'] and facts['java.vendor'] == tools['vendor']
                     assert facts['java.version'] == '17.0.16'
