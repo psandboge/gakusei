@@ -26,14 +26,14 @@ public class RouteController {
     @RequestMapping(
         value = {
             "/",
-            "/login",
-            "/logout",
+            "/login", "/login/",
+            "/logout", "/logout/",
             "/play/**",
             "/select/**",
-            "/translate",
+            "/translate", "/translate/",
             "/finish/**",
-            "/home",
-            "/about"
+            "/home", "/home/",
+            "/about", "/about/"
         },
         method = RequestMethod.GET
     )

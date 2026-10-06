@@ -43,7 +43,7 @@ public class KanjiController {
 
     @Operation(summary="Getting kanji questions from a lesson")
     @RequestMapping(
-        value = "/api/questions/kanji",
+        value = {"/api/questions/kanji", "/api/questions/kanji/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -69,7 +69,7 @@ public class KanjiController {
 
     @Operation(summary="Getting kanji questions that a user has answered incorrectly")
     @RequestMapping(
-            value = "/api/wrongquestions/kanji",
+            value = {"/api/wrongquestions/kanji", "/api/wrongquestions/kanji/"},
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8"
     )

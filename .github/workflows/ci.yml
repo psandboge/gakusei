@@ -43,9 +43,11 @@ jobs:
         run: npm run test:browser
       - name: Lifecycle and browser ownership guards
         run: |
+          python3 tests/lifecycle/boot4-environment.py
           python3 tests/lifecycle/check.py
           node tests/browser/check-guards.js
           python3 tests/lifecycle/upgrade-guards.py
+          python3 tests/lifecycle/boot4-upgrade-guards.py
       - name: Collector privacy regression tests
         id: privacy_tests
         run: python3 scripts/test-ci-artifacts.py
@@ -93,31 +95,87 @@ jobs:
           npm run preflight
           bash scripts/test-postgres.sh -Dskip.frontend=true test
           ./mvnw -Pproduction -DskipTests package
-      - name: Build candidate after regression proof
+      - name: Build immutable merged Boot 3 fixture
         run: |
+          git worktree add --detach .tools/boot3-fixture 1bac4e96fe9a2f405eddff503056ef231fb4a8f9
+          cd .tools/boot3-fixture
+          test "$(git rev-parse HEAD)" = 1bac4e96fe9a2f405eddff503056ef231fb4a8f9
           npm ci
           npm run preflight
+          bash scripts/test-postgres.sh -Dskip.frontend=true test
           ./mvnw -Pproduction -DskipTests package
       - name: Fresh and populated Boot 2 upgrade proof
         timeout-minutes: 15
         run: >-
-          bash scripts/test-boot3-upgrade.sh
+          bash .tools/boot3-fixture/scripts/test-boot3-upgrade.sh
           --baseline-jar "$GITHUB_WORKSPACE/.tools/boot2-fixture/target/gakusei.jar"
-          --candidate-jar "$GITHUB_WORKSPACE/target/gakusei.jar"
+          --candidate-jar "$GITHUB_WORKSPACE/.tools/boot3-fixture/target/gakusei.jar"
           --baseline-sha 9d614c2506d5e58ad3a8343a92dc7d87f9fde1c4
       - name: Upgrade fail-closed and interrupted cleanup proof
         timeout-minutes: 10
         run: |
-          python3 tests/lifecycle/upgrade-guards.py
-          python3 tests/lifecycle/upgrade-interrupt.py "$GITHUB_WORKSPACE/.tools/boot2-fixture/target/gakusei.jar" "$GITHUB_WORKSPACE/target/gakusei.jar"
+          python3 .tools/boot3-fixture/tests/lifecycle/upgrade-guards.py
+          python3 .tools/boot3-fixture/tests/lifecycle/upgrade-interrupt.py "$GITHUB_WORKSPACE/.tools/boot2-fixture/target/gakusei.jar" "$GITHUB_WORKSPACE/.tools/boot3-fixture/target/gakusei.jar"
       - name: Unconditional exact owned cleanup
         if: always()
         timeout-minutes: 5
         run: |
           cleanup_status=0
-          python3 scripts/verify-boot3-upgrade.py --cleanup || cleanup_status=1
+          if test -d .tools/boot3-fixture; then
+            (cd .tools/boot3-fixture && python3 scripts/verify-boot3-upgrade.py --cleanup) || cleanup_status=1
+          fi
           python3 scripts/collect-ci-artifacts.py cleanup || cleanup_status=1
           if test -d .tools/boot2-fixture; then
             (cd .tools/boot2-fixture && python3 scripts/collect-ci-artifacts.py cleanup) || cleanup_status=1
+          fi
+          exit "$cleanup_status"
+  boot4-upgrade:
+    needs: regression
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install pinned Linux tools
+        run: bash scripts/install-ci-tools.sh
+      - name: Build and bind independent frozen Boot 3
+        run: |
+          git worktree add --detach .tools/boot3-fixture 1bac4e96fe9a2f405eddff503056ef231fb4a8f9
+          cd .tools/boot3-fixture
+          npm ci
+          npm run preflight
+          bash scripts/test-postgres.sh -Dskip.frontend=true test
+          python3 ../../scripts/build-upgrade-jar.py --checkout "$PWD" --manifest "$GITHUB_WORKSPACE/.tools/boot3-build.json"
+      - name: Build and bind candidate after regression
+        run: |
+          npm ci
+          npm run preflight
+          python3 scripts/build-upgrade-jar.py --checkout "$GITHUB_WORKSPACE" --manifest "$GITHUB_WORKSPACE/.tools/boot4-build.json"
+      - name: Fresh and populated immutable Boot 3 to Boot 4
+        timeout-minutes: 15
+        run: >-
+          python3 scripts/run-boot4-proof.py
+          --baseline-build-manifest "$GITHUB_WORKSPACE/.tools/boot3-build.json"
+          --candidate-build-manifest "$GITHUB_WORKSPACE/.tools/boot4-build.json"
+      - name: Bound interruption and sentinel proof
+        timeout-minutes: 10
+        run: >-
+          python3 scripts/run-boot4-proof.py --interrupt
+          --baseline-build-manifest "$GITHUB_WORKSPACE/.tools/boot3-build.json"
+          --candidate-build-manifest "$GITHUB_WORKSPACE/.tools/boot4-build.json"
+      - name: Unconditional exact ownership cleanup
+        if: always()
+        timeout-minutes: 5
+        run: |
+          cleanup_status=0
+          python3 scripts/collect-ci-artifacts.py cleanup || cleanup_status=1
+          if test -d .tools/boot3-fixture; then
+            (cd .tools/boot3-fixture && python3 scripts/collect-ci-artifacts.py cleanup) || cleanup_status=1
           fi
           exit "$cleanup_status"

@@ -33,7 +33,7 @@ public class KanjiDrawingController {
 
     @Operation(summary="Adds users kanji drawing, returns ResponseEntity and sets users kanji drawing as a list of coordinates (data) as String")
     @RequestMapping(
-        value = "/api/kanji-drawings",
+        value = {"/api/kanji-drawings", "/api/kanji-drawings/"},
         method = RequestMethod.POST,
         consumes = "application/json;charset=UTF-8",
         produces = "application/json;charset=UTF-8"
@@ -63,7 +63,7 @@ public class KanjiDrawingController {
 
     @Operation(summary="Gets a users kanji drawings")
     @RequestMapping(
-            value = "/api/kanji-drawings",
+            value = {"/api/kanji-drawings", "/api/kanji-drawings/"},
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8"
     )

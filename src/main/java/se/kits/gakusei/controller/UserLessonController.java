@@ -33,7 +33,7 @@ public class UserLessonController {
     private LessonRepository lessonRepository;
 
     @Operation(summary="Get a users lessons")
-    @RequestMapping(value = "/api/userLessons", method = RequestMethod.GET,
+    @RequestMapping(value = {"/api/userLessons", "/api/userLessons/"}, method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     public ResponseEntity<List<UserLesson>> getUserLesson(@RequestParam(value = "username") String username) {
 
@@ -45,7 +45,7 @@ public class UserLessonController {
 
     @Operation(summary="Add a lesson to a user")
     @RequestMapping(
-        value = "/api/userLessons/add",
+        value = {"/api/userLessons/add", "/api/userLessons/add/"},
         method = RequestMethod.POST,
         produces = "application/json;charset=UTF-8",
         consumes = "application/json;charset=UTF-8"
@@ -61,7 +61,7 @@ public class UserLessonController {
     }
 
     @Operation(summary="Remove a lesson from a user")
-    @RequestMapping(value = "/api/userLessons/remove", method = RequestMethod.DELETE,
+    @RequestMapping(value = {"/api/userLessons/remove", "/api/userLessons/remove/"}, method = RequestMethod.DELETE,
             produces = "application/json;charset=UTF-8")
     public ResponseEntity<UserLesson> removeUserLesson(
         @RequestParam(value = "lessonName") String lessonName,
@@ -73,7 +73,7 @@ public class UserLessonController {
     }
 
     @Operation(summary="Set a first deadline for a users lesson")
-    @RequestMapping(value = "/api/userLessons/setFirstDeadline", method = RequestMethod.POST,
+    @RequestMapping(value = {"/api/userLessons/setFirstDeadline", "/api/userLessons/setFirstDeadline/"}, method = RequestMethod.POST,
             produces = "application/json;charset=UTF-8")
     public ResponseEntity<UserLesson> setFirstDeadlineToUserLesson(@RequestBody DeadlineDTO deadlineDTO) {
 
@@ -86,7 +86,7 @@ public class UserLessonController {
     }
 
     @Operation(summary="Set a second deadline for a users lesson")
-    @RequestMapping(value = "/api/userLessons/setSecondDeadline", method = RequestMethod.POST,
+    @RequestMapping(value = {"/api/userLessons/setSecondDeadline", "/api/userLessons/setSecondDeadline/"}, method = RequestMethod.POST,
             produces = "application/json;charset=UTF-8")
     public ResponseEntity<UserLesson> setSecondDeadlineToUserLesson(@RequestBody DeadlineDTO deadlineDTO) {
 

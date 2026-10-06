@@ -48,12 +48,6 @@ public class MvcConfigurer implements WebMvcConfigurer {
     }
 
     @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-        // Compatibility checkpoint: retain Boot 2 controller trailing-slash aliases.
-        configurer.setUseTrailingSlashMatch(true);
-    }
-
-    @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 
     }

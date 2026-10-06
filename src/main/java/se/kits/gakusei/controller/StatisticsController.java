@@ -26,7 +26,7 @@ public class StatisticsController {
 
     @Operation(summary="Get succes rate from a user")
     @RequestMapping(
-        value = "/api/statistics/{user}",
+        value = {"/api/statistics/{user}", "/api/statistics/{user}/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )

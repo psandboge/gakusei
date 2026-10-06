@@ -1,12 +1,12 @@
 package se.kits.gakusei.integration;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.cache.CacheManager;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
@@ -16,6 +16,7 @@ import se.kits.gakusei.util.LessonHandler;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
+@org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = {"spring.cache.type=jcache", "spring.cache.jcache.config=classpath:ehcache.xml"})
 @ActiveProfiles({"local-postgres", "local-seed", "enable-resource-caching"})
@@ -49,6 +50,9 @@ public class Boot3IntegrationTest {
         try {
             org.springframework.security.core.context.SecurityContext security = org.springframework.security.core.context.SecurityContextHolder.createEmptyContext();
             org.springframework.security.core.context.SecurityContextHolder.setContext(security);
+            assertFalse(engine.process(template, context).contains("secret"));
+            security.setAuthentication(new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(
+                "template-learner", "unused", java.util.List.of(new org.springframework.security.core.authority.SimpleGrantedAuthority("ROLE_USER"))));
             assertFalse(engine.process(template, context).contains("secret"));
             security.setAuthentication(new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(
                 "template-admin", "unused", java.util.List.of(new org.springframework.security.core.authority.SimpleGrantedAuthority("ROLE_ADMIN"))));

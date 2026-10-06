@@ -37,7 +37,7 @@ public class InternationalizationController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "api/internationalization", method = RequestMethod.GET,
+    @RequestMapping(value = {"api/internationalization", "api/internationalization/"}, method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     public ResponseEntity<Iterable<Internationalization>> getSentences(
             @RequestParam(value = "language", required = false) String language,
@@ -62,7 +62,7 @@ public class InternationalizationController {
         }
     }
 
-    @RequestMapping(value = "api/internationalization/resources", method = RequestMethod.GET,
+    @RequestMapping(value = {"api/internationalization/resources", "api/internationalization/resources/"}, method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     public String getInternationalizationResources() {
 
@@ -92,7 +92,7 @@ public class InternationalizationController {
         return resources.toString();
     }
 
-    @RequestMapping(value = "api/internationalization/populateDB", method = RequestMethod.GET,
+    @RequestMapping(value = {"api/internationalization/populateDB", "api/internationalization/populateDB/"}, method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     public void populateTableInternationalization() {
         List<String> langs = new ArrayList<>();
@@ -122,7 +122,7 @@ public class InternationalizationController {
 
     }
 
-    @RequestMapping(value = "api/internationalization/generateJSONFromDB", method = RequestMethod.GET,
+    @RequestMapping(value = {"api/internationalization/generateJSONFromDB", "api/internationalization/generateJSONFromDB/"}, method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     public void generateJSONFromDB() {
 
@@ -175,7 +175,7 @@ public class InternationalizationController {
         }
     }
 
-    @RequestMapping(value = "/api/checkUserLanguage", method = RequestMethod.POST)
+    @RequestMapping(value = {"/api/checkUserLanguage", "/api/checkUserLanguage/"}, method = RequestMethod.POST)
     public ResponseEntity<String> checkUserLanguage(@RequestBody String username) {
         String siteLanguage = userRepository.findByUsername(username).getSiteLanguage();
         if (siteLanguage != null && siteLanguage.length() > 0) {
@@ -185,7 +185,7 @@ public class InternationalizationController {
         }
     }
 
-    @RequestMapping(value = "/api/saveUserLanguage", method = RequestMethod.POST,
+    @RequestMapping(value = {"/api/saveUserLanguage", "/api/saveUserLanguage/"}, method = RequestMethod.POST,
             consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> saveUserLanguage(@RequestBody String userData) {
         try {

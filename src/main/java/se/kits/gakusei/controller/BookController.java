@@ -22,7 +22,7 @@ public class BookController {
 
     @Operation(summary="Getting all books")
     @RequestMapping(
-        value = "api/books",
+        value = {"api/books", "api/books/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -37,7 +37,7 @@ public class BookController {
 
     @Operation(summary="Getting one book with a specific id")
     @RequestMapping(
-        value = "api/books/{bookId}",
+        value = {"api/books/{bookId}", "api/books/{bookId}/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )
@@ -56,7 +56,7 @@ public class BookController {
 
     @Operation(summary="Getting one book with a specific title")
     @RequestMapping(
-        value = "api/books/{bookTitle}",
+        value = {"api/books/{bookTitle}", "api/books/{bookTitle}/"},
         method = RequestMethod.GET,
         produces = "application/json;charset=UTF-8"
     )

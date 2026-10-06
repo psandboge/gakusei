@@ -68,3 +68,8 @@ Backend `bash scripts/test-postgres.sh -Dskip.frontend=true test` uses its own
 independent project and forces datasource/profiles/listener. It rejects user
 Spring/JVM profile/property overrides. Parent Spring/JVM/DB/Compose settings
 are removed before run-owned settings are applied.
+
+Boot 4 adds an independently bound Boot 3→Boot 4 proof, packaged environment
+factory check, provenance guards and bound failure/TERM sentinel proof. See
+`docs/backend-boot4.md` for required full-SHA/hash/private-build-manifest inputs
+and exact ownership cleanup. The old Boot 2→Boot 3 proof runs from frozen Boot 3.

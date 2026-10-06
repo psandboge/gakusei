@@ -152,3 +152,9 @@ Full local lifecycle/sentinel proof: `python3 tests/lifecycle/check.py`. It chec
 success, injected runner failure, TERM, conflicting inherited settings and an
 independent owned sentinel. It never uses preview resources. Keep `.tools/`,
 `target/`, generated assets and public diagnostics out of source commits.
+
+For the Boot 4 checkpoint, `boot3-upgrade` now runs the unchanged frozen Boot 3
+harness against separately built frozen Boot 2 and Boot 3. `boot4-upgrade` binds
+frozen Boot 3 and the candidate with private independent build records. Both
+jobs depend on regression. See `backend-boot4.md`; local and hosted results are
+separate evidence and neither is established by this configuration alone.

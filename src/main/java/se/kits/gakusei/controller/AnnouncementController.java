@@ -26,7 +26,7 @@ public class AnnouncementController {
 
     @Operation(summary="get all the announcements")
     @RequestMapping(
-            value = "api/announcement",
+            value = {"api/announcement", "api/announcement/"},
             method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8"
     )

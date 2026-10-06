@@ -179,6 +179,28 @@ def ci_facts():
     return facts
 
 
+def upgrade_facts(directory):
+    marker = directory / 'upgrade-private-marker.json'
+    if not marker.is_file():
+        return []
+    result = directory / 'upgrade-result-private.json'
+    if not result.is_file():
+        return [fact('immutable-upgrade', 'upgrade', 'unavailable', 'unavailable')]
+    data = json.loads(result.read_text())
+    current = subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip()
+    if data.get('candidate_sha') != current:
+        return [fact('immutable-upgrade', 'upgrade', 'unavailable', 'unavailable')]
+    status = data.get('status')
+    if status not in ('passed', 'failed', 'interrupted'):
+        raise ValueError('Invalid upgrade result')
+    if status == 'passed' and not all((directory / name).is_file() for name in
+            ('upgrade-before-private.json', 'upgrade-after-private.json', 'ownership.json')):
+        status = 'unavailable'
+    cause = {'passed':'none', 'failed':'check-failed', 'interrupted':'handled-termination',
+             'unavailable':'unavailable'}[status]
+    return [fact('immutable-upgrade', 'upgrade', status, cause)]
+
+
 def collect():
     os.umask(0o077)
     # Remove any previous upload gate/output before attempting collection.
@@ -228,6 +250,7 @@ def collect():
             result = directory / 'result.json'
             data = json.loads(result.read_text()) if result.exists() else {}
             checks = harness_facts(data)
+            checks.extend(upgrade_facts(directory))
             for phase in PHASES:
                 checks.extend(browser_facts(directory, phase))
             for check in checks:

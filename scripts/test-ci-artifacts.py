@@ -19,6 +19,25 @@ collector = module('collector', 'scripts/collect-ci-artifacts.py')
 owned = module('owned', 'scripts/verify-browser-state.py')
 
 class Privacy(unittest.TestCase):
+    def test_upgrade_requires_current_source_and_complete_prerequisites(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            (directory / 'upgrade-private-marker.json').write_text('{}')
+            self.assertEqual('unavailable', collector.upgrade_facts(directory)[0]['status'])
+            result = directory / 'upgrade-result-private.json'
+            result.write_text(json.dumps(dict(status='passed', candidate_sha='stale')))
+            with patch.object(collector.subprocess, 'check_output', return_value='current'):
+                self.assertEqual('unavailable', collector.upgrade_facts(directory)[0]['status'])
+                result.write_text(json.dumps(dict(status='passed', candidate_sha='current', username='PRIVATE')))
+                self.assertEqual('unavailable', collector.upgrade_facts(directory)[0]['status'])
+                for name in ('upgrade-before-private.json','upgrade-after-private.json','ownership.json'):
+                    (directory / name).write_text('{"private":"SYNTHETIC_SECRET"}')
+                facts = collector.upgrade_facts(directory)
+                self.assertEqual('passed', facts[0]['status'])
+                self.assertNotIn('PRIVATE', json.dumps(facts))
+                result.write_text(json.dumps(dict(status='interrupted', candidate_sha='current')))
+                self.assertEqual('handled-termination', collector.upgrade_facts(directory)[0]['cause'])
+
     def test_secret_rejection(self):
         run = owned.Run()  # actual random DB/remember-me values, no services started
         with tempfile.TemporaryDirectory() as tmp:
