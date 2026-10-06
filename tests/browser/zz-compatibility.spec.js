@@ -1,7 +1,8 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const { manifest, state } = require('./validate-run');
-const { text, login, logout, durable } = require('./helpers');
+const { text, logout, durable } = require('./helpers');
+const { originalProof, specializedProof, specializedLogin, packagedFlag } = require('./specialized-learner');
 
 test('owned anchor, chart, localization, icons and overlay lifecycle parity', async ({ page }, testInfo) => {
   const m = manifest(), s = state(m), diagnostics = [], errors = [];
@@ -40,6 +41,7 @@ test('owned anchor, chart, localization, icons and overlay lifecycle parity', as
     const types = window.nativeParity.listeners.get(window) || new Map();
     return {scroll:(types.get('scroll') || new Set()).size,hashchange:(types.get('hashchange') || new Set()).size};
   });
+  originalProof(m, 'capture');
   try {
     // The retained server serves the anonymous start screen through '/', not direct '/start'.
     await page.goto(m.origin + '/');
@@ -59,7 +61,7 @@ test('owned anchor, chart, localization, icons and overlay lifecycle parity', as
     const unmounted = await windowListeners();
     expect(unmounted.scroll).toBe(mounted.scroll - 1); expect(unmounted.hashchange).toBe(mounted.hashchange - 1);
 
-    await login(page,m,s);
+    const specialized = await specializedLogin(page,m);
     const settingsResponse = page.waitForResponse(r => new URL(r.url()).pathname === '/api/settings');
     await page.goto(m.origin + '/home');
     const languages = await (await settingsResponse).json();
@@ -79,11 +81,16 @@ test('owned anchor, chart, localization, icons and overlay lifecycle parity', as
       expect(Boolean(language)).toBe(true);
       const menu = page.locator('header .glosorDropdown').filter({has:page.locator('img[alt="select language"]')});
       await menu.getByRole('button').click();
+      await packagedFlag(page,m,code);
       const changed = page.waitForResponse(r => new URL(r.url()).pathname === '/api/saveUserLanguage');
       await menu.getByRole('menuitem').filter({hasText:language.language}).click();
-      expect((await changed).ok()).toBe(true);
+      const response = await changed;
+      expect(response.ok()).toBe(true);
+      const payload = JSON.parse(response.request().postData());
+      expect(payload.username === specialized.username && payload.language === code).toBe(true);
       const about = require('../../src/main/resources/locales/' + code + '/translation.json').translations['gakuseiNav.about'];
       await expect(page.locator('header .about')).toHaveText(about);
+      specializedProof(m, 'language', code);
     }
     expect(await canvas.evaluate((el, old) => el === old, oldCanvas)).toBe(true);
     await expect.poll(() => canvas.evaluate(el => window.nativeParity.canvases.get(el).clears)).toBeGreaterThan(cleared);
@@ -104,9 +111,12 @@ test('owned anchor, chart, localization, icons and overlay lifecycle parity', as
     await page.locator('header .about a').click(); await expect(page.locator('.tooltip.in')).toHaveCount(0);
     expect(await durable(m)).toEqual(s.snapshot);
     await logout(page);
+    specializedProof(m, 'finish');
+    originalProof(m, 'verify');
     expect(errors).toEqual([]);
   } finally {
     // Full raw console evidence is private and excluded from the public collector.
     fs.writeFileSync(testInfo.outputPath('compatibility-console-private.json'), JSON.stringify(diagnostics), {mode:0o600});
+    originalProof(m, 'verify');
   }
 });
