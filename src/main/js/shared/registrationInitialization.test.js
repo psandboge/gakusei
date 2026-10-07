@@ -21,7 +21,7 @@ const reply = (status, data = []) => ({ status, ok: status >= 200 && status < 30
   json: () => Promise.resolve(data), text: () => Promise.resolve(JSON.stringify(data)) });
 
 describe('Registration initialization session ownership (proposed)', () => {
-  let store, history, calls, roots, containers, identity, queue;
+  let store, history, calls, roots, containers, identity, queue, previousFetch;
   function makeStore() {
     const h = createMemoryHistory({ initialEntries: ['/about'] });
     const s = createStore(rootReducer, compose(applyMiddleware(thunk, routerMiddleware(h)), persistence.autoRehydrate()));
@@ -36,7 +36,8 @@ describe('Registration initialization session ownership (proposed)', () => {
     sinon.stub(persistence, 'persistStore').callsFake((facade, config, cb) => {
       setTimeout(() => cb(null, {}), 0); return { pause() {}, purge: () => Promise.resolve() };
     });
-    sinon.stub(global, 'fetch').callsFake((url, options = {}) => {
+    previousFetch = global.fetch;
+    global.fetch = sinon.stub().callsFake((url, options = {}) => {
       const path = new URL(url, 'http://localhost').pathname;
       const call = { url, path, options }; calls.push(call);
       if (queue.has(path)) { const d = deferred(); call.d = d; queue.get(path).push(call); return d.promise; }
@@ -51,7 +52,7 @@ describe('Registration initialization session ownership (proposed)', () => {
   });
   afterEach(async () => {
     await act(async () => roots.forEach(root => root.unmount()));
-    containers.forEach(c => c.remove()); sinon.restore();
+    containers.forEach(c => c.remove()); sinon.restore(); global.fetch = previousFetch;
   });
   async function mount(s = store, h = history) {
     const c = document.createElement('div'); containers.push(c); document.body.appendChild(c);
