@@ -77,16 +77,7 @@ export class selectScreen extends React.Component {
   }
 
   checkNewUser() {
-    fetch('/api/checkNewUser', {
-      method: 'post',
-      credentials: 'same-origin',
-      body: this.props.loggedInUser
-    }).then(response => {
-      if (response.status === 200) {
-        this.props.addStarredLesson('GENKI 01', 'guess');
-        this.props.addStarredLesson('KLL 01', 'kanji');
-      }
-    });
+    return this.props.initializeRegistration();
   }
 
   translate(input) {

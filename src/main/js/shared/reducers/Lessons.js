@@ -690,31 +690,42 @@ export function fetchLessonIncorrectAnswers(lessonType) {
   };
 }
 
-export function fetchFavoriteLesson(lessonType) {
+export function fetchFavoriteLesson(lessonType, initialization) {
   return function(dispatch, getState) {
-    const securityState = getState().security;
+    if (initialization && !initialization.current()) return Promise.resolve();
+    const securityState = initialization ? { loggedInUser: initialization.username } : getState().security;
     return fetch(`/api/lessons/favorite?username=${securityState.loggedInUser}&lessonType=${lessonType}`, {
       credentials: 'same-origin'
     })
-      .then(response => response.json())
-      .then(result => dispatch(receiveFavoriteLesson(result)));
+      .then(response => {
+        if (initialization && !initialization.current()) return;
+        if (initialization && !response.ok) throw new Error('Registration favorite refresh failed');
+        return response.json();
+      })
+      .then(result => (!initialization || initialization.current()) && dispatch(receiveFavoriteLesson(result)));
   };
 }
 
-export function fetchUserStarredLessons() {
+export function fetchUserStarredLessons(initialization) {
   return function(dispatch, getState) {
-    const securityState = getState().security;
+    if (initialization && !initialization.current()) return Promise.resolve();
+    const securityState = initialization ? { loggedInUser: initialization.username } : getState().security;
     return fetch(`/api/userLessons?username=${securityState.loggedInUser}`, { credentials: 'same-origin' })
-      .then(response => response.json())
-      .then(result => dispatch(receiveUserStarredLessons(result)));
+      .then(response => {
+        if (initialization && !initialization.current()) return;
+        if (initialization && !response.ok) throw new Error('Registration favorite refresh failed');
+        return response.json();
+      })
+      .then(result => (!initialization || initialization.current()) && dispatch(receiveUserStarredLessons(result)));
   };
 }
 
-export function addStarredLesson(lessonName, lessonType) {
+export function addStarredLesson(lessonName, lessonType, initialization) {
   return function(dispatch, getState) {
+    if (initialization && !initialization.current()) return Promise.resolve();
     const xsrfTokenValue = getCSRF();
-    const securityState = getState().security;
-    fetch(`/api/userLessons/add?lessonName=${lessonName}&username=${securityState.loggedInUser}`, {
+    const securityState = initialization ? { loggedInUser: initialization.username } : getState().security;
+    return fetch(`/api/userLessons/add?lessonName=${lessonName}&username=${securityState.loggedInUser}`, {
       credentials: 'same-origin',
       method: 'POST',
       headers: {
@@ -722,8 +733,12 @@ export function addStarredLesson(lessonName, lessonType) {
         'X-XSRF-TOKEN': xsrfTokenValue
       }
     })
-      .then(() => dispatch(fetchUserStarredLessons()))
-      .then(() => dispatch(fetchFavoriteLesson(lessonType)));
+      .then(response => {
+        if (initialization && !initialization.current()) return;
+        if (initialization && !response.ok) throw new Error('Registration default addition failed');
+        return dispatch(fetchUserStarredLessons(initialization));
+      })
+      .then(() => dispatch(fetchFavoriteLesson(lessonType, initialization)));
   };
 }
 
