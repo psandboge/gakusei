@@ -291,7 +291,7 @@ export function requestUserLogin(data, redirectUrl, transferredToken) {
               // Late language publication also requires this confirmed session.
               const username = getState().security.loggedInUser;
               confirmed = true;
-              dispatch(setLoggingIn(false));
+              dispatch({ type: SET_LOGGING_IN, status: false });
               finishAuthentication(getState, token, true);
               const current = authenticationReader(getState);
               setUserLanguage(username, current).catch(() => {
@@ -317,7 +317,7 @@ export function requestUserLogin(data, redirectUrl, transferredToken) {
     }).then(() => {
       // Do not let an old completion clear newer progress or admission.
       if (ownsAuthentication(getState, token)) {
-        dispatch(setLoggingIn(false)); finishAuthentication(getState, token, confirmed);
+        dispatch({ type: SET_LOGGING_IN, status: false }); finishAuthentication(getState, token, confirmed);
       }
     });
     return transferredToken ? execute() : queueAuthentication(getState, token, execute);

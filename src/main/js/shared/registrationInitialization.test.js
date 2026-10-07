@@ -131,6 +131,18 @@ describe('Registration initialization session ownership (proposed)', () => {
     const next = store.dispatch(initializeRegistration()); await tick(); await complete(); await next;
     expect(count('/api/checkNewUser')).to.equal(2);
   });
+  it('failed HTTP login preserves visible original feedback after owned progress completion', async () => {
+    identity={username:'',loggedIn:false};store.dispatch(Security.receiveLoggedInUser(''));
+    await mount();await route('/login');queue.set('/auth',[]);
+    const login=store.dispatch(Security.requestUserLogin('username=Absent&password=InvalidDisposablePassword'));
+    await tick();await act(async()=>{queue.get('/auth')[0].d.resolve(reply(403));await login;await tick();});
+    const security=store.getState().security;
+    expect(security.loginInProgress).to.equal(false);expect(security.registerInProgress).to.equal(false);
+    expect(security.authSuccess).to.equal(false);expect(security.authResponse).to.be.a('string').and.not.to.equal('');
+    const feedback=document.querySelector('[name="authFeedback"]');expect(feedback).not.to.equal(null);
+    expect(feedback.textContent).to.equal(security.authResponse);
+    expect(store.getState().security.loggedIn).to.equal(false);
+  });
   it('stale auth failure cannot release a newer operation or publish a stale identity', async () => {
     queue.set('/auth', []);
     const first = store.dispatch(Security.requestUserLogin('first')); await tick();
