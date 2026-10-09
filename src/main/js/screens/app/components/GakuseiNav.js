@@ -32,7 +32,7 @@ export class GakuseiNav extends React.Component {
   }
 
   handleChangeLanguage(lng) {
-    if (this.props.loggedInUser) {
+    if (this.props.loggedInUser && !['pending', 'failed'].includes(this.props.identityStatus)) {
       const userData = new Object();
       userData.username = this.props.loggedInUser;
       userData.language = lng;
@@ -81,7 +81,7 @@ export class GakuseiNav extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          {this.props.loggedIn && i18n.language !== 'jp' ? (
+          {this.props.loggedIn && !['pending', 'failed'].includes(this.props.identityStatus) && i18n.language !== 'jp' ? (
             <Nav>
               <NavDropdown
                 className="glosorDropdown"
@@ -105,7 +105,7 @@ export class GakuseiNav extends React.Component {
                 <NavItem className="about">{t('gakuseiNav.about')}</NavItem>
               </LinkContainer>
             </Nav>
-          ) : this.props.loggedIn && i18n.language === 'jp' ? (
+          ) : this.props.loggedIn && !['pending', 'failed'].includes(this.props.identityStatus) && i18n.language === 'jp' ? (
             <Nav>
               <NavDropdown
                 className="glosorDropdown"
@@ -161,7 +161,7 @@ export class GakuseiNav extends React.Component {
           </Nav>
 
           <Nav pullRight>
-            {this.props.loggedIn ? (
+            {this.props.loggedIn && !['pending', 'failed'].includes(this.props.identityStatus) ? (
               <Nav pullRight>
                 <NavDropdown
                   className="profile-button"

@@ -1,4 +1,4 @@
-import { queueAuthentication, markSupersededAuthenticationMutation, markAuthenticationUncertain, beginAuthentication, ownsAuthentication, finishAuthentication, synchronizeAuthentication, authenticationReader, confirmAuthenticationRead, initializeRegistration } from '../registrationInitialization';
+import { queueAuthentication, markSupersededAuthenticationMutation, markAuthenticationUncertain, beginAuthentication, ownsAuthentication, finishAuthentication, synchronizeAuthentication, authenticationReader, beginAuthenticationRead, markAuthenticationReadUncertain, confirmAuthenticationRead, initializeRegistration } from '../registrationInitialization';
 import 'whatwg-fetch';
 import { push } from '../routing';
 import { REHYDRATE } from 'redux-persist/constants';
@@ -17,6 +17,7 @@ export const defaultState = {
   registerInProgress: false,
   authSuccess: null,
   authResponse: null,
+  identityStatus: null,
   loggedIn: false,
   loggedInUser: '',
   currentPageName: '',
@@ -37,6 +38,7 @@ export const propTypes = {
 // ACTION CONSTANTS - Just used to differentiate the "actions"
 export const SET_PAGE = 'SET_PAGE';
 export const RECEIVE_LOGGED_IN_USER = 'RECEIVE_LOGGED_IN_USER';
+export const RECEIVE_IDENTITY_STATUS = 'RECEIVE_IDENTITY_STATUS';
 export const REQUEST_LOGGED_IN_USER = 'REQUEST_LOGGED_IN_USER';
 export const RECEIVE_LOGGED_IN_STATUS = 'RECEIVE_LOGGED_IN_STATUS';
 export const RECEIVE_AUTH_RESPONSE = 'RECEIVE_AUTH_RESPONSE';
@@ -116,7 +118,7 @@ export function receiveLoggedInStatus(loggedIn) {
       dispatch({
         type: RECEIVE_LOGGED_IN_USER,
         description: 'Get status on whether we are logged in or not',
-        loggedInUser: ''
+        user: ''
       });
     }
 
@@ -168,10 +170,10 @@ export function requestLoggedInUser() {
 
 export function fetchLoggedInUser(authenticationToken) {
   return function(dispatch, getState) {
-    const current = authenticationReader(getState, authenticationToken);
+    const current = beginAuthenticationRead(getState, authenticationToken);
     if (!current()) return Promise.resolve();
     dispatch(requestLoggedInUser());
-    return fetch('/username', { credentials: 'same-origin' }).then(response => {
+    return Promise.resolve().then(() => current() && fetch('/username', { credentials: 'same-origin' })).then(response => {
       if (!current()) return;
       if (response.status === 200) {
         return response.text().then(text => {
@@ -181,9 +183,18 @@ export function fetchLoggedInUser(authenticationToken) {
           dispatch(receiveLoggedInUser(data.username));
           dispatch(receiveLoggedInStatus(data.loggedIn));
           confirmAuthenticationRead(getState);
+          dispatch({ type: RECEIVE_IDENTITY_STATUS, status: 'confirmed' });
+          return true;
         });
       }
       throw new Error('Authentication identity refresh failed');
+    }).catch(error => {
+      if (!current()) return false;
+      dispatch({ type: RECEIVE_IDENTITY_STATUS, status: 'failed' });
+      if (authenticationToken) throw error; // Owned operations retain their recovery/uncertainty policy.
+      markAuthenticationReadUncertain(getState);
+      dispatch(receiveLoggedInStatus(false));
+      return false; // Unknown identity is not an anonymous confirmation; explicit retry is required.
     });
   };
 }
@@ -210,9 +221,10 @@ export function requestUserLogout(redirectUrl, csrf) {
       if (response.status === 200 || response.status === 204) {
         confirmed = true;
         dispatch(receiveLoggedInStatus(false));
+        dispatch({ type: RECEIVE_IDENTITY_STATUS, status: 'confirmed' });
         dispatch(clearAuthResponse());
         changeLanguage('1337');
-        dispatch(setPageByName(redirectUrl || routing.locationBeforeTransitions.pathname || '/'));
+        dispatch(setPageByName(redirectUrl || (routing && routing.location && routing.location.pathname) || '/'));
       } else {
         return dispatch(fetchLoggedInUser(token)).then(() => { confirmed = ownsAuthentication(getState, token); });
       }
@@ -406,17 +418,15 @@ export function reloadCurrentRoute() {
   return function(dispatch, getState) {
     const routing = getState().routing;
 
-    dispatch(setPageByName(routing.locationBeforeTransitions.pathname));
+    dispatch(setPageByName((routing && routing.location && routing.location.pathname) || '/'));
   };
 }
 
 export function verifyUserLoggedIn() {
   return function(dispatch, getState) {
-    const securityState = getState().security;
-
-    dispatch(fetchLoggedInUser()).then(() => {
-      if (!securityState.loggedIn) {
-        dispatch(reloadCurrentRoute());
+    return dispatch(fetchLoggedInUser()).then(confirmed => {
+      if (confirmed && !getState().security.loggedIn) {
+        return dispatch(reloadCurrentRoute());
       }
     });
   };
@@ -450,6 +460,7 @@ export function security(state = defaultState, action) {
     if (incoming) {
       return {
         ...state,
+        identityStatus: 'pending',
         loggedIn: incoming.loggedIn,
         loggedInUser: incoming.loggedInUser,
         purgeNeeded: incoming.projectVersion !== state.projectVersion
@@ -467,9 +478,12 @@ export function security(state = defaultState, action) {
         currentPageName: action.currentPageName
       };
     // Security stuff
+    case RECEIVE_IDENTITY_STATUS:
+      return { ...state, identityStatus: action.status };
     case REQUEST_LOGGED_IN_USER:
       return {
         ...state,
+        identityStatus: 'pending',
         csrf: null
       };
     case RECEIVE_LOGGED_IN_USER:

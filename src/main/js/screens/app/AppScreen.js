@@ -11,7 +11,7 @@ export const Reducers = [Security];
 
 export class AppScreen extends React.Component {
   componentWillMount() {
-    this.props.fetchLoggedInUser();
+    this.identityRead = this.props.fetchLoggedInUser();
     if (this.props.announcement !== []) {
       this.props.fetchAnnouncement();
     }
@@ -25,7 +25,11 @@ export class AppScreen extends React.Component {
           <InfoBanner />
           <GakuseiNav />
         </header>
-        <main>{this.props.children}</main>
+        <main>
+          {this.props.identityStatus === 'pending' && <p role="status">Checking your session…</p>}
+          {this.props.identityStatus === 'failed' && <p role="alert">Your session could not be confirmed. <button type="button" onClick={() => this.props.fetchLoggedInUser()}>Retry session check</button></p>}
+          {this.props.children}
+        </main>
         <footer className="page-footer">
           <Grid>
             <Row>

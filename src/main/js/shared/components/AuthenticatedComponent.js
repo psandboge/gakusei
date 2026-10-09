@@ -8,6 +8,8 @@ export const Reducers = [Security, Lessons];
 export function requireAuthentication(Component, ReplacementComponent = null) {
   class AuthenticatedComponent extends React.Component {
     getComponent() {
+      // Preserve the route for explicit recovery; unconfirmed persisted identity is not admission.
+      if (['pending', 'failed'].includes(this.props.identityStatus)) return null;
       if (this.props.loggedIn) {
         return <Component {...this.props} />;
       } else if (ReplacementComponent) {

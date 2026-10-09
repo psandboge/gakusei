@@ -49,6 +49,14 @@ export function queueAuthentication(getState, token, work) {
   e.authTail = result.then(() => undefined, () => undefined);
   return result;
 }
+export function markAuthenticationReadUncertain(getState) { entry(getState).blocked = true; }
+export function beginAuthenticationRead(getState, token) {
+  if (token) return authenticationReader(getState, token);
+  const e = entry(getState), version = (e.readVersion || 0) + 1;
+  e.readVersion = version;
+  const current = authenticationReader(getState);
+  return () => current() && entry(getState).readVersion === version;
+}
 export function confirmAuthenticationRead(getState) { entry(getState).blocked = false; }
 // Ordinary username reads started before an auth operation cannot publish afterward.
 export function authenticationReader(getState, token) {
@@ -62,12 +70,13 @@ const settle = promise => Promise.resolve(promise).then(
 export function initializeRegistration() {
   return (dispatch, getState) => {
     const e = entry(getState);
-    if (e.hold || e.blocked || !e.loggedIn || !e.username) return Promise.resolve();
+    if (['pending', 'failed'].includes(getState().security.identityStatus) || e.hold || e.blocked || !e.loggedIn || !e.username) return Promise.resolve();
     if (e.flight) return e.flight.promise;
     const flight = { epoch: e.epoch, username: e.username };
     const current = () => {
       const now = entry(getState);
-      return now.flight === flight && now.epoch === flight.epoch && !now.hold && !now.blocked &&
+      return !['pending', 'failed'].includes(getState().security.identityStatus) &&
+        now.flight === flight && now.epoch === flight.epoch && !now.hold && !now.blocked &&
         now.loggedIn && now.username === flight.username;
     };
     const context = { username: flight.username, current };
