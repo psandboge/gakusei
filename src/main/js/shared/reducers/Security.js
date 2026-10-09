@@ -168,6 +168,15 @@ export function requestLoggedInUser() {
   };
 }
 
+// An unconfirmed owner must leave a superseded pending read recoverable.
+function finishAuthenticationRecovery(dispatch, getState, token, confirmed = false) {
+  if (ownsAuthentication(getState, token) && !confirmed && getState().security.identityStatus === 'pending') {
+    markAuthenticationUncertain(getState, token);
+    dispatch({ type: RECEIVE_IDENTITY_STATUS, status: 'failed' });
+  }
+  return finishAuthentication(getState, token, confirmed);
+}
+
 export function fetchLoggedInUser(authenticationToken) {
   return function(dispatch, getState) {
     const current = beginAuthenticationRead(getState, authenticationToken);
@@ -329,7 +338,7 @@ export function requestUserLogin(data, redirectUrl, transferredToken) {
     }).then(() => {
       // Do not let an old completion clear newer progress or admission.
       if (ownsAuthentication(getState, token)) {
-        dispatch({ type: SET_LOGGING_IN, status: false }); finishAuthentication(getState, token, confirmed);
+        dispatch({ type: SET_LOGGING_IN, status: false }); finishAuthenticationRecovery(dispatch, getState, token, confirmed);
       }
     });
     return transferredToken ? execute() : queueAuthentication(getState, token, execute);
@@ -409,7 +418,7 @@ export function requestUserRegister(data, redirectUrl) {
       dispatch(setRegistering(false));
       return dispatch(fetchLoggedInUser(token)).then(() => { confirmed = ownsAuthentication(getState, token); }).catch(() => { markAuthenticationUncertain(getState, token); });
     }).then(() => {
-      finishAuthentication(getState, token, confirmed);
+      finishAuthenticationRecovery(dispatch, getState, token, confirmed);
     }));
   };
 }
