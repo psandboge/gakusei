@@ -20,6 +20,195 @@ collector = module('collector', 'scripts/collect-ci-artifacts.py')
 owned = module('owned', 'scripts/verify-browser-state.py')
 
 class Privacy(unittest.TestCase):
+    def private_fixture(self, root):
+        run = root / '.tools/browser-tests' / ('b' * 24)
+        run.mkdir(parents=True, mode=0o700)
+        path = run / 'account-membership-key-private.json'
+        owned.atomic(path, dict(password='DescriptorPrivateKey'))
+        return run, path
+
+    def test_private_descriptor_native_modes_types_and_links(self):
+        import os
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp).resolve()
+            run, path = self.private_fixture(root)
+            self.assertEqual(owned.private_browser_json(path, path, root=root)['password'], 'DescriptorPrivateKey')
+            for mode in (0o400, 0o640, 0o644, 0o660, 0o000):
+                path.chmod(mode)
+                with self.assertRaises((AssertionError, OSError)):
+                    owned.private_browser_json(path, path, root=root)
+            path.chmod(0o600)
+            run.chmod(0o750)
+            with self.assertRaises(AssertionError):
+                owned.private_browser_json(path, path, root=root)
+            run.chmod(0o700)
+            path.unlink()
+            path.mkdir(mode=0o700)
+            with self.assertRaises(AssertionError):
+                owned.private_browser_json(path, path, root=root)
+            path.rmdir()
+            os.mkfifo(path, 0o600)
+            with self.assertRaises(AssertionError):
+                owned.private_browser_json(path, path, root=root)
+            path.unlink()
+            other = run / 'new-owned-target.json'
+            owned.atomic(other, dict(password='DescriptorPrivateKey'))
+            path.symlink_to(other)
+            with self.assertRaises(OSError):
+                owned.private_browser_json(path, path, root=root)
+            path.unlink()
+            os.link(other, path)
+            with self.assertRaises(AssertionError):
+                owned.private_browser_json(path, path, root=root)
+            path.unlink()
+            run.rename(root / 'original-owned-run')
+            run.symlink_to(root / 'original-owned-run', target_is_directory=True)
+            with self.assertRaises(OSError):
+                owned.private_browser_json(path, path, root=root)
+
+    def test_private_descriptor_wrong_uid_metadata_is_refused(self):
+        # Exact-code metadata fault, not a claim of native chown permission.
+        import os
+        from types import SimpleNamespace
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp).resolve()
+            run, path = self.private_fixture(root)
+            inode = path.stat().st_ino
+            native = os.fstat
+            def wrong_file_uid(fd):
+                info = native(fd)
+                if info.st_ino != inode:
+                    return info
+                values = {k: getattr(info, k) for k in dir(info) if k.startswith('st_')}
+                values['st_uid'] = os.geteuid() + 1
+                return SimpleNamespace(**values)
+            with patch.object(owned.os, 'fstat', wrong_file_uid):
+                with self.assertRaises(AssertionError):
+                    owned.private_browser_json(path, path, root=root)
+            native = os.fstat
+            run_inode = run.stat().st_ino
+            def wrong_directory_uid(fd):
+                info = native(fd)
+                if info.st_ino != run_inode:
+                    return info
+                values = {k: getattr(info, k) for k in dir(info) if k.startswith('st_')}
+                values['st_uid'] = os.geteuid() + 1
+                return SimpleNamespace(**values)
+            with patch.object(owned.os, 'fstat', wrong_directory_uid):
+                with self.assertRaises(AssertionError):
+                    owned.private_browser_json(path, path, root=root)
+
+    def test_private_descriptor_path_replacement_is_refused(self):
+        import os
+        for case in ('symlink', 'regular', 'directory'):
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp).resolve()
+                run, path = self.private_fixture(root)
+                replacement = run / 'replacement.json'
+                owned.atomic(replacement, dict(password='DescriptorPrivateKey'))
+                native = os.read
+                replaced = False
+                def replace_during_read(fd, size):
+                    nonlocal replaced
+                    result = native(fd, size)
+                    if not replaced:
+                        replaced = True
+                        if case == 'directory':
+                            run.rename(root / 'retained-owned-run')
+                            run.mkdir(mode=0o700)
+                            owned.atomic(path, dict(password='DescriptorPrivateKey'))
+                        elif case == 'regular':
+                            replacement.replace(path)
+                        else:
+                            path.unlink()
+                            path.symlink_to(replacement)
+                    return result
+                with patch.object(owned.os, 'read', replace_during_read):
+                    with self.assertRaises(AssertionError):
+                        owned.private_browser_json(path, path, root=root)
+                self.assertTrue(replaced)
+
+    def test_private_descriptor_deadline_prevents_open(self):
+        import time
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp).resolve()
+            run, path = self.private_fixture(root)
+            with patch.object(owned.os, 'open', side_effect=AssertionError('Late open')) as opened:
+                with self.assertRaises(subprocess.TimeoutExpired):
+                    owned.private_browser_json(path, path, deadline=time.monotonic()-1, root=root)
+                opened.assert_not_called()
+
+    def test_collector_new_inputs_use_descriptor_owner_boundary(self):
+        import os
+        from types import SimpleNamespace
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp).resolve()
+            run, path = self.private_fixture(root)
+            owned.atomic(run/'ownership.json', dict(nonce='DescriptorRunNonce'))
+            with patch.object(collector, 'ROOT', root):
+                self.assertIn('DescriptorPrivateKey', collector.secrets_from_runs())
+                for mode in (0o400, 0o644):
+                    path.chmod(mode)
+                    with self.assertRaises(ValueError):
+                        collector.secrets_from_runs()
+                path.chmod(0o600)
+                inode = path.stat().st_ino
+                native = os.fstat
+                def wrong_uid(fd):
+                    info = native(fd)
+                    if info.st_ino != inode:
+                        return info
+                    values = {k: getattr(info, k) for k in dir(info) if k.startswith('st_')}
+                    values['st_uid'] = os.geteuid() + 1
+                    return SimpleNamespace(**values)
+                with patch.object(collector.os, 'fstat', wrong_uid):
+                    with self.assertRaises(ValueError):
+                        collector.secrets_from_runs()
+
+    def test_specialized_and_nested_original_credentials_are_private(self):
+        import os
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            run = root / '.tools/browser-tests' / ('a' * 24)
+            run.mkdir(parents=True, mode=0o700)
+            owned.atomic(run / 'ownership.json', dict(nonce='PrivateOriginalNonce'))
+            owned.atomic(run / 'specialized-learner-private.json',
+                         dict(username='PrivateSpecializedLearner', password='PrivateSpecializedCredential'))
+            owned.atomic(run / 'original-account-private.json',
+                         dict(account=dict(username='PrivateOriginalLearner', password='$2b$PrivateOriginalHash')))
+            owned.atomic(run / 'specialized-language-private.json',
+                         dict(initial_account=dict(username='PrivateSpecializedLearner', password='$2b$PrivateSpecializedHash')))
+            owned.atomic(run / 'account-membership-key-private.json', dict(password='PrivateMembershipKey'))
+            output = root / 'public'
+            output.mkdir()
+            with patch.object(collector, 'ROOT', root):
+                values = collector.secrets_from_runs()
+                for value in ('PrivateSpecializedLearner', 'PrivateSpecializedCredential',
+                              'PrivateOriginalLearner', '$2b$PrivateOriginalHash', '$2b$PrivateSpecializedHash', 'PrivateMembershipKey'):
+                    self.assertIn(value, values)
+                    (output / 'diagnostics.log').write_text(value)
+                    with self.assertRaises(ValueError):
+                        collector.privacy_scan(output, values)
+                for name in ('specialized-learner-private.json', 'original-account-private.json', 'specialized-language-private.json', 'specialized-isolation-private.json', 'account-membership-key-private.json'):
+                    (output / 'diagnostics.log').write_text(name)
+                    with self.assertRaises(ValueError):
+                        collector.privacy_scan(output, values)
+                source = run / 'specialized-learner-private.json'
+                source.chmod(0o644)
+                with self.assertRaises(ValueError):
+                    collector.secrets_from_runs()
+                source.chmod(0o600)
+                data = source.read_text()
+                source.write_text('{malformed')
+                with self.assertRaises(ValueError):
+                    collector.secrets_from_runs()
+                source.unlink()
+                target = root / 'foreign.json'
+                target.write_text(data)
+                source.symlink_to(target)
+                with self.assertRaises(ValueError):
+                    collector.secrets_from_runs()
+
     def test_renderer_failure_removes_stale_and_partial_output(self):
         for error in (subprocess.CalledProcessError(1, 'node'),
                       subprocess.TimeoutExpired('node', 45)):
@@ -207,7 +396,7 @@ class Privacy(unittest.TestCase):
         from types import SimpleNamespace
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp)
-            def noop(*args):
+            def noop(*args, **kwargs):
                 pass
             fake = SimpleNamespace(directory=directory, record=directory/'ownership.json',
                 r={'project':'private-project'}, env={'SPRING_DATASOURCE_URL':'private-destination'},

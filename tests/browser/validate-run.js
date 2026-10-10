@@ -15,7 +15,7 @@ function manifest() {
       m.output_dir !== process.env.GAKUSEI_BROWSER_OUTPUT_DIR ||
       !['journey','after-restart','after-reseed'].includes(m.phase) ||
       !/^http:\/\/127\.0\.0\.1:\d+$/.test(m.origin) ||
-      [18082,15432].includes(Number(new URL(m.origin).port))) throw new Error('Run identity mismatch');
+      [18082,18083,15432,15433].includes(Number(new URL(m.origin).port))) throw new Error('Run identity mismatch');
   if (m.phase !== 'journey') state(m);
   return m;
 }

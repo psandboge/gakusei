@@ -18,7 +18,7 @@ import Utility from '../../../../shared/util/Utility';
 import * as Lessons from '../../../../shared/reducers/Lessons';
 import * as Security from '../../../../shared/reducers/Security';
 
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import faStar from '@fortawesome/fontawesome-free-solid/faStar';
 
@@ -65,27 +65,19 @@ export class selectScreen extends React.Component {
 
   // Triggers when we change between play types but remain in "selection" page
   componentWillReceiveProps(nextProps) {
-    if (this.state.playType !== nextProps.match.params.type) {
-      this.props.fetchLessons(nextProps.match.params.type).catch(() => this.props.verifyUserLoggedIn());
-      this.props.fetchaddressedQuestionsInLessons(nextProps.match.params.type);
+    const nextPlayType = nextProps.match.params.type || 'guess';
+    if (this.state.playType !== nextPlayType) {
+      this.props.fetchLessons(nextPlayType).catch(() => this.props.verifyUserLoggedIn());
+      this.props.fetchaddressedQuestionsInLessons(nextPlayType);
       this.setState({
-        playType: nextProps.match.params.type
+        playType: nextPlayType
       });
       this.props.isFetchingLesson ? this.props.setFetchingLesson(false) : null;
     }
   }
 
   checkNewUser() {
-    fetch('/api/checkNewUser', {
-      method: 'post',
-      credentials: 'same-origin',
-      body: this.props.loggedInUser
-    }).then(response => {
-      if (response.status === 200) {
-        this.props.addStarredLesson('GENKI 01', 'guess');
-        this.props.addStarredLesson('KLL 01', 'kanji');
-      }
-    });
+    return this.props.initializeRegistration();
   }
 
   translate(input) {

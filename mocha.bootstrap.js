@@ -28,7 +28,7 @@ require('@babel/register')({
         }
       }
     ],
-    '@babel/preset-react'
+    ['@babel/preset-react', { runtime: 'automatic' }]
   ],
   babelrc: false
 });
@@ -47,7 +47,7 @@ if (!global.dom) {
   const DEFAULT_HTML = '<html><body></body></html>';
   // Define some variables to make it look like we're a browser
   // First, use JSDOM's fake DOM as the document
-  const dom = new jsdom.JSDOM(DEFAULT_HTML);
+  const dom = new jsdom.JSDOM(DEFAULT_HTML, { url: 'http://localhost/' });
   // Set up a mock window
   global.window = dom.window;
   global.document = dom.window.document;
@@ -74,3 +74,12 @@ global.window.ReactDOM = global.ReactDOM;
 // var Adapter = require('enzyme-adapter-react-16');
 // var configure = require('enzyme').configure;
 // configure({ adapter: new Adapter() });
+
+global.PropTypes = require('prop-types');
+global.IS_REACT_ACT_ENVIRONMENT = true;
+// Browser constructors needed by the actual application and SweetAlert.
+global.Element = window.Element;
+global.HTMLElement = window.HTMLElement;
+global.Node = window.Node;
+global.CharacterData = window.CharacterData;
+global.DocumentType = window.DocumentType;

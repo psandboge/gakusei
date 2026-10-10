@@ -42,15 +42,46 @@ def cleanup_all():
         raise RuntimeError('Owned fallback cleanup failed')
 
 
-def secrets_from_runs():
+def private_credential_values(data):
     values = []
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if key in ('password', 'username', 'nonce'):
+                if not isinstance(value, str):
+                    raise ValueError('Invalid private credential field')
+                values.append(value)
+            else:
+                values.extend(private_credential_values(value))
+    elif isinstance(data, list):
+        for value in data:
+            values.extend(private_credential_values(value))
+    return values
+
+
+def secrets_from_runs():
+    spec = importlib.util.spec_from_file_location('private_reader', Path(__file__).resolve().parent / 'verify-browser-state.py')
+    reader = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(reader)
+    values = []
+    legacy = ('learner.json', 'manifest.json', 'ownership.json')
+    additional = ('specialized-learner-private.json', 'original-account-private.json',
+                  'specialized-language-private.json', 'specialized-isolation-private.json', 'account-membership-key-private.json')
+    phase_files = ('original-before-specialized-private.json', 'original-after-specialized-private.json')
     for path in records():
-        for name in ('learner.json', 'manifest.json', 'ownership.json'):
-            file = path.parent / name
-            if not file.exists():
+        files = [(path.parent / name, False) for name in legacy]
+        files += [(path.parent / name, True) for name in additional]
+        files += [(path.parent / phase / name, True) for phase in PHASES for name in phase_files]
+        for file, strict in files:
+            if not file.exists() and not file.is_symlink():
                 continue
-            data = json.loads(file.read_text())
-            values += [str(data[k]) for k in ('password', 'username', 'nonce') if k in data]
+            if strict:
+                try:
+                    data = reader.private_browser_json(file, file, root=ROOT)
+                except (AssertionError, OSError) as error:
+                    raise ValueError('Private specialized account evidence required') from error
+            else:
+                data = json.loads(file.read_text())
+            values.extend(private_credential_values(data))
     return values
 
 
@@ -60,7 +91,8 @@ def privacy_scan(directory, secrets=()):
     if {p.name for p in files} - allowed:
         raise ValueError('Upload allowlist violation')
     forbidden = re.compile(rb'(?i)(synthetic[_ -]?secret|authorization|set-cookie|cookie|password|'
-                           rb'learner\.json|manifest\.json|ownership\.json|jdbc:|'
+                           rb'learner\.json|manifest\.json|ownership\.json|specialized-learner-private\.json|'
+                           rb'account-membership-key-private\.json|original-account-private\.json|specialized-language-private\.json|specialized-isolation-private\.json|jdbc:|'
                            rb'\b[a-f0-9]{36,}\b|gakusei-browser-[a-f0-9]+)')
     for path in files:
         if path.is_symlink() or not path.is_file():
@@ -75,7 +107,8 @@ def privacy_scan(directory, secrets=()):
 # Public facts are reconstructed from static source identifiers and closed enums.
 CHECKS = ('database-readiness', 'application-readiness', 'fresh-state', 'seed-fixture',
           'browser-tests', 'durable-state', 'restart-state', 'reseed-state',
-          'backend-tests', 'owned-cleanup', 'lifecycle')
+          'backend-tests', 'owned-cleanup', 'lifecycle', 'browser-language-fixture',
+          'original-account', 'specialized-language', 'specialized-isolation')
 CAUSES = ('none', 'assertion-failed', 'command-failed', 'timeout', 'readiness-failed',
           'sql-state-mismatch', 'handled-termination', 'cleanup-failed', 'unavailable', 'check-failed')
 STATUSES = ('passed', 'failed', 'interrupted', 'unavailable', 'skipped')
@@ -276,7 +309,10 @@ def collect():
             for check in checks:
                 check['run'] = len(runs) + 1
             runs.append({'exit_code': integer(data['exit_code']) if 'exit_code' in data else None,
-                         'complete': (directory / 'proof.json').is_file(),
+                         'complete': ((directory / 'proof.json').is_file() and all(
+                             any(item.get('check') == name and item.get('phase') == phase and item.get('status') == 'passed'
+                                 for item in data.get('checks', []))
+                             for phase in PHASES for name in ('browser-language-fixture', 'original-account', 'specialized-language', 'specialized-isolation'))),
                          'phases': {p: data.get('phases', {}).get(p, 'unavailable') for p in PHASES},
                          'checks': checks})
             if any(v not in STATUSES for v in runs[-1]['phases'].values()):

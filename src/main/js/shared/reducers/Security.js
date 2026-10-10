@@ -1,5 +1,6 @@
+import { queueAuthentication, markSupersededAuthenticationMutation, markAuthenticationUncertain, beginAuthentication, ownsAuthentication, finishAuthentication, synchronizeAuthentication, authenticationReader, beginAuthenticationRead, markAuthenticationReadUncertain, confirmAuthenticationRead, initializeRegistration } from '../registrationInitialization';
 import 'whatwg-fetch';
-import { push } from 'react-router-redux';
+import { push } from '../routing';
 import { REHYDRATE } from 'redux-persist/constants';
 import Utility from '../../shared/util/Utility';
 import { translate, Trans } from 'react-i18next';
@@ -16,6 +17,7 @@ export const defaultState = {
   registerInProgress: false,
   authSuccess: null,
   authResponse: null,
+  identityStatus: null,
   loggedIn: false,
   loggedInUser: '',
   currentPageName: '',
@@ -36,6 +38,7 @@ export const propTypes = {
 // ACTION CONSTANTS - Just used to differentiate the "actions"
 export const SET_PAGE = 'SET_PAGE';
 export const RECEIVE_LOGGED_IN_USER = 'RECEIVE_LOGGED_IN_USER';
+export const RECEIVE_IDENTITY_STATUS = 'RECEIVE_IDENTITY_STATUS';
 export const REQUEST_LOGGED_IN_USER = 'REQUEST_LOGGED_IN_USER';
 export const RECEIVE_LOGGED_IN_STATUS = 'RECEIVE_LOGGED_IN_STATUS';
 export const RECEIVE_AUTH_RESPONSE = 'RECEIVE_AUTH_RESPONSE';
@@ -110,12 +113,12 @@ export function setRegistering(status = true) {
 }
 
 export function receiveLoggedInStatus(loggedIn) {
-  return function(dispatch) {
+  return function(dispatch, getState) {
     if (!loggedIn) {
       dispatch({
         type: RECEIVE_LOGGED_IN_USER,
         description: 'Get status on whether we are logged in or not',
-        loggedInUser: ''
+        user: ''
       });
     }
 
@@ -124,6 +127,7 @@ export function receiveLoggedInStatus(loggedIn) {
       description: 'Get status on whether we are logged in or not',
       loggedIn
     });
+    synchronizeAuthentication(getState);
   };
 }
 
@@ -145,7 +149,7 @@ export function setPageByName(pageName, query = null) {
 }
 
 export function receiveLoggedInUser(user) {
-  return function(dispatch) {
+  return function(dispatch, getState) {
     dispatch({
       type: RECEIVE_LOGGED_IN_USER,
       description: 'Fetching complete',
@@ -153,6 +157,7 @@ export function receiveLoggedInUser(user) {
     });
 
     dispatch(receiveLoggedInStatus(!!user));
+    synchronizeAuthentication(getState);
   };
 }
 
@@ -163,50 +168,83 @@ export function requestLoggedInUser() {
   };
 }
 
-export function fetchLoggedInUser() {
-  return function(dispatch) {
-    dispatch(requestLoggedInUser());
+// An unconfirmed owner must leave a superseded pending read recoverable.
+function finishAuthenticationRecovery(dispatch, getState, token, confirmed = false) {
+  if (ownsAuthentication(getState, token) && !confirmed && getState().security.identityStatus === 'pending') {
+    markAuthenticationUncertain(getState, token);
+    dispatch({ type: RECEIVE_IDENTITY_STATUS, status: 'failed' });
+  }
+  return finishAuthentication(getState, token, confirmed);
+}
 
-    return new Promise(resolve => {
-      fetch('/username', { credentials: 'same-origin' }).then(response => {
-        if (response.status === 200) {
-          response.text().then(text => {
-            const data = JSON.parse(text);
-            dispatch(receiveLoggedInUser(data.username));
-            dispatch(receiveLoggedInStatus(data.loggedIn));
-            resolve();
-          });
-        } else {
-          // 500 error etc.
-          dispatch(receiveLoggedInUser(''));
-          resolve();
-        }
-      });
+export function fetchLoggedInUser(authenticationToken) {
+  return function(dispatch, getState) {
+    const current = beginAuthenticationRead(getState, authenticationToken);
+    if (!current()) return Promise.resolve();
+    dispatch(requestLoggedInUser());
+    return Promise.resolve().then(() => current() && fetch('/username', { credentials: 'same-origin' })).then(response => {
+      if (!current()) return;
+      if (response.status === 200) {
+        return response.text().then(text => {
+          if (!current()) return;
+          const data = JSON.parse(text);
+          if (!data || typeof data.loggedIn !== 'boolean' || typeof data.username !== 'string') throw new Error('Invalid authentication identity');
+          dispatch(receiveLoggedInUser(data.username));
+          dispatch(receiveLoggedInStatus(data.loggedIn));
+          confirmAuthenticationRead(getState);
+          dispatch({ type: RECEIVE_IDENTITY_STATUS, status: 'confirmed' });
+          return true;
+        });
+      }
+      throw new Error('Authentication identity refresh failed');
+    }).catch(error => {
+      if (!current()) return false;
+      dispatch({ type: RECEIVE_IDENTITY_STATUS, status: 'failed' });
+      if (authenticationToken) throw error; // Owned operations retain their recovery/uncertainty policy.
+      markAuthenticationReadUncertain(getState);
+      dispatch(receiveLoggedInStatus(false));
+      return false; // Unknown identity is not an anonymous confirmation; explicit retry is required.
     });
   };
 }
 
 export function requestUserLogout(redirectUrl, csrf) {
   return function(dispatch, getState) {
+    const token = beginAuthentication(getState);
+    let confirmed = false, issued = false;
     const routing = getState().routing;
     const changeLanguage = lng => {
       i18n.changeLanguage(lng);
     };
 
-    fetch('/logout', {
+    dispatch(setLoggingIn(false)); dispatch(setRegistering(false));
+    return queueAuthentication(getState, token, () => Promise.resolve().then(() => ownsAuthentication(getState, token) && (issued = true, fetch('/logout', {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
         'X-XSRF-TOKEN': csrf || ''
       }
-    }).then(response => {
+    }))).then(response => {
+      if (issued) markSupersededAuthenticationMutation(getState, token);
+      if (!ownsAuthentication(getState, token)) return;
       if (response.status === 200 || response.status === 204) {
+        confirmed = true;
         dispatch(receiveLoggedInStatus(false));
+        dispatch({ type: RECEIVE_IDENTITY_STATUS, status: 'confirmed' });
         dispatch(clearAuthResponse());
         changeLanguage('1337');
-        dispatch(setPageByName(redirectUrl || routing.locationBeforeTransitions.pathname || '/'));
+        dispatch(setPageByName(redirectUrl || (routing && routing.location && routing.location.pathname) || '/'));
+      } else {
+        return dispatch(fetchLoggedInUser(token)).then(() => { confirmed = ownsAuthentication(getState, token); });
       }
-    });
+    }).catch(() => {
+      if (issued) markSupersededAuthenticationMutation(getState, token);
+      if (ownsAuthentication(getState, token)) {
+        markAuthenticationUncertain(getState, token);
+        console.error('Logout request failed');
+        return dispatch(fetchLoggedInUser(token)).then(() => { confirmed = ownsAuthentication(getState, token); }).catch(() => { markAuthenticationUncertain(getState, token); });
+      }
+    }).then(() => finishAuthentication(getState, token, confirmed)));
   };
 }
 
@@ -214,28 +252,30 @@ export function logLoginEvent(username) {
   Utility.logEvent('login', 'login', true, null, username, null, null, true);
 }
 
-export function setUserLanguage(username) {
-  fetch('/api/checkUserLanguage', {
+export function setUserLanguage(username, current = () => true) {
+  return fetch('/api/checkUserLanguage', {
     method: 'post',
     credentials: 'same-origin',
     body: username
   }).then(response => {
-    if (response.status === 200) {
-      response.text().then(str => {
-        i18n.changeLanguage(str);
+    if (current() && response.status === 200) {
+      return response.text().then(str => {
+        if (current()) i18n.changeLanguage(str);
       });
     }
   });
 }
 
-export function requestUserLogin(data, redirectUrl) {
+export function requestUserLogin(data, redirectUrl, transferredToken) {
   return function(dispatch, getState) {
+    if (transferredToken && !ownsAuthentication(getState, transferredToken)) return Promise.resolve();
+    let confirmed = false, issued = false;
     const formBody = typeof data === 'string' ? data : Utility.getFormData(data).join('&');
-
+    const token = transferredToken || beginAuthentication(getState);
+    dispatch(setRegistering(false));
     dispatch(setLoggingIn());
 
-    try {
-      fetch('/auth', {
+    const execute = () => Promise.resolve().then(() => ownsAuthentication(getState, token) && (issued = true, fetch('/auth', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
@@ -243,7 +283,9 @@ export function requestUserLogin(data, redirectUrl) {
           'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
         },
         body: formBody
-      }).then(response => {
+      }))).then(response => {
+        if (issued) markSupersededAuthenticationMutation(getState, token);
+        if (!ownsAuthentication(getState, token)) return;
         switch (response.status) {
           case 403:
             if (i18n.language === 'en') {
@@ -263,17 +305,28 @@ export function requestUserLogin(data, redirectUrl) {
               dispatch(receiveAuthResponse(true, 'Inloggad, tar dig vidare..'));
             }
             dispatch(setRedirectUrl(null));
-            dispatch(fetchLoggedInUser()).then(() => {
+            return dispatch(fetchLoggedInUser(token)).then(() => {
+              if (!ownsAuthentication(getState, token)) return;
               dispatch(setPageByName(redirectUrl || '/'));
-              setUserLanguage(getState().security.loggedInUser);
+              // The hold releases only after the existing identity/status sequence.
+              // Late language publication also requires this confirmed session.
+              const username = getState().security.loggedInUser;
+              confirmed = true;
+              dispatch({ type: SET_LOGGING_IN, status: false });
+              finishAuthentication(getState, token, true);
+              const current = authenticationReader(getState);
+              setUserLanguage(username, current).catch(() => {
+                if (current()) console.error('User language refresh failed');
+              });
               logLoginEvent(getState().security.loggedInUser);
             });
-            break;
           default:
             throw new Error();
         }
-      });
-    } catch (err) {
+      }).catch(() => {
+      if (issued) markSupersededAuthenticationMutation(getState, token);
+      if (!ownsAuthentication(getState, token)) return;
+      markAuthenticationUncertain(getState, token);
       if (i18n.language === 'en') {
         dispatch(receiveAuthResponse(false, 'Technical issue. Please try again later.'));
       } else if (i18n.language === 'jp') {
@@ -281,20 +334,25 @@ export function requestUserLogin(data, redirectUrl) {
       } else {
         dispatch(receiveAuthResponse(false, 'Tekniskt fel. Vänligen försök igen senare.'));
       }
-    } finally {
-      dispatch(setLoggingIn(false));
-    }
+      return dispatch(fetchLoggedInUser(token)).then(() => { confirmed = ownsAuthentication(getState, token); }).catch(() => { markAuthenticationUncertain(getState, token); });
+    }).then(() => {
+      // Do not let an old completion clear newer progress or admission.
+      if (ownsAuthentication(getState, token)) {
+        dispatch({ type: SET_LOGGING_IN, status: false }); finishAuthenticationRecovery(dispatch, getState, token, confirmed);
+      }
+    });
+    return transferredToken ? execute() : queueAuthentication(getState, token, execute);
   };
 }
 
 export function requestUserRegister(data, redirectUrl) {
-  return function(dispatch) {
+  return function(dispatch, getState) {
+    let confirmed = false, issued = false;
     const formBody = typeof data === 'string' ? data : Utility.getFormData(data).join('&');
+    const token = beginAuthentication(getState);
 
-    try {
-      dispatch(setRegistering());
-
-      fetch('/registeruser', {
+    dispatch(setLoggingIn(false)); dispatch(setRegistering());
+    return queueAuthentication(getState, token, () => Promise.resolve().then(() => ownsAuthentication(getState, token) && (issued = true, fetch('/registeruser', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
@@ -302,7 +360,9 @@ export function requestUserRegister(data, redirectUrl) {
           'Content-Type': 'text/plain; charset=utf-8'
         },
         body: formBody
-      }).then(response => {
+      }))).then(response => {
+        if (issued) markSupersededAuthenticationMutation(getState, token);
+        if (!ownsAuthentication(getState, token)) return;
         switch (response.status) {
           case 406:
             if (i18n.language === 'en') {
@@ -333,16 +393,21 @@ export function requestUserRegister(data, redirectUrl) {
               dispatch(receiveAuthResponse(true, 'Registreringen lyckades, loggar in..'));
             }
 
-            setTimeout(() => dispatch(requestUserLogin(formBody, redirectUrl)), 1500);
-            break;
+            dispatch(setRegistering(false));
+            // Registration and delayed auto-login are one serialized operation.
+            return new Promise(resolve => setTimeout(resolve, 1500)).then(() => {
+              if (ownsAuthentication(getState, token)) return dispatch(requestUserLogin(formBody, redirectUrl, token));
+            });
           default:
-            dispatch(fetchLoggedInUser());
+            // Unknown status: the catch below confirms the actual session.
             throw new Error();
         }
 
         dispatch(setRegistering(false));
-      });
-    } catch (err) {
+      }).catch(() => {
+      if (issued) markSupersededAuthenticationMutation(getState, token);
+      if (!ownsAuthentication(getState, token)) return;
+      markAuthenticationUncertain(getState, token);
       if (i18n.language === 'en') {
         dispatch(receiveAuthResponse(false, 'Technical issue. Please try again later.'));
       } else if (i18n.language === 'jp') {
@@ -351,7 +416,10 @@ export function requestUserRegister(data, redirectUrl) {
         dispatch(receiveAuthResponse(false, 'Tekniskt fel. Vänligen försök igen senare.'));
       }
       dispatch(setRegistering(false));
-    }
+      return dispatch(fetchLoggedInUser(token)).then(() => { confirmed = ownsAuthentication(getState, token); }).catch(() => { markAuthenticationUncertain(getState, token); });
+    }).then(() => {
+      finishAuthenticationRecovery(dispatch, getState, token, confirmed);
+    }));
   };
 }
 
@@ -359,23 +427,22 @@ export function reloadCurrentRoute() {
   return function(dispatch, getState) {
     const routing = getState().routing;
 
-    dispatch(setPageByName(routing.locationBeforeTransitions.pathname));
+    dispatch(setPageByName((routing && routing.location && routing.location.pathname) || '/'));
   };
 }
 
 export function verifyUserLoggedIn() {
   return function(dispatch, getState) {
-    const securityState = getState().security;
-
-    dispatch(fetchLoggedInUser()).then(() => {
-      if (!securityState.loggedIn) {
-        dispatch(reloadCurrentRoute());
+    return dispatch(fetchLoggedInUser()).then(confirmed => {
+      if (confirmed && !getState().security.loggedIn) {
+        return dispatch(reloadCurrentRoute());
       }
     });
   };
 }
 
 export const actionCreators = {
+  initializeRegistration,
   fetchLoggedInUser,
   requestLoggedInUser,
   receiveLoggedInUser,
@@ -402,6 +469,7 @@ export function security(state = defaultState, action) {
     if (incoming) {
       return {
         ...state,
+        identityStatus: 'pending',
         loggedIn: incoming.loggedIn,
         loggedInUser: incoming.loggedInUser,
         purgeNeeded: incoming.projectVersion !== state.projectVersion
@@ -419,9 +487,12 @@ export function security(state = defaultState, action) {
         currentPageName: action.currentPageName
       };
     // Security stuff
+    case RECEIVE_IDENTITY_STATUS:
+      return { ...state, identityStatus: action.status };
     case REQUEST_LOGGED_IN_USER:
       return {
         ...state,
+        identityStatus: 'pending',
         csrf: null
       };
     case RECEIVE_LOGGED_IN_USER:

@@ -1,5 +1,5 @@
 import { Grid, Row, Col, ListGroup, ListGroupItem, ProgressBar } from 'react-bootstrap';
-import { Pie } from 'react-chartjs-2';
+import Pie from '../../../../shared/components/PieChart';
 
 import Utility from '../../../../shared/util/Utility';
 import * as Lessons from '../../../../shared/reducers/Lessons';

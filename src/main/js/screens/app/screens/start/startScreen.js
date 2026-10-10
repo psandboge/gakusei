@@ -1,5 +1,5 @@
 import { Grid, Row, Col, Jumbotron, Button, ButtonGroup } from 'react-bootstrap';
-import ScrollableAnchor from 'react-scrollable-anchor';
+import ScrollableAnchor from '../../../../shared/components/ScrollableAnchor';
 import { translate } from 'react-i18next';
 
 export class startScreen extends React.Component {
@@ -36,7 +36,7 @@ export class startScreen extends React.Component {
           </Button>
         </Jumbotron>
         <ScrollableAnchor id={'section1'}>
-          <Grid className="about-features">
+          <div className="about-features container">
             <Row className="features_prev">
               <Col
                 xs={12}
@@ -148,7 +148,7 @@ export class startScreen extends React.Component {
                 </p>
               </Col>
             </Row>
-          </Grid>
+          </div>
         </ScrollableAnchor>
         <Jumbotron>
           <Grid>
