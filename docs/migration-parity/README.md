@@ -24,3 +24,5 @@ P0 does not repair the product, begin Svelte implementation, waive known gaps or
 ## Current status — owner follow-up
 
 Latest correction passed: superseded-identity test and committed-source provenance are verified; language-cache case removed by owner. Full result23cases19passed4knownproductfailed. Owner assigns product fixes to conversion and open-bug tracking if unresolved afterward. See baseline.md and known-gaps.md; prior24-case report retained in history/attempt3/.
+
+CI uses `npm run test:parity:baseline` to distinguish the four recorded product failures from new regressions. `npm run test:parity` retains strict raw exit behavior. Run deterministic gate controls with `npm run test:parity:gate`. See known-gaps.md for acceptance limits.

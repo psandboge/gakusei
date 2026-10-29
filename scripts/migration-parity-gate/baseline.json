@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0",
+  "recordedBaseline": {
+    "cases": 23,
+    "passed": 19,
+    "failed": 4,
+    "sourceRun": "1793273766642-28957",
+    "disposition": "Four recorded product defects remain open for conversion; gate pass means no new regression, not product acceptance."
+  },
+  "project": "chromium",
+  "playwrightVersion": "1.63.0",
+  "cases": [
+    {
+      "title": "P0-DRAW-mouse: simulated one-line score, resize, export, reset/remount",
+      "file": "handwriting.spec.js",
+      "line": 26,
+      "column": 38,
+      "caseId": "P0-DRAW-mouse",
+      "knownFailure": {
+        "assertion": {
+          "file": "handwriting.spec.js",
+          "line": 50,
+          "column": 57,
+          "snippet": "  48 |   }\n  49 |   await expect(page.getByText(/Fråga 2 \\/ 2/)).toBeVisible();\n> 50 |   await expect(page.locator('[name=\"answerbutton-1\"]')).toHaveCount(0);\n     |                                                         ^\n  51 |   await page.goto(app.origin+'/about'); await begin(page,app);\n  52 |   await stroke(page,kind); await expect(yes).toBeVisible(); await yes.click();\n  53 |   await expect.poll(()=>app.requests.filter(r=>r.path==='/api/kanji-drawings').length).toBe(2);"
+        },
+        "messageHeader": "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('[name=\"answerbutton-1\"]')\nExpected: 0\nReceived: 1\nTimeout:  10000ms"
+      }
+    },
+    {
+      "title": "P0-DRAW-touch: simulated one-line score, resize, export, reset/remount",
+      "file": "handwriting.spec.js",
+      "line": 26,
+      "column": 38,
+      "caseId": "P0-DRAW-touch",
+      "knownFailure": {
+        "assertion": {
+          "file": "handwriting.spec.js",
+          "line": 50,
+          "column": 57,
+          "snippet": "  48 |   }\n  49 |   await expect(page.getByText(/Fråga 2 \\/ 2/)).toBeVisible();\n> 50 |   await expect(page.locator('[name=\"answerbutton-1\"]')).toHaveCount(0);\n     |                                                         ^\n  51 |   await page.goto(app.origin+'/about'); await begin(page,app);\n  52 |   await stroke(page,kind); await expect(yes).toBeVisible(); await yes.click();\n  53 |   await expect.poll(()=>app.requests.filter(r=>r.path==='/api/kanji-drawings').length).toBe(2);"
+        },
+        "messageHeader": "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('[name=\"answerbutton-1\"]')\nExpected: 0\nReceived: 1\nTimeout:  10000ms"
+      }
+    },
+    {
+      "title": "P0-MODE-guess: simulated API short lesson, finish and replay",
+      "file": "learning.spec.js",
+      "line": 19,
+      "column": 3,
+      "caseId": "P0-MODE-guess"
+    },
+    {
+      "title": "P0-MODE-quiz: simulated API short lesson, finish and replay",
+      "file": "learning.spec.js",
+      "line": 19,
+      "column": 3,
+      "caseId": "P0-MODE-quiz"
+    },
+    {
+      "title": "P0-MODE-flashcards: simulated API short lesson, finish and replay",
+      "file": "learning.spec.js",
+      "line": 19,
+      "column": 3,
+      "caseId": "P0-MODE-flashcards"
+    },
+    {
+      "title": "P0-MODE-translate: simulated API short lesson, finish and replay",
+      "file": "learning.spec.js",
+      "line": 19,
+      "column": 3,
+      "caseId": "P0-MODE-translate"
+    },
+    {
+      "title": "P0-MODE-grammar: simulated API short lesson, finish and replay",
+      "file": "learning.spec.js",
+      "line": 19,
+      "column": 3,
+      "caseId": "P0-MODE-grammar"
+    },
+    {
+      "title": "P0-MODE-kanji: simulated API short lesson, finish and replay",
+      "file": "learning.spec.js",
+      "line": 19,
+      "column": 3,
+      "caseId": "P0-MODE-kanji"
+    },
+    {
+      "title": "P0-FOCUS: simulated API Enter, actual focus, disabled input, reset and transition navigation",
+      "file": "learning.spec.js",
+      "line": 66,
+      "column": 1,
+      "caseId": "P0-FOCUS",
+      "knownFailure": {
+        "assertion": {
+          "file": "learning.spec.js",
+          "line": 85,
+          "column": 22,
+          "snippet": "  83 |   // Observe beyond PR7's documented 2000 ms final-answer timer (200 ms margin).\n  84 |   await page.waitForTimeout(2200);\n> 85 |   await expect(page).toHaveURL(/\\/about$/);\n     |                      ^\n  86 | });\n  87 | test('P0-DUPLICATE: rapid double activation and disabled choice produce one outcome per question',async({page,app})=>{\n  88 |   await start(page,app,'guess');"
+        },
+        "messageHeader": "Error: expect(page).toHaveURL(expected) failed\n\nExpected pattern: /\\/about$/\nReceived string:  \"http://127.0.0.1:<owned-port>/finish/translate\"\nTimeout: 10000ms"
+      }
+    },
+    {
+      "title": "P0-DUPLICATE: rapid double activation and disabled choice produce one outcome per question",
+      "file": "learning.spec.js",
+      "line": 87,
+      "column": 1,
+      "caseId": "P0-DUPLICATE"
+    },
+    {
+      "title": "P0-PREFERENCES: simulated favorites, repetition request, direct links and browser history",
+      "file": "navigation.spec.js",
+      "line": 5,
+      "column": 1,
+      "caseId": "P0-PREFERENCES"
+    },
+    {
+      "title": "P0-LEGACY-obsolete: simulated stored identity and lesson preferences require server confirmation",
+      "file": "navigation.spec.js",
+      "line": 22,
+      "column": 46,
+      "caseId": "P0-LEGACY-obsolete"
+    },
+    {
+      "title": "P0-LEGACY-current: simulated stored identity and lesson preferences require server confirmation",
+      "file": "navigation.spec.js",
+      "line": 22,
+      "column": 46,
+      "caseId": "P0-LEGACY-current"
+    },
+    {
+      "title": "P0-LANGUAGE-SERVER: simulated UI login restores server locale without detector cache",
+      "file": "navigation.spec.js",
+      "line": 47,
+      "column": 1,
+      "caseId": "P0-LANGUAGE-SERVER"
+    },
+    {
+      "title": "P0-SESSION: simulated API invalid login, login, logout, refresh and account switch",
+      "file": "session.spec.js",
+      "line": 16,
+      "column": 1,
+      "caseId": "P0-SESSION"
+    },
+    {
+      "title": "P0-IDENTITY-RECOVERY: simulated failed identity is fail closed and explicitly retried",
+      "file": "session.spec.js",
+      "line": 38,
+      "column": 1,
+      "caseId": "P0-IDENTITY-RECOVERY"
+    },
+    {
+      "title": "P0-IDENTITY-DELAY: simulated pending identity cannot reveal account-owned lessons",
+      "file": "session.spec.js",
+      "line": 48,
+      "column": 1,
+      "caseId": "P0-IDENTITY-DELAY"
+    },
+    {
+      "title": "P0-REGISTRATION: simulated registration initializes defaults once",
+      "file": "session.spec.js",
+      "line": 59,
+      "column": 1,
+      "caseId": "P0-REGISTRATION"
+    },
+    {
+      "title": "P0-IDENTITY-SUPERSEDED: simulated old identity cannot overwrite a newer UI account login",
+      "file": "session.spec.js",
+      "line": 80,
+      "column": 1,
+      "caseId": "P0-IDENTITY-SUPERSEDED"
+    },
+    {
+      "title": "P0-AUTH-SUPERSEDED: simulated issued login settles before newer account mutation",
+      "file": "session.spec.js",
+      "line": 136,
+      "column": 1,
+      "caseId": "P0-AUTH-SUPERSEDED"
+    },
+    {
+      "title": "P0-ACCOUNT-READ: simulated old account catalog read across logout and account switch cannot publish",
+      "file": "session.spec.js",
+      "line": 152,
+      "column": 1,
+      "caseId": "P0-ACCOUNT-READ",
+      "knownFailure": {
+        "assertion": {
+          "file": "session.spec.js",
+          "line": 168,
+          "column": 67,
+          "snippet": "  166 |   await (await response).finished();\n  167 |   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));\n> 168 |   await expect(exercise(page).locator('.toggle-icon-button')).not.toHaveClass(/--active/);\n      |                                                                   ^\n  169 |   await visibleIdentity(page,'P0Bob');\n  170 | });\n  171 |"
+        },
+        "messageHeader": "Error: expect(locator).not.toHaveClass(expected) failed\n\nLocator: locator('.exercise').filter({ has: getByRole('heading', { name: /^Migration P0/ }) }).locator('.toggle-icon-button')\nExpected pattern: not /--active/\nReceived string: \"toggle-icon-button toggle-icon-button--active toggle-icon-button toggle-icon-button--active-default\"\nTimeout: 10000ms"
+      }
+    },
+    {
+      "title": "P0-VISUAL-desktop: simulated fixed reference screenshots",
+      "file": "visual-reference.spec.js",
+      "line": 4,
+      "column": 3,
+      "caseId": "P0-VISUAL-desktop"
+    },
+    {
+      "title": "P0-VISUAL-mobile: simulated fixed reference screenshots",
+      "file": "visual-reference.spec.js",
+      "line": 4,
+      "column": 3,
+      "caseId": "P0-VISUAL-mobile"
+    }
+  ],
+  "assertionSources": [
+    {
+      "path": "tests/browser/migration-parity/specs/handwriting.spec.js",
+      "sha256": "2485526754832f7e74bffe6a8dba40c09ba9a7a35954825d08bbd8fab2067469"
+    },
+    {
+      "path": "tests/browser/migration-parity/specs/learning.spec.js",
+      "sha256": "15902944319ecaa22cd02bb9d1d2742c1faf10d0cbc46188d7775c41a70ed897"
+    },
+    {
+      "path": "tests/browser/migration-parity/specs/navigation.spec.js",
+      "sha256": "e63fdd97928997a102e593207dd742605fd0dabae91140cbc41c201f264b47b4"
+    },
+    {
+      "path": "tests/browser/migration-parity/specs/session.spec.js",
+      "sha256": "b39f3f12d88c133661c54879f0aca199a73e36229abf632a21edba16149c5931"
+    },
+    {
+      "path": "tests/browser/migration-parity/specs/visual-reference.spec.js",
+      "sha256": "c23c482dc50bdb343c5be596e476b9437fd6ef89771fa2553694e7506e4dd182"
+    }
+  ]
+}

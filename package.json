@@ -23,7 +23,9 @@
     "test": "mocha --exit --require ./mocha.bootstrap.js --timeout 10000 \"src/main/js/**/*.test.js\"",
     "test:browser": "bash scripts/test-browser.sh",
     "test:browser:spec": "playwright test",
-    "test:parity": "node scripts/run-migration-parity.js"
+    "test:parity": "node scripts/run-migration-parity.js",
+    "test:parity:baseline": "node scripts/run-migration-parity.js --baseline",
+    "test:parity:gate": "node --test scripts/migration-parity-gate/gate.test.js"
   },
   "repository": {
     "type": "git",
