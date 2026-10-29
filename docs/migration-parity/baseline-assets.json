@@ -1,0 +1,54 @@
+{
+  "artifactRoot": "build",
+  "scope": "All emitted JS/CSS assets, including static styles. Excludes maps, fonts, images and HTML; totals are not initial-route transfer sizes.",
+  "compression": "gzip level9; Node default Brotli",
+  "assets": [
+    {
+      "file": "bootstrap/css/bootstrap-theme.css",
+      "raw": 26132,
+      "gzip": 2840,
+      "brotli": 2227,
+      "sha256": "c4ea52f9efdd111f33ef6c3eaabc8289e386cac408f1c10b015b773071b4a616"
+    },
+    {
+      "file": "bootstrap/css/bootstrap-theme.min.css",
+      "raw": 23409,
+      "gzip": 2763,
+      "brotli": 2208,
+      "sha256": "653e073e97423adda5bc3917a241ee8497dd38a48f14bcde0098a4e54fd0fa5e"
+    },
+    {
+      "file": "bootstrap/css/bootstrap.css",
+      "raw": 146010,
+      "gzip": 21034,
+      "brotli": 17028,
+      "sha256": "7e630d90c7234b0df1729f62b8f9e4bbfaf293d91a5a0ac46df25f2a6759e39a"
+    },
+    {
+      "file": "bootstrap/css/bootstrap.min.css",
+      "raw": 121200,
+      "gzip": 19577,
+      "brotli": 16113,
+      "sha256": "f75e846cc83bd11432f4b1e21a45f31bc85283d11d372f7b19accd1bf6a2635c"
+    },
+    {
+      "file": "js/main.c92de68948f67d1f9b29.bundle.js",
+      "raw": 2224861,
+      "gzip": 594176,
+      "brotli": 469118,
+      "sha256": "0087bfe3bb396c66769dc903ba6aaf94677091b2ede2a83e83ac01faa9c70d12"
+    },
+    {
+      "file": "locales/index.js",
+      "raw": 151,
+      "gzip": 104,
+      "brotli": 77,
+      "sha256": "1115e900cb19b8483903c56acf110052c8334ee763aa5a1f9afe3de2da44d87c"
+    }
+  ],
+  "totals": {
+    "raw": 2541763,
+    "gzip": 640494,
+    "brotli": 506771
+  }
+}

@@ -4,6 +4,7 @@ process.umask(0o077);
 const output = process.env.GAKUSEI_BROWSER_OUTPUT_DIR || '.tools/browser-collection';
 module.exports = defineConfig({
   testDir: './tests/browser', testMatch: '*.spec.js',
+  testIgnore: '**/migration-parity/**',
   globalSetup: require.resolve('./tests/browser/validate-run'),
   fullyParallel: false, workers: 1, forbidOnly: true, retries: 0,
   timeout: 180000, globalTimeout: 300000, expect: { timeout: 15000 },

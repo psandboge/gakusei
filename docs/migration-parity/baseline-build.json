@@ -1,0 +1,17 @@
+{
+  "node": "24.21.0",
+  "react": "18.3.1",
+  "projectVersion": "2.1.1",
+  "sourceCommit": "03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0",
+  "testedHead": "461d93b3c226b9e9d50d5d58d9867f3554bb5734",
+  "sourceDigest": "3ba54177b651806157e3b686f72dc9c6ce52e8dc264855a40828570978734092",
+  "productSourceUnchanged": true,
+  "files": [
+    {
+      "name": "main.c92de68948f67d1f9b29.bundle.js",
+      "bytes": 2224861,
+      "gzipBytes": 596410,
+      "sha256": "0087bfe3bb396c66769dc903ba6aaf94677091b2ede2a83e83ac01faa9c70d12"
+    }
+  ]
+}

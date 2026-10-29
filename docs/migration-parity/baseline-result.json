@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "bead": "gaku-pd2d2",
+  "predecessor": "gaku-d2wkd",
+  "createdAt": "2026-10-29T11:37:48.635306+00:00",
+  "executionOutcome": "pass",
+  "baselineOutcome": "fail",
+  "disposition": "Engineering correction delivered; inherited product baseline remains failing; no P0 acceptance or P1 advance.",
+  "budget": {
+    "attempt": 4,
+    "cap": 4,
+    "remaining": 0,
+    "ownerAllowance": "Owner2026-10-29T11:30Z one focused correction plus one full verification; cumulative continuation of spent3/max3, no reset"
+  },
+  "model": {
+    "identifier": "gpt-6.1-sol",
+    "reasoningEffort": "high",
+    "verification": "Live ancestor PID1858 invocation, mayor independently confirmed"
+  },
+  "source": {
+    "baseline": "03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0",
+    "testedHead": "461d93b3c226b9e9d50d5d58d9867f3554bb5734",
+    "sourceDigest": "3ba54177b651806157e3b686f72dc9c6ce52e8dc264855a40828570978734092",
+    "afterSourceDigest": "3ba54177b651806157e3b686f72dc9c6ce52e8dc264855a40828570978734092",
+    "beforeAfterUnchanged": true,
+    "productSourceUnchanged": true,
+    "trackedDiffSha256": "176bab572d78e70b84a3c389c826caffd389416c2c7e0dc2e7a117f7165f6ece",
+    "fileCount": 7138,
+    "bundleSourceCommit": "03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0",
+    "bundleTestedHead": "461d93b3c226b9e9d50d5d58d9867f3554bb5734",
+    "bundleSourceDigest": "3ba54177b651806157e3b686f72dc9c6ce52e8dc264855a40828570978734092"
+  },
+  "execution": {
+    "command": "npm run test:parity",
+    "retries": 0,
+    "workers": 1,
+    "expectedCases": 23,
+    "actualCases": 23,
+    "stats": {
+      "startTime": "2026-10-29T11:36:07.125Z",
+      "duration": 97108.94099999999,
+      "expected": 19,
+      "skipped": 0,
+      "unexpected": 4,
+      "flaky": 0
+    },
+    "outerTimeoutSeconds": 420,
+    "exitStatus": 1,
+    "outerTimedOut": false,
+    "finishedAt": 1793273864.5210948,
+    "ownedProcessGroup": 28939,
+    "ownedRunnerExited": true
+  },
+  "tools": {
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "playwright": "1.63.0",
+    "chromiumRevision": "1243",
+    "react": "18.3.1",
+    "projectVersion": "2.1.1"
+  },
+  "preparationChecks": {
+    "javascriptSyntax": "passed",
+    "collection": "23 cases; collection only, no exploratory browser execution",
+    "serverControls": "2 passed in this full verification",
+    "staticProvenanceControls": {
+      "controls": [
+        {
+          "control": "committed test-only descendant accepted",
+          "passed": true,
+          "exitStatus": 0,
+          "expectedError": null,
+          "output": "{\"baseline\":\"03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0\",\"testedHead\":\"6438f339c52266c215d9811971a490ef4766f480\",\"sourceDigest\":\"df0975870bbb6124289d0349d9a056bda61129c4de352202843ec8e41f40f000\"}",
+          "error": null
+        },
+        {
+          "control": "webpack.config.js byte drift rejected",
+          "passed": true,
+          "exitStatus": 1,
+          "expectedError": "Product/build/lock source differs from PR7",
+          "output": "",
+          "error": "Product/build/lock source differs from PR7"
+        },
+        {
+          "control": "package-lock.json byte drift rejected",
+          "passed": true,
+          "exitStatus": 1,
+          "expectedError": "Product/build/lock source differs from PR7",
+          "output": "",
+          "error": "Product/build/lock source differs from PR7"
+        },
+        {
+          "control": "dependency metadata drift rejected",
+          "passed": true,
+          "exitStatus": 1,
+          "expectedError": "Package metadata/dependencies differ from PR7",
+          "output": "",
+          "error": "Package metadata/dependencies differ from PR7"
+        },
+        {
+          "control": "untracked product addition rejected",
+          "passed": true,
+          "exitStatus": 1,
+          "expectedError": "Product/build/lock source differs from PR7",
+          "output": "",
+          "error": "Product/build/lock source differs from PR7"
+        }
+      ],
+      "temporaryCloneRemoved": true,
+      "originalProductWorktreeMutated": false
+    },
+    "committedFreezeSha256": "5cbf37fd456c480388b22146de253f5a49ec792304a9c64e2ab99a7c28fa9acf"
+  },
+  "removedCases": [
+    {
+      "id": "P0-LANGUAGE-CACHE",
+      "disposition": "Removed by explicit owner instruction; not passed. Language reconsideration deferred until after conversion."
+    }
+  ],
+  "cases": [
+    {
+      "id": "P0-DRAW-mouse",
+      "title": "P0-DRAW-mouse: simulated one-line score, resize, export, reset/remount",
+      "runnerStatus": "failed",
+      "verdict": "fail",
+      "classification": "inherited-product",
+      "detail": "Repeated same kanji retains completed self-mark control on question2; expected0, actual1. Scoring, bounded export and endpoint mapping within2CSS pixels passed before reset failure. Remount assertions not reached.",
+      "durationMs": 12379,
+      "attempts": 1,
+      "errors": [
+        "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('[name=\"answerbutton-1\"]')\nExpected: 0\nReceived: 1\nTimeout:  10000ms\n\nCall log:\n  - Expect \"toHaveCount\" locator('[name=\"answerbutton-1\"]') with timeout 10000ms\n  - waiting for locator('[name=\"answerbutton-1\"]')\n    24 \u00d7 locator resolved to 1 element\n       - unexpected value \"1\"\n\n\n  48 |   }\n  49 |   await expect(page.getByText(/Fr\u00e5ga 2 \\/ 2/)).toBeVisible();\n> 50 |   await expect(page.locator('[name=\"answerbutton-1\"]')).toHaveCount(0);\n     |                                                         ^\n  51 |   await page.goto(app.origin+'/about'); await begin(page,app);\n  52 |   await stroke(page,kind); await expect(yes).toBeVisible(); await yes.click();\n  53 |   await expect.poll(()=>app.requests.filter(r=>r.path==='/api/kanji-drawings').length).toBe(2);\n    at [worktree]/tests/browser/migration-parity/specs/handwriting.spec.js:50:57"
+      ]
+    },
+    {
+      "id": "P0-DRAW-touch",
+      "title": "P0-DRAW-touch: simulated one-line score, resize, export, reset/remount",
+      "runnerStatus": "failed",
+      "verdict": "fail",
+      "classification": "inherited-product",
+      "detail": "Repeated same kanji retains completed self-mark control on question2; expected0, actual1. Synthetic touch adapter scoring, bounded export and endpoint mapping within2CSS pixels passed before reset failure. Remount assertions not reached; physical-device touch not tested.",
+      "durationMs": 12227,
+      "attempts": 1,
+      "errors": [
+        "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('[name=\"answerbutton-1\"]')\nExpected: 0\nReceived: 1\nTimeout:  10000ms\n\nCall log:\n  - Expect \"toHaveCount\" locator('[name=\"answerbutton-1\"]') with timeout 10000ms\n  - waiting for locator('[name=\"answerbutton-1\"]')\n    24 \u00d7 locator resolved to 1 element\n       - unexpected value \"1\"\n\n\n  48 |   }\n  49 |   await expect(page.getByText(/Fr\u00e5ga 2 \\/ 2/)).toBeVisible();\n> 50 |   await expect(page.locator('[name=\"answerbutton-1\"]')).toHaveCount(0);\n     |                                                         ^\n  51 |   await page.goto(app.origin+'/about'); await begin(page,app);\n  52 |   await stroke(page,kind); await expect(yes).toBeVisible(); await yes.click();\n  53 |   await expect.poll(()=>app.requests.filter(r=>r.path==='/api/kanji-drawings').length).toBe(2);\n    at [worktree]/tests/browser/migration-parity/specs/handwriting.spec.js:50:57"
+      ]
+    },
+    {
+      "id": "P0-MODE-guess",
+      "title": "P0-MODE-guess: simulated API short lesson, finish and replay",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 4098,
+      "attempts": 1
+    },
+    {
+      "id": "P0-MODE-quiz",
+      "title": "P0-MODE-quiz: simulated API short lesson, finish and replay",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 4070,
+      "attempts": 1
+    },
+    {
+      "id": "P0-MODE-flashcards",
+      "title": "P0-MODE-flashcards: simulated API short lesson, finish and replay",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 5816,
+      "attempts": 1
+    },
+    {
+      "id": "P0-MODE-translate",
+      "title": "P0-MODE-translate: simulated API short lesson, finish and replay",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 2711,
+      "attempts": 1
+    },
+    {
+      "id": "P0-MODE-grammar",
+      "title": "P0-MODE-grammar: simulated API short lesson, finish and replay",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 2730,
+      "attempts": 1
+    },
+    {
+      "id": "P0-MODE-kanji",
+      "title": "P0-MODE-kanji: simulated API short lesson, finish and replay",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 4030,
+      "attempts": 1
+    },
+    {
+      "id": "P0-FOCUS",
+      "title": "P0-FOCUS: simulated API Enter, actual focus, disabled input, reset and transition navigation",
+      "runnerStatus": "failed",
+      "verdict": "fail",
+      "classification": "inherited-product",
+      "detail": "Typed Enter, disabled input, actual Next/input focus and reset passed; pending final-answer timer replaced /about with /finish/translate after navigation.",
+      "durationMs": 12638,
+      "attempts": 1,
+      "errors": [
+        "Error: expect(page).toHaveURL(expected) failed\n\nExpected pattern: /\\/about$/\nReceived string:  \"[owned synthetic origin]/finish/translate\"\nTimeout: 10000ms\n\nCall log:\n  - Expect \"toHaveURL\" with timeout 10000ms\n    24 \u00d7 locator resolved to <html lang=\"sv\">\u2026</html>\n       - unexpected value \"[owned synthetic origin]/finish/translate\"\n\n\n  83 |   // Observe beyond PR7's documented 2000 ms final-answer timer (200 ms margin).\n  84 |   await page.waitForTimeout(2200);\n> 85 |   await expect(page).toHaveURL(/\\/about$/);\n     |                      ^\n  86 | });\n  87 | test('P0-DUPLICATE: rapid double activation and disabled choice produce one outcome per question',async({page,app})=>{\n  88 |   await start(page,app,'guess');\n    at [worktree]/tests/browser/migration-parity/specs/learning.spec.js:85:22"
+      ]
+    },
+    {
+      "id": "P0-DUPLICATE",
+      "title": "P0-DUPLICATE: rapid double activation and disabled choice produce one outcome per question",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 4056,
+      "attempts": 1
+    },
+    {
+      "id": "P0-PREFERENCES",
+      "title": "P0-PREFERENCES: simulated favorites, repetition request, direct links and browser history",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 782,
+      "attempts": 1
+    },
+    {
+      "id": "P0-LEGACY-obsolete",
+      "title": "P0-LEGACY-obsolete: simulated stored identity and lesson preferences require server confirmation",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 272,
+      "attempts": 1
+    },
+    {
+      "id": "P0-LEGACY-current",
+      "title": "P0-LEGACY-current: simulated stored identity and lesson preferences require server confirmation",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 274,
+      "attempts": 1
+    },
+    {
+      "id": "P0-LANGUAGE-SERVER",
+      "title": "P0-LANGUAGE-SERVER: simulated UI login restores server locale without detector cache",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 425,
+      "attempts": 1
+    },
+    {
+      "id": "P0-SESSION",
+      "title": "P0-SESSION: simulated API invalid login, login, logout, refresh and account switch",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 859,
+      "attempts": 1
+    },
+    {
+      "id": "P0-IDENTITY-RECOVERY",
+      "title": "P0-IDENTITY-RECOVERY: simulated failed identity is fail closed and explicitly retried",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 280,
+      "attempts": 1
+    },
+    {
+      "id": "P0-IDENTITY-DELAY",
+      "title": "P0-IDENTITY-DELAY: simulated pending identity cannot reveal account-owned lessons",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 303,
+      "attempts": 1
+    },
+    {
+      "id": "P0-REGISTRATION",
+      "title": "P0-REGISTRATION: simulated registration initializes defaults once",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 2199,
+      "attempts": 1
+    },
+    {
+      "id": "P0-IDENTITY-SUPERSEDED",
+      "title": "P0-IDENTITY-SUPERSEDED: simulated old identity cannot overwrite a newer UI account login",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 349,
+      "attempts": 1
+    },
+    {
+      "id": "P0-AUTH-SUPERSEDED",
+      "title": "P0-AUTH-SUPERSEDED: simulated issued login settles before newer account mutation",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 347,
+      "attempts": 1
+    },
+    {
+      "id": "P0-ACCOUNT-READ",
+      "title": "P0-ACCOUNT-READ: simulated old account catalog read across logout and account switch cannot publish",
+      "runnerStatus": "failed",
+      "verdict": "fail",
+      "classification": "inherited-product",
+      "detail": "Across UI logout and Bob login in same document, releasing old Alice userLessons response made Bob lesson favorite active. Expected inactive, actual active. Ordinary fetchUserStarredLessons lacks the registration-context publication guard in pinned source.",
+      "durationMs": 10521,
+      "attempts": 1,
+      "errors": [
+        "Error: expect(locator).not.toHaveClass(expected) failed\n\nLocator: locator('.exercise').filter({ has: getByRole('heading', { name: /^Migration P0/ }) }).locator('.toggle-icon-button')\nExpected pattern: not /--active/\nReceived string: \"toggle-icon-button toggle-icon-button--active toggle-icon-button toggle-icon-button--active-default\"\nTimeout: 10000ms\n\nCall log:\n  - Expect \"not toHaveClass\" locator('.exercise').filter({ has: getByRole('heading', { name: /^Migration P0/ }) }).locator('.toggle-icon-button') with timeout 10000ms\n  - waiting for locator('.exercise').filter({ has: getByRole('heading', { name: /^Migration P0/ }) }).locator('.toggle-icon-button')\n    24 \u00d7 locator resolved to <button type=\"button\" class=\"toggle-icon-button toggle-icon-button--active toggle-icon-button toggle-icon-button--active-default\">\u2026</button>\n       - unexpected value \"toggle-icon-button toggle-icon-button--active toggle-icon-button toggle-icon-button--active-default\"\n\n\n  166 |   await (await response).finished();\n  167 |   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));\n> 168 |   await expect(exercise(page).locator('.toggle-icon-button')).not.toHaveClass(/--active/);\n      |                                                                   ^\n  169 |   await visibleIdentity(page,'P0Bob');\n  170 | });\n  171 |\n    at [worktree]/tests/browser/migration-parity/specs/session.spec.js:168:67"
+      ]
+    },
+    {
+      "id": "P0-VISUAL-desktop",
+      "title": "P0-VISUAL-desktop: simulated fixed reference screenshots",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 3021,
+      "attempts": 1
+    },
+    {
+      "id": "P0-VISUAL-mobile",
+      "title": "P0-VISUAL-mobile: simulated fixed reference screenshots",
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 2999,
+      "attempts": 1
+    }
+  ],
+  "supersededIdentityObservation": {
+    "sameDocumentTokenRetained": true,
+    "requestMatched": true,
+    "requestFailure": null,
+    "renderCheckpoint": true,
+    "reads": [
+      {
+        "id": 1,
+        "settlement": "fulfilled",
+        "checkpoint": true,
+        "status": 200,
+        "responseIdentity": "superseded-alice",
+        "bodyUsed": false
+      },
+      {
+        "id": 2,
+        "settlement": "fulfilled",
+        "checkpoint": true,
+        "status": 200,
+        "responseIdentity": null,
+        "bodyUsed": true
+      }
+    ],
+    "interpretation": "Exact delayed native Fetch fulfilled HTTP200 with superseded-alice response identity. Task checkpoint follows promise reactions; render checkpoint precedes unchanged Bob/no-Alice publication assertions. Unconsumed stale body is recorded; body-complete is not mistaken for application settlement."
+  },
+  "inheritedProductDisposition": "Try fixes during conversion; if unresolved after conversion record open bugs. No product repairs in this attempt.",
+  "evidenceLimits": [
+    "Synthetic API fixtures do not establish live cookie/CSRF/durable backend behavior or physical-device touch.",
+    "Draw reset failures prevent subsequent remount assertions.",
+    "Screenshots remain private in this run; no new visual acceptance claimed.",
+    "No hosted CI, real-service browser or database repetition."
+  ],
+  "isolationAndCleanup": {
+    "network": "Owned synthetic loopback only, foreign origins blocked, service workers blocked, unknown API rejected.",
+    "protectedPortsExcludedBeforeBind": [
+      52655,
+      62508,
+      62721,
+      18082,
+      18083,
+      15432,
+      15433
+    ],
+    "cleanup": "Fixture contexts close, synthetic servers closeAllConnections, owned runner exited; no real services started.",
+    "verification": {
+      "ownedProcessGroup": 28939,
+      "remainingProcesses": [],
+      "runnerExited": true,
+      "trackedTreeClean": true,
+      "evidenceOnly": "No existing services inspected or stopped."
+    }
+  },
+  "privateEvidence": {
+    "runDirectory": ".tools/migration-parity/runs/1793273766642-28957",
+    "rawResults": ".tools/migration-parity/runs/1793273766642-28957/results.json",
+    "identityObservation": ".tools/migration-parity/runs/1793273766642-28957/identity-observation-private.json",
+    "sourceBefore": ".tools/migration-parity/runs/1793273766642-28957/source-before.json",
+    "sourceAfter": ".tools/migration-parity/runs/1793273766642-28957/source-after.json",
+    "bundleManifest": ".tools/migration-parity/runs/1793273766642-28957/build/bundle-manifest.json",
+    "preparation": ".tools/migration-parity/attempt4-preparation-1793273688",
+    "handling": "Keep raw traces, ledgers, screenshots, HTML and private origins local; public-report.json is sanitized."
+  },
+  "ownership": "No executor commit/push. Mayor committed frozen candidate461d93b3c226b9e9d50d5d58d9867f3554bb5734. All executor mutation relinquished at final handoff; mayor owns docs/CI/PR publication.",
+  "priorEvidencePreserved": [
+    ".tools/migration-parity/runs/1793272165655-87571",
+    "docs/migration-parity/baseline-result.json"
+  ]
+}
