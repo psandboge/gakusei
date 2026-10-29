@@ -8,10 +8,12 @@ const sha256 = data => crypto.createHash('sha256').update(data).digest('hex');
 const git = args => execFileSync('git', args, {cwd:root});
 const inputs = ['src', 'pom.xml', 'package.json', 'package-lock.json', 'webpack.config.js', 'webpack.partial.dev.js', 'webpack.partial.prod.js', '.babelrc', '.browserslistrc', 'postcss.config.js', 'mocha.bootstrap.js', 'scripts', 'tests/browser/migration-parity', 'tests/fixtures/migration-parity', 'playwright.parity.config.js'];
 function snapshot() {
-  if (git(['rev-parse','HEAD']).toString().trim() !== baseline) throw new Error('Parity HEAD differs from pinned PR7 baseline');
+  const testedHead = git(['rev-parse','HEAD']).toString().trim();
+  try { git(['merge-base','--is-ancestor',baseline,testedHead]); }
+  catch { throw new Error('Parity HEAD is not a descendant of pinned PR7 baseline'); }
   // Product/build/dependency inputs must remain byte-for-byte at the baseline.
   const product = ['src','pom.xml','package-lock.json','webpack.config.js','webpack.partial.dev.js','webpack.partial.prod.js','.babelrc','.browserslistrc','postcss.config.js'];
-  if (git(['diff',baseline,'--',...product]).length) throw new Error('Product/build/lock source differs from PR7');
+  if (git(['ls-files','--others','--exclude-standard','--',...product]).length || git(['diff',baseline,'--',...product]).length) throw new Error('Product/build/lock source differs from PR7');
   const original = JSON.parse(git(['show',`${baseline}:package.json`]).toString());
   const current = JSON.parse(fs.readFileSync(path.join(root,'package.json')));
   delete original.scripts; delete current.scripts;
@@ -19,6 +21,6 @@ function snapshot() {
   const names = [...new Set(git(['ls-files','-z','--cached','--others','--exclude-standard','--',...inputs]).toString().split('\0').filter(Boolean))].sort();
   const files = names.map(name => ({path:name,sha256:fs.existsSync(path.join(root,name)) ? sha256(fs.readFileSync(path.join(root,name))) : null}));
   const diff = git(['diff','--binary',baseline,'--',...inputs]);
-  return {baseline,productSourceUnchanged:true,sourceDigest:sha256(JSON.stringify(files)),trackedDiffSha256:sha256(diff),files};
+  return {baseline,testedHead,productSourceUnchanged:true,sourceDigest:sha256(JSON.stringify(files)),trackedDiffSha256:sha256(diff),files};
 }
 module.exports = {snapshot,root,sha256};

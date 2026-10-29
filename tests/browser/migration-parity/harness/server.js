@@ -13,7 +13,7 @@ async function createApp() {
   app.defer = (method, pathname) => {
     let release, requested;
     const ready = new Promise(resolve => { requested = resolve; });
-    const response = new Promise(resolve => { release = (body, status = 200) => resolve({body,status}); });
+    const response = new Promise(resolve => { release = (body, status = 200, headers = {}) => resolve({body,status,headers}); });
     app.respond(method, pathname, request => { requested(request); return response; });
     return { requested: ready, release };
   };

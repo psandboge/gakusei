@@ -28,7 +28,7 @@ async function build() {
   const provenance=require('./provenance').snapshot();
   const before=JSON.parse(fs.readFileSync(path.join(output,'../source-before.json')));
   if(before.sourceDigest!==provenance.sourceDigest) throw new Error('Source changed before build completed');
-  fs.writeFileSync(path.join(output, 'bundle-manifest.json'), JSON.stringify({ node:process.versions.node, react:require(path.join(root,'node_modules/react/package.json')).version, projectVersion:require(path.join(root,'package.json')).version, sourceCommit:provenance.baseline, sourceDigest:provenance.sourceDigest, productSourceUnchanged:provenance.productSourceUnchanged, files }, null, 2));
+  fs.writeFileSync(path.join(output, 'bundle-manifest.json'), JSON.stringify({ node:process.versions.node, react:require(path.join(root,'node_modules/react/package.json')).version, projectVersion:require(path.join(root,'package.json')).version, sourceCommit:provenance.baseline, testedHead:provenance.testedHead, sourceDigest:provenance.sourceDigest, productSourceUnchanged:provenance.productSourceUnchanged, files }, null, 2));
 }
 module.exports = build;
 if (require.main === module) build().catch(e => { console.error(e); process.exitCode = 1; });

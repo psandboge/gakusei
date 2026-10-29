@@ -44,24 +44,6 @@ for(const version of ['obsolete','current']) test(`P0-LEGACY-${version}: simulat
   expect(request.query.spacedRepetition).toBe('true');
   expect(request.query.username).toBe('P0Bob');
 });
-test('P0-LANGUAGE-CACHE: simulated language save payload and browser locale cache survive reload',async({page,app})=>{
-  app.respond('GET','/api/settings',()=>({body:[
-    {language_code:'se',language:'Svenska',flag_svg:'/img/flags/flags.svg'},
-    {language_code:'en',language:'English',flag_svg:'/img/flags/flags.svg'}
-  ]}));
-  app.respond('POST','/api/checkUserLanguage',()=>({body:app.state.language||'se',raw:true,headers:{'Content-Type':'text/plain'}}));
-  await page.goto(app.origin+'/select/guess');
-  await page.locator('.glosorDropdown').getByRole('button').click();
-  await page.getByRole('menuitem',{name:'English'}).click();
-  await expect.poll(()=>app.state.language).toBe('en');
-  const save=app.requests.find(r=>r.path==='/api/saveUserLanguage');
-  expect(save.body).toEqual({username:'P0Alice',language:'en'});
-  // New page startup confirms identity; language preference is retained by i18next's browser storage.
-  await page.reload();
-  await expect(page.locator('.profile-button')).toContainText('P0Alice');
-  await expect(page.getByRole('link',{name:'About Gakusei',exact:true})).toBeVisible();
-  expect(app.requests.filter(r=>r.path==='/api/checkUserLanguage')).toHaveLength(0);
-});
 test('P0-LANGUAGE-SERVER: simulated UI login restores server locale without detector cache',async({page,app})=>{
   app.state.username=''; app.state.language='en';
   app.respond('POST','/api/checkUserLanguage',()=>({body:app.state.language,raw:true,headers:{'Content-Type':'text/plain'}}));

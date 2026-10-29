@@ -77,17 +77,58 @@ test('P0-REGISTRATION: simulated registration initializes defaults once', async 
   expect(additions().map(r=>r.query.lessonName).sort()).toEqual(defaultNames);
   expect(app.state.favorites.slice().sort()).toEqual(defaultNames);
 });
-test('P0-IDENTITY-SUPERSEDED: simulated old identity cannot overwrite a newer UI account login',async({page,app})=>{
+test('P0-IDENTITY-SUPERSEDED: simulated old identity cannot overwrite a newer UI account login',async({page,app},testInfo)=>{
+  // Observe native Fetch settlement, not Response.finished: superseded reads
+  // intentionally return before consuming Response.text() (Security.js).
+  // Keep the native Response and every rejection unchanged; no store hooks.
+  await page.addInitScript(() => {
+    const nativeFetch=window.fetch;
+    const observation=window.__parityIdentity={document:crypto.randomUUID(),reads:[]};
+    window.fetch=function(...args) {
+      const url=new URL(typeof args[0]==='string'?args[0]:args[0].url,location.href);
+      if(url.origin!==location.origin || url.pathname!=='/username') return Reflect.apply(nativeFetch,this,args);
+      const read={id:observation.reads.length+1,url:url.href,settlement:'pending',checkpoint:false};
+      observation.reads.push(read);
+      return Reflect.apply(nativeFetch,this,args).then(response=>{
+        Object.assign(read,{settlement:'fulfilled',status:response.status,responseURL:response.url,
+          responseIdentity:response.headers.get('X-Parity-Identity')});
+        // A task runs after the promise assimilation and application reaction
+        // microtasks. The following render checkpoint lets UI work publish.
+        setTimeout(()=>{read.bodyUsed=response.bodyUsed;read.checkpoint=true;},0);
+        return response;
+      },error=>{read.settlement='rejected';read.error=error.name;throw error;});
+    };
+  });
+  let oldRequest;
+  page.on('request',request=>{
+    if(!oldRequest && request.url()===app.origin+'/username') oldRequest=request;
+  });
   const old=app.defer('GET','/username');
   await page.goto(app.origin+'/login'); await old.requested;
+  const document=await page.evaluate(()=>window.__parityIdentity.document);
   app.respond('GET','/username',()=>({body:{username:app.state.username,loggedIn:true}}));
   await fillLogin(page,'P0Bob');
   await page.getByRole('button',{name:text('loginScreen.login.login'),exact:true}).click();
   await visibleIdentity(page,'P0Bob'); await expect(exercise(page)).toBeVisible();
-  const response=page.waitForResponse(r=>r.url()===app.origin+'/username');
-  old.release({username:'P0Alice',loggedIn:true});
-  await (await response).finished();
+  expect(oldRequest).toBeTruthy();
+  expect(await page.evaluate(()=>window.__parityIdentity.reads.map(r=>r.settlement))).toEqual(['pending','fulfilled']);
+  const response=page.waitForResponse(r=>r.request()===oldRequest,{timeout:10000});
+  old.release({username:'P0Alice',loggedIn:true},200,{'X-Parity-Identity':'superseded-alice'});
+  const delivered=await response;
+  expect(delivered.request()).toBe(oldRequest);
+  expect(delivered.status()).toBe(200);
+  expect(delivered.headers()['x-parity-identity']).toBe('superseded-alice');
+  await expect.poll(()=>page.evaluate(()=>window.__parityIdentity.reads[0].checkpoint)).toBe(true);
   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  const observation=await page.evaluate(()=>window.__parityIdentity);
+  await testInfo.attach('superseded-identity-observation',{body:JSON.stringify({
+    ...observation,requestMatched:true,requestFailure:oldRequest.failure(),renderCheckpoint:true
+  },null,2),contentType:'application/json'});
+  expect(observation.document).toBe(document);
+  expect(observation.reads).toHaveLength(2);
+  expect(observation.reads[0]).toMatchObject({id:1,url:app.origin+'/username',responseURL:app.origin+'/username',
+    settlement:'fulfilled',status:200,responseIdentity:'superseded-alice',checkpoint:true});
+  expect(oldRequest.failure()).toBeNull();
   await visibleIdentity(page,'P0Bob');
   expect(app.requests.filter(r=>r.query.username==='P0Alice')).toHaveLength(0);
   await expect(page.getByText('P0Alice',{exact:true})).toHaveCount(0);
