@@ -7,7 +7,60 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const digest = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const commit = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
 const finite = value => typeof value === 'number' && Number.isFinite(value) && value >= 0;
-const check = (condition, reason) => { if (!condition) throw new Error(reason); };
+// Only errors created by this gate can select a public diagnostic code.
+// Native IO/JSON errors and arbitrary thrown objects have one fixed fallback.
+const rejectionCodes = new WeakMap();
+const reasons = Object.freeze({
+  'Invalid assertion message': 'ASSERTION_MESSAGE_INVALID',
+  'Non-owned assertion origin': 'ASSERTION_ORIGIN_REJECTED',
+  'Missing suite collection': 'SUITES_MISSING',
+  'Malformed suite collection': 'SUITES_INVALID',
+  'Invalid source provenance': 'SOURCE_PROVENANCE_INVALID',
+  'Invalid source file provenance': 'SOURCE_FILE_INVALID',
+  'Source digest mismatch': 'SOURCE_DIGEST_MISMATCH',
+  'Scenario assertion source changed': 'ASSERTION_SOURCE_CHANGED',
+  'Invalid invocation identity': 'INVOCATION_IDENTITY_INVALID',
+  'Incomplete or failed runner invocation': 'INVOCATION_FAILED',
+  'Source drift or raw exit mismatch': 'SOURCE_DRIFT_OR_EXIT_MISMATCH',
+  'Invalid build provenance': 'BUILD_PROVENANCE_INVALID',
+  'Invalid bundle manifest': 'BUNDLE_MANIFEST_INVALID',
+  'Changed runner configuration or CLI filters': 'RUNNER_CONFIG_CHANGED',
+  'Changed project collection': 'PROJECT_COLLECTION_CHANGED',
+  'Changed project configuration': 'PROJECT_CONFIG_CHANGED',
+  'Report belongs to a different run': 'REPORT_RUN_MISMATCH',
+  'Global runner errors': 'GLOBAL_RUNNER_ERRORS',
+  'Stale or incomplete report time window': 'REPORT_TIME_INVALID',
+  'Skipped or flaky report': 'REPORT_SKIPPED_OR_FLAKY',
+  'Missing or extra scenarios': 'SCENARIO_COUNT_MISMATCH',
+  'Unknown, duplicate or changed scenario identity': 'SCENARIO_IDENTITY_CHANGED',
+  'Changed scenario projects': 'SCENARIO_PROJECTS_CHANGED',
+  'Retries, skips or changed expectations': 'SCENARIO_EXPECTATIONS_CHANGED',
+  'Invalid scenario execution evidence': 'SCENARIO_EXECUTION_INVALID',
+  'Inconsistent passing result': 'PASS_RESULT_INCONSISTENT',
+  'Timed out, interrupted, skipped or flaky scenario': 'SCENARIO_STATUS_REJECTED',
+  'Raw runner exit or aggregate count mismatch': 'AGGREGATE_OR_EXIT_MISMATCH',
+  'Invalid evidence file': 'EVIDENCE_FILE_INVALID',
+  'Invalid run directory': 'RUN_DIRECTORY_INVALID',
+  'Stale report file': 'REPORT_FILE_STALE',
+  'Unsafe bundle path': 'BUNDLE_PATH_REJECTED',
+  'Missing build bundle': 'BUNDLE_FILE_INVALID',
+  'Build bundle digest mismatch': 'BUNDLE_DIGEST_MISMATCH',
+  'Unrecorded or multiple assertion failures': 'ASSERTION_FAILURE_UNRECORDED',
+  'Changed assertion location': 'ASSERTION_LOCATION_CHANGED',
+  'Changed assertion snippet': 'ASSERTION_SNIPPET_CHANGED',
+  'Changed assertion header': 'ASSERTION_HEADER_CHANGED',
+});
+function rejectionCode(error) {
+  return error && (typeof error === 'object' || typeof error === 'function')
+    ? rejectionCodes.get(error) || 'UNEXPECTED_GATE_ERROR' : 'UNEXPECTED_GATE_ERROR';
+}
+const check = (condition, reason) => {
+  if (!condition) {
+    const error = new Error(reason);
+    rejectionCodes.set(error, reasons[reason] || 'UNEXPECTED_GATE_ERROR');
+    throw error;
+  }
+};
 const specRoot = 'tests/browser/migration-parity/specs';
 const clean = value => value.replace(/\x1b\[[0-9;]*m/g, '');
 function header(message) {
@@ -22,16 +75,19 @@ function locationMatches(location, expected, root) {
   return location && location.file === path.join(root, specRoot, expected.file) &&
     location.line === expected.line && location.column === expected.column;
 }
-function knownFailure(result, expected, root) {
+function validateKnownFailure(result, expected, root) {
   const error = result.error;
   const failure = expected.knownFailure;
-  return error && failure && result.errors.length === 1 &&
-    locationMatches(error.location, failure.assertion, root) &&
+  check(error && failure && result.errors.length === 1, 'Unrecorded or multiple assertion failures');
+  check(locationMatches(error.location, failure.assertion, root) &&
     locationMatches(result.errorLocation, failure.assertion, root) &&
-    locationMatches(result.errors[0].location, failure.assertion, root) &&
-    error.snippet === failure.assertion.snippet &&
-    header(error.message) === failure.messageHeader &&
-    header(result.errors[0].message) === failure.messageHeader;
+    locationMatches(result.errors[0].location, failure.assertion, root), 'Changed assertion location');
+  // Playwright highlights code frames in CI. Strip only SGR color; keep every
+  // source character, line number, caret and whitespace in the pinned frame.
+  check(typeof error.snippet === 'string' && error.snippet.length <= 16000 &&
+    clean(error.snippet) === failure.assertion.snippet, 'Changed assertion snippet');
+  check(header(error.message) === failure.messageHeader &&
+    header(result.errors[0].message) === failure.messageHeader, 'Changed assertion header');
 }
 function collect(suites) {
   check(Array.isArray(suites), 'Missing suite collection');
@@ -140,7 +196,7 @@ function evaluate(evidence, context) {
     } else {
       check(result.status === 'failed' && test.status === 'unexpected' && spec.ok === false,
         'Timed out, interrupted, skipped or flaky scenario');
-      check(knownFailure(result, expected, context.root), `New failure: ${expected.caseId}`);
+      validateKnownFailure(result, expected, context.root);
       failed++; knownFailures.push(expected.caseId);
     }
   }
@@ -187,4 +243,4 @@ function summary(result) {
   }
   return lines.join('\n') + '\n';
 }
-module.exports = { evaluate, evaluateRun, summary };
+module.exports = { evaluate, evaluateRun, summary, rejectionCode };

@@ -35,7 +35,7 @@ const invocation={run,output,startedAt,finishedAt,preflight:'pass',controlsExitS
   rawRunnerExitStatus:result.status,rawRunnerSignal:result.signal || null,rawRunnerError:result.error ? result.error.code || 'process-error' : null};
 fs.writeFileSync(path.join(output,'invocation.json'),JSON.stringify(invocation,null,2));
 if(baselineMode){
-  const {evaluateRun,summary}=require('./migration-parity-gate');
+  const {evaluateRun,summary,rejectionCode}=require('./migration-parity-gate');
   let gate;
   try {
     gate=evaluateRun({root,run,startedAt,finishedAt,testedHead:before.testedHead,sourceDigest:before.sourceDigest});
@@ -43,12 +43,13 @@ if(baselineMode){
     const message=summary(gate);
     console.log(message);
     if(process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,message);
-  } catch {
+  } catch (error) {
+    const code=rejectionCode(error);
     // Never expose raw reports, assertion bodies, origins, ledgers or traces in CI summaries.
-    gate={schemaVersion:1,gate:'fail',rawRunnerExitStatus:result.status,sourceAfterExitStatus:rawExitStatus,
+    gate={schemaVersion:1,gate:'fail',rejectionCode:code,rawRunnerExitStatus:result.status,sourceAfterExitStatus:rawExitStatus,
       reason:'Evidence invalid, incomplete, changed, or contains a new regression. Inspect private runner evidence.'};
     process.exitCode=1;
-    const message=`### Synthetic parity baseline gate\nGate: **FAIL**. Raw runner exit: ${result.status}; source-after exit: ${rawExitStatus}.\nEvidence rejected or new regression; no product acceptance.\n`;
+    const message=`### Synthetic parity baseline gate\nGate: **FAIL**. Raw runner exit: ${result.status}; source-after exit: ${rawExitStatus}.\nRejection code: ${code}.\nEvidence rejected or new regression; no product acceptance.\n`;
     console.error(message);
     if(process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,message);
   }

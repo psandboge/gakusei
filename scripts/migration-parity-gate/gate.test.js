@@ -6,7 +6,7 @@ const os = require('node:os');
 const crypto = require('node:crypto');
 const zlib = require('node:zlib');
 const { spawnSync } = require('node:child_process');
-const { evaluate, evaluateRun, summary } = require('./index');
+const { evaluate, evaluateRun, summary, rejectionCode } = require('./index');
 const fixture = require('./fixtures/scenarios.json');
 const hash = data => crypto.createHash('sha256').update(data).digest('hex');
 function sample(root='/synthetic/repository') {
@@ -183,13 +183,14 @@ test('changed scenario assertion source rejected even with consistent recomputed
 });
 // Execute the real runner with synthetic process boundaries: no browser, build,
 // dependency installation or repository mutation. This checks exit wiring too.
-function runnerControl({baseline=true,controls=0,raw=1,signal=null,processError=null,omitReport=false,preflightFail=false,drift=false,afterSnapshotFail=false}={}) {
+function runnerControl({baseline=true,controls=0,raw=1,signal=null,processError=null,omitReport=false,preflightFail=false,drift=false,afterSnapshotFail=false,mutateEvidence=()=>{},gateFault}={}) {
   const vm=require('node:vm');
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'parity-runner-control-'));
+  const messages=[];
   const original=sample(root);let ticks=2000000,snapshots=0,children=0,output;
   class Clock extends Date {static now(){return ticks+=1000;}}
   const fakeProcess={argv:['node','runner',...(baseline?['--baseline']:[])],pid:321,execPath:process.execPath,
-    env:{},umask(){},exitCode:undefined,exit(code){this.exitCode=code;throw new Error('synthetic-exit');}};
+    env:{GITHUB_STEP_SUMMARY:path.join(root,'summary.md')},umask(){},exitCode:undefined,exit(code){this.exitCode=code;throw new Error('synthetic-exit');}};
   const child={spawnSync(){
     children++;
     if(children===1)return {status:controls,signal:null};
@@ -200,6 +201,7 @@ function runnerControl({baseline=true,controls=0,raw=1,signal=null,processError=
     e.report.config.reporter[1][1].outputFile=path.join('.tools/migration-parity/runs',output,'results.json');
     e.report.stats.startTime=new Date(ticks+100).toISOString();e.report.stats.duration=500;
     specs(e).forEach((spec,i)=>{const result=spec.tests[0].results[0];result.startTime=new Date(ticks+100+i).toISOString();result.duration=1;});
+    mutateEvidence(e);
     fs.mkdirSync(path.join(runDir,'build/js'),{recursive:true});
     fs.writeFileSync(path.join(runDir,'build/bundle-manifest.json'),JSON.stringify(e.build));
     fs.writeFileSync(path.join(runDir,'build/js/main.synthetic.js'),s.bytes);
@@ -215,15 +217,19 @@ function runnerControl({baseline=true,controls=0,raw=1,signal=null,processError=
       if(drift&&snapshots>1)s.sourceDigest='f'.repeat(64);return s;
     }};
     if(name==='./preflight'){if(preflightFail)throw new Error('synthetic-preflight');return {};}
-    if(name==='./migration-parity-gate')return require('./index');
+    if(name==='./migration-parity-gate'){
+      const gate=require('./index');
+      return gateFault ? {...gate,evaluateRun(){throw gateFault;}} : gate;
+    }
     return require(name);
   };
   loader.resolve=()=>path.join(root,'node_modules/@playwright/test/cli.js');
   try {
     try {vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../run-migration-parity.js'),'utf8'),
-      {require:loader,process:fakeProcess,Date:Clock,console:{log(){},error(){}}});}
+      {require:loader,process:fakeProcess,Date:Clock,console:{log(m){messages.push(m);},error(m){messages.push(m);}}});}
     catch(error){assert.match(error.message,/synthetic-exit|synthetic-preflight/);}
-    const result={exit:fakeProcess.exitCode,children};
+    const result={exit:fakeProcess.exitCode,children,messages:messages.join('\n'),
+      summary:fs.existsSync(path.join(root,'summary.md')) ? fs.readFileSync(path.join(root,'summary.md'),'utf8') : ''};
     if(output){
       const runDir=path.join(root,'.tools/migration-parity/runs',output);
       result.after=JSON.parse(fs.readFileSync(path.join(runDir,'source-after.json')));
@@ -254,4 +260,82 @@ for(const [name,options] of Object.entries({
   'null runner status with signal despite complete report':{raw:null,signal:'SIGTERM'}
 })) test(`runner rejects ${name}`,()=>{
   const r=runnerControl(options);assert.equal(r.exit,1);assert.equal(r.gate.gate,'fail');
+});
+
+// Generate frames through the installed pinned Playwright implementation, with
+// the same options as runner.addLocationAndSnippetToError. No test execution.
+function playwrightFrames({color,ci=true}) {
+  const env={...process.env,CI:ci?'1':'',FORCE_COLOR:color?'1':'0'};
+  delete env.NO_COLOR;
+  const child=spawnSync(process.execPath,['-e',`
+    const fs=require('node:fs'),path=require('node:path');
+    const babel=require('./node_modules/playwright/lib/transform/babelBundle');
+    const fixture=require('./scripts/migration-parity-gate/fixtures/scenarios.json');
+    const frames=fixture.cases.filter(c=>c.failure).map(c=>{
+      const f=c.failure.assertion;
+      return babel.codeFrameColumns(fs.readFileSync(path.join('tests/browser/migration-parity/specs',f.file),'utf8'),
+        {start:{line:f.line,column:f.column}},{highlightCode:true});
+    });
+    process.stdout.write(JSON.stringify(frames));
+  `],{cwd:path.join(__dirname,'../..'),env,encoding:'utf8'});
+  assert.equal(child.status,0,child.stderr);
+  return JSON.parse(child.stdout);
+}
+const coloredFrames=playwrightFrames({color:true});
+const plainFrames=playwrightFrames({color:false,ci:false});
+function applyFrames(e,frames) {
+  specs(e).filter(s=>s.tests[0].results[0].status==='failed').forEach((s,i)=>{
+    s.tests[0].results[0].error.snippet=frames[i];
+  });
+}
+for(const root of ['/home/runner/work/gakusei/gakusei','/Users/synthetic/check out']) {
+  for(const [name,frames] of [['CI colored',coloredFrames],['local plain',plainFrames]]) {
+    test(`${name} installed Playwright frames preserve exact fingerprints at ${root}`,()=>{
+      const {evidence,context}=sample(root);applyFrames(evidence,frames);
+      frames.forEach((frame,i)=>{
+        assert.equal(/\x1b\[/.test(frame),name==='CI colored');
+        assert.equal(frame.replace(/\x1b\[[0-9;]*m/g,''),plainFrames[i]);
+      });
+      const result=evaluate(evidence,context);
+      assert.equal(result.gate,'pass');assert.equal(result.rawSuite,'fail');assert.equal(result.failed,4);
+    });
+  }
+}
+for(const [name,mutate,code] of [
+  ['colored changed source',e=>{failed(e).error.snippet=failed(e).error.snippet.replace('toHaveCount','toHaveText');},'ASSERTION_SNIPPET_CHANGED'],
+  ['colored earlier location',e=>{failed(e).error.location={...failed(e).error.location,line:49};},'ASSERTION_LOCATION_CHANGED'],
+  ['colored changed received',e=>{failed(e).error.message=failed(e).error.message.replace('Received: 1','Received: 2');},'ASSERTION_HEADER_CHANGED'],
+  ['colored secondary changed received',e=>{failed(e).errors[0].message=failed(e).errors[0].message.replace('Received: 1','Received: 2');},'ASSERTION_HEADER_CHANGED'],
+  ['colored additional error',e=>{failed(e).errors.push({message:'private secondary failure'});},'ASSERTION_FAILURE_UNRECORDED'],
+  ['non-color terminal escape',e=>{failed(e).error.snippet+='\x1b[2J';},'ASSERTION_SNIPPET_CHANGED'],
+  ['missing snippet',e=>{delete failed(e).error.snippet;},'ASSERTION_SNIPPET_CHANGED'],
+  ['oversized snippet',e=>{failed(e).error.snippet='x'.repeat(16001);},'ASSERTION_SNIPPET_CHANGED'],
+  ['Linux config root drift',e=>{e.report.config.rootDir='/another/root';},'RUNNER_CONFIG_CHANGED'],
+  ['Linux CLI path drift',e=>{e.report.config.argv[1]='/another/cli.js';},'RUNNER_CONFIG_CHANGED'],
+  ['Linux setup path drift',e=>{e.report.config.globalSetup='/another/build.js';},'RUNNER_CONFIG_CHANGED'],
+  ['Linux output run drift',e=>{e.report.config.projects[0].outputDir='/another/results';},'PROJECT_CONFIG_CHANGED']
+]) test(`portable gate rejects ${name} with fixed code`,()=>{
+  const {evidence,context}=sample('/home/runner/work/gakusei/gakusei');applyFrames(evidence,coloredFrames);mutate(evidence);
+  assert.throws(()=>evaluate(evidence,context),error=>rejectionCode(error)===code);
+});
+test('runner accepts installed CI-colored snippets while retaining raw exit 1',()=>{
+  const r=runnerControl({mutateEvidence:e=>applyFrames(e,coloredFrames)});
+  assert.equal(r.exit,0);assert.equal(r.gate.gate,'pass');assert.equal(r.after.exitStatus,1);
+});
+test('runner emits fixed rejection code in JSON, console and GitHub summary',()=>{
+  const r=runnerControl({mutateEvidence:e=>{failed(e).error.snippet='private assertion body https://private.example/account';}});
+  assert.equal(r.exit,1);assert.equal(r.gate.rejectionCode,'ASSERTION_SNIPPET_CHANGED');
+  for(const text of [JSON.stringify(r.gate),r.messages,r.summary]){
+    assert.match(text,/ASSERTION_SNIPPET_CHANGED/);assert.doesNotMatch(text,/private assertion|private.example|account/);
+  }
+});
+test('untrusted error text and forged diagnostic codes cannot enter public output',()=>{
+  const fault=Object.assign(new Error('private assertion https://secret.example/account'),{code:'PRIVATE_DYNAMIC_CODE'});
+  const r=runnerControl({gateFault:fault});
+  assert.equal(r.exit,1);assert.equal(r.gate.rejectionCode,'UNEXPECTED_GATE_ERROR');
+  for(const text of [JSON.stringify(r.gate),r.messages,r.summary]){
+    assert.match(text,/UNEXPECTED_GATE_ERROR/);assert.doesNotMatch(text,/private assertion|secret.example|PRIVATE_DYNAMIC_CODE/);
+  }
+  for(const error of [fault,null,undefined,'PRIVATE_DYNAMIC_CODE',{code:'ASSERTION_HEADER_CHANGED'}])
+    assert.equal(rejectionCode(error),'UNEXPECTED_GATE_ERROR');
 });
