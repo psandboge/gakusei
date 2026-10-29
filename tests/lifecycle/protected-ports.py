@@ -12,7 +12,7 @@ root = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location('owned', root / 'scripts/verify-browser-state.py')
 owned = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(owned)
-ports = (18082, 18083, 15432, 15433)
+ports = (18082, 18083, 15432, 15433, 52655, 62508, 62721)
 run = secrets.token_hex(12)
 directory = root / '.tools/browser-tests' / run
 directory.mkdir(parents=True, mode=0o700)
@@ -40,7 +40,7 @@ try:
         def getsockname(self): return ('127.0.0.1', next(sequence))
     with patch.object(owned.socket, 'socket', return_value=Socket()):
         assert owned.free_port() == 23456
-    print('PASS offline: all four protected ports rejected as app/database destinations and skipped by allocator')
+    print('PASS offline: all seven protected ports rejected as app/database destinations and skipped by allocator')
 finally:
     record.unlink(missing_ok=True)
     directory.rmdir()

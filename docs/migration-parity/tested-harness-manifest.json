@@ -1,0 +1,76 @@
+{
+  "baseline": "03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0",
+  "sourceDigest": "712714500d8338e783851f2572762f72883b6b998a7cac32124434d236285f69",
+  "beforeAfterUnchanged": true,
+  "scope": "Selected tested harness paths; complete source manifest retained privately. Docs/new CI draft gate were added outside this tested input set.",
+  "files": [
+    {
+      "path": "playwright.parity.config.js",
+      "sha256": "cceba593dff3ea9595cd192307d7d03d6286b7bc32117143e36f7afb392bd08b"
+    },
+    {
+      "path": "scripts/run-migration-parity.js",
+      "sha256": "b9254917ec16fbc1012903cacdb50025bf7dcbcedd470f0f1770cc653e0ee9ba"
+    },
+    {
+      "path": "tests/browser/migration-parity/harness/build.js",
+      "sha256": "0963f86a4427ff202f56b3f914a56a6fd24db886784a3bec55169570a615826e"
+    },
+    {
+      "path": "tests/browser/migration-parity/harness/provenance.js",
+      "sha256": "0455d013fd268f93a73a90ea97f25210435aadda1ada5b848b938469e13653bc"
+    },
+    {
+      "path": "tests/browser/migration-parity/harness/server.js",
+      "sha256": "39f998048d5d46a484aadca81e8cafb0782a4029d229b9820e780e0265835b15"
+    },
+    {
+      "path": "tests/browser/migration-parity/harness/server.test.js",
+      "sha256": "17472d7e89e22058c095e96fe87b9737ec4ddded29d1a1796ec376d204338398"
+    },
+    {
+      "path": "tests/browser/migration-parity/specs/handwriting.spec.js",
+      "sha256": "2485526754832f7e74bffe6a8dba40c09ba9a7a35954825d08bbd8fab2067469"
+    },
+    {
+      "path": "tests/browser/migration-parity/specs/learning.spec.js",
+      "sha256": "15902944319ecaa22cd02bb9d1d2742c1faf10d0cbc46188d7775c41a70ed897"
+    },
+    {
+      "path": "tests/browser/migration-parity/specs/navigation.spec.js",
+      "sha256": "d9d50354a985912d6be04a50f6fbeda87597042de70da3f0f2333ccfcbd01072"
+    },
+    {
+      "path": "tests/browser/migration-parity/specs/session.spec.js",
+      "sha256": "1407e98f06ccbee26eed98be3074bb8ee0625e6dd6303c530b9e5d185f71fcc3"
+    },
+    {
+      "path": "tests/browser/migration-parity/specs/visual-reference.spec.js",
+      "sha256": "c23c482dc50bdb343c5be596e476b9437fd6ef89771fa2553694e7506e4dd182"
+    },
+    {
+      "path": "tests/browser/migration-parity/support/fixture.js",
+      "sha256": "e5ce6555f2851c366325f9752c1b71c4d23358c937ef28fbbd41995e9f2473c3"
+    },
+    {
+      "path": "tests/fixtures/migration-parity/api.js",
+      "sha256": "889b540a6b3064acbf46d66abda3620923f23d7100dcd38b49ea9817c1dec1e7"
+    },
+    {
+      "path": "tests/fixtures/migration-parity/legacy-state.json",
+      "sha256": "ceca4ed1fc1c02ba0342f57070ebc885d44e46698e119e43ba278fe3ea06e890"
+    },
+    {
+      "path": "tests/fixtures/migration-parity/one-line.svg",
+      "sha256": "d56c7be711aa412227a16eb78309fdb259a948c2d5f4652c49dbb20232873812"
+    },
+    {
+      "path": "tests/fixtures/migration-parity/scoring.test.js",
+      "sha256": "eb612d5030d547f3ea2e27415f450a67813f98428e0632209ed5913b87792956"
+    },
+    {
+      "path": "tests/fixtures/migration-parity/strokes.json",
+      "sha256": "efceff549805887aa2e9708e9cc8e7c776787ac0da7d74a09c6db32adbe462b1"
+    }
+  ]
+}

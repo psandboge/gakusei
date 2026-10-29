@@ -1,0 +1,129 @@
+{
+  "baseline": "03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0",
+  "scope": "existing owned Spring/PostgreSQL browser suite; separate from fixture-backed parity pack",
+  "recorded_at": "2026-10-29",
+  "phases": {
+    "after-reseed": "passed",
+    "after-restart": "passed",
+    "journey": "passed"
+  },
+  "checks": [
+    {
+      "cause": "none",
+      "check": "browser-language-fixture",
+      "phase": "journey",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "original-account",
+      "phase": "journey",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "specialized-language",
+      "phase": "journey",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "specialized-isolation",
+      "phase": "journey",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "browser-tests",
+      "phase": "journey",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "durable-state",
+      "phase": "journey",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "browser-language-fixture",
+      "phase": "after-restart",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "original-account",
+      "phase": "after-restart",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "specialized-language",
+      "phase": "after-restart",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "specialized-isolation",
+      "phase": "after-restart",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "browser-tests",
+      "phase": "after-restart",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "durable-state",
+      "phase": "after-restart",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "browser-language-fixture",
+      "phase": "after-reseed",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "original-account",
+      "phase": "after-reseed",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "specialized-language",
+      "phase": "after-reseed",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "specialized-isolation",
+      "phase": "after-reseed",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "browser-tests",
+      "phase": "after-reseed",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "durable-state",
+      "phase": "after-reseed",
+      "status": "passed"
+    },
+    {
+      "cause": "none",
+      "check": "owned-cleanup",
+      "phase": "cleanup",
+      "status": "passed"
+    }
+  ],
+  "exit_code": 0,
+  "privacy": "Sanitized summary only; learner identities, database ownership manifests, raw logs and traces remain private.",
+  "limitation": "This covers only the existing suite and its observed assertions, not every new six-mode parity contract."
+}

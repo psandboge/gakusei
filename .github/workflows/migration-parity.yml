@@ -1,0 +1,32 @@
+name: Framework migration acceptance baseline
+on:
+  pull_request:
+  push:
+    branches: [develop]
+permissions:
+  contents: read
+jobs:
+  synthetic-browser-contract:
+    # Draft baseline has exhausted its local verification budget; no hosted pass is claimed.
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install repository-pinned tools
+        run: bash scripts/install-ci-tools.sh
+      - name: Clean dependencies
+        run: npm ci --strict-peer-deps
+      - name: Chromium and Linux libraries
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Fixture isolation controls
+        run: node --test tests/browser/migration-parity/harness/server.test.js
+      - name: Protected destination guards
+        run: python3 tests/lifecycle/protected-ports.py
+      - name: Synthetic API browser contracts
+        run: npm run test:parity
+      # Raw reports/traces stay on the runner. This job does not prove Spring,
+      # PostgreSQL, or hosted user-data behavior; the existing regression job does.
