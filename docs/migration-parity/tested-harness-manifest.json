@@ -1,8 +1,9 @@
 {
   "baseline": "03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0",
-  "sourceDigest": "712714500d8338e783851f2572762f72883b6b998a7cac32124434d236285f69",
+  "testedHead": "461d93b3c226b9e9d50d5d58d9867f3554bb5734",
+  "sourceDigest": "3ba54177b651806157e3b686f72dc9c6ce52e8dc264855a40828570978734092",
   "beforeAfterUnchanged": true,
-  "scope": "Selected tested harness paths; complete source manifest retained privately. Docs/new CI draft gate were added outside this tested input set.",
+  "scope": "Selected tested harness paths; full manifest retained privately. Later docs only are outside this tested input set.",
   "files": [
     {
       "path": "playwright.parity.config.js",
@@ -14,15 +15,15 @@
     },
     {
       "path": "tests/browser/migration-parity/harness/build.js",
-      "sha256": "0963f86a4427ff202f56b3f914a56a6fd24db886784a3bec55169570a615826e"
+      "sha256": "98f0c9ce1e5bd37d106ce392c45b40493a41dcf346d19e01375cc5a36881f187"
     },
     {
       "path": "tests/browser/migration-parity/harness/provenance.js",
-      "sha256": "0455d013fd268f93a73a90ea97f25210435aadda1ada5b848b938469e13653bc"
+      "sha256": "2bd73ab0425422ed4439a9c9227fe4ba245f4e874e18beb3c23b7ab1423c10dc"
     },
     {
       "path": "tests/browser/migration-parity/harness/server.js",
-      "sha256": "39f998048d5d46a484aadca81e8cafb0782a4029d229b9820e780e0265835b15"
+      "sha256": "8ec306716ff9133a6ce6ca0ea6fa02d44bc303a7048daa4c1604e9c1b8f0c662"
     },
     {
       "path": "tests/browser/migration-parity/harness/server.test.js",
@@ -38,11 +39,11 @@
     },
     {
       "path": "tests/browser/migration-parity/specs/navigation.spec.js",
-      "sha256": "d9d50354a985912d6be04a50f6fbeda87597042de70da3f0f2333ccfcbd01072"
+      "sha256": "e63fdd97928997a102e593207dd742605fd0dabae91140cbc41c201f264b47b4"
     },
     {
       "path": "tests/browser/migration-parity/specs/session.spec.js",
-      "sha256": "1407e98f06ccbee26eed98be3074bb8ee0625e6dd6303c530b9e5d185f71fcc3"
+      "sha256": "b39f3f12d88c133661c54879f0aca199a73e36229abf632a21edba16149c5931"
     },
     {
       "path": "tests/browser/migration-parity/specs/visual-reference.spec.js",

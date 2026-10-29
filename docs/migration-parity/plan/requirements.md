@@ -65,3 +65,7 @@ Backend rewrite, database/schema changes, visual redesign, new learning features
 ## Other Notes
 
 User requested planning with analyst assistance on 2026-10-28. Gakusei remains suspended. Requirements and implementation plan are drafts; no new retry budgets are implied. Existing protected previews, resource exclusions, owner-deferred gaps and model ceiling remain in force.
+
+## Owner follow-up — 29 October 2026, 11:30 UTC
+
+Known P0 product failures are explicitly assigned to conversion fixes; if unresolved after conversion, create open bugs with retained reproduction/evidence. See conversion-defect-disposition.md. Remove the P0 language-cache-restoration case; revisit language after conversion. Superseded-identity synchronization and necessary committed-source provenance are the focused current correction. This does not reset prior attempts or launch P1.

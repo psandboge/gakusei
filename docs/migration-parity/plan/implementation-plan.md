@@ -139,3 +139,7 @@ Gakusei stays suspended during planning. Before execution: approve scope/interfa
 - Svelte Testing Library setup: https://testing-library.com/docs/svelte-testing-library/setup/
 - Existing source references are all relative to PR7's pinned commit, not the unfinished shared candidate.
 - Read-only analyst findings and package review: `analyst-findings.md` alongside this plan.
+
+## Owner follow-up — 29 October 2026, 11:30 UTC
+
+Known P0 product failures are explicitly assigned to conversion fixes; if unresolved after conversion, create open bugs with retained reproduction/evidence. See conversion-defect-disposition.md. Remove the P0 language-cache-restoration case; revisit language after conversion. Superseded-identity synchronization and necessary committed-source provenance are the focused current correction. This does not reset prior attempts or launch P1.

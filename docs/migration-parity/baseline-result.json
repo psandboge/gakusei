@@ -1,486 +1,400 @@
 {
   "schemaVersion": 1,
-  "bead": "gaku-d2wkd",
-  "createdAt": "2026-10-29T11:13:46.586744+00:00",
-  "disposition": "P0 acceptance blocked; final executable delivery contains unresolved test-contract defects and inherited product findings",
-  "executionOutcome": "fail",
-  "reportComplete": true,
+  "bead": "gaku-pd2d2",
+  "predecessor": "gaku-d2wkd",
+  "createdAt": "2026-10-29T11:37:48.635306+00:00",
+  "executionOutcome": "pass",
+  "baselineOutcome": "fail",
+  "disposition": "Engineering correction delivered; inherited product baseline remains failing; no P0 acceptance or P1 advance.",
   "budget": {
-    "attempt": 3,
-    "cap": 3,
+    "attempt": 4,
+    "cap": 4,
     "remaining": 0,
-    "furtherAttempts": "Require explicit owner disposition; no repair or browser rerun performed after final source freeze."
+    "ownerAllowance": "Owner2026-10-29T11:30Z one focused correction plus one full verification; cumulative continuation of spent3/max3, no reset"
   },
   "model": {
     "identifier": "gpt-6.1-sol",
     "reasoningEffort": "high",
-    "verifiedBy": "Live ancestor process invocation; independently acknowledged by mayor in da-wisp-03livpu"
+    "verification": "Live ancestor PID1858 invocation, mayor independently confirmed"
   },
   "source": {
     "baseline": "03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0",
-    "testedHead": "03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0",
-    "productSourceUnchanged": true,
-    "sourceDigest": "712714500d8338e783851f2572762f72883b6b998a7cac32124434d236285f69",
-    "trackedDiffSha256": "9495a4bcdbe62615394221efa0227af862de1dac21707877ee76d6bd16a404f2",
-    "filesHashed": 7138,
+    "testedHead": "461d93b3c226b9e9d50d5d58d9867f3554bb5734",
+    "sourceDigest": "3ba54177b651806157e3b686f72dc9c6ce52e8dc264855a40828570978734092",
+    "afterSourceDigest": "3ba54177b651806157e3b686f72dc9c6ce52e8dc264855a40828570978734092",
     "beforeAfterUnchanged": true,
-    "manifestBefore": ".tools/migration-parity/runs/1793272165655-87571/source-before.json",
-    "manifestAfter": ".tools/migration-parity/runs/1793272165655-87571/source-after.json",
-    "buildManifest": ".tools/migration-parity/runs/1793272165655-87571/build/bundle-manifest.json",
-    "harnessCommit": "Uncommitted frozen source; coordinator owns later commit/PR"
+    "productSourceUnchanged": true,
+    "trackedDiffSha256": "176bab572d78e70b84a3c389c826caffd389416c2c7e0dc2e7a117f7165f6ece",
+    "fileCount": 7138,
+    "bundleSourceCommit": "03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0",
+    "bundleTestedHead": "461d93b3c226b9e9d50d5d58d9867f3554bb5734",
+    "bundleSourceDigest": "3ba54177b651806157e3b686f72dc9c6ce52e8dc264855a40828570978734092"
   },
   "execution": {
     "command": "npm run test:parity",
-    "exitStatus": 1,
     "retries": 0,
     "workers": 1,
-    "perTestTimeoutMs": 45000,
-    "suiteTimeoutMs": 300000,
+    "expectedCases": 23,
+    "actualCases": 23,
+    "stats": {
+      "startTime": "2026-10-29T11:36:07.125Z",
+      "duration": 97108.94099999999,
+      "expected": 19,
+      "skipped": 0,
+      "unexpected": 4,
+      "flaky": 0
+    },
     "outerTimeoutSeconds": 420,
-    "startTime": "2026-10-29T11:09:26.247Z",
-    "durationMs": 143077.447,
-    "passed": 18,
-    "failed": 6,
-    "skipped": 0,
-    "flaky": 0
+    "exitStatus": 1,
+    "outerTimedOut": false,
+    "finishedAt": 1793273864.5210948,
+    "ownedProcessGroup": 28939,
+    "ownedRunnerExited": true
   },
   "tools": {
     "node": "24.21.0",
     "npm": "11.19.0",
     "playwright": "1.63.0",
-    "chromiumVersion": "153.0.8010.12",
     "chromiumRevision": "1243",
     "react": "18.3.1",
     "projectVersion": "2.1.1"
   },
   "preparationChecks": {
-    "serverControls": "2passed",
-    "pureStrokeScoring": "1passed",
-    "javascriptSyntax": "12files checked",
-    "collection": "24cases in5files; no exploratory browser execution"
+    "javascriptSyntax": "passed",
+    "collection": "23 cases; collection only, no exploratory browser execution",
+    "serverControls": "2 passed in this full verification",
+    "staticProvenanceControls": {
+      "controls": [
+        {
+          "control": "committed test-only descendant accepted",
+          "passed": true,
+          "exitStatus": 0,
+          "expectedError": null,
+          "output": "{\"baseline\":\"03ce2f38d3099e9ccd7dd09a430e023e9f4ce0d0\",\"testedHead\":\"6438f339c52266c215d9811971a490ef4766f480\",\"sourceDigest\":\"df0975870bbb6124289d0349d9a056bda61129c4de352202843ec8e41f40f000\"}",
+          "error": null
+        },
+        {
+          "control": "webpack.config.js byte drift rejected",
+          "passed": true,
+          "exitStatus": 1,
+          "expectedError": "Product/build/lock source differs from PR7",
+          "output": "",
+          "error": "Product/build/lock source differs from PR7"
+        },
+        {
+          "control": "package-lock.json byte drift rejected",
+          "passed": true,
+          "exitStatus": 1,
+          "expectedError": "Product/build/lock source differs from PR7",
+          "output": "",
+          "error": "Product/build/lock source differs from PR7"
+        },
+        {
+          "control": "dependency metadata drift rejected",
+          "passed": true,
+          "exitStatus": 1,
+          "expectedError": "Package metadata/dependencies differ from PR7",
+          "output": "",
+          "error": "Package metadata/dependencies differ from PR7"
+        },
+        {
+          "control": "untracked product addition rejected",
+          "passed": true,
+          "exitStatus": 1,
+          "expectedError": "Product/build/lock source differs from PR7",
+          "output": "",
+          "error": "Product/build/lock source differs from PR7"
+        }
+      ],
+      "temporaryCloneRemoved": true,
+      "originalProductWorktreeMutated": false
+    },
+    "committedFreezeSha256": "5cbf37fd456c480388b22146de253f5a49ec792304a9c64e2ab99a7c28fa9acf"
   },
+  "removedCases": [
+    {
+      "id": "P0-LANGUAGE-CACHE",
+      "disposition": "Removed by explicit owner instruction; not passed. Language reconsideration deferred until after conversion."
+    }
+  ],
   "cases": [
     {
       "id": "P0-DRAW-mouse",
       "title": "P0-DRAW-mouse: simulated one-line score, resize, export, reset/remount",
-      "file": "handwriting.spec.js",
-      "line": 26,
       "runnerStatus": "failed",
       "verdict": "fail",
       "classification": "inherited-product",
       "detail": "Repeated same kanji retains completed self-mark control on question2; expected0, actual1. Scoring, bounded export and endpoint mapping within2CSS pixels passed before reset failure. Remount assertions not reached.",
-      "durationMs": 12327,
-      "attempts": 1
+      "durationMs": 12379,
+      "attempts": 1,
+      "errors": [
+        "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('[name=\"answerbutton-1\"]')\nExpected: 0\nReceived: 1\nTimeout:  10000ms\n\nCall log:\n  - Expect \"toHaveCount\" locator('[name=\"answerbutton-1\"]') with timeout 10000ms\n  - waiting for locator('[name=\"answerbutton-1\"]')\n    24 \u00d7 locator resolved to 1 element\n       - unexpected value \"1\"\n\n\n  48 |   }\n  49 |   await expect(page.getByText(/Fr\u00e5ga 2 \\/ 2/)).toBeVisible();\n> 50 |   await expect(page.locator('[name=\"answerbutton-1\"]')).toHaveCount(0);\n     |                                                         ^\n  51 |   await page.goto(app.origin+'/about'); await begin(page,app);\n  52 |   await stroke(page,kind); await expect(yes).toBeVisible(); await yes.click();\n  53 |   await expect.poll(()=>app.requests.filter(r=>r.path==='/api/kanji-drawings').length).toBe(2);\n    at [worktree]/tests/browser/migration-parity/specs/handwriting.spec.js:50:57"
+      ]
     },
     {
       "id": "P0-DRAW-touch",
       "title": "P0-DRAW-touch: simulated one-line score, resize, export, reset/remount",
-      "file": "handwriting.spec.js",
-      "line": 26,
       "runnerStatus": "failed",
       "verdict": "fail",
       "classification": "inherited-product",
       "detail": "Repeated same kanji retains completed self-mark control on question2; expected0, actual1. Synthetic touch adapter scoring, bounded export and endpoint mapping within2CSS pixels passed before reset failure. Remount assertions not reached; physical-device touch not tested.",
-      "durationMs": 12223,
-      "attempts": 1
+      "durationMs": 12227,
+      "attempts": 1,
+      "errors": [
+        "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('[name=\"answerbutton-1\"]')\nExpected: 0\nReceived: 1\nTimeout:  10000ms\n\nCall log:\n  - Expect \"toHaveCount\" locator('[name=\"answerbutton-1\"]') with timeout 10000ms\n  - waiting for locator('[name=\"answerbutton-1\"]')\n    24 \u00d7 locator resolved to 1 element\n       - unexpected value \"1\"\n\n\n  48 |   }\n  49 |   await expect(page.getByText(/Fr\u00e5ga 2 \\/ 2/)).toBeVisible();\n> 50 |   await expect(page.locator('[name=\"answerbutton-1\"]')).toHaveCount(0);\n     |                                                         ^\n  51 |   await page.goto(app.origin+'/about'); await begin(page,app);\n  52 |   await stroke(page,kind); await expect(yes).toBeVisible(); await yes.click();\n  53 |   await expect.poll(()=>app.requests.filter(r=>r.path==='/api/kanji-drawings').length).toBe(2);\n    at [worktree]/tests/browser/migration-parity/specs/handwriting.spec.js:50:57"
+      ]
     },
     {
       "id": "P0-MODE-guess",
       "title": "P0-MODE-guess: simulated API short lesson, finish and replay",
-      "file": "learning.spec.js",
-      "line": 19,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 4061,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 4098,
       "attempts": 1
     },
     {
       "id": "P0-MODE-quiz",
       "title": "P0-MODE-quiz: simulated API short lesson, finish and replay",
-      "file": "learning.spec.js",
-      "line": 19,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 4123,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 4070,
       "attempts": 1
     },
     {
       "id": "P0-MODE-flashcards",
       "title": "P0-MODE-flashcards: simulated API short lesson, finish and replay",
-      "file": "learning.spec.js",
-      "line": 19,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 5903,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 5816,
       "attempts": 1
     },
     {
       "id": "P0-MODE-translate",
       "title": "P0-MODE-translate: simulated API short lesson, finish and replay",
-      "file": "learning.spec.js",
-      "line": 19,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 2714,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 2711,
       "attempts": 1
     },
     {
       "id": "P0-MODE-grammar",
       "title": "P0-MODE-grammar: simulated API short lesson, finish and replay",
-      "file": "learning.spec.js",
-      "line": 19,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 2797,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 2730,
       "attempts": 1
     },
     {
       "id": "P0-MODE-kanji",
       "title": "P0-MODE-kanji: simulated API short lesson, finish and replay",
-      "file": "learning.spec.js",
-      "line": 19,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 4080,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 4030,
       "attempts": 1
     },
     {
       "id": "P0-FOCUS",
       "title": "P0-FOCUS: simulated API Enter, actual focus, disabled input, reset and transition navigation",
-      "file": "learning.spec.js",
-      "line": 66,
       "runnerStatus": "failed",
       "verdict": "fail",
       "classification": "inherited-product",
       "detail": "Typed Enter, disabled input, actual Next/input focus and reset passed; pending final-answer timer replaced /about with /finish/translate after navigation.",
-      "durationMs": 12606,
-      "attempts": 1
+      "durationMs": 12638,
+      "attempts": 1,
+      "errors": [
+        "Error: expect(page).toHaveURL(expected) failed\n\nExpected pattern: /\\/about$/\nReceived string:  \"[owned synthetic origin]/finish/translate\"\nTimeout: 10000ms\n\nCall log:\n  - Expect \"toHaveURL\" with timeout 10000ms\n    24 \u00d7 locator resolved to <html lang=\"sv\">\u2026</html>\n       - unexpected value \"[owned synthetic origin]/finish/translate\"\n\n\n  83 |   // Observe beyond PR7's documented 2000 ms final-answer timer (200 ms margin).\n  84 |   await page.waitForTimeout(2200);\n> 85 |   await expect(page).toHaveURL(/\\/about$/);\n     |                      ^\n  86 | });\n  87 | test('P0-DUPLICATE: rapid double activation and disabled choice produce one outcome per question',async({page,app})=>{\n  88 |   await start(page,app,'guess');\n    at [worktree]/tests/browser/migration-parity/specs/learning.spec.js:85:22"
+      ]
     },
     {
       "id": "P0-DUPLICATE",
       "title": "P0-DUPLICATE: rapid double activation and disabled choice produce one outcome per question",
-      "file": "learning.spec.js",
-      "line": 87,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 4054,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 4056,
       "attempts": 1
     },
     {
       "id": "P0-PREFERENCES",
       "title": "P0-PREFERENCES: simulated favorites, repetition request, direct links and browser history",
-      "file": "navigation.spec.js",
-      "line": 5,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 855,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 782,
       "attempts": 1
     },
     {
       "id": "P0-LEGACY-obsolete",
       "title": "P0-LEGACY-obsolete: simulated stored identity and lesson preferences require server confirmation",
-      "file": "navigation.spec.js",
-      "line": 22,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 289,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 272,
       "attempts": 1
     },
     {
       "id": "P0-LEGACY-current",
       "title": "P0-LEGACY-current: simulated stored identity and lesson preferences require server confirmation",
-      "file": "navigation.spec.js",
-      "line": 22,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 287,
-      "attempts": 1
-    },
-    {
-      "id": "P0-LANGUAGE-CACHE",
-      "title": "P0-LANGUAGE-CACHE: simulated language save payload and browser locale cache survive reload",
-      "file": "navigation.spec.js",
-      "line": 47,
-      "runnerStatus": "failed",
-      "verdict": "fail",
-      "classification": "test-authoring",
-      "detail": "Strict selector .glosorDropdown resolves2buttons, so language selection, save and browser-cache restoration assertions were not reached. This failure does not establish a product locale defect.",
-      "durationMs": 250,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 274,
       "attempts": 1
     },
     {
       "id": "P0-LANGUAGE-SERVER",
       "title": "P0-LANGUAGE-SERVER: simulated UI login restores server locale without detector cache",
-      "file": "navigation.spec.js",
-      "line": 65,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 458,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 425,
       "attempts": 1
     },
     {
       "id": "P0-SESSION",
       "title": "P0-SESSION: simulated API invalid login, login, logout, refresh and account switch",
-      "file": "session.spec.js",
-      "line": 16,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 869,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 859,
       "attempts": 1
     },
     {
       "id": "P0-IDENTITY-RECOVERY",
       "title": "P0-IDENTITY-RECOVERY: simulated failed identity is fail closed and explicitly retried",
-      "file": "session.spec.js",
-      "line": 38,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 281,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 280,
       "attempts": 1
     },
     {
       "id": "P0-IDENTITY-DELAY",
       "title": "P0-IDENTITY-DELAY: simulated pending identity cannot reveal account-owned lessons",
-      "file": "session.spec.js",
-      "line": 48,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 284,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 303,
       "attempts": 1
     },
     {
       "id": "P0-REGISTRATION",
       "title": "P0-REGISTRATION: simulated registration initializes defaults once",
-      "file": "session.spec.js",
-      "line": 59,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 2209,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 2199,
       "attempts": 1
     },
     {
       "id": "P0-IDENTITY-SUPERSEDED",
       "title": "P0-IDENTITY-SUPERSEDED: simulated old identity cannot overwrite a newer UI account login",
-      "file": "session.spec.js",
-      "line": 80,
-      "runnerStatus": "timedOut",
-      "verdict": "fail",
-      "classification": "test-synchronization-unresolved",
-      "detail": "New UI Bob login and Bob catalog rendered in same document; released old Alice identity returnedHTTP200 but response.finished barrier did not settle before45s timeout. Final Bob/no-Alice publication assertions not reached. No stale-identity acceptance claim; root cause beyond barrier remains unverified.",
-      "durationMs": 45037,
+      "runnerStatus": "passed",
+      "verdict": "pass",
+      "classification": "verified-fixture-behavior",
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 349,
       "attempts": 1
     },
     {
       "id": "P0-AUTH-SUPERSEDED",
       "title": "P0-AUTH-SUPERSEDED: simulated issued login settles before newer account mutation",
-      "file": "session.spec.js",
-      "line": 95,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 382,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 347,
       "attempts": 1
     },
     {
       "id": "P0-ACCOUNT-READ",
       "title": "P0-ACCOUNT-READ: simulated old account catalog read across logout and account switch cannot publish",
-      "file": "session.spec.js",
-      "line": 111,
       "runnerStatus": "failed",
       "verdict": "fail",
       "classification": "inherited-product",
       "detail": "Across UI logout and Bob login in same document, releasing old Alice userLessons response made Bob lesson favorite active. Expected inactive, actual active. Ordinary fetchUserStarredLessons lacks the registration-context publication guard in pinned source.",
-      "durationMs": 10495,
-      "attempts": 1
+      "durationMs": 10521,
+      "attempts": 1,
+      "errors": [
+        "Error: expect(locator).not.toHaveClass(expected) failed\n\nLocator: locator('.exercise').filter({ has: getByRole('heading', { name: /^Migration P0/ }) }).locator('.toggle-icon-button')\nExpected pattern: not /--active/\nReceived string: \"toggle-icon-button toggle-icon-button--active toggle-icon-button toggle-icon-button--active-default\"\nTimeout: 10000ms\n\nCall log:\n  - Expect \"not toHaveClass\" locator('.exercise').filter({ has: getByRole('heading', { name: /^Migration P0/ }) }).locator('.toggle-icon-button') with timeout 10000ms\n  - waiting for locator('.exercise').filter({ has: getByRole('heading', { name: /^Migration P0/ }) }).locator('.toggle-icon-button')\n    24 \u00d7 locator resolved to <button type=\"button\" class=\"toggle-icon-button toggle-icon-button--active toggle-icon-button toggle-icon-button--active-default\">\u2026</button>\n       - unexpected value \"toggle-icon-button toggle-icon-button--active toggle-icon-button toggle-icon-button--active-default\"\n\n\n  166 |   await (await response).finished();\n  167 |   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));\n> 168 |   await expect(exercise(page).locator('.toggle-icon-button')).not.toHaveClass(/--active/);\n      |                                                                   ^\n  169 |   await visibleIdentity(page,'P0Bob');\n  170 | });\n  171 |\n    at [worktree]/tests/browser/migration-parity/specs/session.spec.js:168:67"
+      ]
     },
     {
       "id": "P0-VISUAL-desktop",
       "title": "P0-VISUAL-desktop: simulated fixed reference screenshots",
-      "file": "visual-reference.spec.js",
-      "line": 4,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 3030,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 3021,
       "attempts": 1
     },
     {
       "id": "P0-VISUAL-mobile",
       "title": "P0-VISUAL-mobile: simulated fixed reference screenshots",
-      "file": "visual-reference.spec.js",
-      "line": 4,
       "runnerStatus": "passed",
       "verdict": "pass",
       "classification": "verified-fixture-behavior",
-      "detail": "All assertions in this bounded simulated-API case passed.",
-      "durationMs": 3011,
+      "detail": "All assertions in this bounded synthetic API case passed.",
+      "durationMs": 2999,
       "attempts": 1
     }
   ],
-  "screenshots": [
-    {
-      "path": ".tools/migration-parity/runs/1793272165655-87571/results/visual-reference-P0-VISUAL-0733f-fixed-reference-screenshots-chromium/mobile-handwriting.png",
-      "sha256": "cb254827a4c4155fcf9cc1efa6ca8d4a13616b1ef3342194f0fe5d4aac1d4202",
-      "width": 390,
-      "height": 880,
-      "visualInspection": "Reviewed; expected synthetic selection/feedback/results/canvas content. Reference aid only; no pixel comparison or visual parity acceptance."
-    },
-    {
-      "path": ".tools/migration-parity/runs/1793272165655-87571/results/visual-reference-P0-VISUAL-0733f-fixed-reference-screenshots-chromium/mobile-results.png",
-      "sha256": "148116fbe67a54ad73b9af51194cd87687656c48ae775b6be9a39b1b107b75e0",
-      "width": 390,
-      "height": 844,
-      "visualInspection": "Reviewed; expected synthetic selection/feedback/results/canvas content. Reference aid only; no pixel comparison or visual parity acceptance."
-    },
-    {
-      "path": ".tools/migration-parity/runs/1793272165655-87571/results/visual-reference-P0-VISUAL-0733f-fixed-reference-screenshots-chromium/mobile-selection.png",
-      "sha256": "94eb93fe3600c88018b3d781ff5907016cab80ebc601f61d2ce103ba3a546bb4",
-      "width": 390,
-      "height": 1386,
-      "visualInspection": "Reviewed; expected synthetic selection/feedback/results/canvas content. Reference aid only; no pixel comparison or visual parity acceptance."
-    },
-    {
-      "path": ".tools/migration-parity/runs/1793272165655-87571/results/visual-reference-P0-VISUAL-0733f-fixed-reference-screenshots-chromium/mobile-text-feedback.png",
-      "sha256": "71fea5d257e1c39286c48ac4c55a514148ad29f385ff23485c3e322ac8ae3aa6",
-      "width": 390,
-      "height": 844,
-      "visualInspection": "Reviewed; expected synthetic selection/feedback/results/canvas content. Reference aid only; no pixel comparison or visual parity acceptance."
-    },
-    {
-      "path": ".tools/migration-parity/runs/1793272165655-87571/results/visual-reference-P0-VISUAL-f0947-fixed-reference-screenshots-chromium/desktop-handwriting.png",
-      "sha256": "981bdfc29e5ebb1d2f79d700bc087fc8e50cb913c17445ccd32a43cb396e8d78",
-      "width": 1280,
-      "height": 985,
-      "visualInspection": "Reviewed; expected synthetic selection/feedback/results/canvas content. Reference aid only; no pixel comparison or visual parity acceptance."
-    },
-    {
-      "path": ".tools/migration-parity/runs/1793272165655-87571/results/visual-reference-P0-VISUAL-f0947-fixed-reference-screenshots-chromium/desktop-results.png",
-      "sha256": "733421bf0ff262855ecbf13e0f25ce4c9b1373512b1b17463f82b94f857ceb63",
-      "width": 1280,
-      "height": 900,
-      "visualInspection": "Reviewed; expected synthetic selection/feedback/results/canvas content. Reference aid only; no pixel comparison or visual parity acceptance."
-    },
-    {
-      "path": ".tools/migration-parity/runs/1793272165655-87571/results/visual-reference-P0-VISUAL-f0947-fixed-reference-screenshots-chromium/desktop-selection.png",
-      "sha256": "55689c7fddc82ad5a54a6d552b3934389d2a19753f7fee91ed3bd5de9d96598d",
-      "width": 1280,
-      "height": 1286,
-      "visualInspection": "Reviewed; expected synthetic selection/feedback/results/canvas content. Reference aid only; no pixel comparison or visual parity acceptance."
-    },
-    {
-      "path": ".tools/migration-parity/runs/1793272165655-87571/results/visual-reference-P0-VISUAL-f0947-fixed-reference-screenshots-chromium/desktop-text-feedback.png",
-      "sha256": "3b74f47d03e67b2a42959c308a8bdeddc15ad6ee854d08aaa925809ff84baa36",
-      "width": 1280,
-      "height": 900,
-      "visualInspection": "Reviewed; expected synthetic selection/feedback/results/canvas content. Reference aid only; no pixel comparison or visual parity acceptance."
-    }
-  ],
-  "assets": {
-    "artifactRoot": "build",
-    "scope": "All emitted JS/CSS assets, including static styles. Excludes maps, fonts, images and HTML; totals are not initial-route transfer sizes.",
-    "compression": "gzip level9; Node default Brotli",
-    "assets": [
+  "supersededIdentityObservation": {
+    "sameDocumentTokenRetained": true,
+    "requestMatched": true,
+    "requestFailure": null,
+    "renderCheckpoint": true,
+    "reads": [
       {
-        "file": "bootstrap/css/bootstrap-theme.css",
-        "raw": 26132,
-        "gzip": 2840,
-        "brotli": 2227,
-        "sha256": "c4ea52f9efdd111f33ef6c3eaabc8289e386cac408f1c10b015b773071b4a616"
+        "id": 1,
+        "settlement": "fulfilled",
+        "checkpoint": true,
+        "status": 200,
+        "responseIdentity": "superseded-alice",
+        "bodyUsed": false
       },
       {
-        "file": "bootstrap/css/bootstrap-theme.min.css",
-        "raw": 23409,
-        "gzip": 2763,
-        "brotli": 2208,
-        "sha256": "653e073e97423adda5bc3917a241ee8497dd38a48f14bcde0098a4e54fd0fa5e"
-      },
-      {
-        "file": "bootstrap/css/bootstrap.css",
-        "raw": 146010,
-        "gzip": 21034,
-        "brotli": 17028,
-        "sha256": "7e630d90c7234b0df1729f62b8f9e4bbfaf293d91a5a0ac46df25f2a6759e39a"
-      },
-      {
-        "file": "bootstrap/css/bootstrap.min.css",
-        "raw": 121200,
-        "gzip": 19577,
-        "brotli": 16113,
-        "sha256": "f75e846cc83bd11432f4b1e21a45f31bc85283d11d372f7b19accd1bf6a2635c"
-      },
-      {
-        "file": "js/main.c92de68948f67d1f9b29.bundle.js",
-        "raw": 2224861,
-        "gzip": 594176,
-        "brotli": 469118,
-        "sha256": "0087bfe3bb396c66769dc903ba6aaf94677091b2ede2a83e83ac01faa9c70d12"
-      },
-      {
-        "file": "locales/index.js",
-        "raw": 151,
-        "gzip": 104,
-        "brotli": 77,
-        "sha256": "1115e900cb19b8483903c56acf110052c8334ee763aa5a1f9afe3de2da44d87c"
+        "id": 2,
+        "settlement": "fulfilled",
+        "checkpoint": true,
+        "status": 200,
+        "responseIdentity": null,
+        "bodyUsed": true
       }
     ],
-    "totals": {
-      "raw": 2541763,
-      "gzip": 640494,
-      "brotli": 506771
-    }
+    "interpretation": "Exact delayed native Fetch fulfilled HTTP200 with superseded-alice response identity. Task checkpoint follows promise reactions; render checkpoint precedes unchanged Bob/no-Alice publication assertions. Unconsumed stale body is recorded; body-complete is not mistaken for application settlement."
   },
-  "additionalMaterialFinding": {
-    "classification": "test-authoring",
-    "id": "P0-PROVENANCE-HEAD",
-    "source": "tests/browser/migration-parity/harness/provenance.js snapshot()",
-    "finding": "Requires HEAD===PR7 baseline; a subsequent test-only commit necessarily makes test:parity and hosted CI fail before browser execution. Current frozen PR7 run provenance remains valid.",
-    "proposedRecovery": "After explicit owner disposition, allow a test-only descendant HEAD while comparing product/build/dependency bytes against pinned PR7; record both baseline and tested HEAD plus source digest. Verify changed harness under newly authorized budget."
-  },
-  "remainingGaps": [
-    "Browser locale-cache save/reload check blocked by ambiguous dropdown selector; independent server-locale restoration passed.",
-    "Stale identity after newer UI login final assertions blocked by response-finished barrier timeout.",
-    "Mouse/touch reset failed; following unmount/remount assertions not reached, so listener cleanup is not verified.",
-    "Late ordinary account favorites leak across UI logout/login; product correction outsideP0.",
-    "Pending lesson navigation timer survives route change; product correction outsideP0.",
-    "Postcommit execution and hostedCI blocked by provenance HEAD guard; hostedCI not run by executor.",
-    "Screenshots are synthetic visual references; not pixel parity or physical-device proof.",
-    "Real backend was not rerun; coordinator owns prior real-service and132Mocha/build receipts.",
-    "No downstreamP1 acceptance or product release; owner must disposition material baseline gaps."
+  "inheritedProductDisposition": "Try fixes during conversion; if unresolved after conversion record open bugs. No product repairs in this attempt.",
+  "evidenceLimits": [
+    "Synthetic API fixtures do not establish live cookie/CSRF/durable backend behavior or physical-device touch.",
+    "Draw reset failures prevent subsequent remount assertions.",
+    "Screenshots remain private in this run; no new visual acceptance claimed.",
+    "No hosted CI, real-service browser or database repetition."
   ],
   "isolationAndCleanup": {
-    "ownedResources": "Fresh synthetic loopback HTTP server per test; browser context per test; no real backend/database/accounts.",
+    "network": "Owned synthetic loopback only, foreign origins blocked, service workers blocked, unknown API rejected.",
     "protectedPortsExcludedBeforeBind": [
       52655,
       62508,
@@ -490,22 +404,28 @@
       15432,
       15433
     ],
-    "network": "Unknown API fails501 and ledger assertion; foreign origins blocked; serviceWorkers:block.",
-    "cleanup": "Fixture teardown calls context.close(), HTTP server.close()/closeAllConnections(); final owned runner exited1. No services are intentionally left running; no real resources were started.",
-    "credentialHandling": "Synthetic auth request bodies redacted in private ledgers; this public report includes no request bodies, cookies, private origins or raw trace contents."
+    "cleanup": "Fixture contexts close, synthetic servers closeAllConnections, owned runner exited; no real services started.",
+    "verification": {
+      "ownedProcessGroup": 28939,
+      "remainingProcesses": [],
+      "runnerExited": true,
+      "trackedTreeClean": true,
+      "evidenceOnly": "No existing services inspected or stopped."
+    }
   },
   "privateEvidence": {
-    "runDirectory": ".tools/migration-parity/runs/1793272165655-87571",
-    "rawResults": ".tools/migration-parity/runs/1793272165655-87571/results.json",
-    "htmlReport": ".tools/migration-parity/runs/1793272165655-87571/report",
-    "log": ".tools/parity-attempt3.log",
-    "handling": "Keep raw JSON/HTML, traces, ledgers and failure screenshots private. Public allowlist is this sanitized report, selected eight synthetic reference screenshots, source digests and asset summary."
+    "runDirectory": ".tools/migration-parity/runs/1793273766642-28957",
+    "rawResults": ".tools/migration-parity/runs/1793273766642-28957/results.json",
+    "identityObservation": ".tools/migration-parity/runs/1793273766642-28957/identity-observation-private.json",
+    "sourceBefore": ".tools/migration-parity/runs/1793273766642-28957/source-before.json",
+    "sourceAfter": ".tools/migration-parity/runs/1793273766642-28957/source-after.json",
+    "bundleManifest": ".tools/migration-parity/runs/1793273766642-28957/build/bundle-manifest.json",
+    "preparation": ".tools/migration-parity/attempt4-preparation-1793273688",
+    "handling": "Keep raw traces, ledgers, screenshots, HTML and private origins local; public-report.json is sanitized."
   },
-  "preservedPriorEvidence": [
-    ".tools/parity-attempt1.log",
-    ".tools/parity-attempt2.log",
-    ".tools/migration-parity/results.json",
-    ".tools/migration-parity/results"
-  ],
-  "ownership": "Executor made no commit/push/PR/product change. All harness/spec/fixture mutation relinquished after this handoff; coordinator owns docs/CI/PR. No extra workflow/counter/attempt created."
+  "ownership": "No executor commit/push. Mayor committed frozen candidate461d93b3c226b9e9d50d5d58d9867f3554bb5734. All executor mutation relinquished at final handoff; mayor owns docs/CI/PR publication.",
+  "priorEvidencePreserved": [
+    ".tools/migration-parity/runs/1793272165655-87571",
+    "docs/migration-parity/baseline-result.json"
+  ]
 }

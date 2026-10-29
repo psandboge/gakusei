@@ -1,25 +1,23 @@
-# P0 unresolved findings
+# Known product findings and owner disposition
 
-P0 is not accepted. Existing attempt3/max3 is exhausted. Further correction/verification requires explicit owner disposition; no product repair or Svelte conversion starts here.
+Owner29October11:30UTC: try to fix these during the Svelte conversion; if still unresolved after conversion, create open bugs for later. This does not claim the existing product passes. Keep regression assertions meaningful.
 
-## Test-harness blockers
+| Finding | Evidence / conversion task |
+| --- | --- |
+| Repeated identical-kanji state reset | Mouse and synthetic touch completion/self-mark state persists into next question. Reset on new question; remount assertions remain unverified beyond this failure. |
+| Pending lesson timer after navigation | Final-answer timer replaces /about with /finish/translate after navigation. Guard/dispose timers by route/lesson lifecycle. |
+| Stale account favorites | Delayed Alice favorites publish after same-document logout and Bob login. Guard account-owned read publication. This is fixture-backed UI isolation evidence, not a proved server authorization failure. |
 
-- **T3-HEAD:** harness/provenance.js requires HEAD to equal PR7 exactly. Committing this test pack changes HEAD, so post-commit/local/hosted execution will fail before checking product invariance. Proposed correction: allow the test-only descendant commit, compare product/build/dependencies against pinned PR7, and record both baseline and tested HEAD plus source digest. Not corrected or rerun after final freeze.
-- **T3-LOCALE:** P0-LANGUAGE-CACHE uses a dropdown selector matching two controls. Its language-save/cache-restore assertions were not reached; this is not evidence of a locale product defect. Scope the selector to the intended language control, then reverify only within a new owner-approved allowance.
-- **T3-IDENTITY-BARRIER:** same-document old-identity test reached the new Bob account/catalog but timed out on Response.finished after releasing the old Alice response. Final identity/no-stale-publication assertions remain unverified. Diagnose the barrier without assuming either application correctness or a stale-identity defect.
+## Harness findings resolved or removed
 
-## Inherited PR7 product findings
+- T3-IDENTITY-BARRIER: fixed and verified on committed461d93b3. Native Fetch settlement/exact request and same-document checkpoints replace Response.finished on an intentionally unread body. Bob/no-Alice assertions passed.
+- T3-HEAD: fixed and verified; committed test-only descendant allowed, product/build/lock remain compared to immutable PR7. Static rejection controls5/5 passed.
+- T3-LOCALE: language-cache test removed explicitly by owner; not a pass. Revisit language after conversion. Server-language case remains passing.
 
-- **P0-DRAW (mouse and synthetic touch):** completing a repeated identical kanji leaves self-mark/completed state visible on the next question. The scoring/export/coordinate-tolerance assertions passed before the reset failure; remount assertions were not reached.
-- **P0-ROUTE-TIMER:** the pending final-answer timer changes /about to /finish/translate after the user navigates away. Earlier focus/Enter/disabled/reset assertions in that case passed.
-- **P0-ACCOUNT-READ:** a delayed old-account favorites response updates the new account's lesson favorite state after same-document logout/login. This is fixture-backed browser reproduction and source evidence; no live-user data was accessed. The ordinary lesson read path lacks the publication ownership check used for registration initialization.
+Historical reports and prior gaps are retained under history/attempt3/. Latest full result remains19pass4knownproductfail, not a green suite. Product repairs happen during conversion under its execution scope; they are not implemented by this harness correction. No P1 started here.
 
-These should be explicitly dispositioned before migration parity is accepted. Keep the failing assertions meaningful; do not hide them with skip, expected-fail or broad selector changes. Resolving existing product behavior is separate from repairing the test harness.
+## Evidence and CI limits
 
-## Evidence limits
+Synthetic API/browser behavior does not prove real cookie/CSRF enforcement, durable server writes or physical-device touch behavior. Existing real-service proof remains separate. Reference screenshots are not visual-diff assertions. Private traces/ledgers/ownership manifests are not uploaded.
 
-The new pack uses synthetic APIs and does not establish real session cookies, CSRF enforcement, durable writes or physical-device touch correctness. The existing real-service suite is separate and does not cover all24 new contracts. The images are synthetic reference captures only. Raw traces, auth payload ledgers, fixture ownership manifests and browser HTML reports remain private and are not uploaded. A red baseline can be reviewed without being accepted.
-
-## Draft CI posture
-
-The new parity job is skipped when the pull request is a draft. This prevents an unbudgeted fourth parity execution and the known post-commit startup failure. Marking the PR ready would enable that job; do not do so until the test-harness blockers and new verification allowance are dispositioned. No hosted parity pass is claimed. Existing repository CI is unchanged.
+The new parity job is skipped while PR8 is draft; existing repository CI runs independently. Marking it ready enables the strict suite, which still reports the four known product failures. Do not interpret skipped parity as success. Cumulative correction/verification4/4 is spent; any additional run needs owner disposition.

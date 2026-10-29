@@ -20,3 +20,7 @@ contracts.md inventories actual PR7 routes, HTTP and storage semantics. review.m
 Raw browser traces/reports, fixture account records and database ownership manifests are excluded from Git/CI artifacts. Only reviewed synthetic reference screenshots and sanitized summaries may be committed. Screenshots are reference captures, not a passed pixel-diff assertion. All emitted JS/CSS totals include lazy/static assets and are not initial-route download sizes.
 
 P0 does not repair the product, begin Svelte implementation, waive known gaps or permit merge/deployment. A red baseline PR can be inspected, but conversion requires explicit disposition of material gaps.
+
+## Current status — owner follow-up
+
+Latest correction passed: superseded-identity test and committed-source provenance are verified; language-cache case removed by owner. Full result23cases19passed4knownproductfailed. Owner assigns product fixes to conversion and open-bug tracking if unresolved afterward. See baseline.md and known-gaps.md; prior24-case report retained in history/attempt3/.
